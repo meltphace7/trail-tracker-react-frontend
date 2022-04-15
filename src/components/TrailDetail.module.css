@@ -1,0 +1,38 @@
+.trail-detail {
+  width: 100%;
+  background-color: var(--secondary-green);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 50rem;
+}
+
+.info-header {
+  width: 100%;
+  min-height: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+
+}
+
+.info-header h1 {
+ padding: 1rem;
+ background-color: var(--secondary-orange);
+}
+
+.info-sub-header {
+  width: 100%;
+  background-color: var(--secondary-orange);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.description {
+  width: 75%;
+  line-height: 2rem;
+}

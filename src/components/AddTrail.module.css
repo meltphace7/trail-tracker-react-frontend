@@ -1,0 +1,93 @@
+.add-trail-section {
+  width: 100%;
+  background-color: rgb(59, 91, 44);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-trail-section h1 {
+  color: var(--tertiary-green);
+}
+
+.trail-form {
+  margin-bottom: 5rem;
+  width: 40%;
+  color: white;
+  background-color: var(--secondary-green);
+  border-radius: 15px;
+  border: 1px solid var(--tertiary-green);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-row {
+  margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.text-input-col {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+.trail-name input {
+  width: 100%;
+}
+
+.state input {
+  width: 100%;
+}
+
+.wilderness-area {
+  width: 100%;
+}
+
+.season {
+  width: 100%;
+}
+
+.number-input {
+  width: 5rem;
+}
+
+.input-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.number-group {
+  margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.description {
+  margin: 2rem 0rem;
+}
+
+.trail-form button {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  width: 100%;
+  padding: 1.5rem;
+  text-align: center;
+  color: white;
+  background-color: var(--secondary-orange);
+  border: 1px solid var(--tertiary-green);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 300ms;
+}
+
+.trail-form button:hover {
+  background-color: black;
+  border: 1px solid white;
+  
+}
