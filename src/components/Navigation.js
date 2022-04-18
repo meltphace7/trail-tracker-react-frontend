@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const Navigation = (props) => {
   const [filterType, setFilterType] = useState();
   const [filterQuery, setFilterQuery] = useState("");
-  const [selectedMonth, setSelectedMonth] = useState('1');
   const [filter, setFilter] = useState();
 
   const handleFilterSelect = (e) => {
@@ -146,9 +145,6 @@ const Navigation = (props) => {
         </li>
         <li>
           <Link to="/addtrail">ADD TRAIL</Link>
-        </li>
-        <li>
-          <Link to="/home">ALL TRAILS</Link>
         </li>
       </ul>
     </nav>

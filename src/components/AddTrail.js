@@ -83,7 +83,7 @@ const AddTrail = (props) => {
       trailName: trailName,
       state: state,
       wildernessArea: wilderness,
-      season: season,
+      bestSeason: season,
       longitude: longitude,
       latitude: latitude,
       miles: miles,
@@ -93,7 +93,9 @@ const AddTrail = (props) => {
       description: description
     }
 
-    props.onAddTrail(trailData)
+    props.onAddTrail(trailData);
+
+    console.log(trailData);
 
     }
 

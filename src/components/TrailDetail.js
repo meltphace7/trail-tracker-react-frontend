@@ -12,24 +12,30 @@ const TrailDetail = (props) => {
      setTrailIsLoaded(true);
    }
   }, [props.trail.id])
-  
 
-  
+
   return (
     <div className={classes["trail-detail"]}>
-      {trailIsLoaded ? <div className={classes['trail-detail-info']}>
-        <div className={classes["info-header"]}>
-          <h1>{props.trail.trailName}</h1>
-          <h3>{`${props.trail.wildernessArea},  ${props.trail.state}`}</h3>
+      {trailIsLoaded ? (
+        <div className={classes["trail-detail-info"]}>
+          <div className={classes["info-header"]}>
+            <h1>{props.trail.trailName}</h1>
+            <h3>{`${props.trail.wildernessArea},  ${props.trail.state}`}</h3>
+          </div>
+          <div className={classes["info-sub-header"]}>
+            <h3>{`Miles: ${props.trail.miles}`}</h3>
+            <h3>{`Scenery: ${props.trail.scenery}`}</h3>
+            <h3>{`Solitude: ${props.trail.solitude}`}</h3>
+            <h3>{`Difficulty: ${props.trail.difficulty}`}</h3>
+            <h3>{`Best Season: ${props.trail.bestSeason[0]} - ${props.trail.bestSeason[1]}`}</h3>
+          </div>
+          <p className={classes["description"]}>{props.trail.description}</p>
         </div>
-        <div className={classes["info-sub-header"]}>
-          <h3>{`Miles: ${props.trail.miles}`}</h3>
-          <h3>{`Scenery: ${props.trail.scenery}`}</h3>
-          <h3>{`Solitude: ${props.trail.solitude}`}</h3>
-          <h3>{`Difficulty: ${props.trail.difficulty}`}</h3>
-        </div>
-        <p className={classes["description"]}>{props.trail.description}</p>
-      </div> : <p className={classes['select-trail-message']}>Please Select A Trail!</p>}
+      ) : (
+        <p className={classes["select-trail-message"]}>
+          Please Select A Trail!
+        </p>
+      )}
     </div>
   );
 }

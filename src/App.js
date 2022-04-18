@@ -138,9 +138,16 @@ function App() {
     setFilter(filterSetting);
   }
 
+  useEffect(() => {
+    setFilteredTrails(trails)
+  }, [])
+  
   // FILTERS TRAILS BASED ON FILTER TYPE AND FILTER QUERY
   useEffect(() => {
-    if (filter === undefined) return;
+    if (filter === undefined) {
+      setFilteredTrails(trails);
+      return;
+    }
     if (filter.filterType === "all-trails") {
       setFilteredTrails(trails);
     }
@@ -164,16 +171,11 @@ function App() {
         (trail) => +trail.bestSeason[0] < +trail.bestSeason[1]
       );
       // Apply Filter logic to Inverted Date hikes
-       
        const matchingInvertedHikes = invertedDateHikes.filter(
          (trail) =>
            (+filter.filterQuery >= +trail.bestSeason[0] && 12) ||
            +filter.filterQuery <= +trail.bestSeason[1]
        );
-      // const matchingInvertedHikes = invertedDateHikes.filter(trail => trail.bestSeason[0] >= +filter.filterQuery && trail.bestSeason[1] >= +filter.filterQuery);
-
-
-
       // Apply Filter Login to Standard Date Hikes
       const matchingStandardHikes = standardDateHikes.filter(
         (trail) =>
