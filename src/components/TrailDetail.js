@@ -1,26 +1,39 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import classes from "./TrailDetail.module.css";
 
-const TrailDetail = () => {
-    return (
-      <div className={classes["trail-detail"]}>
-        <div class={classes["info-header"]}>
-                <h1>THOUSAND ISLAND LAKE LOOP</h1>
-          <h3>Ansel Adams Wilderness, California</h3>
+const TrailDetail = (props) => {
+  const [trailIsLoaded, setTrailIsLoaded] = useState(false);
+  
+  
+  useEffect(() => {
+   if (props.trail.id === undefined) {
+     setTrailIsLoaded(false);
+   } else {
+     setTrailIsLoaded(true);
+   }
+  }, [props.trail.id])
+  
+
+  
+  return (
+    <div className={classes["trail-detail"]}>
+      {trailIsLoaded ? <div className={classes['trail-detail-info']}>
+        <div className={classes["info-header"]}>
+          <h1>{props.trail.trailName}</h1>
+          <h3>{`${props.trail.wildernessArea},  ${props.trail.state}`}</h3>
         </div>
-        <div class={classes["info-sub-header"]}>
-          <h3>Miles: 21</h3>
-          <h3>Scenery: 7/10</h3>
-          <h3>Solitude: 7/10</h3>
-          <h3>Difficulty: 7/10</h3>
+        <div className={classes["info-sub-header"]}>
+          <h3>{`Miles: ${props.trail.miles}`}</h3>
+          <h3>{`Scenery: ${props.trail.scenery}`}</h3>
+          <h3>{`Solitude: ${props.trail.solitude}`}</h3>
+          <h3>{`Difficulty: ${props.trail.difficulty}`}</h3>
         </div>
-        <p class={classes["description"]}>
-          A popular and incredibly scenic trail that passes through one of the
-          most beautiful areas in the High Sierra. Part of this loop follows the
-          famous John Muir Trail.
-        </p>
-      </div>
-    );
+        <p className={classes["description"]}>{props.trail.description}</p>
+      </div> : <p className={classes['select-trail-message']}>Please Select A Trail!</p>}
+    </div>
+  );
 }
 
+
 export default TrailDetail
+

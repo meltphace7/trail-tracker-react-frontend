@@ -5,7 +5,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 50rem;
+  min-height: 54rem;
+}
+
+.trail-detail-info {
+ width: 100%;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
 }
 
 .info-header {
@@ -35,4 +42,9 @@
 .description {
   width: 75%;
   line-height: 2rem;
+}
+
+.select-trail-message {
+  margin-top: 2rem;
+  color: var(--primary-orange);
 }

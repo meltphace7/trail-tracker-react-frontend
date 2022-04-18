@@ -1,10 +1,10 @@
 .trail-item {
   font-size: .7rem;
-  margin: .3rem 0rem;
+  margin: .2rem 0rem;
   border-radius: 10px;
-  padding: 1rem 0rem 1.5rem 0rem;
+  padding: .75rem 0rem 1.5rem 0rem;
   width: 90%;
-  height: 5rem;
+  height: 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
