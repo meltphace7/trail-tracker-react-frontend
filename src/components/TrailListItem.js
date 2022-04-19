@@ -7,11 +7,16 @@ const TrailListItem = (props) => {
   }
    
     return (
-      <li key={props.id} onClick={getIdHandler} className={classes["trail-item"]}>
-        <h2>{props.name}</h2>
-        <div className={classes['secondary-info']}>
-          <h3>{props.state}</h3>
-          <h3>{props.wildernessArea}</h3>
+      <li
+        key={props.id}
+        onClick={getIdHandler}
+        className={classes["trail-item"]}
+      >
+        <div className={classes["info-container"]}>
+          <h2>{props.name}</h2>
+          <div className={classes["secondary-info"]}>
+            <h3>{`${props.state} - ${props.wildernessArea} `}</h3>
+          </div>
         </div>
       </li>
     );

@@ -10,7 +10,7 @@ const MainPage = (props) => {
      const trail = props.trails.find((trail) => trail.id === trailID);
       setSelectedTrail(trail)
    };
-  
+
     return (
       <div className={classes["main-page"]}>
         <TrailList onTrailSelect={getSelectedTrail} trails={props.trails} />
@@ -19,4 +19,4 @@ const MainPage = (props) => {
     );
 }
 
-export default MainPage
+export default MainPage;

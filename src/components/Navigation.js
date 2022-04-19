@@ -3,6 +3,7 @@ import classes from "./Navigations.module.css";
 import { Link } from "react-router-dom";
 
 const Navigation = (props) => {
+ 
   // FINDS UNIQUE VALUES OF props.trails ARRAY
   const getUniqueValues = function (property) {
     const uniqueValues = [
@@ -30,7 +31,6 @@ const Navigation = (props) => {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-
     setFilter({
       filterType: filterType,
       filterQuery: filterQuery,
@@ -42,9 +42,6 @@ const Navigation = (props) => {
   useEffect(() => {
     props.onFilterSelect(filter);
   }, [filter])
-
-  console.log(filter);
-
 
   // JSX TO BE DYNAMICALLY RENDERED DEPENDING ON FILTER SELECTION
 
@@ -60,7 +57,7 @@ const Navigation = (props) => {
       >
         <optgroup label="Choose State">
           {states.map((trail) => {
-            return <option key={Math.random()}>{trail}</option>;
+            return <option key={Math.random()} value={trail}>{trail}</option>;
           })}
         </optgroup>
       </select>

@@ -4,16 +4,47 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 80rem;
+  min-height: 54rem;
+}
+
+.results-container {
+  color: white;
 }
 
 .trail-list {
   width: 85%;
-  min-height: 78rem;
+  min-height: 49rem;
   padding: .5rem;
   border-radius: 10px;
   background-color: rgb(223, 223, 223);
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.pagination-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.pagination-button {
+  width: 6rem;
+  height: 2rem;
+  margin: .5rem;
+  background-color: orangered;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 300ms ease-in;
+}
+
+.pagination-button:hover {
+  background-color: white;
+  color: orangered;
+}
+
+.pagination-num {
+  color: white;
 }
