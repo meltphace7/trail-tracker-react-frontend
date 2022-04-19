@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import classes from "./AddTrail.module.css";
 
-
-
 const AddTrail = (props) => {
   const [trailName, setTrailName] = useState("");
   const [state, setState] = useState("");

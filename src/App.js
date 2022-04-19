@@ -144,6 +144,7 @@ function App() {
   
   // FILTERS TRAILS BASED ON FILTER TYPE AND FILTER QUERY
   useEffect(() => {
+    console.log(filter);
     if (filter === undefined) {
       setFilteredTrails(trails);
       return;
@@ -183,10 +184,9 @@ function App() {
           +filter.filterQuery <= +trail.bestSeason[1]
       );
       const seasonFilteredHikes = [...matchingInvertedHikes, ...matchingStandardHikes]
-      console.log(seasonFilteredHikes);
       setFilteredTrails(seasonFilteredHikes);
     }
-  }, [filter])
+  }, [filter, trails])
 
   console.log('RENDER');
       

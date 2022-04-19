@@ -1,30 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./Navigations.module.css";
 import { Link } from "react-router-dom";
 
 const Navigation = (props) => {
-  const [filterType, setFilterType] = useState();
-  const [filterQuery, setFilterQuery] = useState("");
-  const [filter, setFilter] = useState();
-
-  const handleFilterSelect = (e) => {
-    setFilterType(e.target.value);
-  };
-
-  const handleStateFilterSelect = (e) => {
-    setFilterQuery(e.target.value);
-  };
-
-  const formSubmitHandler = (e) => {
-    e.preventDefault();
-    setFilter({
-      filterType: filterType,
-      filterQuery: filterQuery,
-    });
-    props.onFilterSelect(filter);
-    console.log("SUBMIT");
-  };
-
   // FINDS UNIQUE VALUES OF props.trails ARRAY
   const getUniqueValues = function (property) {
     const uniqueValues = [
@@ -37,6 +15,37 @@ const Navigation = (props) => {
   const states = getUniqueValues("state");
   const wilderness = getUniqueValues("wildernessArea");
 
+  const [filterType, setFilterType] = useState('');
+  const [filterQuery, setFilterQuery] = useState("");
+  const [filter, setFilter] = useState({filterType: filterType, filterQuery: filterQuery});
+
+
+  const handleFilterSelect = (e) => {
+    setFilterType(e.target.value);
+  };
+
+  const handleFilterQuerySelect = (e) => {
+    setFilterQuery(e.target.value);
+  };
+
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+
+    setFilter({
+      filterType: filterType,
+      filterQuery: filterQuery,
+    });
+
+    console.log("SUBMIT");
+  };
+
+  useEffect(() => {
+    props.onFilterSelect(filter);
+  }, [filter])
+
+  console.log(filter);
+
+
   // JSX TO BE DYNAMICALLY RENDERED DEPENDING ON FILTER SELECTION
 
   // RENDERS STATE OPTIONS FOR filter by state OPTION
@@ -47,7 +56,7 @@ const Navigation = (props) => {
         id="choose-state"
         name="choose-state"
         value={filterQuery}
-        onChange={handleStateFilterSelect}
+        onChange={handleFilterQuerySelect}
       >
         <optgroup label="Choose State">
           {states.map((trail) => {
@@ -66,7 +75,7 @@ const Navigation = (props) => {
         id="choose-wilderness"
         name="choose-wilderness"
         value={filterQuery}
-        onChange={handleStateFilterSelect}
+        onChange={handleFilterQuerySelect}
       >
         <optgroup label="Choose Wilderness">
           {wilderness.map((trail) => {
@@ -86,7 +95,7 @@ const Navigation = (props) => {
         id="choose-month"
         name="choose-month"
         value={filterQuery}
-        onChange={handleStateFilterSelect}
+        onChange={handleFilterQuerySelect}
         // defaultValue={'1'}
       >
         <optgroup label="Month">
@@ -132,7 +141,6 @@ const Navigation = (props) => {
               </optgroup>
             </select>
           </div>
-
           {filterType === "by-state" && chooseState}
           {filterType === "by-wilderness" && chooseWilderness}
           {filterType === "by-season" && chooseMonth}
