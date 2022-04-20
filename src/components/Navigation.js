@@ -56,6 +56,7 @@ const Navigation = (props) => {
         onChange={handleFilterQuerySelect}
       >
         <optgroup label="Choose State">
+          <option key={Math.random()}>Select a State</option>
           {states.map((trail) => {
             return <option key={Math.random()} value={trail}>{trail}</option>;
           })}
@@ -75,6 +76,7 @@ const Navigation = (props) => {
         onChange={handleFilterQuerySelect}
       >
         <optgroup label="Choose Wilderness">
+          <option key={Math.random()}>Select Wilderness</option>
           {wilderness.map((trail) => {
             return <option key={Math.random()}>{trail}</option>;
           })}

@@ -15,6 +15,11 @@
  align-items: center;
 }
 
+.trail-image {
+  width: 90%;
+  height: auto;
+}
+
 .info-header {
   width: 100%;
   min-height: 25rem;
@@ -47,4 +52,11 @@
 .select-trail-message {
   margin-top: 2rem;
   color: var(--primary-orange);
+}
+
+.map {
+  height: 20rem;
+  width: 35rem;
+  background-color: black;
+  margin-bottom: 5rem;
 }

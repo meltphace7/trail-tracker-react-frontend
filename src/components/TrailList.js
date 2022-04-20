@@ -64,7 +64,7 @@ const TrailList = (props) => {
         )}
       </ul>
       <div className={classes["pagination-container"]}>
-        <div>
+        <div className={classes["button-container"]}>
           {page > 1 && (
             <button
               onClick={prevPageHandler}
@@ -75,7 +75,7 @@ const TrailList = (props) => {
           )}
         </div>
         <h3 className={classes["pagination-num"]}>{page}</h3>
-        <div>
+        <div className={classes["button-container"]}>
           {page < pages && (
             <button
               onClick={nextPageHandler}

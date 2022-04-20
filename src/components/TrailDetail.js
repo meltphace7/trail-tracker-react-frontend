@@ -21,6 +21,10 @@ const TrailDetail = (props) => {
           <div className={classes["info-header"]}>
             <h1>{props.trail.trailName}</h1>
             <h3>{`${props.trail.wildernessArea},  ${props.trail.state}`}</h3>
+            <img
+              className={classes["trail-image"]}
+              src={props.trail.imageURL ? props.trail.imageURL : ""}
+            />
           </div>
           <div className={classes["info-sub-header"]}>
             <h3>{`Miles: ${props.trail.miles}`}</h3>
@@ -30,6 +34,7 @@ const TrailDetail = (props) => {
             <h3>{`Best Season: ${props.trail.bestSeason[0]} - ${props.trail.bestSeason[1]}`}</h3>
           </div>
           <p className={classes["description"]}>{props.trail.description}</p>
+          <div className={classes.map}></div>
         </div>
       ) : (
         <p className={classes["select-trail-message"]}>

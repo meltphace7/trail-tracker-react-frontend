@@ -29,13 +29,18 @@
   align-items: center;
 }
 
+.button-container {
+  width: 6rem;
+  height: 2.1rem;
+}
+
 .pagination-button {
   width: 6rem;
   height: 2rem;
   margin: .5rem;
   background-color: orangered;
   color: white;
-  border: none;
+  border: 1px solid white;
   cursor: pointer;
   transition: 300ms ease-in;
 }
