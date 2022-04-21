@@ -14,7 +14,7 @@ const MainPage = (props) => {
     return (
       <div className={classes["main-page"]}>
         <TrailList onTrailSelect={getSelectedTrail} trails={props.trails} />
-        <TrailDetail trail={selectedTrail} />
+        <TrailDetail trails={props.trails} trail={selectedTrail} />
       </div>
     );
 }
