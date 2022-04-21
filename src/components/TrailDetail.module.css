@@ -53,10 +53,3 @@
   margin-top: 2rem;
   color: var(--primary-orange);
 }
-
-.map {
-  height: 20rem;
-  width: 35rem;
-  background-color: black;
-  margin-bottom: 5rem;
-}

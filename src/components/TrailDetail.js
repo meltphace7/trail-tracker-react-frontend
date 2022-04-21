@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import classes from "./TrailDetail.module.css";
+import Map from './Map'
+
 
 const TrailDetail = (props) => {
   const [trailIsLoaded, setTrailIsLoaded] = useState(false);
@@ -13,6 +15,7 @@ const TrailDetail = (props) => {
    }
   }, [props.trail.id])
 
+  const coords = [props.trail.latitude, props.trail.longitude];
 
   return (
     <div className={classes["trail-detail"]}>
@@ -34,7 +37,7 @@ const TrailDetail = (props) => {
             <h3>{`Best Season: ${props.trail.bestSeason[0]} - ${props.trail.bestSeason[1]}`}</h3>
           </div>
           <p className={classes["description"]}>{props.trail.description}</p>
-          <div className={classes.map}></div>
+           <Map coords={coords} />
         </div>
       ) : (
         <p className={classes["select-trail-message"]}>

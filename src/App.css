@@ -12,3 +12,8 @@
   flex-direction: column;
   align-items: center;
 }
+
+.leaflet-container {
+  width: 50rem;
+  height: 35rem;
+}
