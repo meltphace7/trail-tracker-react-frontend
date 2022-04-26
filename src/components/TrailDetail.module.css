@@ -46,10 +46,19 @@
 
 .description {
   width: 75%;
+  min-height: 10rem;
   line-height: 2rem;
+  margin-bottom: 4rem;
 }
 
 .select-trail-message {
   margin-top: 2rem;
   color: var(--primary-orange);
+}
+
+.map-text-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
