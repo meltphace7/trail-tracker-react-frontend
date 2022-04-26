@@ -1,0 +1,39 @@
+
+.trail-search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-container {
+  margin: 1rem;
+}
+
+.search-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.trail-search label {
+  margin-right: 1rem;
+  color: var(--primary-orange);
+}
+
+.trail-search input {
+  width: 12rem;
+  height: 1.3rem;
+  border-radius: 5px;
+}
+
+.trail-search button {
+  font-size: 1rem;
+  margin-left: 1rem;
+  width: 8rem;
+  border-radius: 10px;
+  padding: 1rem;
+  border: 1px solid white;
+  color: white;
+  background-color: var(--secondary-orange);
+
+}
