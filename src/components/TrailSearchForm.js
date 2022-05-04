@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import classes from "./TrailSearchForm.module.css";
+import { useHistory } from "react-router-dom";
 
 const TrailSearchForm = (props) => {
+  const history = useHistory();
   // FINDS UNIQUE VALUES OF props.trails ARRAY
   const getUniqueValues = function (property) {
     const uniqueValues = [
@@ -37,11 +39,17 @@ const TrailSearchForm = (props) => {
     });
 
     console.log("SUBMIT");
-  };
+    
+    setTimeout(() => {
+      history.push('/trails')
+    }, 500);
+  };;
 
   useEffect(() => {
-    props.onFilterSelect(filter);
+    props.onFilterSelection(filter);
   }, [filter]);
+
+  console.log(filter);
 
   // JSX TO BE DYNAMICALLY RENDERED DEPENDING ON FILTER SELECTION
 
@@ -142,7 +150,7 @@ const TrailSearchForm = (props) => {
         {filterType === "by-wilderness" && chooseWilderness}
         {filterType === "by-season" && chooseMonth}
       </div>
-      <button type="submit">Find A Trail!</button>
+        <button type="submit">Find A Trail!</button>
     </form>
   );
 };

@@ -17,12 +17,12 @@
 
 .trail-search label {
   margin-right: 1rem;
-  color: var(--primary-orange);
+  color: white;
 }
 
 .trail-search input {
   width: 12rem;
-  height: 1.3rem;
+  height: 2rem;
   border-radius: 5px;
 }
 
@@ -34,6 +34,8 @@
   padding: 1rem;
   border: 1px solid white;
   color: white;
-  background-color: var(--secondary-orange);
+  background: rgb(36,116,7);
+  background: linear-gradient(0deg, rgba(36,116,7,1) 21%, rgba(50,251,23,1) 100%);
+  cursor: pointer;
 
 }

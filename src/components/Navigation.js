@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./Navigations.module.css";
 import { Link } from "react-router-dom";
+import Logo from './Logo'
 
 const Navigation = (props) => {
  
@@ -119,10 +120,10 @@ const Navigation = (props) => {
     <nav>
       <div className={classes["logo-container"]}>
         <Link to="/home">
-          <h1>TRAIL TRACKER</h1>
+          <Logo />
         </Link>
       </div>
-      <form onSubmit={formSubmitHandler} className={classes["trail-search"]}>
+      {/* <form onSubmit={formSubmitHandler} className={classes["trail-search"]}>
         <div className={classes["search-group"]}>
           <div className="search-container">
             <label htmlFor="filter-trails">Filter Trails</label>
@@ -145,7 +146,7 @@ const Navigation = (props) => {
           {filterType === "by-season" && chooseMonth}
         </div>
         <button type="submit">Find A Trail!</button>
-      </form>
+      </form> */}
       <ul className={classes["nav-menu"]}>
         <li>
           <Link to="/home">HOME</Link>
