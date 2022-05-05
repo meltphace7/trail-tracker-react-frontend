@@ -4,11 +4,9 @@ import TrailList from './TrailList'
 
 
 const TrailSearchResults = (props) => {
-    console.log(props.trails);
-
     return (
         <div className={classes['trail-search-results']}>
-            <TrailList trails={props.trails} />
+            <TrailList onTrailSelect={props.onTrailSelect} trails={props.trails} filter={props.trailFilter}  />
         </div>
     )
 }

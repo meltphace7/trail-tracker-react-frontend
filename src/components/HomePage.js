@@ -9,6 +9,14 @@ const HomePage = (props) => {
       props.onFilterSelect(filter);
     }
   
+  const getIdHandler = () => {
+    props.getTrail(props.id);
+  };
+
+  const getTrailData = function (id) {
+    props.onTrailSelect(id)
+  }
+  
   //   const randomTrails = [
   //     props.trails[Math.round(Math.random() * props.trails.length)],
   //     props.trails[Math.round(Math.random() * props.trails.length)],
@@ -34,9 +42,11 @@ const HomePage = (props) => {
                 <div className={classes['featured-hikes-container']}>
                     {props.trails.slice(28, 31).map(trail => {
                         return (
-                            <FeaturedHike
-                              key={trail.id}
-                              trailData={trail}
+                          <FeaturedHike
+                            getTrailId={getIdHandler}
+                            key={trail.id}
+                            trailData={trail}
+                            getTrail={getTrailData}
                             />
                      )
                  } )}

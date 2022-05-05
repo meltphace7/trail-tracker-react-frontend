@@ -1,5 +1,6 @@
 .trail-detail {
-  width: 100%;
+  width: 90%;
+  padding-bottom: 4rem;
   background-color: var(--secondary-green);
   color: white;
   display: flex;

@@ -5,9 +5,13 @@ import TrailMap from './TrailMap'
 //https://earth.google.com/web/@-31.9430245,115.88902211,4.1972381a,3204.7080705d
 
 const TrailDetail = (props) => {
+  // props.getSelectedTrail(params.id);
+ 
+
   const [season, setSeason] = useState('');
   const coords = [props.trail.latitude, props.trail.longitude];
-  const [trailIsLoaded, setTrailIsLoaded] = useState(false);
+  // const [trailIsLoaded, setTrailIsLoaded] = useState(false);
+
   const monthArray = [
     [1, "January"],
     [2, "Febuary"],
@@ -34,18 +38,17 @@ const TrailDetail = (props) => {
   }, [props.trail])
 
   // Determines if a Trail is Displayed or not
-  useEffect(() => {
-   if (props.trail.id === undefined) {
-     setTrailIsLoaded(false);
-   } else {
-     setTrailIsLoaded(true);
-   }
-  }, [props.trail.id])
+  // useEffect(() => {
+  //  if (props.trail.id === undefined) {
+  //    setTrailIsLoaded(false);
+  //  } else {
+  //    setTrailIsLoaded(true);
+  //  }
+  // }, [props.trail.id])
 
 
   return (
     <div className={classes["trail-detail"]}>
-      {trailIsLoaded ? (
         <div className={classes["trail-detail-info"]}>
           <div className={classes["info-header"]}>
             <h1>{props.trail.trailName}</h1>
@@ -56,7 +59,7 @@ const TrailDetail = (props) => {
             />
           </div>
           <div className={classes["info-sub-header"]}>
-            <h3>{`Miles: ${props.trail.miles}`}</h3>
+            <h3>{`Miles: ${props.trail.miles} round-trip`}</h3>
             <h3>{`Scenery: ${props.trail.scenery}`}</h3>
             <h3>{`Solitude: ${props.trail.solitude}`}</h3>
             <h3>{`Difficulty: ${props.trail.difficulty}`}</h3>
@@ -77,11 +80,6 @@ const TrailDetail = (props) => {
             <TrailMap trails={props.trails} coords={coords} />
           </div>
         </div>
-      ) : (
-        <p className={classes["select-trail-message"]}>
-          Please Select A Trail!
-        </p>
-      )}
     </div>
   );
 }

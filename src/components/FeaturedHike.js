@@ -1,9 +1,17 @@
 import React from 'react'
 import classes from './FeaturedHike.module.css'
+import { Link } from 'react-router-dom'
 
 const FeaturedHike = (props) => {
-    return (
-      <div className={classes["featured-hike"]}>
+  const getTrailHandler = function () {
+    props.getTrail(props.trailData.id);
+    console.log(props.trailData.id);
+  }
+
+
+  return (
+    <Link to={`trail-detail/${props.trailData.id}`}>
+      <div className={classes["featured-hike"]} onClick={getTrailHandler}>
         <div className={classes["featured-hike-image"]}>
           <img src={props.trailData.imageURL} />
         </div>
@@ -22,7 +30,8 @@ const FeaturedHike = (props) => {
           </div>
         </div>
       </div>
-    );
+    </Link>
+  );
 }
 
 export default FeaturedHike

@@ -4,39 +4,39 @@ import TrailListItem from "./TrailListItem";
 
 
 const TrailList = (props) => {
-  const resultsPerPage = 8;
+
+  //Pagination
+  const resultsPerPage = 5;
   const [page, setPage] = useState(1);
-  const [results, setResults] = useState(
-    props.trails.slice(0, resultsPerPage)
-  );
+  const [results, setResults] = useState(props.trails.slice(0, resultsPerPage));
 
   useEffect(() => {
-    setPage(1)
-  }, [props.trails])
-  
+    setPage(1);
+  }, [props.trails]);
+
   const pages = Math.ceil(props.trails.length / resultsPerPage);
 
   useEffect(() => {
-   const calcResults = (page) => {
-     let startIndex = (page - 1) * resultsPerPage;
-     let endIndex = startIndex + resultsPerPage;
-     let results = props.trails.slice(startIndex, endIndex);
-     setResults(results);
-   };
+    const calcResults = (page) => {
+      let startIndex = (page - 1) * resultsPerPage;
+      let endIndex = startIndex + resultsPerPage;
+      let results = props.trails.slice(startIndex, endIndex);
+      setResults(results);
+    };
 
-   calcResults(page);
- }, [page, props.trails])
-  
+    calcResults(page);
+  }, [page, props.trails]);
+
   const prevPageHandler = () => {
-    console.log('click');
+    console.log("click");
     if (page === 1) return;
-    setPage((prevState) => prevState - 1)
+    setPage((prevState) => prevState - 1);
   };
 
   const nextPageHandler = () => {
     if (page === pages) return;
-     console.log("click");
-     setPage((prevState) => prevState + 1)
+    console.log("click");
+    setPage((prevState) => prevState + 1);
   };
 
   const renderFilteredTrails = results.map((trail) => {
@@ -45,16 +45,21 @@ const TrailList = (props) => {
         getTrail={props.onTrailSelect}
         key={trail.id}
         id={trail.id}
+        image={trail.imageURL}
         name={trail.trailName}
         state={trail.state}
+        miles={trail.miles}
+        description={trail.description}
         wildernessArea={trail.wildernessArea}
       />
     );
   });
+
+
   return (
     <div className={classes["trail-list-container"]}>
       <div className={classes["results-container"]}>
-        <p>{`${props.trails.length} results - page ${page} of ${pages}`}</p>
+        <p>{`${props.trails.length} results for "${props.filter.filterQuery}"  - page ${page} of ${pages}`}</p>
       </div>
       <ul className={classes["trail-list"]}>
         {props.trails.length === 0 ? (

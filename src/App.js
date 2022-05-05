@@ -4,15 +4,18 @@ import Navigation from './components/Navigation'
 import AddTrail from "./components/AddTrail";
 import Footer from "./components/Footer";
 import MainPage from './components/MainPage';
+import TrailDetail from './components/TrailDetail'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { TRAIL_DATA } from './assets/trails'
 import HomePage from './components/HomePage'
 import TrailSearchResults from './components/TrailSearchResults'
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
   const [trails, setTrails] = useState(TRAIL_DATA);
   const [filteredTrails, setFilteredTrails] = useState([]);
   const [filter, setFilter] = useState('');
+  const [selectedTrail, setSelectedTrail] = useState({})
 
   const getAddTrailData = (trailData) => {
     setTrails(prevState => {
@@ -34,7 +37,7 @@ function App() {
       setFilteredTrails(trails);
       return;
     }
-    if (filter.filterType === "all-trails") {
+    if (filter.filterType === "all-trails" || filter.filterQuery || '') {
       setFilteredTrails(trails);
     }
     if (filter.filterType === 'by-state') {
@@ -73,24 +76,43 @@ function App() {
     }
   }, [filter, trails])
 
+  // GETS Indiviual Trail data for TrailDetail rendering
+  const getSelectedTrail = function (id) {
+    const [selectTrail] = trails.filter(trail => trail.id === id);
+    setSelectedTrail(selectTrail)
+  }
+
   console.log('RENDER');
+  console.log(selectedTrail);
   
   return (
     <div className="App">
       <Navigation trails={trails} onFilterSelect={getFilter} />
+      <ScrollToTop />
       <Switch>
         <Route path="/" exact>
           <Redirect to="/home" />
         </Route>
         <Route path="/home">
-          <HomePage trails={trails} onFilterSelect={getFilter} />
+          <HomePage
+            trails={trails}
+            onFilterSelect={getFilter}
+            onTrailSelect={getSelectedTrail}
+          />
           {/* <MainPage trails={filteredTrails} /> */}
         </Route>
         <Route path="/addtrail">
           <AddTrail onAddTrail={getAddTrailData} />
         </Route>
         <Route path="/trails">
-          <TrailSearchResults trails={filteredTrails} />
+          <TrailSearchResults
+            onTrailSelect={getSelectedTrail}
+            trails={filteredTrails}
+            trailFilter={filter}
+          />
+        </Route>
+        <Route path="/trail-detail/:trailId">
+          <TrailDetail trail={selectedTrail} trails={filteredTrails} />
         </Route>
       </Switch>
       <Footer />

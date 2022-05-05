@@ -28,7 +28,7 @@ export let TRAIL_DATA = [
     scenery: 10,
     solitude: 3,
     difficulty: 6,
-    description: `A popular and incredibly scenic trail that passes through one of the most beautiful areas in the High Sierra.  Part of this loop follows the famous John Muir Trail.  `,
+    description: `A popular and incredibly scenic trail that passes through one of the most beautiful areas in the High Sierra.  Part of this loop follows the famous John Muir Trail.  The loop passes by Thousand Island Lake, Gannet Lake, Ediza Lake and Shadow lake.  This loop can be made longer by heading to Iceberg Lake and Minaret Lake from Ediza Lake.  `,
   },
   {
     id: 3,
@@ -43,7 +43,7 @@ export let TRAIL_DATA = [
     scenery: 10,
     solitude: 4,
     difficulty: 5,
-    description: ` A gorgeous hike through the heart of the Sawtooth Range, featuring multiple lakes and a scenic high pass.  Alice lake is a main feature of this hike and is perhaps the most beautiful of the Sawtooth mountains.`,
+    description: ` A gorgeous hike through the heart of the Sawtooth Range, featuring multiple lakes and a scenic high pass.  Alice lake is a main feature of this hike and is perhaps the most beautiful of the Sawtooth mountains.  The tin cup loop is a relatively easy hike that showcases the grandeur of the Sawtooth mountains.`,
   },
   {
     id: 4,
@@ -73,7 +73,7 @@ export let TRAIL_DATA = [
     scenery: 10,
     solitude: 4,
     difficulty: 8,
-    description: `A wonder inspiring trail which circles the Pacific Northwest's most magnificent mountain.  The wonderland trail is a long and scenery packed route which traverses many ridges and valleys.`,
+    description: `A wonder inspiring trail which circles the Pacific Northwest's most magnificent mountain.  The wonderland trail is a long and scenery packed route which traverses many ridges and valleys.  The beauty of this trail makes it a bucket list hike for many hikers and thus, it is very popular.  You must win a lottery for the chance to hike this epic trail.`,
   },
   {
     id: 6,
@@ -88,7 +88,7 @@ export let TRAIL_DATA = [
     scenery: 8,
     solitude: 6,
     difficulty: 9,
-    description: `A long buy scenic route up a long glaciated valley into the goat rocks wilderness area.  The route features Packwood Lake, the Knifes edge and Ol' Snowy Mountain.`,
+    description: `A long buy scenic route up a long glaciated valley into the goat rocks wilderness area.  The route features Packwood Lake, the Knifes edge and Ol' Snowy Mountain.  This route is quite difficult and lengthy but it yields almost constant outstading views, especially after the Coyote Trail takes you above the treeline.  Packwood Lake is also a very worthy spot for a break or even an overnight stay before begining the arduous ascent up towards Ol' Snowy Mountain.`,
   },
   {
     id: 7,
@@ -133,7 +133,7 @@ export let TRAIL_DATA = [
     scenery: 7,
     solitude: 4,
     difficulty: 7,
-    description: `A steep yet rewarding hike to the high country of the small Tatoosh mountain range.  Featuring beautiful views of nearby Mt. Rainier.`,
+    description: `A steep yet rewarding hike to the high country of the small Tatoosh mountain range.  Featuring beautiful views of nearby Mt. Rainier.  Camping near the Lakes is prohibited but there are many great camp spots`,
   },
   {
     id: 10,

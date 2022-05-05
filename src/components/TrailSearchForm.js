@@ -49,8 +49,6 @@ const TrailSearchForm = (props) => {
     props.onFilterSelection(filter);
   }, [filter]);
 
-  console.log(filter);
-
   // JSX TO BE DYNAMICALLY RENDERED DEPENDING ON FILTER SELECTION
 
   // RENDERS STATE OPTIONS FOR filter by state OPTION
