@@ -4,3 +4,10 @@
     flex-direction: column;
     align-items: center; */
 }
+
+.trail-search-form-container {
+    height: 4rem;
+    padding-right: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}

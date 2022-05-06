@@ -47,13 +47,14 @@ const HomePage = (props) => {
           <TrailSearchForm
             trails={props.trails}
             onFilterSelection={getFilterSelection}
+            filter={props.trailFilter}
           />
         </div>
       </div>
       <div className={classes["featured-hikes-section"]}>
         <h1>Featured Trails</h1>
         <div className={classes["featured-hikes-container"]}>
-           {props.trails.slice(3,6).map((trail) => {
+          {props.trails.slice(3, 6).map((trail) => {
             return (
               <FeaturedHike
                 getTrailId={getIdHandler}

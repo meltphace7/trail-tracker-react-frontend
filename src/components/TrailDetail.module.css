@@ -28,13 +28,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: rgb(43, 43, 43);
 
 }
 
 .info-header h1 {
  padding: 1rem;
  background-color: var(--secondary-orange);
+ border-radius: 10px;
 }
 
 .info-sub-header {

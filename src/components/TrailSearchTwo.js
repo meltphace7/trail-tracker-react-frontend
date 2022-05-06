@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import classes from "./TrailSearchForm.module.css";
+import classes from "./TrailSearchTwo.module.css";
 import { useHistory } from "react-router-dom";
 
 const TrailSearchForm = (props) => {
@@ -15,12 +15,9 @@ const TrailSearchForm = (props) => {
   // UNIQUE PROPERTY VALUES AS VARIABLES
   const states = getUniqueValues("state");
   const wilderness = getUniqueValues("wildernessArea");
-  
-  const initialStateType = props.filter.filterType ? props.filter.filterType : 'All'
 
-  const [filterType, setFilterType] = useState(initialStateType);
-  const [filterQuery, setFilterQuery] = useState(props.filter.filterQuery
-  );
+  const [filterType, setFilterType] = useState("All");
+  const [filterQuery, setFilterQuery] = useState("All");
 
   const [filter, setFilter] = useState({
     filterType: filterType,
@@ -31,31 +28,24 @@ const TrailSearchForm = (props) => {
     setFilterType(e.target.value);
   };
 
-  useEffect(() => {
-    if (filterType === "All") setFilterQuery("All");
-  }, [filterType])
-
-  
-
   const handleFilterQuerySelect = (e) => {
-      setFilterQuery(e.target.value);
-  
+    setFilterQuery(e.target.value);
   };
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    if (filterQuery === 'select') return
+    if (filterQuery === "select") return;
     setFilter({
       filterType: filterType,
       filterQuery: filterQuery,
     });
 
     console.log("SUBMIT");
-    
+
     setTimeout(() => {
-      history.push('/trails')
+      history.push("/trails");
     }, 500);
-  };;
+  };
 
   useEffect(() => {
     props.onFilterSelection(filter);
@@ -140,10 +130,8 @@ const TrailSearchForm = (props) => {
       </select>
     </div>
   );
-   
-  console.log(filter);
-  console.log(props.filter.filterType);
-   console.log(props.filter.filterQuery);
+
+  console.log(props.filter);
 
   return (
     <form onSubmit={formSubmitHandler} className={classes["trail-search"]}>
@@ -155,10 +143,10 @@ const TrailSearchForm = (props) => {
             name="filter-trails"
             value={filterType}
             onChange={handleFilterSelect}
-            // defaultValue={'All'}
+            // defaultValue={'all-trails'}
           >
             <optgroup label="Filter By">
-              <option value="All">All Trails</option>
+              <option value="all-trails">All Trails</option>
               <option value="by-state">By State</option>
               <option value="by-wilderness">By Wilderness Area</option>
               <option value="by-season">By Season</option>
@@ -169,7 +157,7 @@ const TrailSearchForm = (props) => {
         {filterType === "by-wilderness" && chooseWilderness}
         {filterType === "by-season" && chooseMonth}
       </div>
-        <button type="submit">Search Trails!</button>
+      <button type="submit">Search Trails!</button>
     </form>
   );
 };

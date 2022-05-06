@@ -22,19 +22,12 @@ const TrailList = (props) => {
   // Converts filter Query to Month Name if filterQuery is month Number
    const [month, setMonth] = useState("");
 
-  console.log(props.filter.filterQuery);
-  console.log(isNaN(+props.filter.filterQuery));
-
   useEffect(() => {
      if (isNaN(+props.filter.filterQuery)) return;
      const seasonNum = parseInt(props.filter.filterQuery, 10);
-     console.log(seasonNum);
      const [season] = monthArray.filter((month) => month[0] === seasonNum);
      setMonth(season[1]);
-   }, [props.trailFilter]);
-
-   console.log(month);
-    
+   }, [props.trailFilter, props.filter]);
 
   //Pagination
   const resultsPerPage = 5;
@@ -59,14 +52,12 @@ const TrailList = (props) => {
   }, [page, props.trails]);
 
   const prevPageHandler = () => {
-    console.log("click");
     if (page === 1) return;
     setPage((prevState) => prevState - 1);
   };
 
   const nextPageHandler = () => {
     if (page === pages) return;
-    console.log("click");
     setPage((prevState) => prevState + 1);
   };
 
@@ -90,6 +81,13 @@ const TrailList = (props) => {
   return (
     <div className={classes["trail-list-container"]}>
       <div className={classes["results-container"]}>
+        <h1 className={classes["results-title"]}>
+          {`${
+            props.filter.filterType === "by-season"
+              ? month
+              : props.filter.filterQuery
+          } Trails`}
+        </h1>
         <p>{`${props.trails.length} results for "${
           props.filter.filterType === "by-season"
             ? month

@@ -37,7 +37,7 @@ function App() {
       setFilteredTrails(trails);
       return;
     }
-    if (filter.filterType === "all-trails") {
+    if (filter.filterType === "All") {
       setFilteredTrails(trails);
     }
     if (filter.filterType === 'by-state') {
@@ -97,6 +97,7 @@ function App() {
             trails={trails}
             onFilterSelect={getFilter}
             onTrailSelect={getSelectedTrail}
+            trailFilter={filter}
           />
           {/* <MainPage trails={filteredTrails} /> */}
         </Route>
@@ -106,8 +107,10 @@ function App() {
         <Route path="/trails">
           <TrailSearchResults
             onTrailSelect={getSelectedTrail}
-            trails={filteredTrails}
+            filteredTrails={filteredTrails}
+            trails={trails}
             trailFilter={filter}
+            onFilterSelect={getFilter}
           />
         </Route>
         <Route path="/trail-detail/:trailId">
