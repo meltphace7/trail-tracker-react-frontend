@@ -33,11 +33,11 @@ function App() {
   
   // FILTERS TRAILS BASED ON FILTER TYPE AND FILTER QUERY
   useEffect(() => {
-    if (filter === undefined) {
+    if (filter === undefined || filter.filterType === '' ) {
       setFilteredTrails(trails);
       return;
     }
-    if (filter.filterType === "all-trails" || filter.filterQuery || '') {
+    if (filter.filterType === "all-trails") {
       setFilteredTrails(trails);
     }
     if (filter.filterType === 'by-state') {
@@ -83,7 +83,6 @@ function App() {
   }
 
   console.log('RENDER');
-  console.log(selectedTrail);
   
   return (
     <div className="App">

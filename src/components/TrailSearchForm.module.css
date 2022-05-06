@@ -16,6 +16,7 @@
 }
 
 .trail-search label {
+  font-size: 1.5rem;
   margin-right: 1rem;
   color: white;
 }
@@ -38,4 +39,12 @@
   background: linear-gradient(0deg, rgba(36,116,7,1) 21%, rgba(50,251,23,1) 100%);
   cursor: pointer;
 
+}
+
+.trail-search select {
+  width: 20rem;
+  padding-left: .5rem;
+  font-size: 1.5rem;
+  height: 2rem;
+  border-radius: 20px
 }

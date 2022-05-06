@@ -2,8 +2,39 @@ import React, { useState, useEffect} from "react";
 import classes from "./TrailList.module.css";
 import TrailListItem from "./TrailListItem";
 
+ const monthArray = [
+   [1, "January"],
+   [2, "Febuary"],
+   [3, "March"],
+   [4, "April"],
+   [5, "May"],
+   [6, "June"],
+   [7, "July"],
+   [8, "August"],
+   [9, "September"],
+   [10, "October"],
+   [11, "November"],
+   [12, "December"],
+ ];
+
 
 const TrailList = (props) => {
+  // Converts filter Query to Month Name if filterQuery is month Number
+   const [month, setMonth] = useState("");
+
+  console.log(props.filter.filterQuery);
+  console.log(isNaN(+props.filter.filterQuery));
+
+  useEffect(() => {
+     if (isNaN(+props.filter.filterQuery)) return;
+     const seasonNum = parseInt(props.filter.filterQuery, 10);
+     console.log(seasonNum);
+     const [season] = monthArray.filter((month) => month[0] === seasonNum);
+     setMonth(season[1]);
+   }, [props.trailFilter]);
+
+   console.log(month);
+    
 
   //Pagination
   const resultsPerPage = 5;
@@ -59,7 +90,11 @@ const TrailList = (props) => {
   return (
     <div className={classes["trail-list-container"]}>
       <div className={classes["results-container"]}>
-        <p>{`${props.trails.length} results for "${props.filter.filterQuery}"  - page ${page} of ${pages}`}</p>
+        <p>{`${props.trails.length} results for "${
+          props.filter.filterType === "by-season"
+            ? month
+            : props.filter.filterQuery
+        }"  - page ${page} of ${pages}`}</p>
       </div>
       <ul className={classes["trail-list"]}>
         {props.trails.length === 0 ? (

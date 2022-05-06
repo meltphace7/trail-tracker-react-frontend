@@ -16,8 +16,8 @@ const TrailSearchForm = (props) => {
   const states = getUniqueValues("state");
   const wilderness = getUniqueValues("wildernessArea");
 
-  const [filterType, setFilterType] = useState("");
-  const [filterQuery, setFilterQuery] = useState("");
+  const [filterType, setFilterType] = useState("all-trails");
+  const [filterQuery, setFilterQuery] = useState("all-trails");
   const [filter, setFilter] = useState({
     filterType: filterType,
     filterQuery: filterQuery,
@@ -33,6 +33,7 @@ const TrailSearchForm = (props) => {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
+    if(filterQuery === 'select') return
     setFilter({
       filterType: filterType,
       filterQuery: filterQuery,
@@ -62,7 +63,9 @@ const TrailSearchForm = (props) => {
         onChange={handleFilterQuerySelect}
       >
         <optgroup label="Choose State">
-          <option key={Math.random()}>Select a State</option>
+          <option key={Math.random()} value="select">
+            Select a State
+          </option>
           {states.map((trail) => {
             return (
               <option key={Math.random()} value={trail}>
@@ -86,7 +89,9 @@ const TrailSearchForm = (props) => {
         onChange={handleFilterQuerySelect}
       >
         <optgroup label="Choose Wilderness">
-          <option key={Math.random()}>Select Wilderness</option>
+          <option key={Math.random()} value="select">
+            Select Wilderness
+          </option>
           {wilderness.map((trail) => {
             return <option key={Math.random()}>{trail}</option>;
           })}
@@ -105,9 +110,9 @@ const TrailSearchForm = (props) => {
         name="choose-month"
         value={filterQuery}
         onChange={handleFilterQuerySelect}
-        // defaultValue={'1'}
       >
         <optgroup label="Month">
+          <option value="0">Choose Month</option>
           <option value="1">January</option>
           <option value="2">Febuary</option>
           <option value="3">March</option>

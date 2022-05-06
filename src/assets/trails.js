@@ -179,7 +179,7 @@ export let TRAIL_DATA = [
     scenery: 8,
     solitude: 2,
     difficulty: 7,
-    description: `This steep hike features more than 6 beautiful alpine lakes.  The trail officialy stops at Big Heart Lake but a goat trail can be followed North to even more beatiful alpine lakes.`,
+    description: `This steep hike features more than 6 beautiful alpine lakes.  The trail officialy stops at Big Heart Lake but a goat trail can be followed North to even more beautiful alpine lakes.`,
   },
   {
     id: 14,

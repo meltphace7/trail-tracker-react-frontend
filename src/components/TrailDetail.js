@@ -11,7 +11,7 @@ const TrailDetail = (props) => {
   const [season, setSeason] = useState('');
   const coords = [props.trail.latitude, props.trail.longitude];
   // const [trailIsLoaded, setTrailIsLoaded] = useState(false);
-
+// Mom-  46.64463, -120.77671
   const monthArray = [
     [1, "January"],
     [2, "Febuary"],
@@ -46,7 +46,6 @@ const TrailDetail = (props) => {
   //  }
   // }, [props.trail.id])
 
-
   return (
     <div className={classes["trail-detail"]}>
         <div className={classes["trail-detail-info"]}>
@@ -59,10 +58,10 @@ const TrailDetail = (props) => {
             />
           </div>
           <div className={classes["info-sub-header"]}>
-            <h3>{`Miles: ${props.trail.miles} round-trip`}</h3>
-            <h3>{`Scenery: ${props.trail.scenery}`}</h3>
-            <h3>{`Solitude: ${props.trail.solitude}`}</h3>
-            <h3>{`Difficulty: ${props.trail.difficulty}`}</h3>
+            <h3>{`Length: ${props.trail.miles} miles roundtrip`}</h3>
+            <h3>{`Scenery: ${props.trail.scenery}/10`}</h3>
+            <h3>{`Solitude: ${props.trail.solitude}/10`}</h3>
+            <h3>{`Difficulty: ${props.trail.difficulty}/10`}</h3>
             {/* <h3>{`Best Season: ${season}`}</h3> */}
             <h3>{`Season: ${season}`}</h3>
           </div>
