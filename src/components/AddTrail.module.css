@@ -79,15 +79,15 @@
   padding: 1.5rem;
   text-align: center;
   color: white;
-  background-color: var(--secondary-orange);
-  border: 1px solid var(--tertiary-green);
+  border: none;
+  background: rgb(36,116,7);
+  background: linear-gradient(0deg, rgba(36,116,7,1) 21%, rgba(50,251,23,1) 100%);
   border-radius: 10px;
   cursor: pointer;
   transition: 300ms;
 }
 
 .trail-form button:hover {
-  background-color: black;
-  border: 1px solid white;
+  color: rgb(214, 249, 143);
   
 }

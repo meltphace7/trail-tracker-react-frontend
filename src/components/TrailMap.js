@@ -29,7 +29,11 @@ const TrailMap = (props) => {
             icon={icon}
             position={[trail.latitude, trail.longitude]}
             key={trail.id}
-          ></Marker>
+          >
+            <Popup>
+              {`${trail.trailName} trailhead`}
+            </Popup>
+          </Marker>
         ))}
       </MapContainer>
     </div>

@@ -94,6 +94,7 @@ const AddTrail = (props) => {
     props.onAddTrail(trailData);
 
     console.log(trailData);
+    alert('Trail Submitted!')
 
     }
 

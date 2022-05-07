@@ -15,12 +15,18 @@ const TrailSearchForm = (props) => {
   // UNIQUE PROPERTY VALUES AS VARIABLES
   const states = getUniqueValues("state");
   const wilderness = getUniqueValues("wildernessArea");
-  
-  const initialStateType = props.filter.filterType ? props.filter.filterType : 'All'
+  // Alpha-Sort
+  const alphaSortedStates = states.sort((a, b) =>
+    a.localeCompare(b)
+  );
+   const alphaSortedWilderness = wilderness.sort((a, b) => a.localeCompare(b));
+
+  const initialStateType = props.filter.filterType
+    ? props.filter.filterType
+    : "All";
 
   const [filterType, setFilterType] = useState(initialStateType);
-  const [filterQuery, setFilterQuery] = useState(props.filter.filterQuery
-  );
+  const [filterQuery, setFilterQuery] = useState(props.filter.filterQuery);
 
   const [filter, setFilter] = useState({
     filterType: filterType,
@@ -33,29 +39,26 @@ const TrailSearchForm = (props) => {
 
   useEffect(() => {
     if (filterType === "All") setFilterQuery("All");
-  }, [filterType])
-
-  
+  }, [filterType]);
 
   const handleFilterQuerySelect = (e) => {
-      setFilterQuery(e.target.value);
-  
+    setFilterQuery(e.target.value);
   };
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    if (filterQuery === 'select') return
+    if (filterQuery === "select") return;
     setFilter({
       filterType: filterType,
       filterQuery: filterQuery,
     });
 
     console.log("SUBMIT");
-    
+
     setTimeout(() => {
-      history.push('/trails')
+      history.push("/trails");
     }, 500);
-  };;
+  };
 
   useEffect(() => {
     props.onFilterSelection(filter);
@@ -77,7 +80,7 @@ const TrailSearchForm = (props) => {
           <option key={Math.random()} value="select">
             Select a State
           </option>
-          {states.map((trail) => {
+          {alphaSortedStates.map((trail) => {
             return (
               <option key={Math.random()} value={trail}>
                 {trail}
@@ -103,7 +106,7 @@ const TrailSearchForm = (props) => {
           <option key={Math.random()} value="select">
             Select Wilderness
           </option>
-          {wilderness.map((trail) => {
+          {alphaSortedWilderness.map((trail) => {
             return <option key={Math.random()}>{trail}</option>;
           })}
         </optgroup>
@@ -140,10 +143,6 @@ const TrailSearchForm = (props) => {
       </select>
     </div>
   );
-   
-  console.log(filter);
-  console.log(props.filter.filterType);
-   console.log(props.filter.filterQuery);
 
   return (
     <form onSubmit={formSubmitHandler} className={classes["trail-search"]}>
@@ -169,7 +168,7 @@ const TrailSearchForm = (props) => {
         {filterType === "by-wilderness" && chooseWilderness}
         {filterType === "by-season" && chooseMonth}
       </div>
-        <button type="submit">Search Trails!</button>
+      <button type="submit">Search Trails!</button>
     </form>
   );
 };

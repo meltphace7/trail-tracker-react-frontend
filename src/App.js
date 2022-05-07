@@ -12,7 +12,10 @@ import TrailSearchResults from './components/TrailSearchResults'
 import ScrollToTop from './components/ScrollToTop'
 
 function App() {
-  const [trails, setTrails] = useState(TRAIL_DATA);
+  // Sort Trail Names Alphabetically
+  const alphaSortedTrails = TRAIL_DATA.sort((a, b) => a.trailName.localeCompare(b.trailName));
+ 
+  const [trails, setTrails] = useState(alphaSortedTrails);
   const [filteredTrails, setFilteredTrails] = useState([]);
   const [filter, setFilter] = useState('');
   const [selectedTrail, setSelectedTrail] = useState({})
