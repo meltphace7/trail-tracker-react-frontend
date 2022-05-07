@@ -1,10 +1,17 @@
 .trail-list-container {
   width: 100%;
-  background-color: darkgray;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 54rem;
+}
+
+.trail-list-container p {
+  color:gray;
+}
+
+.trail-list-container h3 {
+  color:gray;
 }
 
 .results-container {
@@ -16,7 +23,6 @@
   min-height: 49rem;
   padding: .5rem;
   border-radius: 10px;
-  background-color: rgb(223, 223, 223);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,7 +44,9 @@
   width: 6rem;
   height: 2rem;
   margin: .5rem;
-  background-color: orangered;
+  border-radius: 5px;
+  background: rgb(36,116,7);
+  background: linear-gradient(0deg, rgba(36,116,7,1) 21%, rgba(50,251,23,1) 100%);
   color: white;
   border: 1px solid white;
   cursor: pointer;
@@ -46,8 +54,8 @@
 }
 
 .pagination-button:hover {
-  background-color: white;
-  color: orangered;
+  border: 1px solid rgb(209, 249, 130);
+  color: rgb(209, 249, 130);
 }
 
 .pagination-num {
@@ -55,5 +63,5 @@
 }
 
 .results-title {
-  color: rgb(52, 52, 52);
+  color: var(--secondary-green)
 }

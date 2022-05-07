@@ -126,7 +126,7 @@ const TrailSearchForm = (props) => {
         onChange={handleFilterQuerySelect}
       >
         <optgroup label="Month">
-          <option value="0">Choose Month</option>
+          <option value="0">Select Month</option>
           <option value="1">January</option>
           <option value="2">Febuary</option>
           <option value="3">March</option>
@@ -158,9 +158,9 @@ const TrailSearchForm = (props) => {
           >
             <optgroup label="Filter By">
               <option value="All">All Trails</option>
-              <option value="by-state">By State</option>
-              <option value="by-wilderness">By Wilderness Area</option>
-              <option value="by-season">By Season</option>
+              <option value="by-state">Filter By State</option>
+              <option value="by-wilderness">Filter By Wilderness Area</option>
+              <option value="by-season">Filter By Season</option>
             </optgroup>
           </select>
         </div>

@@ -12,7 +12,15 @@
   background-color: var(--secondary-green);
   cursor: pointer;
   transition: 300ms ease-in;
-  box-shadow: 6px 3px 3px rgb(171, 171, 171);
+  box-shadow: 3px 3px 3px rgb(171, 171, 171);
+}
+
+.trail-item p {
+  color: white;
+}
+
+.trail-item h3 {
+  color: white;
 }
 
 .image-container {
@@ -41,13 +49,12 @@
 }
 
 .trail-item h2 {
-  color: var(--primary-orange);
+  color: yellowgreen;
   transition: 300ms ease-in;
 }
 
 
 .trail-item:hover {
-  color: greenyellow;
   background-color: var(--primary-green);
 }
 

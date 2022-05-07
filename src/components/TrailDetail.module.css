@@ -9,6 +9,10 @@
   min-height: 58.85rem;
 }
 
+.trail-detail a {
+  color: var(--green);
+}
+
 .trail-detail-info {
  width: 100%;
  display: flex;
@@ -28,19 +32,19 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(43, 43, 43);
+  background-color: var(--secondary-green);
 
 }
 
 .info-header h1 {
  padding: 1rem;
- background-color: var(--secondary-orange);
+ background-color: var(--green);
  border-radius: 10px;
 }
 
 .info-sub-header {
   width: 100%;
-  background-color: var(--secondary-orange);
+  background-color: var(--green);
   display: flex;
   justify-content: space-around;
   align-items: center;
