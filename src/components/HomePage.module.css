@@ -3,7 +3,6 @@
     min-height: 35rem;
     background-image: url('/public/imgs/thousand-island-lake-loop-1.jpg');
     background-size: cover;
-    background-color: green;
     color: white;
     display: flex;
     justify-content: center;
@@ -14,11 +13,15 @@
     margin: 2rem 0rem 4rem 0rem;
     width: 100%;
     min-height: 50vh;
-    background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
+.featured-hikes-section h1 {
+  color: var(--secondary-green)
+}
+
 
 .featured-hikes-container {
     height: 25rem;

@@ -53,15 +53,15 @@
   transition: 300ms ease-in;
 }
 
-.pagination-button:hover {
+/* .pagination-button:hover {
   border: 1px solid rgb(209, 249, 130);
   color: rgb(209, 249, 130);
-}
-
-.pagination-num {
-  color: white;
-}
+} */
 
 .results-title {
   color: var(--secondary-green)
+}
+
+.pagination-container h3 {
+  color:var(--primary-green);
 }

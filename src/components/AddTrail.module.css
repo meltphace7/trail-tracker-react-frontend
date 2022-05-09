@@ -16,7 +16,7 @@
   color: white;
   background-color: var(--secondary-green);
   border-radius: 15px;
-  border: 1px solid var(--tertiary-green);
+  /* border: 1px solid var(--tertiary-green); */
   padding: 3rem;
   display: flex;
   flex-direction: column;

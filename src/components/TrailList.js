@@ -72,6 +72,7 @@ const TrailList = (props) => {
         state={trail.state}
         miles={trail.miles}
         description={trail.description}
+        difficulty={trail.difficulty}
         wildernessArea={trail.wildernessArea}
       />
     );
@@ -112,7 +113,7 @@ const TrailList = (props) => {
             </button>
           )}
         </div>
-        <h3 className={classes["pagination-num"]}>{page}</h3>
+        <h3 className={classes["pagination-num"]}>{`${page} of ${pages}`}</h3>
         <div className={classes["button-container"]}>
           {page < pages && (
             <button

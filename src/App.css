@@ -14,6 +14,18 @@
   flex-direction: column;
   align-items: center;
   background-color: whitesmoke;
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: .05rem;
+}
+
+button {
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: .05rem;
+}
+
+select {
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: .05rem;
 }
 
 .leaflet-container {

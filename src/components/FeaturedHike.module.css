@@ -23,7 +23,7 @@
 }
 
 .featured-hike h1 {
-    color: black;
+    color: var(--quatrary-green);
 }
 
 .featured-hike-image {

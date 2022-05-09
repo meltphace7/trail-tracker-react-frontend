@@ -21,7 +21,7 @@ const TrailListItem = (props) => {
           <h2>{props.name}</h2>
           <div className={classes["secondary-info"]}>
             <h3>{`${props.state} - ${props.wildernessArea} `}</h3>
-            <h3>{`${props.miles} miles roundtrip`}</h3>
+            <h3>{`${props.miles} miles roundtrip - Difficulty: ${props.difficulty}/10`}</h3>
           </div>
           <div className={classes["description"]}>
             <p>{props.description}</p>
