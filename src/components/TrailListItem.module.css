@@ -34,11 +34,13 @@
   align-items: center;
   overflow: hidden;
   transform: scale(1.05);
+  transition: 300ms ease-in;
 }
 
 .image-container img {
   height: 100%;
   width: auto;
+  border-radius: 10px;
 }
 
 .info-container {
@@ -55,6 +57,10 @@
 
 
 .trail-item:hover {
+  background-color: var(--primary-green);
+}
+
+.trail-item:hover .image-container {
   background-color: var(--primary-green);
 }
 

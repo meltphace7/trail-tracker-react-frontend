@@ -1,0 +1,45 @@
+.slider-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.slider {
+   height: 37rem;
+   width: 50rem;
+   border-radius: 10px;
+   position: relative;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   overflow: hidden;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.slider-button {
+    cursor: pointer;
+    border: none;
+    margin: 1.5rem;
+    width: 6rem;
+    height: 3rem;
+    border-radius: 5px;
+    color: white;
+  background: rgb(36,116,7);
+  background: linear-gradient(0deg, rgba(36,116,7,1) 21%, rgba(50,251,23,1) 100%);
+}
+
+.slide {
+  opacity: 0;
+  transition: 1s ease;
+}
+
+.slide.active {
+    opacity: .6;
+    transition-duration: 1s;
+    transform: scale(1.08);
+}

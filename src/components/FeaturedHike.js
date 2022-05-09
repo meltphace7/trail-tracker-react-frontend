@@ -13,7 +13,7 @@ const FeaturedHike = (props) => {
     <Link to={`trail-detail/${props.trailData.id}`}>
       <div className={classes["featured-hike"]} onClick={getTrailHandler}>
         <div className={classes["featured-hike-image"]}>
-          <img src={props.trailData.imageURL} />
+          <img src={props.trailData.imageURL[0]} />
         </div>
         <div className={classes["featured-hike-text"]}>
           <h1 className={classes["featured-hike-title"]}>

@@ -67,7 +67,7 @@ const TrailList = (props) => {
         getTrail={props.onTrailSelect}
         key={trail.id}
         id={trail.id}
-        image={trail.imageURL}
+        image={trail.imageURL[0]}
         name={trail.trailName}
         state={trail.state}
         miles={trail.miles}
