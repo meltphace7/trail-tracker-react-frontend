@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import classes from "./TrailDetail.module.css";
 import TrailMap from './TrailMap'
 import ImageSlider from './ImageSlider'
+import WeatherReport from './WeatherReport';
 //https://earth.google.com/web/@0,0,0a,22251752.77375655d,35y,0h,0t,0r
 //https://earth.google.com/web/@-31.9430245,115.88902211,4.1972381a,3204.7080705d
 
@@ -68,7 +69,9 @@ const TrailDetail = (props) => {
         </div>
         <p className={classes["description"]}>{props.trail.description}</p>
         <ImageSlider images={props.trail.imageURL} />
+        <WeatherReport coords={coords} />
         <div className={classes["map-container"]}>
+          <h1>Map</h1>
           <div className={classes["map-text-container"]}>
             <p>{`Trailhead coordinates: ${coords[0]}, ${coords[1]}`}</p>
             <a

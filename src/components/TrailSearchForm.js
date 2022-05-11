@@ -168,7 +168,7 @@ const TrailSearchForm = (props) => {
         {filterType === "by-wilderness" && chooseWilderness}
         {filterType === "by-season" && chooseMonth}
       </div>
-      <button type="submit">Search Trails!</button>
+      <button type="submit">Search Trails</button>
     </form>
   );
 };

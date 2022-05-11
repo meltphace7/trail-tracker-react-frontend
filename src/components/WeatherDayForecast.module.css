@@ -1,0 +1,12 @@
+.day-container {
+ margin: 1rem;
+ padding: .25rem;
+ width: 10rem;
+ /* background-color: rgb(53, 53, 53); */
+ background-color: var(--primary-green);
+ border-radius: 10px;
+ border: 1px solid white;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}

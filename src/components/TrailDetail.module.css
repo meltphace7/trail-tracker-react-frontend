@@ -62,8 +62,15 @@
   color: var(--primary-orange);
 }
 
-.map-text-container {
+.map-container {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.map-text-container {
+  width: 75%;
   display: flex;
   justify-content: space-around;
   align-items: center;
