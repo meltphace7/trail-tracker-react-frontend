@@ -7,9 +7,14 @@ import WeatherReport from './WeatherReport';
 //https://earth.google.com/web/@-31.9430245,115.88902211,4.1972381a,3204.7080705d
 
 const TrailDetail = (props) => {
-  // props.getSelectedTrail(params.id);
+  
+  if (Object.keys(props.trail).length === 0) {
+    const trailID = localStorage.getItem('selectedTrail')
+    const trail = props.trails(trail => trail.id === +trailID)
+    console.log(trailID);
+    console.log(trail);
+};
  
-
   const [season, setSeason] = useState('');
   const coords = [props.trail.latitude, props.trail.longitude];
   // const [trailIsLoaded, setTrailIsLoaded] = useState(false);

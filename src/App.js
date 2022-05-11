@@ -12,13 +12,16 @@ import TrailSearchResults from './components/TrailSearchResults'
 import ScrollToTop from './components/ScrollToTop'
 
 function App() {
+ 
   // Sort Trail Names Alphabetically
   const alphaSortedTrails = TRAIL_DATA.sort((a, b) => a.trailName.localeCompare(b.trailName));
  
   const [trails, setTrails] = useState(alphaSortedTrails);
   const [filteredTrails, setFilteredTrails] = useState([]);
   const [filter, setFilter] = useState('');
-  const [selectedTrail, setSelectedTrail] = useState({})
+  const trailID = localStorage.getItem('selectedTrail')
+  const [selectTrail] = trails.filter((trail) => trail.id === +trailID);
+  const [selectedTrail, setSelectedTrail] = useState(selectTrail);
 
   const getAddTrailData = (trailData) => {
     setTrails(prevState => {
@@ -83,6 +86,7 @@ function App() {
   const getSelectedTrail = function (id) {
     const [selectTrail] = trails.filter(trail => trail.id === id);
     setSelectedTrail(selectTrail)
+    localStorage.setItem("selectedTrail", id);
   }
 
   console.log('RENDER');

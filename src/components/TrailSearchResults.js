@@ -4,6 +4,9 @@ import TrailList from "./TrailList";
 import TrailSearchForm from "./TrailSearchForm";
 
 const TrailSearchResults = (props) => {
+  console.log(props.filteredTrails);
+  console.log(props.trails);
+  console.log(props.trailFilter);
   const getFilterSelection = function (filter) {
     props.onFilterSelect(filter);
   };

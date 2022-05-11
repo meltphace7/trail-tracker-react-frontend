@@ -1,0 +1,11 @@
+.current-weather-container {
+    margin-top: 3rem;
+    width: 35rem;
+    background-color: var(--primary-green);
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid white;
+    border-radius: 10px;
+}

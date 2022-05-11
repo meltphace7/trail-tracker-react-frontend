@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import classes from "./WeatherReport.module.css";
 import WeatherDayForecast from "./WeatherDayForecast";
+import WeatherCurrent from './WeatherCurrent';
 
 const WeatherReport = (props) => {
   const [curTemp, setCurTemp] = useState("");
   const [curWeather, setCurWeather] = useState("");
   const [weatherForecast, setWeatherForecast] = useState("");
+  const [weatherIcon, setWeatherIcon] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -20,11 +22,11 @@ const WeatherReport = (props) => {
           }&exclude=minutely&units=imperial&appid=${"9418ca858afd140d5a2ec6a614c1d7a9"}`
         );
           const data = await res.json();
-          console.log(data.daily);
         const [currentWeather] = data.current.weather;
         setCurTemp(data.current.temp);
           setCurWeather(currentWeather.description);
-          setWeatherForecast(data.daily)
+        setWeatherForecast(data.daily);
+        setWeatherIcon(currentWeather.icon);
       } catch (err) {
         throw err;
       }
@@ -36,10 +38,16 @@ const WeatherReport = (props) => {
   return (
     <div className={classes["weather-container"]}>
       <h1>Weather</h1>
-      <div className={classes["current-weather-display"]}>
-        {!isLoading && <h3>{`Current Temperature: ${curTemp}° F`}</h3>}
-        {!isLoading && <h3>{`Current Weather: ${curWeather}`}</h3>}
-        {isLoading && <h3>Loading...</h3>}
+      {isLoading && <h3>Loading...</h3>}
+      {!isLoading && (
+        <WeatherCurrent
+          curWeather={curWeather}
+          curTemp={curTemp}
+          icon={weatherIcon}
+        />
+      )}
+      <div className={classes["forecast-container"]}>
+        <h1>5 Day Forecast</h1>
         <div className={classes["forecast"]}>
           {weatherForecast &&
             weatherForecast.slice(0, 5).map((day) => {

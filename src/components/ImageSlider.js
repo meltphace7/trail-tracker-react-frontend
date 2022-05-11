@@ -11,14 +11,10 @@ const ImageSlider = (props) => {
 
   const prevHandler = function () {
     setCurrent(current === 0 ? length - 1 : current - 1);
-    console.log("PREV");
   };
-
-  console.log(current);
 
   const nextHandler = function () {
     setCurrent(current === length - 1 ? 0 : current + 1);
-    console.log("NEXT");
   };
   return (
     <div className={classes["slider-container"]}>
