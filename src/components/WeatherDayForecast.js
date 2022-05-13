@@ -16,8 +16,8 @@ const WeatherDayForecast = (props) => {
     const [weather] = props.weather;
     const icon = weather.icon;
     const weatherDescription = weather.description;
-    const high = props.highTemp;
-    const low = props.lowTemp
+    const high = Math.round(props.highTemp);
+  const low = Math.round(props.lowTemp);
     const dateNumberFormat = props.date;
     const dateString = (new Date(dateNumberFormat * 1000).toString());
     const day = dateString.slice(0, 3);

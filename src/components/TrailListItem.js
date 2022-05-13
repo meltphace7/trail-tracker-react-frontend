@@ -15,7 +15,7 @@ const TrailListItem = (props) => {
         className={classes["trail-item"]}
       >
         <div className={classes["image-container"]}>
-          <img src={props.image} />
+          {props.image && <img src={props.image} />}
         </div>
         <div className={classes["info-container"]}>
           <h2>{props.name}</h2>

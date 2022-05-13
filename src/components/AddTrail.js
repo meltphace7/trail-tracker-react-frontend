@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import classes from "./AddTrail.module.css";
+import { storage } from "../firebase";
 
 const AddTrail = (props) => {
   const [trailName, setTrailName] = useState("");
@@ -16,6 +17,8 @@ const AddTrail = (props) => {
   const [solitude, setSolitude] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [description, setDescription] = useState("");
+  const [image, setImage] = useState('');
+  const [url, setUrl] = useState('');
 
   const nameInputChangeHandler = (e) => {
     setTrailName(e.target.value)
@@ -72,31 +75,75 @@ const AddTrail = (props) => {
    const descriptionInputChangeHandler = (e) => {
      setDescription(e.target.value);
    };
+  
+  const imageUploadHandler = (e) => {
+    console.log(e.target.files[0]);
+    setImage(e.target.files[0]);
+  }
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    
-    const trailData = {
-      id: Math.random(),
-      trailName: trailName,
-      state: state,
-      wildernessArea: wilderness,
-      bestSeason: season,
-      longitude: longitude,
-      latitude: latitude,
-      miles: miles,
-      scenery: scenery,
-      solitude: solitude,
-      difficulty: difficulty,
-      description: description
-    }
 
-    props.onAddTrail(trailData);
+    let imageData;
 
-    console.log(trailData);
-    alert('Trail Submitted!')
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {},
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(image.name)
+          .getDownloadURL()
+          .then((url) => {
+            console.log(url);
+            imageData = url;
+            // setUrl(url)
+          });
+      }
+    );
+ 
+    setTimeout(() => {
+      const trailData = {
+        id: Math.random() * 1000000,
+        trailName: trailName,
+        state: state,
+        wildernessArea: wilderness,
+        bestSeason: season,
+        longitude: longitude,
+        latitude: latitude,
+        imageURL: [imageData],
+        miles: miles,
+        scenery: scenery,
+        solitude: solitude,
+        difficulty: difficulty,
+        description: description,
+      };
 
-    }
+      // props.onAddTrail(trailData);
+
+      // Submit Trail to FIREBASE
+      const submitTrailHandler = async (trailData) => {
+        const response = await fetch(`https://trail-tracker-image-store-default-rtdb.firebaseio.com/trails.json`, {
+          method: 'POST',
+          body: JSON.stringify({
+            trail: trailData
+          })
+        });
+        const data = await response.json();
+        console.log(data);
+      }
+
+      submitTrailHandler(trailData)
+
+      /////////////////////
+      console.log(trailData);
+      alert("Trail Submitted!");
+   },15000)
+  }
 
   return (
     <div className={classes["add-trail-section"]}>
@@ -266,6 +313,8 @@ const AddTrail = (props) => {
           cols="50"
         />
 
+       <label htmlFor="image-upload">Upload Images</label>
+       <input type="file" multiple onChange={imageUploadHandler} accept="image/jpg"/>
         <button type="submit">Submit Trail!</button>
       </form>
     </div>

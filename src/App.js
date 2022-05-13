@@ -12,42 +12,100 @@ import TrailSearchResults from './components/TrailSearchResults'
 import ScrollToTop from './components/ScrollToTop'
 
 function App() {
- 
-  // Sort Trail Names Alphabetically
-  const alphaSortedTrails = TRAIL_DATA.sort((a, b) => a.trailName.localeCompare(b.trailName));
- 
+  // LOAD SUBMITED TRAILS FROM FIREBASE
+  const [loadedTrails, setLoadedTrails] = useState([]);
+
+  useEffect(() => {
+    const fetchTrails = async () => {
+      const response = await fetch(
+        `https://trail-tracker-image-store-default-rtdb.firebaseio.com/trails.json`
+      );
+      const data = await response.json();
+
+      const fetchedTrails = [];
+
+      for (const key in data) {
+        fetchedTrails.push({
+          id: key,
+          bestSeason: data[key].trail.bestSeason,
+          description: data[key].trail.description,
+          difficulty: data[key].trail.difficulty,
+          imageURL: data[key].trail.imageURL,
+          latitude: data[key].trail.latitude,
+          longitude: data[key].trail.longitude,
+          miles: data[key].trail.miles,
+          scenery: data[key].trail.scenery,
+          solitude: data[key].trail.solitude,
+          state: data[key].trail.state,
+          trailName: data[key].trail.trailName,
+          wildernessArea: data[key].trail.wildernessArea,
+        });
+      }
+
+      setLoadedTrails(fetchedTrails);
+    };
+
+    fetchTrails();
+  }, []);
+
+  // const [trails, setTrails] = useState([]);
+
+
+  const alphaSortedTrails = TRAIL_DATA.sort((a, b) =>
+    a.trailName.localeCompare(b.trailName)
+  );
+
   const [trails, setTrails] = useState(alphaSortedTrails);
+  useEffect(() => {
+    let allTrails = TRAIL_DATA;
+    if (loadedTrails.length >= 1) {
+      const combinedTrails = allTrails
+        .concat(...loadedTrails)
+        .sort((a, b) => a.trailName.localeCompare(b.trailName));
+      // const alphaSortTrails = allTrails.sort((a, b) =>
+      //   a.trailName.localeCompare(b.trailName)
+      // );
+      setTrails(combinedTrails)
+      console.log(combinedTrails);
+    }
+    
+  }, [loadedTrails]);
+
+  // const [trails, setTrails] = useState(alphaSortedTrails);
   const [filteredTrails, setFilteredTrails] = useState([]);
-  const [filter, setFilter] = useState('');
-  const trailID = localStorage.getItem('selectedTrail')
+  const [filter, setFilter] = useState("");
+  const trailID = localStorage.getItem("selectedTrail");
   const [selectTrail] = trails.filter((trail) => trail.id === +trailID);
   const [selectedTrail, setSelectedTrail] = useState(selectTrail);
 
+  ////////////////////////////////////////////////
   const getAddTrailData = (trailData) => {
-    setTrails(prevState => {
-      return [...prevState, trailData]
-    })
-  }
+    setTrails((prevState) => {
+      return [...prevState, trailData];
+    });
+  };
 
   const getFilter = (filterSetting) => {
     setFilter(filterSetting);
-  }
+  };
 
   useEffect(() => {
-    setFilteredTrails(trails)
-  }, [])
-  
+    setFilteredTrails(trails);
+  }, [trails]);
+
   // FILTERS TRAILS BASED ON FILTER TYPE AND FILTER QUERY
   useEffect(() => {
-    if (filter === undefined || filter.filterType === '' ) {
+    if (filter === undefined || filter.filterType === "") {
       setFilteredTrails(trails);
       return;
     }
     if (filter.filterType === "All") {
       setFilteredTrails(trails);
     }
-    if (filter.filterType === 'by-state') {
-      const filterTrails = trails.filter(trail => trail.state === filter.filterQuery);
+    if (filter.filterType === "by-state") {
+      const filterTrails = trails.filter(
+        (trail) => trail.state === filter.filterQuery
+      );
       setFilteredTrails(filterTrails);
     }
     if (filter.filterType === "by-wilderness") {
@@ -66,31 +124,34 @@ function App() {
         (trail) => +trail.bestSeason[0] < +trail.bestSeason[1]
       );
       // Apply Filter logic to Inverted Date hikes
-       const matchingInvertedHikes = invertedDateHikes.filter(
-         (trail) =>
-           (+filter.filterQuery >= +trail.bestSeason[0] && 12) ||
-           +filter.filterQuery <= +trail.bestSeason[1]
-       );
+      const matchingInvertedHikes = invertedDateHikes.filter(
+        (trail) =>
+          (+filter.filterQuery >= +trail.bestSeason[0] && 12) ||
+          +filter.filterQuery <= +trail.bestSeason[1]
+      );
       // Apply Filter Login to Standard Date Hikes
       const matchingStandardHikes = standardDateHikes.filter(
         (trail) =>
           +filter.filterQuery >= +trail.bestSeason[0] &&
           +filter.filterQuery <= +trail.bestSeason[1]
       );
-      const seasonFilteredHikes = [...matchingInvertedHikes, ...matchingStandardHikes]
+      const seasonFilteredHikes = [
+        ...matchingInvertedHikes,
+        ...matchingStandardHikes,
+      ];
       setFilteredTrails(seasonFilteredHikes);
     }
-  }, [filter, trails])
+  }, [filter, trails]);
 
   // GETS Indiviual Trail data for TrailDetail rendering
   const getSelectedTrail = function (id) {
-    const [selectTrail] = trails.filter(trail => trail.id === id);
-    setSelectedTrail(selectTrail)
+    const [selectTrail] = trails.filter((trail) => trail.id === id);
+    setSelectedTrail(selectTrail);
     localStorage.setItem("selectedTrail", id);
-  }
+  };
 
-  console.log('RENDER');
-  
+  console.log("RENDER");
+
   return (
     <div className="App">
       <Navigation trails={trails} onFilterSelect={getFilter} />
