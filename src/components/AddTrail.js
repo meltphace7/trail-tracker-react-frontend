@@ -19,7 +19,6 @@ const AddTrail = (props) => {
   const [difficulty, setDifficulty] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState('');
-  const [url, setUrl] = useState('');
   const [trailSubmited, setTrailSubmited] = useState(false);
   const [isUploading, setIsuploading] = useState(false);
 
@@ -146,7 +145,21 @@ const AddTrail = (props) => {
 
             postTrail(trailData)
               
-             setIsuploading(false)
+            setIsuploading(false)
+            setTrailName('');
+            setState('');
+            setWilderness('');
+            setSeasonStart('');
+            setSeasonEnd('');
+            setSeason('');
+            setLongitude('');
+            setLatitude('');
+            setMiles('');
+            setScenery('');
+            setSolitude('');
+            setDifficulty('');
+            setDescription('');
+            setImage('');
           });
       }
     );
@@ -182,6 +195,7 @@ const AddTrail = (props) => {
               type="text"
               id="state"
               onChange={stateInputChangeHandler}
+              value={state}
             />
           </div>
         </div>
@@ -193,6 +207,7 @@ const AddTrail = (props) => {
               type="text"
               id="wilderness-area"
               onChange={wildernessInputChangeHandler}
+              value={wilderness}
             />
           </div>
           <div className={classes["text-input-col"]}>
@@ -202,6 +217,7 @@ const AddTrail = (props) => {
               type="text"
               id="trailhead-name"
               onChange={trailheadNameInputChangeHandler}
+              value={trailheadName}
             />
           </div>
         </div>
@@ -264,6 +280,7 @@ const AddTrail = (props) => {
               type="text"
               id="longitude"
               onChange={longitudeInputChangeHandler}
+              value={longitude}
             />
           </div>
 
@@ -274,6 +291,7 @@ const AddTrail = (props) => {
               type="text"
               id="latitude"
               onChange={latitudeInputChangeHandler}
+              value={latitude}
             />
           </div>
         </div>
@@ -286,6 +304,7 @@ const AddTrail = (props) => {
               type="number"
               id="miles"
               onChange={milesInputChangeHandler}
+              value={miles}
             />
           </div>
 
@@ -296,6 +315,7 @@ const AddTrail = (props) => {
               type="number"
               id="scenery"
               onChange={sceneryInputChangeHandler}
+              value={scenery}
             />
           </div>
           <div className={classes["input-col"]}>
@@ -305,6 +325,7 @@ const AddTrail = (props) => {
               type="number"
               id="solitude"
               onChange={solitudeInputChangeHandler}
+              value={solitude}
             />
           </div>
           <div className={classes["input-col"]}>
@@ -314,6 +335,7 @@ const AddTrail = (props) => {
               type="number"
               id="difficulty"
               onChange={difficultyInputChangeHandler}
+              value={difficulty}
             />
           </div>
         </div>
@@ -326,6 +348,7 @@ const AddTrail = (props) => {
           onChange={descriptionInputChangeHandler}
           rows="10"
           cols="50"
+          value={description}
         />
 
         <label htmlFor="image-upload">Upload Images</label>
@@ -337,7 +360,9 @@ const AddTrail = (props) => {
         />
         <button type="submit">Submit Trail!</button>
       </form>
-      {trailSubmited && <MessageTrailSubmit onClose={closeModal} uploading={isUploading}/>}
+      {trailSubmited && (
+        <MessageTrailSubmit onClose={closeModal} uploading={isUploading} />
+      )}
     </div>
   );
 }

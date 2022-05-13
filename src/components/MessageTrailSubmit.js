@@ -19,17 +19,23 @@ const MessageTrailSubmit = (props) => {
 
 
 
-    const loadingMessage = <div>
+    const loadingMessage = <React.Fragment>
         <h1>Uploading...</h1>
         <LoadingIcons.SpinningCircles />
-    </div>
+    </React.Fragment>
+
+    const successMessage = (
+      <React.Fragment>
+        <h1>TRAIL SUBMITED!</h1>
+        <button onClick={closeModalHandler}>OK</button>
+      </React.Fragment>
+    );
 
     return (
       <Modal>
         <div className={classes["trail-submit-message"]}>
           {isUploading && loadingMessage}
-          {!isUploading && <h1>TRAIL SUBMITED!</h1>}
-          <button onClick={closeModalHandler}>OK</button>
+          {!isUploading && successMessage}
         </div>
       </Modal>
     );
