@@ -1,0 +1,17 @@
+.trail-submit-message {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.trail-submit-message button {
+    width: 8rem;
+    height: 3rem;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background: rgb(36,116,7);
+  background: linear-gradient(0deg, rgba(36,116,7,1) 21%, rgba(50,251,23,1) 100%);
+}
