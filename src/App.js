@@ -26,11 +26,8 @@ function App() {
   
   const favoriteToggleHandler = function () {
     setFavorites(JSON.parse(localStorage.getItem("favorite-trails")));
-    console.log('FAVORITE TOGGLED');
   }
-  console.log(favorites);
     
- 
   useEffect(() => {
     const fetchTrails = async () => {
       const response = await fetch(

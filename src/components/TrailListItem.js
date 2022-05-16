@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import classes from './TrailListItem.module.css'
 import { Link } from 'react-router-dom'
+import { AiOutlineStar } from 'react-icons/ai'
+import { AiFillStar } from 'react-icons/ai'
+
 
 const TrailListItem = (props) => {
     
      const storageFaves = localStorage.getItem("favorite-trails")
         ? JSON.parse(localStorage.getItem("favorite-trails"))
         : []
- 
-  
-
-  console.log(storageFaves);
   
   const [favorites, setFavorites] = useState([]);
 
@@ -37,7 +36,6 @@ const TrailListItem = (props) => {
     useEffect(() => {
       if (faveIDs.includes(props.trail.id)) {
         setIsFavorited(true);
-        console.log("YEEEES");
       } 
       props.onFavoriteToggle();
     }, [favorites, props.trail.id]);
@@ -49,9 +47,19 @@ const TrailListItem = (props) => {
 
   // Disables Link when Favorites Button is clicked so favorite state can be toggled without leaving the page
   const linkClickHandler = function (e) {
-    if (e.target.className === "TrailListItem_favorites-button__FJ7Ki") {
+    console.log(e.target);
+    if (
+      e.target.className === "TrailListItem_favorites-button__FJ7Ki"
+    ) {
       e.preventDefault();
     }
+    if (e.target.className === "TrailListItem_star__Bs8Q+") {
+      e.preventDefault();
+    }
+  }
+
+  const svgClickHandler = function (e) {
+    e.preventDefault();
   }
 
   const faveHandler = function () {
@@ -74,13 +82,9 @@ const TrailListItem = (props) => {
     localStorage.setItem("favorite-trails", JSON.stringify(newFavorites));
     props.onFavoriteToggle();
   };
-  console.log(favorites);
    
   return (
-    <Link
-      to={`trail-detail/${props.id}`}
-      onClick={linkClickHandler}
-    >
+    <Link to={`trail-detail/${props.id}`} onClick={linkClickHandler}>
       <li
         key={props.id}
         onClick={getIdHandler}
@@ -90,9 +94,6 @@ const TrailListItem = (props) => {
           {props.image && <img src={props.image} />}
         </div>
         <div className={classes["info-container"]}>
-          <button onClick={faveHandler} className={classes["favorites-button"]}>
-            {isFavorited ? "REMOVE FROM FAVORITED" : "ADD TO FAVORITED"}
-          </button>
           <h2>{props.name}</h2>
           <div className={classes["secondary-info"]}>
             <h3>{`${props.state} - ${props.wildernessArea} `}</h3>
@@ -102,9 +103,28 @@ const TrailListItem = (props) => {
             <p>{props.description}</p>
           </div>
         </div>
+        <button onClick={faveHandler} className={classes["favorites-button"]}>
+          {isFavorited ? (
+            <AiFillStar
+              onClick={svgClickHandler}
+              size={30}
+              className={classes["star"]}
+            />
+          ) : (
+            <AiOutlineStar
+              onClick={svgClickHandler}
+              size={30}
+              className={classes["star"]}
+            />
+          )}
+        </button>
       </li>
     </Link>
   );
 }
 
 export default TrailListItem
+
+
+
+

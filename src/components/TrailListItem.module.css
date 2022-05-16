@@ -96,14 +96,24 @@
 
 .favorites-button {
   margin-left: auto;
+  margin-bottom: auto;
   position: relative;
-  top: 1rem;
+  /* top: 1rem; */
   border: none;
   color: yellowgreen;
   background-color: var(--primary-secondary);
   cursor: pointer;
+    width: 2rem;
+  height: 2rem;
+  z-index: 99;
 }
 
 .favorites-button:hover {
   color: white;
+
 }
+
+.star {
+  position: relative;
+}
+

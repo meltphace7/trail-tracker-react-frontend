@@ -1,38 +1,40 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from "react";
 import classes from "./TrailDetail.module.css";
-import TrailMap from './TrailMap'
-import ImageSlider from './ImageSlider'
-import WeatherReport from './WeatherReport';
+import TrailMap from "./TrailMap";
+import ImageSlider from "./ImageSlider";
+import { AiOutlineStar } from "react-icons/ai";
+import { AiFillStar } from "react-icons/ai";
+import WeatherReport from "./WeatherReport";
 
 const TrailDetail = (props) => {
-
   const [favorites, setFavorites] = useState(
-    localStorage.getItem("favorite-trails") ? JSON.parse(localStorage.getItem('favorite-trails')) : []
+    localStorage.getItem("favorite-trails")
+      ? JSON.parse(localStorage.getItem("favorite-trails"))
+      : []
   );
 
   const [isFavorited, setIsFavorited] = useState(false);
 
-  const faveIDs = favorites.map(trail => trail.id);
+  const faveIDs = favorites.map((trail) => trail.id);
 
   useEffect(() => {
-      if (faveIDs.includes(props.trail.id)) {
-        setIsFavorited(true);
-        console.log("YEEEES");
-      } else {
-        console.log('NNNOOO')
-      }
-  }, [favorites, props.trail])
-  
+    if (faveIDs.includes(props.trail.id)) {
+      setIsFavorited(true);
+      console.log("YEEEES");
+    } else {
+      console.log("NNNOOO");
+    }
+  }, [favorites, props.trail]);
 
   if (Object.keys(props.trail).length === 0) {
-    const trailID = localStorage.getItem('selectedTrail')
-    const trail = props.trails(trail => trail.id === +trailID)
-};
- 
-  const [season, setSeason] = useState('');
+    const trailID = localStorage.getItem("selectedTrail");
+    const trail = props.trails((trail) => trail.id === +trailID);
+  }
+
+  const [season, setSeason] = useState("");
   const coords = [props.trail.latitude, props.trail.longitude];
   // const [trailIsLoaded, setTrailIsLoaded] = useState(false);
-// Mom-  46.64463, -120.77671
+  // Mom-  46.64463, -120.77671
   const monthArray = [
     [1, "January"],
     [2, "Febuary"],
@@ -51,22 +53,26 @@ const TrailDetail = (props) => {
   // Gets MONTH NAME from props.trail
   useEffect(() => {
     if (props.trail.bestSeason === undefined) return;
-    const [monthStart] = monthArray.filter((month) => month[0] === +props.trail.bestSeason[0])
+    const [monthStart] = monthArray.filter(
+      (month) => month[0] === +props.trail.bestSeason[0]
+    );
     const [monthEnd] = monthArray.filter(
       (month) => month[0] === +props.trail.bestSeason[1]
     );
-    setSeason(`${monthStart[1]} - ${monthEnd[1]}`)
-  }, [props.trail])
+    setSeason(`${monthStart[1]} - ${monthEnd[1]}`);
+  }, [props.trail]);
 
   const isFavoritedHandler = function () {
     if (isFavorited) {
       setIsFavorited(false);
-      const newFavorites = favorites.filter(trail => trail.id !== props.trail.id);
+      const newFavorites = favorites.filter(
+        (trail) => trail.id !== props.trail.id
+      );
       console.log(newFavorites);
       setFavorites(newFavorites);
       localStorage.setItem("favorite-trails", JSON.stringify(newFavorites));
-      props.onFavoriteToggle()
-      console.log('UN-Favorited')
+      props.onFavoriteToggle();
+      console.log("UN-Favorited");
     } else {
       setIsFavorited(true);
       const newFavorites = favorites.concat(props.trail);
@@ -75,13 +81,22 @@ const TrailDetail = (props) => {
       localStorage.setItem("favorite-trails", JSON.stringify(newFavorites));
       props.onFavoriteToggle();
     }
-  }
+  };
 
   return (
     <div className={classes["trail-detail"]}>
       <div className={classes["trail-detail-info"]}>
         <div className={classes["info-header"]}>
-          <button onClick={isFavoritedHandler} className={classes['favorites-button']}>{isFavorited ? 'REMOVE FROM FAVORITES' : 'ADD TO FAVORITES'}</button>
+          <button
+            onClick={isFavoritedHandler}
+            className={classes["favorites-button"]}
+          >
+            {isFavorited ? (
+              <AiFillStar size={50} className={classes["star"]} />
+            ) : (
+              <AiOutlineStar size={50} className={classes["star"]} />
+            )}
+          </button>
           <h1>{props.trail.trailName}</h1>
           <h3>{`${props.trail.wildernessArea},  ${props.trail.state}`}</h3>
           <img
@@ -116,8 +131,6 @@ const TrailDetail = (props) => {
       </div>
     </div>
   );
-}
+};
 
-
-export default TrailDetail
-
+export default TrailDetail;

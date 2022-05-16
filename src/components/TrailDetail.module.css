@@ -25,6 +25,11 @@
   color: white;
 }
 
+.star {
+  position: absolute;
+  right: 1.5rem;
+}
+
 .trail-detail a {
   color: rgb(185, 245, 65);
 }
