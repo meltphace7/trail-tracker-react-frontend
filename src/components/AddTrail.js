@@ -1,99 +1,100 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import classes from "./AddTrail.module.css";
 import { storage } from "../firebase";
-import MessageTrailSubmit from './MessageTrailSubmit';
+import MessageTrailSubmit from "./MessageTrailSubmit";
 
 const AddTrail = (props) => {
   const [trailName, setTrailName] = useState("");
   const [state, setState] = useState("");
-  const [wilderness, setWilderness] = useState('');
-  const [trailheadName, setTrailheadName] = useState('');
+  const [wilderness, setWilderness] = useState("");
+  const [trailheadName, setTrailheadName] = useState("");
   const [seasonStart, setSeasonStart] = useState("");
   const [seasonEnd, setSeasonEnd] = useState("");
   const [season, setSeason] = useState("");
-  const [longitude, setLongitude] = useState('');
+  const [longitude, setLongitude] = useState("");
   const [latitude, setLatitude] = useState("");
   const [miles, setMiles] = useState("");
   const [scenery, setScenery] = useState("");
   const [solitude, setSolitude] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState("");
   const [trailSubmited, setTrailSubmited] = useState(false);
   const [isUploading, setIsuploading] = useState(false);
 
   useEffect(() => {
     console.log(isUploading);
-  }, [isUploading])
- 
+  }, [isUploading]);
 
   const nameInputChangeHandler = (e) => {
-    setTrailName(e.target.value)
-  }
+    setTrailName(e.target.value);
+  };
 
   const stateInputChangeHandler = (e) => {
     setState(e.target.value);
   };
-  
+
   const wildernessInputChangeHandler = (e) => {
     setWilderness(e.target.value);
   };
-  
+
   const trailheadNameInputChangeHandler = (e) => {
     setTrailheadName(e.target.value);
-  }
-  
+  };
+
   const seasonStartInputChangeHandler = (e) => {
-     setSeasonStart(e.target.value);
-   };
-  
-   const seasonEndInputChangeHandler = (e) => {
-     setSeasonEnd(e.target.value);
-   };
-  
+    setSeasonStart(e.target.value);
+  };
+
+  const seasonEndInputChangeHandler = (e) => {
+    setSeasonEnd(e.target.value);
+  };
+
   useEffect(() => {
     setSeason([seasonStart, seasonEnd]);
-  })
- 
-   const longitudeInputChangeHandler = (e) => {
-     setLongitude(e.target.value);
-   };
-  
-   const latitudeInputChangeHandler = (e) => {
-     setLatitude(e.target.value);
-   };
-  
-   const milesInputChangeHandler = (e) => {
-     setMiles(e.target.value);
-   };
-  
-   const sceneryInputChangeHandler = (e) => {
-     setScenery((e.target.value).toLowerCase());
-   };
-  
-   const solitudeInputChangeHandler = (e) => {
-     setSolitude(e.target.value);
-   };
-  
-   const difficultyInputChangeHandler = (e) => {
-     setDifficulty(e.target.value);
-   };
-  
-   const descriptionInputChangeHandler = (e) => {
-     setDescription(e.target.value);
-   };
-  
+  });
+
+  const longitudeInputChangeHandler = (e) => {
+    setLongitude(e.target.value);
+  };
+
+  const latitudeInputChangeHandler = (e) => {
+    setLatitude(e.target.value);
+  };
+
+  const milesInputChangeHandler = (e) => {
+    setMiles(e.target.value);
+  };
+
+  const sceneryInputChangeHandler = (e) => {
+    setScenery(e.target.value.toLowerCase());
+  };
+
+  const solitudeInputChangeHandler = (e) => {
+    setSolitude(e.target.value);
+  };
+
+  const difficultyInputChangeHandler = (e) => {
+    setDifficulty(e.target.value);
+  };
+
+  const descriptionInputChangeHandler = (e) => {
+    setDescription(e.target.value);
+  };
+
   let fileList = [];
   const imageUploadHandler = (e) => {
     console.log(e.target.files[0]);
     setImage(e.target.files[0]);
-  }
+  };
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
     setTrailSubmited(true);
     setIsuploading(true);
-  // SENDS IMAGE TO FIREBASE STORAGE
+
+    // SENDS IMAGE TO FIREBASE STORAGE THEN UPLOADS trail to FIREBASE REALTIME DATABASE  /////////////////////
+
     let imageData;
 
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
@@ -110,23 +111,23 @@ const AddTrail = (props) => {
           .getDownloadURL()
           .then((url) => {
             console.log(url);
-            console.log('IMAGE UPLOADED');
+            console.log("IMAGE UPLOADED");
             imageData = url;
-             const trailData = {
-               id: Math.random() * 1000000,
-               trailName: trailName,
-               state: state,
-               wildernessArea: wilderness,
-               bestSeason: season,
-               longitude: longitude,
-               latitude: latitude,
-               imageURL: [imageData],
-               miles: miles,
-               scenery: scenery,
-               solitude: solitude,
-               difficulty: difficulty,
-               description: description,
-             };
+            const trailData = {
+              id: Math.random() * 1000000,
+              trailName: trailName,
+              state: state,
+              wildernessArea: wilderness,
+              bestSeason: season,
+              longitude: longitude,
+              latitude: latitude,
+              imageURL: [imageData],
+              miles: miles,
+              scenery: scenery,
+              solitude: solitude,
+              difficulty: difficulty,
+              description: description,
+            };
             // SENDS TRAIL DATA TO FIREBASE REALTIME DATABASE
             const postTrail = async function (trail) {
               const response = await fetch(
@@ -140,38 +141,34 @@ const AddTrail = (props) => {
               );
               const data = await response.json();
               console.log(data);
-              console.log('POSTED');
-            }
+              console.log("POSTED");
+            };
 
-            postTrail(trailData)
-              
-            setIsuploading(false)
-            setTrailName('');
-            setState('');
-            setWilderness('');
-            setSeasonStart('');
-            setSeasonEnd('');
-            setSeason('');
-            setLongitude('');
-            setLatitude('');
-            setMiles('');
-            setScenery('');
-            setSolitude('');
-            setDifficulty('');
-            setDescription('');
-            setImage('');
+            postTrail(trailData);
+
+            setIsuploading(false);
+            setTrailName("");
+            setState("");
+            setWilderness("");
+            setSeasonStart("");
+            setSeasonEnd("");
+            setSeason("");
+            setLongitude("");
+            setLatitude("");
+            setMiles("");
+            setScenery("");
+            setSolitude("");
+            setDifficulty("");
+            setDescription("");
+            setImage("");
           });
       }
     );
-      /////////////////////
   };
 
   const closeModal = function () {
-    setTrailSubmited((prevState) => !prevState)
-  }
-
-
-  
+    setTrailSubmited((prevState) => !prevState);
+  };
 
   return (
     <div className={classes["add-trail-section"]}>
@@ -365,74 +362,70 @@ const AddTrail = (props) => {
       )}
     </div>
   );
-}
+};
 
-export default AddTrail
-
-
-
-
+export default AddTrail;
 
 // const formSubmitHandler = (e) => {
-  //   e.preventDefault();
+//   e.preventDefault();
 
-  //   let imageData;
+//   let imageData;
 
-  //   const uploadTask = storage.ref(`images/${image.name}`).put(image);
-  //   uploadTask.on(
-  //     "state_changed",
-  //     (snapshot) => {},
-  //     (error) => {
-  //       console.log(error);
-  //     },
-  //     () => {
-  //       storage
-  //         .ref("images")
-  //         .child(image.name)
-  //         .getDownloadURL()
-  //         .then((url) => {
-  //           console.log(url);
-  //           imageData = url;
-  //           // setUrl(url)
-  //         });
-  //     }
-  //   );
- 
-  //   setTimeout(() => {
-  //     const trailData = {
-  //       id: Math.random() * 1000000,
-  //       trailName: trailName,
-  //       state: state,
-  //       wildernessArea: wilderness,
-  //       bestSeason: season,
-  //       longitude: longitude,
-  //       latitude: latitude,
-  //       imageURL: [imageData],
-  //       miles: miles,
-  //       scenery: scenery,
-  //       solitude: solitude,
-  //       difficulty: difficulty,
-  //       description: description,
-  //     };
+//   const uploadTask = storage.ref(`images/${image.name}`).put(image);
+//   uploadTask.on(
+//     "state_changed",
+//     (snapshot) => {},
+//     (error) => {
+//       console.log(error);
+//     },
+//     () => {
+//       storage
+//         .ref("images")
+//         .child(image.name)
+//         .getDownloadURL()
+//         .then((url) => {
+//           console.log(url);
+//           imageData = url;
+//           // setUrl(url)
+//         });
+//     }
+//   );
 
-  //     // props.onAddTrail(trailData);
+//   setTimeout(() => {
+//     const trailData = {
+//       id: Math.random() * 1000000,
+//       trailName: trailName,
+//       state: state,
+//       wildernessArea: wilderness,
+//       bestSeason: season,
+//       longitude: longitude,
+//       latitude: latitude,
+//       imageURL: [imageData],
+//       miles: miles,
+//       scenery: scenery,
+//       solitude: solitude,
+//       difficulty: difficulty,
+//       description: description,
+//     };
 
-  //     // Submit Trail to FIREBASE
-  //     const submitTrailHandler = async (trailData) => {
-  //       const response = await fetch(`https://trail-tracker-image-store-default-rtdb.firebaseio.com/trails.json`, {
-  //         method: 'POST',
-  //         body: JSON.stringify({
-  //           trail: trailData
-  //         })
-  //       });
-  //       const data = await response.json();
-  //       console.log(data);
-  //     }
+//     // props.onAddTrail(trailData);
 
-  //     submitTrailHandler(trailData)
+//     // Submit Trail to FIREBASE
+//     const submitTrailHandler = async (trailData) => {
+//       const response = await fetch(`https://trail-tracker-image-store-default-rtdb.firebaseio.com/trails.json`, {
+//         method: 'POST',
+//         body: JSON.stringify({
+//           trail: trailData
+//         })
+//       });
+//       const data = await response.json();
+//       console.log(data);
+//     }
 
-  //     /////////////////////
-  //     console.log(trailData);
-  //     alert("Trail Submitted!");
-  //  },15000)
-  // }
+//     submitTrailHandler(trailData)
+
+//     /////////////////////
+//     console.log(trailData);
+//     alert("Trail Submitted!");
+//  },15000)
+// }

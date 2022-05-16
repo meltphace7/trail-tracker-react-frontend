@@ -3,6 +3,8 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 
+
+
 function ChangeView({ center, zoom }) {
   const map = useMap();
   map.setView(center, zoom);
@@ -14,14 +16,12 @@ const TrailMap = (props) => {
 
   return (
     <div>
-      <MapContainer
-        center={props.coords}
-        zoom={14}
-        scrollWheelZoom={true}
-      >
+      <MapContainer center={props.coords} zoom={14} scrollWheelZoom={true}>
         <TileLayer
-          attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
-          url="https://api.maptiler.com/maps/outdoor/{z}/{x}/{y}.png?key=AyMX0LXoTHHgR2du1wzC"
+          attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
+          url="https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg"
+          // attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+          // url="https://api.maptiler.com/maps/outdoor/{z}/{x}/{y}.png?key=AyMX0LXoTHHgR2du1wzC"
         />
         <ChangeView center={props.coords} zoom={14} />
         {props.trails.map((trail) => (
@@ -30,9 +30,7 @@ const TrailMap = (props) => {
             position={[trail.latitude, trail.longitude]}
             key={trail.id}
           >
-            <Popup>
-              {`${trail.trailName} trailhead`}
-            </Popup>
+            <Popup>{`${trail.trailName} trailhead`}</Popup>
           </Marker>
         ))}
       </MapContainer>

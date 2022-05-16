@@ -10,6 +10,9 @@ const WeatherReport = (props) => {
   const [weatherIcon, setWeatherIcon] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  // weather api key protonmail: c1d64aca00157236debbddc5f2e543ff
+  // weather api key gmail: 9418ca858afd140d5a2ec6a614c1d7a9
+
   useEffect(() => {
     const getWeather = async function (coordinates) {
       setIsLoading(true);
@@ -21,10 +24,10 @@ const WeatherReport = (props) => {
             coordinates[1]
           }&exclude=minutely&units=imperial&appid=${"9418ca858afd140d5a2ec6a614c1d7a9"}`
         );
-          const data = await res.json();
+        const data = await res.json();
         const [currentWeather] = data.current.weather;
         setCurTemp(data.current.temp);
-          setCurWeather(currentWeather.description);
+        setCurWeather(currentWeather.description);
         setWeatherForecast(data.daily);
         setWeatherIcon(currentWeather.icon);
       } catch (err) {
