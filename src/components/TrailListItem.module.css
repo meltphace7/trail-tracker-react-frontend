@@ -93,3 +93,17 @@
     width: 30rem;
   /* background-color: red; */
 }
+
+.favorites-button {
+  margin-left: auto;
+  position: relative;
+  top: 1rem;
+  border: none;
+  color: yellowgreen;
+  background-color: var(--primary-secondary);
+  cursor: pointer;
+}
+
+.favorites-button:hover {
+  color: white;
+}

@@ -10,11 +10,27 @@ import { TRAIL_DATA } from './assets/trails'
 import HomePage from './components/HomePage'
 import TrailSearchResults from './components/TrailSearchResults'
 import ScrollToTop from './components/ScrollToTop'
+import Favorites from './components/Favorites';
 
 function App() {
   // LOAD SUBMITED TRAILS FROM FIREBASE
   const [loadedTrails, setLoadedTrails] = useState([]);
 
+  //FAVORITES 
+   const [favorites, setFavorites] = useState(
+     localStorage.getItem("favorite-trails")
+       ? JSON.parse(localStorage.getItem("favorite-trails"))
+       : []
+   );
+
+  
+  const favoriteToggleHandler = function () {
+    setFavorites(JSON.parse(localStorage.getItem("favorite-trails")));
+    console.log('FAVORITE TOGGLED');
+  }
+  console.log(favorites);
+    
+ 
   useEffect(() => {
     const fetchTrails = async () => {
       const response = await fetch(
@@ -48,14 +64,31 @@ function App() {
     fetchTrails();
   }, []);
 
-  // const [trails, setTrails] = useState([]);
-
 
   const alphaSortedTrails = TRAIL_DATA.sort((a, b) =>
     a.trailName.localeCompare(b.trailName)
   );
 
   const [trails, setTrails] = useState(alphaSortedTrails);
+
+  /// Favorite Trails ////////
+
+  // const favoriteTrails = favoriteIDs.map(id => {
+  //   const [faveTrail] = trails.filter(trail => trail.id === id);
+  //   return faveTrail;
+  // }
+  // );
+
+  // console.log(favoriteTrails);
+
+  // const [favorites, setFavorites] = useState([]);
+
+  // useEffect(() => {
+  //   setFavorites(favoriteTrails)
+  // }, [favoriteIDs])
+ 
+
+
   useEffect(() => {
     let allTrails = TRAIL_DATA;
     if (loadedTrails.length >= 1) {
@@ -66,7 +99,6 @@ function App() {
       //   a.trailName.localeCompare(b.trailName)
       // );
       setTrails(combinedTrails)
-      console.log(combinedTrails);
     }
     
   }, [loadedTrails]);
@@ -145,6 +177,7 @@ function App() {
 
   // GETS Indiviual Trail data for TrailDetail rendering
   const getSelectedTrail = function (id) {
+  
     const [selectTrail] = trails.filter((trail) => trail.id === id);
     setSelectedTrail(selectTrail);
     localStorage.setItem("selectedTrail", id);
@@ -169,6 +202,13 @@ function App() {
           />
           {/* <MainPage trails={filteredTrails} /> */}
         </Route>
+        <Route path="/favorites">
+          <Favorites
+            onTrailSelect={getSelectedTrail}
+            onFavoriteToggle={favoriteToggleHandler}
+            favorites={favorites}
+          />
+        </Route>
         <Route path="/addtrail">
           <AddTrail onAddTrail={getAddTrailData} />
         </Route>
@@ -179,10 +219,16 @@ function App() {
             trails={trails}
             trailFilter={filter}
             onFilterSelect={getFilter}
+            onFavoriteToggle={favoriteToggleHandler}
+            favorites={favorites}
           />
         </Route>
         <Route path="/trail-detail/:trailId">
-          <TrailDetail trail={selectedTrail} trails={filteredTrails} />
+          <TrailDetail
+            trail={selectedTrail}
+            trails={filteredTrails}
+            onFavoriteToggle={favoriteToggleHandler}
+          />
         </Route>
       </Switch>
       <Footer />

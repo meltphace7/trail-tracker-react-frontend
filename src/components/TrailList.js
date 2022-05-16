@@ -20,7 +20,10 @@ import TrailListItem from "./TrailListItem";
 
 const TrailList = (props) => {
   // Converts filter Query to Month Name if filterQuery is month Number
-   const [month, setMonth] = useState("");
+  const [month, setMonth] = useState("");
+
+
+
 
   useEffect(() => {
      if (isNaN(+props.filter.filterQuery)) return;
@@ -33,6 +36,7 @@ const TrailList = (props) => {
   const resultsPerPage = 5;
   const [page, setPage] = useState(1);
   const [results, setResults] = useState(props.trails.slice(0, resultsPerPage));
+
 
   useEffect(() => {
     setPage(1);
@@ -61,6 +65,11 @@ const TrailList = (props) => {
     setPage((prevState) => prevState + 1);
   };
 
+  // const getTrailHandler = function (e) {
+  //   console.log(e);
+  //   props.onTrailSelect();
+  // }
+
   const renderFilteredTrails = results.map((trail) => {
     return (
       <TrailListItem
@@ -74,6 +83,9 @@ const TrailList = (props) => {
         description={trail.description}
         difficulty={trail.difficulty}
         wildernessArea={trail.wildernessArea}
+        onFavoriteToggle={props.onFavoriteToggle}
+        trail={trail}
+        favorites={props.favorites}
       />
     );
   });

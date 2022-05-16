@@ -9,6 +9,22 @@
   min-height: 58.85rem;
 }
 
+.favorites-button {
+  font-size: 1.2rem;;
+  margin-left: auto;
+  margin-right: 1rem;
+  position: relative;
+  top: 2rem;
+  border: none;
+  color: yellowgreen;
+  background-color: var(--primary-secondary);
+  cursor: pointer;
+}
+
+.favorites-button:hover {
+  color: white;
+}
+
 .trail-detail a {
   color: rgb(185, 245, 65);
 }

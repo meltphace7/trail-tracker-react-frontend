@@ -3,16 +3,30 @@ import classes from "./TrailDetail.module.css";
 import TrailMap from './TrailMap'
 import ImageSlider from './ImageSlider'
 import WeatherReport from './WeatherReport';
-//https://earth.google.com/web/@0,0,0a,22251752.77375655d,35y,0h,0t,0r
-//https://earth.google.com/web/@-31.9430245,115.88902211,4.1972381a,3204.7080705d
 
 const TrailDetail = (props) => {
+
+  const [favorites, setFavorites] = useState(
+    localStorage.getItem("favorite-trails") ? JSON.parse(localStorage.getItem('favorite-trails')) : []
+  );
+
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  const faveIDs = favorites.map(trail => trail.id);
+
+  useEffect(() => {
+      if (faveIDs.includes(props.trail.id)) {
+        setIsFavorited(true);
+        console.log("YEEEES");
+      } else {
+        console.log('NNNOOO')
+      }
+  }, [favorites, props.trail])
   
+
   if (Object.keys(props.trail).length === 0) {
     const trailID = localStorage.getItem('selectedTrail')
     const trail = props.trails(trail => trail.id === +trailID)
-    console.log(trailID);
-    console.log(trail);
 };
  
   const [season, setSeason] = useState('');
@@ -44,19 +58,30 @@ const TrailDetail = (props) => {
     setSeason(`${monthStart[1]} - ${monthEnd[1]}`)
   }, [props.trail])
 
-  // Determines if a Trail is Displayed or not
-  // useEffect(() => {
-  //  if (props.trail.id === undefined) {
-  //    setTrailIsLoaded(false);
-  //  } else {
-  //    setTrailIsLoaded(true);
-  //  }
-  // }, [props.trail.id])
+  const isFavoritedHandler = function () {
+    if (isFavorited) {
+      setIsFavorited(false);
+      const newFavorites = favorites.filter(trail => trail.id !== props.trail.id);
+      console.log(newFavorites);
+      setFavorites(newFavorites);
+      localStorage.setItem("favorite-trails", JSON.stringify(newFavorites));
+      props.onFavoriteToggle()
+      console.log('UN-Favorited')
+    } else {
+      setIsFavorited(true);
+      const newFavorites = favorites.concat(props.trail);
+      console.log(newFavorites);
+      setFavorites(newFavorites);
+      localStorage.setItem("favorite-trails", JSON.stringify(newFavorites));
+      props.onFavoriteToggle();
+    }
+  }
 
   return (
     <div className={classes["trail-detail"]}>
       <div className={classes["trail-detail-info"]}>
         <div className={classes["info-header"]}>
+          <button onClick={isFavoritedHandler} className={classes['favorites-button']}>{isFavorited ? 'REMOVE FROM FAVORITES' : 'ADD TO FAVORITES'}</button>
           <h1>{props.trail.trailName}</h1>
           <h3>{`${props.trail.wildernessArea},  ${props.trail.state}`}</h3>
           <img
@@ -74,7 +99,7 @@ const TrailDetail = (props) => {
         </div>
         <p className={classes["description"]}>{props.trail.description}</p>
         <ImageSlider images={props.trail.imageURL} />
-        <WeatherReport coords={coords} />
+        {/* <WeatherReport coords={coords} /> */}
         <div className={classes["map-container"]}>
           <h1>Map</h1>
           <div className={classes["map-text-container"]}>
