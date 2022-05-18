@@ -1,13 +1,11 @@
-import React from 'react'
-import classes from './FeaturedHike.module.css'
-import { Link } from 'react-router-dom'
+import React from "react";
+import classes from "./FeaturedHike.module.css";
+import { Link } from "react-router-dom";
 
 const FeaturedHike = (props) => {
   const getTrailHandler = function () {
     props.getTrail(props.trailData.id);
-    console.log(props.trailData.id);
-  }
-
+  };
 
   return (
     <Link to={`trail-detail/${props.trailData.id}`}>
@@ -32,6 +30,6 @@ const FeaturedHike = (props) => {
       </div>
     </Link>
   );
-}
+};
 
-export default FeaturedHike
+export default FeaturedHike;

@@ -7,7 +7,7 @@ const WeatherCurrent = (props) => {
           <h2>Currently...</h2>
           <h3>{props.curWeather}</h3>
           <img src={`http://openweathermap.org/img/wn/${props.icon}@2x.png`} />
-          <h3>{`${Math.round(props.curTemp)}° F`}</h3>
+          <h3 className={classes.temp}>{`${Math.round(props.curTemp)}° F`}</h3>
         </div>
     )
 }

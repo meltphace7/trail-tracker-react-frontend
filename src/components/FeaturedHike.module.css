@@ -43,12 +43,12 @@
 
 .featured-hike-text {
     width: 100%;
-    height: 50%;
+    height: 9rem;
     background-color: white;
     line-height: 1.4rem;
     display: flex;
     flex-direction: column;
-    padding: .3rem;
+    padding: .4rem;
 }
 
 .featured-hike-title {

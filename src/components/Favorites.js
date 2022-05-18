@@ -3,7 +3,6 @@ import classes from './Favorites.module.css'
 import TrailListItem from './TrailListItem';
 
 const Favorites = (props) => {
-  console.log(props.favorites);
 
   const renderFavorites = props.favorites.map((trail) => {
         
@@ -26,12 +25,12 @@ const Favorites = (props) => {
       );
     });
     return (
-        <div className={classes['favorites-container']}>
-            <h1>FAVORITES</h1>
-            {props.favorites.length !== 0 ? renderFavorites : 'NO FAVORITES YET'}
-            
-        </div>
-    )
+      <div className={classes["favorites-container"]}>
+        <h1>FAVORITES</h1>
+        <p>{props.favorites.length !== 0 ? `${props.favorites.length} results` : ''}</p>
+        {props.favorites.length !== 0 ? renderFavorites : "NO FAVORITES YET"}
+      </div>
+    );
 }
 
 export default Favorites

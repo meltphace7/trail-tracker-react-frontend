@@ -161,7 +161,6 @@ function App() {
   };
 
   console.log("RENDER");
-  console.log(favorites);
 
   return (
     <div className="App">

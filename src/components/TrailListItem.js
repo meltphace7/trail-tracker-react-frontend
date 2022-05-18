@@ -47,7 +47,6 @@ const TrailListItem = (props) => {
 
   // Disables Link when Favorites Button is clicked so favorite state can be toggled without leaving the page
   const linkClickHandler = function (e) {
-    console.log(e.target);
     if (
       e.target.className === "TrailListItem_favorites-button__FJ7Ki"
     ) {
@@ -63,10 +62,6 @@ const TrailListItem = (props) => {
   }
 
   const faveHandler = function () {
-    console.log(favorites);
-    console.log(faveIDs);
-    console.log(props.trail);
-
     let newFavorites;
     if (isFavorited) {
       setIsFavorited(false);
@@ -96,9 +91,6 @@ const TrailListItem = (props) => {
   }
 
   calcDifficulty(props.difficulty);
-
-  console.log(difficulty);
-  
 
   return (
     <Link to={`trail-detail/${props.id}`} onClick={linkClickHandler}>

@@ -20,9 +20,7 @@ const TrailDetail = (props) => {
   useEffect(() => {
     if (faveIDs.includes(props.trail.id)) {
       setIsFavorited(true);
-      console.log("YEEEES");
     } else {
-      console.log("NNNOOO");
     }
   }, [favorites, props.trail]);
 
@@ -68,17 +66,14 @@ const TrailDetail = (props) => {
       const newFavorites = favorites
         .filter((trail) => trail.id !== props.trail.id)
         .sort((a, b) => a.trailName.localeCompare(b.trailName));
-      console.log(newFavorites);
       setFavorites(newFavorites);
       localStorage.setItem("favorite-trails", JSON.stringify(newFavorites));
       props.onFavoriteToggle();
-      console.log("UN-Favorited");
     } else {
       setIsFavorited(true);
       const newFavorites = favorites
         .concat(props.trail)
         .sort((a, b) => a.trailName.localeCompare(b.trailName));
-      console.log(newFavorites);
       setFavorites(newFavorites);
       localStorage.setItem("favorite-trails", JSON.stringify(newFavorites));
       props.onFavoriteToggle();
@@ -94,8 +89,6 @@ const TrailDetail = (props) => {
    };
 
    calcDifficulty(props.trail.difficulty);
-
-   console.log(difficulty);
 
   return (
     <div className={classes["trail-detail"]}>
