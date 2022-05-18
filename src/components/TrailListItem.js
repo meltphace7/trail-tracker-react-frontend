@@ -71,11 +71,15 @@ const TrailListItem = (props) => {
     if (isFavorited) {
       setIsFavorited(false);
       console.log('UN-FAVORITED');
-      newFavorites = storageFaves.filter(trail => trail.id !== props.trail.id);
+      newFavorites = storageFaves
+        .filter((trail) => trail.id !== props.trail.id)
+        .sort((a, b) => a.trailName.localeCompare(b.trailName));
     } else {
       setIsFavorited(true);
       console.log('FAVORITED');
-      newFavorites = storageFaves.concat(props.trail);
+      newFavorites = storageFaves
+        .concat(props.trail)
+        .sort((a, b) => a.trailName.localeCompare(b.trailName));
     }
     console.log(newFavorites);
     setFavorites(newFavorites);

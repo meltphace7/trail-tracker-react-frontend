@@ -3,8 +3,7 @@ import classes from './Favorites.module.css'
 import TrailListItem from './TrailListItem';
 
 const Favorites = (props) => {
-
-  // onFavoriteToggle = { favoriteToggleHandler };
+  console.log(props.favorites);
 
   const renderFavorites = props.favorites.map((trail) => {
         

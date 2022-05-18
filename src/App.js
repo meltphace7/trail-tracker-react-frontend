@@ -1,106 +1,87 @@
-import { useState, useEffect } from 'react';
-import './App.css';
-import Navigation from './components/Navigation'
+import { useState, useEffect } from "react";
+import "./App.css";
+import Navigation from "./components/Navigation";
 import AddTrail from "./components/AddTrail";
 import Footer from "./components/Footer";
-import MainPage from './components/MainPage';
-import TrailDetail from './components/TrailDetail'
-import { Switch, Route, Redirect } from 'react-router-dom'
-import { TRAIL_DATA } from './assets/trails'
-import HomePage from './components/HomePage'
-import TrailSearchResults from './components/TrailSearchResults'
-import ScrollToTop from './components/ScrollToTop'
-import Favorites from './components/Favorites';
+import MainPage from "./components/MainPage";
+import TrailDetail from "./components/TrailDetail";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { TRAIL_DATA } from "./assets/trails";
+import HomePage from "./components/HomePage";
+import TrailSearchResults from "./components/TrailSearchResults";
+import ScrollToTop from "./components/ScrollToTop";
+import Favorites from "./components/Favorites";
 
 function App() {
   // LOAD SUBMITED TRAILS FROM FIREBASE
   const [loadedTrails, setLoadedTrails] = useState([]);
 
-  //FAVORITES 
-   const [favorites, setFavorites] = useState(
-     localStorage.getItem("favorite-trails")
-       ? JSON.parse(localStorage.getItem("favorite-trails"))
-       : []
-   );
+  //LOAD FAVORITES from local storage
+  const [favorites, setFavorites] = useState(
+    localStorage.getItem("favorite-trails")
+      ? JSON.parse(localStorage.getItem("favorite-trails"))
+      : []
+  );
 
-  
   const favoriteToggleHandler = function () {
     setFavorites(JSON.parse(localStorage.getItem("favorite-trails")));
-  }
-    
+  };
+
+  const fetchTrails = async () => {
+    const response = await fetch(
+      `https://trail-tracker-image-store-default-rtdb.firebaseio.com/trails.json`
+    );
+    const data = await response.json();
+
+    const fetchedTrails = [];
+
+    for (const key in data) {
+      fetchedTrails.push({
+        id: key,
+        bestSeason: data[key].trail.bestSeason,
+        description: data[key].trail.description,
+        difficulty: data[key].trail.difficulty,
+        imageURL: data[key].trail.imageURL,
+        latitude: data[key].trail.latitude,
+        longitude: data[key].trail.longitude,
+        miles: data[key].trail.miles,
+        scenery: data[key].trail.scenery,
+        solitude: data[key].trail.solitude,
+        state: data[key].trail.state,
+        trailName: data[key].trail.trailName,
+        wildernessArea: data[key].trail.wildernessArea,
+      });
+    }
+
+    setLoadedTrails(fetchedTrails);
+  };
+
   useEffect(() => {
-    const fetchTrails = async () => {
-      const response = await fetch(
-        `https://trail-tracker-image-store-default-rtdb.firebaseio.com/trails.json`
-      );
-      const data = await response.json();
-
-      const fetchedTrails = [];
-
-      for (const key in data) {
-        fetchedTrails.push({
-          id: key,
-          bestSeason: data[key].trail.bestSeason,
-          description: data[key].trail.description,
-          difficulty: data[key].trail.difficulty,
-          imageURL: data[key].trail.imageURL,
-          latitude: data[key].trail.latitude,
-          longitude: data[key].trail.longitude,
-          miles: data[key].trail.miles,
-          scenery: data[key].trail.scenery,
-          solitude: data[key].trail.solitude,
-          state: data[key].trail.state,
-          trailName: data[key].trail.trailName,
-          wildernessArea: data[key].trail.wildernessArea,
-        });
-      }
-
-      setLoadedTrails(fetchedTrails);
-    };
-
     fetchTrails();
   }, []);
-
+ 
+  // updates loaded trails on trail submission in AddTrails.js
+  const upDateLoadedTrailsHandler = function () {
+    fetchTrails();
+    console.log("TRAILS UPDATED");
+  };
 
   const alphaSortedTrails = TRAIL_DATA.sort((a, b) =>
     a.trailName.localeCompare(b.trailName)
   );
 
   const [trails, setTrails] = useState(alphaSortedTrails);
-
-  /// Favorite Trails ////////
-
-  // const favoriteTrails = favoriteIDs.map(id => {
-  //   const [faveTrail] = trails.filter(trail => trail.id === id);
-  //   return faveTrail;
-  // }
-  // );
-
-  // console.log(favoriteTrails);
-
-  // const [favorites, setFavorites] = useState([]);
-
-  // useEffect(() => {
-  //   setFavorites(favoriteTrails)
-  // }, [favoriteIDs])
  
-
-
   useEffect(() => {
     let allTrails = TRAIL_DATA;
     if (loadedTrails.length >= 1) {
       const combinedTrails = allTrails
         .concat(...loadedTrails)
         .sort((a, b) => a.trailName.localeCompare(b.trailName));
-      // const alphaSortTrails = allTrails.sort((a, b) =>
-      //   a.trailName.localeCompare(b.trailName)
-      // );
-      setTrails(combinedTrails)
+      setTrails(combinedTrails);
     }
-    
   }, [loadedTrails]);
 
-  // const [trails, setTrails] = useState(alphaSortedTrails);
   const [filteredTrails, setFilteredTrails] = useState([]);
   const [filter, setFilter] = useState("");
   const trailID = localStorage.getItem("selectedTrail");
@@ -174,13 +155,13 @@ function App() {
 
   // GETS Indiviual Trail data for TrailDetail rendering
   const getSelectedTrail = function (id) {
-  
     const [selectTrail] = trails.filter((trail) => trail.id === id);
     setSelectedTrail(selectTrail);
     localStorage.setItem("selectedTrail", id);
   };
 
   console.log("RENDER");
+  console.log(favorites);
 
   return (
     <div className="App">
@@ -207,7 +188,10 @@ function App() {
           />
         </Route>
         <Route path="/addtrail">
-          <AddTrail onAddTrail={getAddTrailData} />
+          <AddTrail
+            onAddTrail={getAddTrailData}
+            updateTrails={upDateLoadedTrailsHandler}
+          />
         </Route>
         <Route path="/trails">
           <TrailSearchResults

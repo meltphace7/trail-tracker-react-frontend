@@ -65,9 +65,9 @@ const TrailDetail = (props) => {
   const isFavoritedHandler = function () {
     if (isFavorited) {
       setIsFavorited(false);
-      const newFavorites = favorites.filter(
-        (trail) => trail.id !== props.trail.id
-      );
+      const newFavorites = favorites
+        .filter((trail) => trail.id !== props.trail.id)
+        .sort((a, b) => a.trailName.localeCompare(b.trailName));
       console.log(newFavorites);
       setFavorites(newFavorites);
       localStorage.setItem("favorite-trails", JSON.stringify(newFavorites));
@@ -75,7 +75,9 @@ const TrailDetail = (props) => {
       console.log("UN-Favorited");
     } else {
       setIsFavorited(true);
-      const newFavorites = favorites.concat(props.trail);
+      const newFavorites = favorites
+        .concat(props.trail)
+        .sort((a, b) => a.trailName.localeCompare(b.trailName));
       console.log(newFavorites);
       setFavorites(newFavorites);
       localStorage.setItem("favorite-trails", JSON.stringify(newFavorites));
