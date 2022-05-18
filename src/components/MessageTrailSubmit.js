@@ -7,7 +7,6 @@ const MessageTrailSubmit = (props) => {
    const [isUploading, setIsuploading] = useState(true)
    
     useEffect(() => {
-        console.log(props.uploading);
         if (props.uploading === false) {
           setIsuploading(false);
         }

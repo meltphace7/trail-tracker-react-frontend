@@ -1,11 +1,10 @@
 import firebase from "firebase/app";
-// import "firebase/compat/auth";
-// import "firebase/compat/firestore";
 import "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAn9setska2fITb1v9zCbqfFm8FA4wg99c",
   authDomain: "trail-tracker-image-store.firebaseapp.com",
+  databaseURL: "gs://trail-tracker-image-store.appspot.com/images",
   projectId: "trail-tracker-image-store",
   storageBucket: "trail-tracker-image-store.appspot.com",
   messagingSenderId: "875270639826",

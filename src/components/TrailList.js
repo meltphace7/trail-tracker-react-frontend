@@ -72,6 +72,7 @@ const TrailList = (props) => {
 
   const renderFilteredTrails = results.map((trail) => {
     return (
+     
       <TrailListItem
         getTrail={props.onTrailSelect}
         key={trail.id}

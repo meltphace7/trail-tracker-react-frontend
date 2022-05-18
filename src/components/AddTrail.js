@@ -21,10 +21,9 @@ const AddTrail = (props) => {
   const [image, setImage] = useState("");
   const [trailSubmited, setTrailSubmited] = useState(false);
   const [isUploading, setIsuploading] = useState(false);
-
-  useEffect(() => {
-    console.log(isUploading);
-  }, [isUploading]);
+  ///////// image upload state
+  const [images, setImages] = useState([]);
+  const [progress, setProgress] = useState(0);
 
   const nameInputChangeHandler = (e) => {
     setTrailName(e.target.value);
@@ -82,10 +81,28 @@ const AddTrail = (props) => {
     setDescription(e.target.value);
   };
 
-  let fileList = [];
-  const imageUploadHandler = (e) => {
-    console.log(e.target.files[0]);
-    setImage(e.target.files[0]);
+  const handleChange = function (e) {
+    for (let i = 0; i < e.target.files.length; i++) {
+      const newImage = e.target.files[i];
+      newImage["id"] = Math.random();
+      setImages((prevState) => [...prevState, newImage]);
+    }
+  };
+
+  // SENDS TRAIL DATA TO FIREBASE REALTIME DATABASE
+  const postTrail = async function (trail) {
+    const response = await fetch(
+      `https://trail-tracker-image-store-default-rtdb.firebaseio.com/trails.json`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          trail: trail,
+        }),
+      }
+    );
+    const data = await response.json();
+    console.log("POSTED");
+    setIsuploading(false);
   };
 
   const formSubmitHandler = (e) => {
@@ -95,24 +112,50 @@ const AddTrail = (props) => {
 
     // SENDS IMAGE TO FIREBASE STORAGE THEN UPLOADS trail to FIREBASE REALTIME DATABASE  /////////////////////
 
-    let imageData;
+    const handleUpload = function () {
+      let urlImages = [];
+      const promises = [];
 
-    const uploadTask = storage.ref(`images/${image.name}`).put(image);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {},
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        storage
-          .ref("images")
-          .child(image.name)
-          .getDownloadURL()
-          .then((url) => {
-            console.log(url);
-            console.log("IMAGE UPLOADED");
-            imageData = url;
+      /// Starts upload process for each selected image
+      images.map((image, i) => {
+        const uploadTask = storage.ref(`images/${image.name}`).put(image);
+        promises.push(uploadTask);
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            setProgress(progress);
+          },
+          (error) => {
+            console.log(error);
+          },
+          async () => {
+            await storage
+              .ref("images")
+              .child(image.name)
+              .getDownloadURL()
+              .then((url) => {
+                console.log(i);
+                console.log(url);
+                urlImages.push(url);
+                console.log(urlImages);
+              });
+          }
+        );
+      });
+
+      Promise.allSettled(promises)
+        .then(() => {
+          // TRAIL SUBMIT GOES IN HERRE
+
+          setTimeout(() => {
+            console.log("PROMISES", promises.length);
+            console.log("URL ARRAY", urlImages.length);
+            console.log(urlImages);
+            console.log("IMAGES SET");
+
             const trailData = {
               id: Math.random() * 1000000,
               trailName: trailName,
@@ -121,49 +164,36 @@ const AddTrail = (props) => {
               bestSeason: season,
               longitude: longitude,
               latitude: latitude,
-              imageURL: [imageData],
+              imageURL: urlImages,
               miles: miles,
               scenery: scenery,
               solitude: solitude,
               difficulty: difficulty,
               description: description,
             };
-            // SENDS TRAIL DATA TO FIREBASE REALTIME DATABASE
-            const postTrail = async function (trail) {
-              const response = await fetch(
-                `https://trail-tracker-image-store-default-rtdb.firebaseio.com/trails.json`,
-                {
-                  method: "POST",
-                  body: JSON.stringify({
-                    trail: trail,
-                  }),
-                }
-              );
-              const data = await response.json();
-              console.log(data);
-              console.log("POSTED");
-            };
 
             postTrail(trailData);
+          }, 1000);
+        })
+        .catch((err) => console.log(err));
+    };
 
-            setIsuploading(false);
-            setTrailName("");
-            setState("");
-            setWilderness("");
-            setSeasonStart("");
-            setSeasonEnd("");
-            setSeason("");
-            setLongitude("");
-            setLatitude("");
-            setMiles("");
-            setScenery("");
-            setSolitude("");
-            setDifficulty("");
-            setDescription("");
-            setImage("");
-          });
-      }
-    );
+    handleUpload();
+
+    setTrailName("");
+    setState("");
+    setWilderness("");
+    setSeasonStart("");
+    setSeasonEnd("");
+    setSeason("");
+    setLongitude("");
+    setLatitude("");
+    setMiles("");
+    setScenery("");
+    setSolitude("");
+    setDifficulty("");
+    setDescription("");
+    setImage("");
   };
 
   const closeModal = function () {
@@ -352,9 +382,10 @@ const AddTrail = (props) => {
         <input
           type="file"
           multiple
-          onChange={imageUploadHandler}
+          onChange={handleChange}
           accept="image/jpg"
         />
+        <progress value={progress} max="100" />
         <button type="submit">Submit Trail!</button>
       </form>
       {trailSubmited && (
@@ -365,67 +396,3 @@ const AddTrail = (props) => {
 };
 
 export default AddTrail;
-
-// const formSubmitHandler = (e) => {
-//   e.preventDefault();
-
-//   let imageData;
-
-//   const uploadTask = storage.ref(`images/${image.name}`).put(image);
-//   uploadTask.on(
-//     "state_changed",
-//     (snapshot) => {},
-//     (error) => {
-//       console.log(error);
-//     },
-//     () => {
-//       storage
-//         .ref("images")
-//         .child(image.name)
-//         .getDownloadURL()
-//         .then((url) => {
-//           console.log(url);
-//           imageData = url;
-//           // setUrl(url)
-//         });
-//     }
-//   );
-
-//   setTimeout(() => {
-//     const trailData = {
-//       id: Math.random() * 1000000,
-//       trailName: trailName,
-//       state: state,
-//       wildernessArea: wilderness,
-//       bestSeason: season,
-//       longitude: longitude,
-//       latitude: latitude,
-//       imageURL: [imageData],
-//       miles: miles,
-//       scenery: scenery,
-//       solitude: solitude,
-//       difficulty: difficulty,
-//       description: description,
-//     };
-
-//     // props.onAddTrail(trailData);
-
-//     // Submit Trail to FIREBASE
-//     const submitTrailHandler = async (trailData) => {
-//       const response = await fetch(`https://trail-tracker-image-store-default-rtdb.firebaseio.com/trails.json`, {
-//         method: 'POST',
-//         body: JSON.stringify({
-//           trail: trailData
-//         })
-//       });
-//       const data = await response.json();
-//       console.log(data);
-//     }
-
-//     submitTrailHandler(trailData)
-
-//     /////////////////////
-//     console.log(trailData);
-//     alert("Trail Submitted!");
-//  },15000)
-// }
