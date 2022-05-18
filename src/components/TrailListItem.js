@@ -86,7 +86,20 @@ const TrailListItem = (props) => {
     localStorage.setItem("favorite-trails", JSON.stringify(newFavorites));
     props.onFavoriteToggle();
   };
-   
+
+  let difficulty;
+  const calcDifficulty = function (diff) {
+    if (+diff <= 3) difficulty = 'easy';
+    if (+diff > 3 && +diff < 7) difficulty =  "moderate";
+    if (+diff >= 7 && +diff <= 8) difficulty = "hard";
+    if (+diff > 8) difficulty = "very-hard";
+  }
+
+  calcDifficulty(props.difficulty);
+
+  console.log(difficulty);
+  
+
   return (
     <Link to={`trail-detail/${props.id}`} onClick={linkClickHandler}>
       <li
@@ -101,7 +114,13 @@ const TrailListItem = (props) => {
           <h2>{props.name}</h2>
           <div className={classes["secondary-info"]}>
             <h3>{`${props.state} - ${props.wildernessArea} `}</h3>
-            <h3>{`${props.miles} miles roundtrip - Difficulty: ${props.difficulty}/10`}</h3>
+            {/* <h3>{`${props.miles} miles roundtrip - Difficulty:${props.difficulty}/10`}</h3> */}
+            <div className={classes["miles-difficulty-container"]}>
+              <h3>{`${props.miles} miles roundtrip -`}&nbsp;</h3>
+              <h3 className={classes[difficulty]}>
+                {`Difficulty: ${props.difficulty}/10`}
+              </h3>
+            </div>
           </div>
           <div className={classes["description"]}>
             <p>{props.description}</p>

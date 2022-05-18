@@ -71,6 +71,30 @@
   align-items: center;
 }
 
+.easy {
+  padding: .2rem;
+  border-radius: 5px;
+  background-color: green;
+}
+
+.moderate {
+  padding: .2rem;
+  border-radius: 5px;
+  background-color: rgb(237, 116, 11);
+}
+
+.hard {
+  padding: .2rem;
+  border-radius: 5px;
+  background-color: red
+}
+
+.very-hard {
+  padding: .2rem;
+  border-radius: 5px;
+  background-color: rgb(133, 1, 1)
+}
+
 .description {
   width: 75%;
   min-height: 10rem;

@@ -84,6 +84,42 @@
   font-size: .75rem;
 }
 
+.miles-difficulty-container {
+  display: flex;
+  align-items: center;
+}
+
+/* .difficulty {
+  padding: .2rem;
+  border-radius: 5px;
+  background-color: 
+  green;
+} */
+
+.easy {
+  padding: .2rem;
+  border-radius: 5px;
+  background-color: green;
+}
+
+.moderate {
+  padding: .2rem;
+  border-radius: 5px;
+  background-color: rgb(237, 116, 11);
+}
+
+.hard {
+  padding: .2rem;
+  border-radius: 5px;
+  background-color: red
+}
+
+.very-hard {
+  padding: .2rem;
+  border-radius: 5px;
+  background-color: rgb(133, 1, 1)
+}
+
 .description {
    line-height: 1.5em;
     height: 3em;

@@ -85,6 +85,18 @@ const TrailDetail = (props) => {
     }
   };
 
+   let difficulty;
+   const calcDifficulty = function (diff) {
+     if (+diff <= 3) difficulty = "easy";
+     if (+diff > 3 && +diff < 7) difficulty = "moderate";
+     if (+diff >= 7 && +diff <= 8) difficulty = "hard";
+     if (+diff > 8) difficulty = "very-hard";
+   };
+
+   calcDifficulty(props.trail.difficulty);
+
+   console.log(difficulty);
+
   return (
     <div className={classes["trail-detail"]}>
       <div className={classes["trail-detail-info"]}>
@@ -108,9 +120,11 @@ const TrailDetail = (props) => {
         </div>
         <div className={classes["info-sub-header"]}>
           <h3>{`Length: ${props.trail.miles} miles roundtrip`}</h3>
+          <h3 className={classes[difficulty]}>
+            {`Difficulty: ${props.trail.difficulty}/10`}
+          </h3>
           <h3>{`Scenery: ${props.trail.scenery}/10`}</h3>
           <h3>{`Solitude: ${props.trail.solitude}/10`}</h3>
-          <h3>{`Difficulty: ${props.trail.difficulty}/10`}</h3>
           {/* <h3>{`Best Season: ${season}`}</h3> */}
           <h3>{`Season: ${season}`}</h3>
         </div>

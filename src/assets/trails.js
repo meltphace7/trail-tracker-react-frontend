@@ -89,7 +89,7 @@ export let TRAIL_DATA = [
     miles: 96.2,
     scenery: 10,
     solitude: 4,
-    difficulty: 8,
+    difficulty: 10,
     description: `A wonder inspiring trail which circles the Pacific Northwest's most magnificent mountain.  The wonderland trail is a long and scenery packed route which traverses many ridges and valleys.  The beauty of this trail makes it a bucket list hike for many hikers and thus, it is very popular.  You must win a lottery for the chance to hike this epic trail.`,
   },
   {
@@ -147,7 +147,7 @@ export let TRAIL_DATA = [
     miles: 20,
     scenery: 7,
     solitude: 1,
-    difficulty: 4,
+    difficulty: 3,
     description: `A beautiful hike through the Sitka Spruce forests and beaches of Oregon.`,
   },
   {
@@ -166,7 +166,7 @@ export let TRAIL_DATA = [
     miles: 3.5,
     scenery: 7,
     solitude: 4,
-    difficulty: 6,
+    difficulty: 5,
     description: `A steep yet rewarding hike to the high country of the small Tatoosh mountain range.  Featuring beautiful views of nearby Mt. Rainier.  Camping near the Lakes is prohibited but there are many great camp spots`,
   },
   {
@@ -187,7 +187,7 @@ export let TRAIL_DATA = [
     miles: 30,
     scenery: 10,
     solitude: 4,
-    difficulty: 7,
+    difficulty: 8,
     description: `A long and incredibly scenic trail in the Alpine Lakes Wilderness. Featuring expansive views of many lakes and mountains, this hike is one of personal favorites of Washington.  You will lose track of how long the hike is as a result of the stunning views.`,
   },
 
@@ -208,7 +208,7 @@ export let TRAIL_DATA = [
     miles: 38,
     scenery: 8,
     solitude: 9,
-    difficulty: 8,
+    difficulty: 9,
     description: `A long trek through volcanic aftermath of the Mt. St. Helens explosion leads to a remote and newly formed lake.  This hike showcases the awesome destructive force of nature and also it's ability to regenerate.`,
   },
   {
@@ -421,7 +421,7 @@ export let TRAIL_DATA = [
     miles: 9,
     scenery: 9,
     solitude: 3,
-    difficulty: 8,
+    difficulty: 9,
     description: `A tough hike that yields ample rewards.  Features several beautiful scenic high alpine lakes and a great view of Mt. Daniel, the highest point in the Alpine Lakes Wilderness.`,
   },
   {
@@ -441,7 +441,7 @@ export let TRAIL_DATA = [
     miles: 7,
     scenery: 9,
     solitude: 3,
-    difficulty: 8,
+    difficulty: 7,
     description: `This hike takes you to a high alpine pond on the shoulder of Cathedral Rock.  From there the summit of Mt. Daniel, the highest point in the Alpine Lakes Wilderness, is only a couple hours climb.`,
   },
   {
@@ -495,7 +495,7 @@ export let TRAIL_DATA = [
     miles: 14,
     scenery: 9,
     solitude: 7,
-    difficulty: 7,
+    difficulty: 6,
     description: `A great lesser known hike in the Alpine Lakes Wilderness that features large twin alpine lakes.  This trip offers a bit more solitude from the often bust, more popular destinations in the Alpine Lakes Wilderness.`,
   },
   {
@@ -552,7 +552,7 @@ export let TRAIL_DATA = [
     miles: 6,
     scenery: 7,
     solitude: 5,
-    difficulty: 3,
+    difficulty: 2,
     description: `A relatively easy and short hike to the beautiful shore of Lake Dorothy, and to Snoqualmie lake beyond.  The first part of this hike can be done relatively early in the season depending on snow pack.`,
   },
   {
@@ -589,7 +589,7 @@ export let TRAIL_DATA = [
     miles: 9,
     scenery: 6,
     solitude: 6,
-    difficulty: 3,
+    difficulty: 2,
     description: `A short and relativeley easy hike to a forested plateau featuring the Twin Sisters Lakes.  Theses lakes are the largest and most scenic in the area.  Area is also abundant with elk and mosquitoes.`,
   },
   {
@@ -610,7 +610,7 @@ export let TRAIL_DATA = [
     miles: 12,
     scenery: 9,
     solitude: 6,
-    difficulty: 7,
+    difficulty: 8,
     description: `A long but beautiful hike to a beautiful high alpine lake.  This trail is a bit unmaintained but it yields huge rewards as you approach Grizzly Lake.  After about 10 miles you enter a pretty meadow with Grizzly Creek running through it.  From the meadow Grizzly Falls can be seen roaring.  The waterfall's source is your destination.  Getting to the top is more or less a scramble but you are greeted with an up close view of the impressive Grizzly Falls as well as the beautiful Grizzly Lake.`,
   },
   {
@@ -677,7 +677,7 @@ export let TRAIL_DATA = [
     miles: 12,
     scenery: 7,
     solitude: 8,
-    difficulty: 5,
+    difficulty: 3,
     description: `An easy hike through a gorgeous lake filled valley in the Sierras.`,
   },
   {
@@ -719,7 +719,7 @@ export let TRAIL_DATA = [
     miles: 211,
     scenery: 10,
     solitude: 5,
-    difficulty: 9,
+    difficulty: 10,
     description: `One of the most famous backpacking trails in the world.  You would be hard pressed to find a more scenic trail.  The world famous JMT takes you through the heart of the Sierra Nevada mountains for over 180 miles.  The trek goes over many high mountain passes and visits countless beautiful alpine lakes.  Though it is extremely popular you still can find solitude and the grandeur of the Sierras makes one seem small and humbled.  This is a bucket list journey that people from all over the world flock to.`,
   },
   {
@@ -742,7 +742,7 @@ export let TRAIL_DATA = [
     miles: 8,
     scenery: 10,
     solitude: 6,
-    difficulty: 7,
+    difficulty: 6,
     description: `This trail takes you to the awe-inspiring Baron Lakes.  Though not a super long trek, this journey takes you to the scenic heart of the Sawtooth Wilderness.  The massive craggy rock formations high above Baron Lakes will have you mesmerized.  A great spot for relaxing and swimming.`,
   },
   {
@@ -817,7 +817,7 @@ export let TRAIL_DATA = [
     miles: 5.3,
     scenery: 10,
     solitude: 1,
-    difficulty: 4,
+    difficulty: 3,
     description: `Don't expect much solitude on this short and incredibly scenic trail.  This extremely popular trail leads one of the most stunning lakes you'll ever see.  Hidden Lake is giant shimmering beauty at the base of a massive pyramid shaped mountain.  The crowds are intense but the views make up for it.`,
   },
   {
