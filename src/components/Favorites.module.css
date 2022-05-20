@@ -5,3 +5,13 @@
     align-items: center;
     min-height: 50rem;
 }
+
+.favorites-container h1 {
+    margin-top: 1rem;
+
+}
+
+.favorites-container p {
+    margin: 1rem;
+
+}

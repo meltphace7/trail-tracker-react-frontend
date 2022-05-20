@@ -95,18 +95,19 @@ const TrailList = (props) => {
   return (
     <div className={classes["trail-list-container"]}>
       <div className={classes["results-container"]}>
-        <h1 className={classes["results-title"]}>
-          {`${
+    
+          <h1 className={classes["results-title"]}>
+            {`${
+              props.filter.filterType === "by-season"
+                ? month
+                : props.filter.filterQuery
+            } Trails`}
+          </h1>
+          <p>{`${props.trails.length} results for "${
             props.filter.filterType === "by-season"
               ? month
               : props.filter.filterQuery
-          } Trails`}
-        </h1>
-        <p>{`${props.trails.length} results for "${
-          props.filter.filterType === "by-season"
-            ? month
-            : props.filter.filterQuery
-        }"  - page ${page} of ${pages}`}</p>
+          }"  - page ${page} of ${pages}`}</p>
       </div>
       <ul className={classes["trail-list"]}>
         {props.trails.length === 0 ? (

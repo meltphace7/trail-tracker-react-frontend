@@ -8,6 +8,7 @@
 
 .add-trail-section h1 {
   color: var(--tertiary-green);
+  margin: 1rem;
 }
 
 .trail-form {
