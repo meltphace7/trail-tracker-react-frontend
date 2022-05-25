@@ -42,16 +42,16 @@ const ImageSlider = (props) => {
         className={classes["slider-button"]}
         onClick={nextHandler}
       />
-    {/* <div className={classes["slider-controls-container"]}>
-      <IoIosArrowBack
-        className={classes["slider-button"]}
-        onClick={prevHandler}
-      />
-      <IoIosArrowForward
-        className={classes["slider-button"]}
-        onClick={nextHandler}
-      />
-    </div> */}
+      <div className={classes["slider-controls-container"]}>
+        <IoIosArrowBack
+          className={classes["mobile-slider-button"]}
+          onClick={prevHandler}
+        />
+        <IoIosArrowForward
+          className={classes["mobile-slider-button"]}
+          onClick={nextHandler}
+        />
+      </div>
     </div>
   );
 };

@@ -92,3 +92,10 @@
   color: rgb(214, 249, 143);
   
 }
+
+
+@media (max-width: 53em) { 
+  .trail-form {
+    width: 90%;
+  }
+}

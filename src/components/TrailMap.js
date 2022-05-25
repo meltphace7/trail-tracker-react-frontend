@@ -23,7 +23,7 @@ const TrailMap = (props) => {
           // attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
           // url="https://api.maptiler.com/maps/outdoor/{z}/{x}/{y}.png?key=AyMX0LXoTHHgR2du1wzC"
         />
-        <ChangeView center={props.coords} zoom={14} />
+        <ChangeView center={props.coords} zoom={13} />
         {props.trails.map((trail) => (
           <Marker
             icon={icon}

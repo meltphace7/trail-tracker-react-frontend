@@ -33,3 +33,17 @@ select {
   width: 50rem;
   height: 35rem;
 }
+
+@media (max-width: 56em) {
+  .leaflet-container {
+  width: 35rem;
+  height: 35rem;
+}
+}
+
+@media (max-width: 40em) {
+  .leaflet-container {
+  width: 23rem;
+  height: 23rem;
+}
+}
