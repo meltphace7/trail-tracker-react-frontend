@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import classes from "./ImageSlider.module.css";
+import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowForward } from 'react-icons/io';
 
 const ImageSlider = (props) => {
   const [current, setCurrent] = useState(1);
@@ -18,16 +20,15 @@ const ImageSlider = (props) => {
   };
   return (
     <div className={classes["slider-container"]}>
-      <button className={classes["slider-button"]} onClick={prevHandler}>
-        PREV
-      </button>
+      <IoIosArrowBack
+        className={classes["slider-button"]}
+        onClick={prevHandler}
+      />
       <div className={classes.slider}>
         {props.images.map((slide, index) => {
           return (
             <div
-              className={
-                index === current ? "slide active" : "slide"
-              }
+              className={index === current ? "slide active" : "slide"}
               key={index}
             >
               {index === current && (
@@ -37,9 +38,20 @@ const ImageSlider = (props) => {
           );
         })}
       </div>
-      <button className={classes["slider-button"]} onClick={nextHandler}>
-        NEXT
-      </button>
+      <IoIosArrowForward
+        className={classes["slider-button"]}
+        onClick={nextHandler}
+      />
+    {/* <div className={classes["slider-controls-container"]}>
+      <IoIosArrowBack
+        className={classes["slider-button"]}
+        onClick={prevHandler}
+      />
+      <IoIosArrowForward
+        className={classes["slider-button"]}
+        onClick={nextHandler}
+      />
+    </div> */}
     </div>
   );
 };

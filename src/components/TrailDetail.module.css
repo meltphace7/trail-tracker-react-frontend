@@ -48,7 +48,7 @@
 
 .info-header {
   width: 100%;
-  min-height: 25rem;
+  /* min-height: 25rem; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -131,4 +131,25 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+@media (max-width: 53em) {
+  .trail-detail {
+    width: 100%;
+  }
+
+  .info-header h1 {
+    transform: scale(.7);
+    margin: 0;
+  }
+
+  .info-sub-header {
+    font-size: .7rem;
+  }
+
+  .star {
+    transform: scale(.7);
+    top: -1rem;
+    right: -1rem;
+  }
 }
