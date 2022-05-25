@@ -73,3 +73,9 @@
 .pagination-container h3 {
   color:var(--primary-green);
 }
+
+@media (max-width: 53em) {
+  .trail-list-container {
+    margin-top: 3rem;
+  }
+}

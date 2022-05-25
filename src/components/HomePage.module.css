@@ -31,3 +31,9 @@
     justify-content: space-around;
     align-items: center;
 }
+
+@media (max-width: 48em) {
+    .home-container {
+        background-position: 50% 50%;
+    }
+}

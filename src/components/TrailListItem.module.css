@@ -4,7 +4,6 @@
   border-radius: 10px;
   padding: .75rem .5rem;
   width: 100%;
-  /* max-width: 70rem; */
   height: 10rem;
   display: flex;
   align-items: center;
@@ -154,3 +153,28 @@
   position: relative;
 }
 
+@media (max-width: 53em) {
+  .trail-item {
+    height: 18rem;
+    width: 22rem;
+    flex-direction: column;
+  }
+
+  .image-container {
+    width: 16rem;
+  }
+
+  .image-container img {
+    width: 16rem;
+    height: auto;
+  }
+
+  .info-container {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .star {
+    top: -16rem;
+  }
+}

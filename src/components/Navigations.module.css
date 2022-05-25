@@ -72,8 +72,19 @@ nav a {
 }
 
 .nav-menu {
-  margin-right: 5rem;
+  margin-right: 3rem;
   width: 20rem;
   display: flex;
   justify-content: space-between;
+}
+
+@media (max-width: 53em) {
+  nav {
+    flex-direction: column;
+  }
+
+  .nav-menu {
+    margin-right: 0;
+  }
+
 }

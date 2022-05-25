@@ -11,3 +11,9 @@
     display: flex;
     justify-content: flex-end;
 }
+
+@media (max-width: 53em) {
+    .trail-search-results {
+        margin-top: 2rem;
+    }
+}

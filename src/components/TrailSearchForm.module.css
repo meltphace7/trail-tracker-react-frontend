@@ -28,7 +28,7 @@
 
 .trail-search button {
   font-size: 1rem;
-  margin-left: 1rem;
+  margin: .5rem 1rem;
   width: 9rem;
   border-radius: 10px;
   padding: 1rem;
@@ -46,4 +46,11 @@
   font-size: 1.2rem;
   height: 2rem;
   border-radius: 20px
+}
+
+@media (max-width: 48em) {
+  .trail-search {
+    flex-direction: column;
+  }
+  
 }
