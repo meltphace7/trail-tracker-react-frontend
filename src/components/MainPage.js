@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import classes from './MainPage.module.css'
 import TrailList from './TrailList'
-import TrailDetail from "./TrailDetail";
+import TrailDetail from "./pages/TrailDetail";
 
 const MainPage = (props) => {
   const [selectedTrail, setSelectedTrail] = useState({})

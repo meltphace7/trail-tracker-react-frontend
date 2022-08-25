@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import classes from "./TrailDetail.module.css";
-import TrailMap from "./TrailMap";
-import ImageSlider from "./ImageSlider";
+import TrailMap from "../TrailMap";
+import ImageSlider from "../ImageSlider";
 import { AiOutlineStar } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
-import WeatherReport from "./WeatherReport";
+import WeatherReport from "../WeatherReport";
 
 const TrailDetail = (props) => {
   const [favorites, setFavorites] = useState(

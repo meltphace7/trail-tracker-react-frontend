@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./AddTrail.module.css";
-import { storage } from "../firebase";
-import MessageTrailSubmit from "./MessageTrailSubmit";
+import { storage } from "../../firebase";
+import MessageTrailSubmit from "../MessageTrailSubmit";
 
 const AddTrail = (props) => {
   const [trailName, setTrailName] = useState("");

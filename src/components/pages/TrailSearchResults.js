@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./TrailSearchResults.module.css";
-import TrailList from "./TrailList";
-import TrailSearchForm from "./TrailSearchForm";
+import TrailList from "../TrailList";
+import TrailSearchForm from "../TrailSearchForm";
 
 const TrailSearchResults = (props) => {
 
