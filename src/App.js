@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import AuthContext from './store/auth-context';
 import "./App.css";
 import Navigation from "./components/Navigation";
 import AddTrail from "./components/pages/AddTrail";
@@ -17,6 +18,7 @@ import LogIn from './components/pages/LogIn'
 function App() {
   // LOAD SUBMITED TRAILS FROM FIREBASE
   const [loadedTrails, setLoadedTrails] = useState([]);
+  const authCtx = useContext(AuthContext);
 
   //LOAD FAVORITES from local storage
   const [favorites, setFavorites] = useState(
@@ -181,19 +183,23 @@ function App() {
           />
           {/* <MainPage trails={filteredTrails} /> */}
         </Route>
-        <Route path="/favorites">
-          <Favorites
-            onTrailSelect={getSelectedTrail}
-            onFavoriteToggle={favoriteToggleHandler}
-            favorites={favorites}
-          />
-        </Route>
-        <Route path="/addtrail">
-          <AddTrail
-            onAddTrail={getAddTrailData}
-            updateTrails={upDateLoadedTrailsHandler}
-          />
-        </Route>
+        {authCtx.isLoggedIn && (
+          <Route path="/favorites">
+            <Favorites
+              onTrailSelect={getSelectedTrail}
+              onFavoriteToggle={favoriteToggleHandler}
+              favorites={favorites}
+            />
+          </Route>
+        )}
+        {authCtx.isLoggedIn && (
+          <Route path="/addtrail">
+            <AddTrail
+              onAddTrail={getAddTrailData}
+              updateTrails={upDateLoadedTrailsHandler}
+            />
+          </Route>
+        )}
         <Route path="/trails">
           <TrailSearchResults
             onTrailSelect={getSelectedTrail}
@@ -217,6 +223,9 @@ function App() {
         </Route>
         <Route path="/login">
           <LogIn />
+        </Route>
+        <Route path="*" >
+          <Redirect to='/'/>
         </Route>
       </Switch>
       <Footer />
