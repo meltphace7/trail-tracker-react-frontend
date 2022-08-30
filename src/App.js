@@ -1,19 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import AuthContext from './store/auth-context';
 import "./App.css";
 import Navigation from "./components/Navigation";
-import AddTrail from "./components/AddTrail";
+import AddTrail from "./components/pages/AddTrail";
 import Footer from "./components/Footer";
-import TrailDetail from "./components/TrailDetail";
+import TrailDetail from "./components/pages/TrailDetail";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { TRAIL_DATA } from "./assets/trails";
-import HomePage from "./components/HomePage";
-import TrailSearchResults from "./components/TrailSearchResults";
+import HomePage from "./components/pages/HomePage";
+import TrailSearchResults from "./components/pages/TrailSearchResults";
 import ScrollToTop from "./components/ScrollToTop";
-import Favorites from "./components/Favorites";
+import Favorites from "./components/pages/Favorites";
+import SignUp from './components/pages/SignUp';
+import LogIn from './components/pages/LogIn'
 
 function App() {
   // LOAD SUBMITED TRAILS FROM FIREBASE
   const [loadedTrails, setLoadedTrails] = useState([]);
+  const authCtx = useContext(AuthContext);
 
   //LOAD FAVORITES from local storage
   const [favorites, setFavorites] = useState(
@@ -177,19 +181,23 @@ function App() {
             trailFilter={filter}
           />
         </Route>
-        <Route path="/favorites">
-          <Favorites
-            onTrailSelect={getSelectedTrail}
-            onFavoriteToggle={favoriteToggleHandler}
-            favorites={favorites}
-          />
-        </Route>
-        <Route path="/addtrail">
-          <AddTrail
-            onAddTrail={getAddTrailData}
-            updateTrails={upDateLoadedTrailsHandler}
-          />
-        </Route>
+        {authCtx.isLoggedIn && (
+          <Route path="/favorites">
+            <Favorites
+              onTrailSelect={getSelectedTrail}
+              onFavoriteToggle={favoriteToggleHandler}
+              favorites={favorites}
+            />
+          </Route>
+        )}
+        {authCtx.isLoggedIn && (
+          <Route path="/addtrail">
+            <AddTrail
+              onAddTrail={getAddTrailData}
+              updateTrails={upDateLoadedTrailsHandler}
+            />
+          </Route>
+        )}
         <Route path="/trails">
           <TrailSearchResults
             onTrailSelect={getSelectedTrail}
@@ -207,6 +215,15 @@ function App() {
             trails={filteredTrails}
             onFavoriteToggle={favoriteToggleHandler}
           />
+        </Route>
+        <Route path="/signup">
+          <SignUp />
+        </Route>
+        <Route path="/login">
+          <LogIn />
+        </Route>
+        <Route path="*" >
+          <Redirect to='/'/>
         </Route>
       </Switch>
       <Footer />

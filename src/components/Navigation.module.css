@@ -73,9 +73,23 @@ nav a {
 
 .nav-menu {
   margin-right: 3rem;
-  width: 20rem;
+  width: 25rem;
   display: flex;
   justify-content: space-between;
+}
+
+.logout-button {
+  font-size: 1rem;
+  border: none;
+  background-color: transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 200ms ease-in-out;
+  color: var(--secondary-green);
+}
+
+.logout-button:hover {
+  color: rgb(64, 155, 64);
 }
 
 @media (max-width: 53em) {

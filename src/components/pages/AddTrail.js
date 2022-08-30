@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./AddTrail.module.css";
-import { storage } from "../firebase";
-import MessageTrailSubmit from "./MessageTrailSubmit";
+import { storage } from "../../firebase";
+import MessageTrailSubmit from "../MessageTrailSubmit";
 
 const AddTrail = (props) => {
   const [trailName, setTrailName] = useState("");
@@ -214,6 +214,7 @@ const AddTrail = (props) => {
               id="trail-name"
               onChange={nameInputChangeHandler}
               value={trailName}
+              required
             />
           </div>
           <div className={classes["text-input-col"]}>
@@ -224,6 +225,7 @@ const AddTrail = (props) => {
               id="state"
               onChange={stateInputChangeHandler}
               value={state}
+              required
             />
           </div>
         </div>
@@ -236,6 +238,7 @@ const AddTrail = (props) => {
               id="wilderness-area"
               onChange={wildernessInputChangeHandler}
               value={wilderness}
+              required
             />
           </div>
           <div className={classes["text-input-col"]}>
@@ -333,6 +336,7 @@ const AddTrail = (props) => {
               id="miles"
               onChange={milesInputChangeHandler}
               value={miles}
+              required
             />
           </div>
 
@@ -344,6 +348,7 @@ const AddTrail = (props) => {
               id="scenery"
               onChange={sceneryInputChangeHandler}
               value={scenery}
+              required
             />
           </div>
           <div className={classes["input-col"]}>
@@ -354,6 +359,7 @@ const AddTrail = (props) => {
               id="solitude"
               onChange={solitudeInputChangeHandler}
               value={solitude}
+              required
             />
           </div>
           <div className={classes["input-col"]}>
@@ -364,6 +370,7 @@ const AddTrail = (props) => {
               id="difficulty"
               onChange={difficultyInputChangeHandler}
               value={difficulty}
+              required
             />
           </div>
         </div>
@@ -377,6 +384,7 @@ const AddTrail = (props) => {
           rows="10"
           cols="50"
           value={description}
+          required
         />
 
         <label htmlFor="image-upload">Upload Images</label>

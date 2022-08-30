@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import TrailSearchForm from "./TrailSearchForm";
+import TrailSearchForm from "../TrailSearchForm";
 import classes from "./HomePage.module.css";
-import FeaturedHike from "./FeaturedHike";
+import FeaturedHike from "../FeaturedHike";
 
 const HomePage = (props) => {
   const getFilterSelection = function (filter) {

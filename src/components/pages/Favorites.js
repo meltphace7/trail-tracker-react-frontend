@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './Favorites.module.css'
-import TrailListItem from './TrailListItem';
+import TrailListItem from '../TrailListItem';
 
 const Favorites = (props) => {
 
