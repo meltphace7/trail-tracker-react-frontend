@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import classes from "./AddTrail.module.css";
 import { storage } from "../../firebase";
 import MessageTrailSubmit from "../MessageTrailSubmit";
 import useValidation from '../hooks/use-validation';
 
 const AddTrail = (props) => {
+  // Validating User Inputs with custom useValidation hook
   const {
     enteredValue: trailName,
     valueIsValid: trailNameIsValid,
@@ -121,7 +122,6 @@ const AddTrail = (props) => {
     reset: descriptionReset,
   } = useValidation((value) => value.trim() !== "");
 
-
   const [trailheadName, setTrailheadName] = useState("");
   const [season, setSeason] = useState("");
   const [_image, setImage] = useState("");
@@ -131,7 +131,11 @@ const AddTrail = (props) => {
   const [images, setImages] = useState([]);
   const [progress, setProgress] = useState(0);
 
+  const imageInputRef = useRef();
   
+  const resetImageInput = () => {
+    imageInputRef.current.value = "";
+  }
 
   const trailheadNameInputChangeHandler = (e) => {
     setTrailheadName(e.target.value);
@@ -175,6 +179,10 @@ const AddTrail = (props) => {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
+    if (imageInputRef.current.value === "") {
+      alert('Please include at least one image')
+      return;
+      };
       if (!formIsValid) {
         alert("Please enter all required Fields!");
         return;
@@ -245,6 +253,7 @@ const AddTrail = (props) => {
             };
 
             postTrail(trailData);
+            resetImageInput();
           }, 1000);
         })
         .catch((err) => console.log(err));
@@ -254,6 +263,7 @@ const AddTrail = (props) => {
 
     trailNameReset();
     stateReset();
+    setTrailheadName('');
     wildernessAreaReset();
     seasonStartReset();
     seasonEndReset();
@@ -595,8 +605,10 @@ const AddTrail = (props) => {
           )}
         </div>
 
-        <label htmlFor="image-upload">Upload Images (optional)</label>
+        <label htmlFor="image-upload">Upload Images (required)</label>
         <input
+          id="file-input"
+          ref={imageInputRef}
           type="file"
           multiple
           onChange={handleImageInputChange}
