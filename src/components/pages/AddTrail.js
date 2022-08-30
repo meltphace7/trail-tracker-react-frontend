@@ -57,7 +57,7 @@ const AddTrail = (props) => {
     valueChangeHandler: longitudeChangeHandler,
     valueBlurHandler: longitudeBlurHandler,
     reset: longitudeReset,
-  } = useValidation((value) => value.trim() !== "");
+  } = useValidation((value) => value.trim() !== "" && +value >= -180 && +value <= 180);
 
   const {
     enteredValue: latitude,
@@ -66,7 +66,9 @@ const AddTrail = (props) => {
     valueChangeHandler: latitudeChangeHandler,
     valueBlurHandler: latitudeBlurHandler,
     reset: latitudeReset,
-  } = useValidation((value) => value.trim() !== "");
+  } = useValidation(
+    (value) => value.trim() !== "" && +value >= -90 && +value <= 90
+  );
 
   const {
     enteredValue: miles,
@@ -146,7 +148,7 @@ const AddTrail = (props) => {
   }
 
   //// HANDLES FILE INPUT CHANGE FOR IMG UPLOAD
-  const handleChange = function (e) {
+  const handleImageInputChange = function (e) {
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
       newImage["id"] = Math.random();
@@ -597,7 +599,7 @@ const AddTrail = (props) => {
         <input
           type="file"
           multiple
-          onChange={handleChange}
+          onChange={handleImageInputChange}
           accept="image/jpg"
         />
         <progress value={progress} max="100" />
