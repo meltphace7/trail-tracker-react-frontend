@@ -33,6 +33,24 @@ const AddTrail = (props) => {
   } = useValidation((value) => value.trim() !== "");
 
   const {
+    enteredValue: seasonStart,
+    valueIsValid: seasonStartIsValid,
+    hasError: seasonStartHasError,
+    valueChangeHandler: seasonStartChangeHandler,
+    valueBlurHandler: seasonStartBlurHandler,
+    reset: seasonStartReset,
+  } = useValidation((value) => value.trim() !== "");
+
+  const {
+    enteredValue: seasonEnd,
+    valueIsValid: seasonEndIsValid,
+    hasError: seasonEndHasError,
+    valueChangeHandler: seasonEndChangeHandler,
+    valueBlurHandler: seasonEndBlurHandler,
+    reset: seasonEndReset,
+  } = useValidation((value) => value.trim() !== "");
+
+  const {
     enteredValue: longitude,
     valueIsValid: longitudeIsValid,
     hasError: longitudeHasError,
@@ -57,7 +75,7 @@ const AddTrail = (props) => {
     valueChangeHandler: milesChangeHandler,
     valueBlurHandler: milesBlurHandler,
     reset: milesReset,
-  } = useValidation((value) => value.trim() !== "");
+  } = useValidation((value) => value.trim() !== "" && +value > 0);
 
   const {
     enteredValue: scenery,
@@ -66,7 +84,9 @@ const AddTrail = (props) => {
     valueChangeHandler: sceneryChangeHandler,
     valueBlurHandler: sceneryBlurHandler,
     reset: sceneryReset,
-  } = useValidation((value) => value.trim() !== "");
+  } = useValidation(
+    (value) => value.trim() !== "" && +value <= 10 && +value >= 1
+  );
 
   const {
     enteredValue: solitude,
@@ -75,7 +95,9 @@ const AddTrail = (props) => {
     valueChangeHandler: solitudeChangeHandler,
     valueBlurHandler: solitudeBlurHandler,
     reset: solitudeReset,
-  } = useValidation((value) => value.trim() !== "");
+  } = useValidation(
+    (value) => value.trim() !== "" && +value <= 10 && +value >= 1
+  );
 
   const {
     enteredValue: difficulty,
@@ -84,7 +106,9 @@ const AddTrail = (props) => {
     valueChangeHandler: difficultyChangeHandler,
     valueBlurHandler: difficultyBlurHandler,
     reset: difficultyReset,
-  } = useValidation((value) => value.trim() !== "");
+  } = useValidation(
+    (value) => value.trim() !== "" && +value <= 10 && +value >= 1
+  );
 
   const {
     enteredValue: description,
@@ -95,86 +119,29 @@ const AddTrail = (props) => {
     reset: descriptionReset,
   } = useValidation((value) => value.trim() !== "");
 
-  // const [trailName, setTrailName] = useState("");
-  // const [state, setState] = useState("");
-  // const [wilderness, setWilderness] = useState("");
+
   const [trailheadName, setTrailheadName] = useState("");
-  const [seasonStart, setSeasonStart] = useState("");
-  const [seasonEnd, setSeasonEnd] = useState("");
   const [season, setSeason] = useState("");
-  // const [longitude, setLongitude] = useState("");
-  // const [latitude, setLatitude] = useState("");
-  // const [miles, setMiles] = useState("");
-  // const [scenery, setScenery] = useState("");
-  // const [solitude, setSolitude] = useState("");
-  // const [difficulty, setDifficulty] = useState("");
-  // const [description, setDescription] = useState("");
-  const [image, setImage] = useState("");
+  const [_image, setImage] = useState("");
   const [trailSubmited, setTrailSubmited] = useState(false);
   const [isUploading, setIsuploading] = useState(false);
   ///////// image upload state
   const [images, setImages] = useState([]);
   const [progress, setProgress] = useState(0);
 
-  // const nameInputChangeHandler = (e) => {
-  //   setTrailName(e.target.value);
-  // };
-
-  // const stateInputChangeHandler = (e) => {
-  //   setState(e.target.value);
-  // };
-
-  // const wildernessInputChangeHandler = (e) => {
-  //   setWilderness(e.target.value);
-  // };
+  
 
   const trailheadNameInputChangeHandler = (e) => {
     setTrailheadName(e.target.value);
-  };
-
-  const seasonStartInputChangeHandler = (e) => {
-    setSeasonStart(e.target.value);
-  };
-
-  const seasonEndInputChangeHandler = (e) => {
-    setSeasonEnd(e.target.value);
   };
 
   useEffect(() => {
     setSeason([seasonStart, seasonEnd]);
   }, [seasonStart, seasonEnd]);
 
-  // const longitudeInputChangeHandler = (e) => {
-  //   setLongitude(e.target.value);
-  // };
-
-  // const latitudeInputChangeHandler = (e) => {
-  //   setLatitude(e.target.value);
-  // };
-
-  // const milesInputChangeHandler = (e) => {
-  //   setMiles(e.target.value);
-  // };
-
-  // const sceneryInputChangeHandler = (e) => {
-  //   setScenery(e.target.value.toLowerCase());
-  // };
-
-  // const solitudeInputChangeHandler = (e) => {
-  //   setSolitude(e.target.value);
-  // };
-
-  // const difficultyInputChangeHandler = (e) => {
-  //   setDifficulty(e.target.value);
-  // };
-
-  // const descriptionInputChangeHandler = (e) => {
-  //   setDescription(e.target.value);
-  // };
-
   let formIsValid = false;
   
-  if (trailNameIsValid && stateIsValid && wildernessAreaIsValid && longitudeIsValid && latitudeIsValid && milesIsValid && sceneryIsValid && solitudeIsValid && difficultyIsValid && descriptionIsValid) {
+  if (trailNameIsValid && stateIsValid && wildernessAreaIsValid && seasonStartIsValid && seasonEndIsValid && longitudeIsValid && latitudeIsValid && milesIsValid && sceneryIsValid && solitudeIsValid && difficultyIsValid && descriptionIsValid) {
     formIsValid = true;
   }
 
@@ -206,9 +173,10 @@ const AddTrail = (props) => {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    if (!formIsValid) {
-      return
-    }
+      if (!formIsValid) {
+        alert("Please enter all required Fields!");
+        return;
+      }
     setTrailSubmited(true);
     setIsuploading(true);
 
@@ -282,28 +250,18 @@ const AddTrail = (props) => {
 
     handleUpload();
 
-    // setTrailName("");
     trailNameReset();
-    // setState("");
     stateReset();
-    // setWilderness("");
     wildernessAreaReset();
-    setSeasonStart("");
-    setSeasonEnd("");
+    seasonStartReset();
+    seasonEndReset();
     setSeason("");
-    // setLongitude("");
     longitudeReset();
-    // setLatitude("");
     latitudeReset();
-    // setMiles("");
     milesReset();
-    // setScenery("");
     sceneryReset();
-    // setSolitude("");
     solitudeReset();
-    // setDifficulty("");
     difficultyReset();
-    // setDescription("");
     descriptionReset();
     setImage("");
   };
@@ -321,6 +279,14 @@ const AddTrail = (props) => {
     : classes["text-input-col"];
   
   const wildernessAreaClasses = wildernessAreaHasError
+    ? `${classes["text-input-col"]} ${classes["invalid"]}`
+    : classes["text-input-col"];
+  
+  const seasonStartClasses = seasonStartHasError
+    ? `${classes["text-input-col"]} ${classes["invalid"]}`
+    : classes["text-input-col"];
+  
+  const seasonEndClasses = seasonEndHasError
     ? `${classes["text-input-col"]} ${classes["invalid"]}`
     : classes["text-input-col"];
   
@@ -423,15 +389,18 @@ const AddTrail = (props) => {
           </div>
         </div>
         <div className={classes["text-row"]}>
-          <div className={classes["text-input-col"]}>
-            <label htmlFor="season-start">Season Start (optional)</label>
+          <div className={seasonStartClasses}>
+            <label htmlFor="season-start">Season Start</label>
             <select
               id="season-start"
               name="season-start"
               value={seasonStart}
-              onChange={seasonStartInputChangeHandler}
+              onChange={seasonStartChangeHandler}
+              onBlur={seasonStartBlurHandler}
+              required
             >
               <optgroup label="Month">
+                <option value="0">Select Month</option>
                 <option value="1">January</option>
                 <option value="2">Febuary</option>
                 <option value="3">March</option>
@@ -446,17 +415,25 @@ const AddTrail = (props) => {
                 <option value="12">December</option>
               </optgroup>
             </select>
+            {seasonStartHasError && (
+              <p className={classes["error-text"]}>
+                Please select a start season
+              </p>
+            )}
           </div>
 
-          <div className={classes["text-input-col"]}>
-            <label htmlFor="season-start">Season End (optional)</label>
+          <div className={seasonEndClasses}>
+            <label htmlFor="season-start">Season End</label>
             <select
               id="season-end"
               name="season-end"
               value={seasonEnd}
-              onChange={seasonEndInputChangeHandler}
+              onChange={seasonEndChangeHandler}
+              onBlur={seasonEndBlurHandler}
+              required
             >
               <optgroup label="Month">
+                <option value="0">Select Month</option>
                 <option value="1">January</option>
                 <option value="2">Febuary</option>
                 <option value="3">March</option>
@@ -471,6 +448,11 @@ const AddTrail = (props) => {
                 <option value="12">December</option>
               </optgroup>
             </select>
+            {seasonEndHasError && (
+              <p className={classes["error-text"]}>
+                Please select an end season
+              </p>
+            )}
           </div>
         </div>
         <div className={classes["text-row"]}>
@@ -478,7 +460,7 @@ const AddTrail = (props) => {
             <label htmlFor="longitude">Longitude (trailhead)</label>
             <input
               className={classes["wilderness-area"]}
-              type="text"
+              type="number"
               id="longitude"
               onChange={longitudeChangeHandler}
               onBlur={longitudeBlurHandler}
@@ -497,11 +479,12 @@ const AddTrail = (props) => {
             <label htmlFor="latitude">Latitude (trailhead) </label>
             <input
               className={classes["season"]}
-              type="text"
+              type="number"
               id="latitude"
               onChange={latitudeChangeHandler}
               onBlur={latitudeBlurHandler}
               value={latitude}
+              required
             />
             {latitudeHasError && (
               <p className={classes["error-text"]}>
@@ -514,7 +497,7 @@ const AddTrail = (props) => {
 
         <div className={classes["number-group"]}>
           <div className={milesClasses}>
-            <label htmlFor="miles">Miles </label>
+            <label htmlFor="miles">Miles (round trip) </label>
             <input
               className={classes["number-input"]}
               type="number"
@@ -536,6 +519,8 @@ const AddTrail = (props) => {
             <input
               className={classes["number-input"]}
               type="number"
+              min="1"
+              max="10"
               id="scenery"
               onChange={sceneryChangeHandler}
               onBlur={sceneryBlurHandler}
@@ -553,6 +538,8 @@ const AddTrail = (props) => {
             <input
               className={classes["number-input"]}
               type="number"
+              min="1"
+              max="10"
               id="solitude"
               onChange={solitudeChangeHandler}
               onBlur={solitudeBlurHandler}
@@ -570,6 +557,8 @@ const AddTrail = (props) => {
             <input
               className={classes["number-input"]}
               type="number"
+              min="1"
+              max="10"
               id="difficulty"
               onChange={difficultyChangeHandler}
               onBlur={difficultyBlurHandler}
