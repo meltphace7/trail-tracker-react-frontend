@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import classes from "./Navigations.module.css";
+import classes from "./Navigation.module.css";
 import { Link } from "react-router-dom";
 import Logo from './Logo'
 

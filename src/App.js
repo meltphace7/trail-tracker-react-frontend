@@ -3,7 +3,6 @@ import "./App.css";
 import Navigation from "./components/Navigation";
 import AddTrail from "./components/AddTrail";
 import Footer from "./components/Footer";
-import MainPage from "./components/MainPage";
 import TrailDetail from "./components/TrailDetail";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { TRAIL_DATA } from "./assets/trails";
@@ -177,7 +176,6 @@ function App() {
             onTrailSelect={getSelectedTrail}
             trailFilter={filter}
           />
-          {/* <MainPage trails={filteredTrails} /> */}
         </Route>
         <Route path="/favorites">
           <Favorites
