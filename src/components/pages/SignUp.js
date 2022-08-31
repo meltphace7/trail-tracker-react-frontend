@@ -89,7 +89,7 @@ export const SignUp = () => {
           className={classes["sign-up-input"]}
           id="first-name"
           type="text"
-          placeholder="first-name"
+          placeholder="first name"
           value={firstNameInput}
           onChange={firstNameChangeHandler}
           required
@@ -99,7 +99,7 @@ export const SignUp = () => {
           className={classes["sign-up-input"]}
           id="last-name"
           type="text"
-          placeholder="last-name"
+          placeholder="last name"
           value={lastNameInput}
           onChange={lastNameChangeHandler}
           required

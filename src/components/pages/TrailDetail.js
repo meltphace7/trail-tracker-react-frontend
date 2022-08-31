@@ -88,7 +88,13 @@ const TrailDetail = (props) => {
      if (+diff > 8) difficulty = "very-hard";
    };
 
-   calcDifficulty(props.trail.difficulty);
+  calcDifficulty(props.trail.difficulty);
+  
+  const favoriteIcon = isFavorited ? (
+    <AiFillStar size={50} className={classes["star"]} />
+  ) : (
+    <AiOutlineStar size={50} className={classes["star"]} />
+  );
 
   return (
     <div className={classes["trail-detail"]}>
@@ -98,11 +104,7 @@ const TrailDetail = (props) => {
             onClick={isFavoritedHandler}
             className={classes["favorites-button"]}
           >
-            {isFavorited ? (
-              <AiFillStar size={50} className={classes["star"]} />
-            ) : (
-              <AiOutlineStar size={50} className={classes["star"]} />
-            )}
+            {favoriteIcon}
           </button>
           <h1>{props.trail.trailName}</h1>
           <h3>{`${props.trail.wildernessArea},  ${props.trail.state}`}</h3>
@@ -118,7 +120,6 @@ const TrailDetail = (props) => {
           </h3>
           <h3>{`Scenery: ${props.trail.scenery}/10`}</h3>
           <h3>{`Solitude: ${props.trail.solitude}/10`}</h3>
-          {/* <h3>{`Best Season: ${season}`}</h3> */}
           <h3>{`Season: ${season}`}</h3>
         </div>
         <p className={classes["description"]}>{props.trail.description}</p>

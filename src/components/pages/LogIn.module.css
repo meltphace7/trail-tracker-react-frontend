@@ -44,6 +44,11 @@
   height: 3rem;
   width: 20rem;
   cursor: pointer;
+  transition: all 200ms ease-in;
+}
+
+.button:hover {
+    background-color: var(--secondary-green);
 }
 
 .sign-up-link {
