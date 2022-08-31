@@ -1,4 +1,5 @@
 .message-container {
+    font-family: 'Raleway', sans-serif, Arial, Helvetica, sans-serif;
     width: 100%;
     display: flex;
     flex-direction: column;
