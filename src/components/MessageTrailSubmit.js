@@ -18,14 +18,16 @@ const MessageTrailSubmit = (props) => {
 
 
 
-    const loadingMessage = <React.Fragment>
-        <h1>Uploading...</h1>
+    const loadingMessage = (
+      <React.Fragment>
+        <h1 className={classes["message-text"]}>Uploading...</h1>
         <LoadingIcons.SpinningCircles />
-    </React.Fragment>
+      </React.Fragment>
+    );
 
     const successMessage = (
       <React.Fragment>
-        <h1>TRAIL SUBMITED!</h1>
+        <h1 className={classes['message-text']}>Trail Submitted!</h1>
         <button onClick={closeModalHandler}>OK</button>
       </React.Fragment>
     );

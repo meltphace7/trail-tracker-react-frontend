@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import classes from "./AddTrail.module.css";
 import { storage } from "../../firebase";
 import MessageTrailSubmit from "../MessageTrailSubmit";
-import useValidation from '../hooks/use-validation';
+import AddTrailErrorMessage from '../AddTrailErrorMessage';
+import useValidation from '../../hooks/use-validation';
 
 const AddTrail = (props) => {
   // Validating User Inputs with custom useValidation hook
@@ -127,6 +128,7 @@ const AddTrail = (props) => {
   const [_image, setImage] = useState("");
   const [trailSubmited, setTrailSubmited] = useState(false);
   const [isUploading, setIsuploading] = useState(false);
+  const [uploadError, setUploadError] = useState(false);
   ///////// image upload state
   const [images, setImages] = useState([]);
   const [progress, setProgress] = useState(0);
@@ -180,11 +182,12 @@ const AddTrail = (props) => {
   const formSubmitHandler = (e) => {
     e.preventDefault();
     if (imageInputRef.current.value === "") {
-      alert('Please include at least one image')
+      setUploadError(true);
+      // alert('Please include at least one image')
       return;
       };
-      if (!formIsValid) {
-        alert("Please enter all required Fields!");
+    if (!formIsValid) {
+      setUploadError(true);
         return;
       }
     setTrailSubmited(true);
@@ -281,6 +284,11 @@ const AddTrail = (props) => {
   const closeModal = function () {
     setTrailSubmited((prevState) => !prevState);
   };
+
+   const closeErrorMsg = function () {
+     setUploadError((prevState) => !prevState);
+   };
+
 
   const trailNameClasses = trailNameHasError
     ? `${classes['text-input-col']} ${classes['invalid']}`
@@ -620,6 +628,7 @@ const AddTrail = (props) => {
       {trailSubmited && (
         <MessageTrailSubmit onClose={closeModal} uploading={isUploading} />
       )}
+      {uploadError && <AddTrailErrorMessage onCloseErrorMsg={closeErrorMsg} />}
     </div>
   );
 };
