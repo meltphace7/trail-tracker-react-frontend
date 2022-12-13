@@ -59,7 +59,9 @@ const AddTrail = (props) => {
     valueChangeHandler: longitudeChangeHandler,
     valueBlurHandler: longitudeBlurHandler,
     reset: longitudeReset,
-  } = useValidation((value) => value.trim() !== "" && +value >= -180 && +value <= 180);
+  } = useValidation((value) => value.trim() !== ""
+    // && +value >= -180 && +value <= 180
+  );
 
   const {
     enteredValue: latitude,
