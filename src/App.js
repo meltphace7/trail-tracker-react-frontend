@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 import AuthContext from './store/auth-context';
 import "./App.css";
 import Navigation from "./components/Navigation";
@@ -13,11 +13,14 @@ import ScrollToTop from "./components/ScrollToTop";
 import Favorites from "./components/pages/Favorites";
 import SignUp from './components/pages/SignUp';
 import LogIn from './components/pages/LogIn'
+import {useSelector} from 'react-redux';
 
 function App() {
   // LOAD SUBMITED TRAILS FROM FIREBASE
   const [loadedTrails, setLoadedTrails] = useState([]);
   const authCtx = useContext(AuthContext);
+  const isAuth = useSelector((state) => state.auth.isAuth);
+  console.log('isAuth', isAuth)
 
   //LOAD FAVORITES from local storage
   const [favorites, setFavorites] = useState(
@@ -30,34 +33,40 @@ function App() {
     setFavorites(JSON.parse(localStorage.getItem("favorite-trails")));
   };
 
-  const fetchTrails = async () => {
+  const fetchTrails = useCallback(async () => {
+    try {
     const response = await fetch(
       `https://trail-tracker-image-store-default-rtdb.firebaseio.com/trails.json`
     );
+      if (!response.ok) {
+          throw new Error('Could not fetch trails from firebase!')
+      }
     const data = await response.json();
-
     const fetchedTrails = [];
 
-    for (const key in data) {
-      fetchedTrails.push({
-        id: key,
-        bestSeason: data[key].trail.bestSeason,
-        description: data[key].trail.description,
-        difficulty: data[key].trail.difficulty,
-        imageURL: data[key].trail.imageURL,
-        latitude: data[key].trail.latitude,
-        longitude: data[key].trail.longitude,
-        miles: data[key].trail.miles,
-        scenery: data[key].trail.scenery,
-        solitude: data[key].trail.solitude,
-        state: data[key].trail.state,
-        trailName: data[key].trail.trailName,
-        wildernessArea: data[key].trail.wildernessArea,
-      });
+      for (const key in data) {
+        fetchedTrails.push({
+          id: key,
+          bestSeason: data[key].trail.bestSeason,
+          description: data[key].trail.description,
+          difficulty: data[key].trail.difficulty,
+          imageURL: data[key].trail.imageURL,
+          latitude: data[key].trail.latitude,
+          longitude: data[key].trail.longitude,
+          miles: data[key].trail.miles,
+          scenery: data[key].trail.scenery,
+          solitude: data[key].trail.solitude,
+          state: data[key].trail.state,
+          trailName: data[key].trail.trailName,
+          wildernessArea: data[key].trail.wildernessArea,
+        });
+      }
+      // Sets ALL firebase trails as state
+      setLoadedTrails(fetchedTrails);
+    } catch (err) {
+      console.log(err)
     }
-
-    setLoadedTrails(fetchedTrails);
-  };
+  }, []);
 
   useEffect(() => {
     fetchTrails();
@@ -181,7 +190,7 @@ function App() {
             trailFilter={filter}
           />
         </Route>
-        {authCtx.isLoggedIn && (
+        {isAuth && (
           <Route path="/favorites">
             <Favorites
               onTrailSelect={getSelectedTrail}
@@ -190,7 +199,7 @@ function App() {
             />
           </Route>
         )}
-        {authCtx.isLoggedIn && (
+        {isAuth && (
           <Route path="/addtrail">
             <AddTrail
               onAddTrail={getAddTrailData}

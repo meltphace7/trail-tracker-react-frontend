@@ -26,7 +26,7 @@
   margin-bottom: 3rem;
 }
 
-.sign-up-input {
+.signup-input {
   width: 20rem;
   padding: 0 0.25rem;
   height: 2.5rem;
@@ -58,4 +58,14 @@
 
 .loading {
   margin-bottom: 2.5rem;
+}
+
+.invalid {
+  border: 1px solid #b40e0e;
+  background-color: #fddddd;
+}
+
+.invalid:focus {
+  border-color: #ff8800;
+  background-color: #fbe8d2;
 }

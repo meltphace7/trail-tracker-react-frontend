@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import classes from "./WeatherReport.module.css";
 import WeatherDayForecast from "./WeatherDayForecast";
-import WeatherCurrent from './WeatherCurrent';
+import WeatherCurrent from "./WeatherCurrent";
 
 const WeatherReport = (props) => {
   const [curTemp, setCurTemp] = useState("");
@@ -13,29 +13,34 @@ const WeatherReport = (props) => {
   // weather api key protonmail: c1d64aca00157236debbddc5f2e543ff
   // weather api key gmail: 9418ca858afd140d5a2ec6a614c1d7a9
 
-  useEffect(() => {
-    const getWeather = async function (coordinates) {
-      setIsLoading(true);
-      try {
-        const res = await fetch(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${
-            coordinates[0]
-          }&lon=${
-            coordinates[1]
-          }&exclude=minutely&units=imperial&appid=${"9418ca858afd140d5a2ec6a614c1d7a9"}`
-        );
-        const data = await res.json();
-        const [currentWeather] = data.current.weather;
-        setCurTemp(data.current.temp);
-        setCurWeather(currentWeather.description);
-        setWeatherForecast(data.daily);
-        setWeatherIcon(currentWeather.icon);
-      } catch (err) {
-        throw err;
+  const getWeather = useCallback(async function (coordinates) {
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${
+          coordinates[0]
+        }&lon=${
+          coordinates[1]
+        }&exclude=minutely&units=imperial&appid=${"9418ca858afd140d5a2ec6a614c1d7a9"}`
+      );
+      if (!response.ok) {
+        throw new Error('Could not get weather data!')
       }
-    };
-    getWeather(props.coords);
+      const data = await response.json();
+      console.log('got weather data')
+      const [currentWeather] = data.current.weather;
+      setCurTemp(data.current.temp);
+      setCurWeather(currentWeather.description);
+      setWeatherForecast(data.daily);
+      setWeatherIcon(currentWeather.icon);
+    } catch (err) {
+      throw err;
+    }
     setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    getWeather(props.coords);
   }, [props.coords]);
 
   return (

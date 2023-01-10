@@ -1,13 +1,31 @@
 import React, { useState, useEffect, useContext } from "react";
 import AuthContext from '../store/auth-context';
 import classes from "./Navigation.module.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { authActions } from "../store/auth-slice";
 import Logo from './Logo'
 
 const Navigation = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const authCtx = useContext(AuthContext);
+  const isAuth = useSelector((state) => state.auth.isAuth);
+  const currentUser = useSelector((state) => state.auth.currentUser);
+  console.log('isAuth', isAuth);
+  if (isAuth) {
+ console.log("currentUser", currentUser);
+  }
 
-  const isLoggedIn = authCtx.isLoggedIn;
+  const isLoggedIn = isAuth;
+
+    const logoutHandler = () => {
+      dispatch(authActions.logout());
+      localStorage.setItem("token", null);
+      localStorage.setItem("userId", null);
+      localStorage.setItem("expiryDate", null);
+      history.replace("/home");
+    };
  
   return (
     <nav>
@@ -28,7 +46,7 @@ const Navigation = () => {
           {isLoggedIn && <Link to="/addtrail">ADD TRAIL</Link>}
           {!isLoggedIn && <Link to="/login">LOG IN</Link>}
         </li>
-        {isLoggedIn && <li><button onClick={authCtx.logout} className={classes['logout-button']}>LOG OUT</button></li>}
+        {isLoggedIn && <li><button onClick={logoutHandler} className={classes['logout-button']}>LOG OUT</button></li>}
       </ul>
     </nav>
   );

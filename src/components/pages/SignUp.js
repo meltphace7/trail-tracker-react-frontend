@@ -2,133 +2,200 @@ import React, { useState, useContext } from "react";
 import AuthContext from '../../store/auth-context'
 import classes from "./SignUp.module.css";
 import { Link, useHistory } from "react-router-dom";
+import hostURL from '../../hosturl';
+import useValidation from "../../hooks/use-validation";
+import ModalMessage from '../notifications/ModalMessage';
 
 export const SignUp = () => {
   const authCtx = useContext(AuthContext);
   const history = useHistory();
-  const [firstNameInput, setFirstNameInput] = useState("");
-  const [lastNameInput, setLastNameInput] = useState("");
-  const [emailInput, setEmailNameInput] = useState("");
-  const [passwordInput, setPasswordInput] = useState("");
+   const [isMessage, setIsMessage] = useState(false);
+   const [isErrorMessage, setIsErrorMessage] = useState(false);
+   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const firstNameChangeHandler = (event) => {
-    setFirstNameInput(event.currentTarget.value);
-  };
+    const {
+      enteredValue: firstName,
+      valueIsValid: firstNameIsValid,
+      hasError: firstNameHasError,
+      valueChangeHandler: firstNameChangeHandler,
+      valueBlurHandler: firstNameBlurHandler,
+      reset: firstNameReset,
+    } = useValidation((value) => value.trim() !== "" && isNaN(+value));
 
-  const lastNameChangeHandler = (event) => {
-    setLastNameInput(event.currentTarget.value);
-  };
+    const {
+      enteredValue: lastName,
+      valueIsValid: lastNameIsValid,
+      hasError: lastNameHasError,
+      valueChangeHandler: lastNameChangeHandler,
+      valueBlurHandler: lastNameBlurHandler,
+      reset: lastNameReset,
+    } = useValidation((value) => value.trim() !== "" && isNaN(+value));
 
-  const emailChangeHandler = (event) => {
-    setEmailNameInput(event.currentTarget.value);
-  };
+    const {
+      enteredValue: email,
+      valueIsValid: emailIsValid,
+      hasError: emailHasError,
+      valueChangeHandler: emailChangeHandler,
+      valueBlurHandler: emailBlurHandler,
+      reset: emailReset,
+    } = useValidation((value) => value.trim() !== "" && value.includes("@"));
 
-  const passwordChangeHandler = (event) => {
-    setPasswordInput(event.currentTarget.value);
-  };
+    const {
+      enteredValue: password,
+      valueIsValid: passwordIsValid,
+      hasError: passwordHasError,
+      valueChangeHandler: passwordChangeHandler,
+      valueBlurHandler: passwordBlurHandler,
+      reset: passwordReset,
+    } = useValidation((value) => value.trim() !== "" && value.length > 5);
+  
 
-  const signupUser = async function () {
-    const WEB_API_KEY = "AIzaSyAn9setska2fITb1v9zCbqfFm8FA4wg99c";
-    
-    setIsLoading(true);
-    try {
-      const resFirebase = await fetch(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${WEB_API_KEY}`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email: emailInput,
-            password: passwordInput,
-            returnSecureToken: true,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      setIsLoading(false);
-      if (!resFirebase.ok) {
-        const dataFirebase = await resFirebase.json();
-        let errorMessage = "Problem signing up!";
-        if (dataFirebase && dataFirebase.error && dataFirebase.error.message) {
-          errorMessage = dataFirebase.error.message;
-        }
-        console.log(dataFirebase.error.message);
-        throw new Error(errorMessage)
-      }
-      const dataFirebase = await resFirebase.json();
-      console.log(dataFirebase.idToken);
-      const expirationTime = new Date(new Date().getTime() + (+dataFirebase.expiresIn * 1000));
-      authCtx.login(dataFirebase.idToken, expirationTime.toISOString());
-      history.replace('/');
-      
-    } catch (err) {
-      alert(err)
-      console.log(err);
-    }
+  const firstNameClasses = firstNameHasError
+    ? `${classes["signup-input"]} ${classes["invalid"]}`
+    : classes["signup-input"];
+
+  const lastNameClasses = lastNameHasError
+    ? `${classes["signup-input"]} ${classes["invalid"]}`
+    : classes["signup-input"];
+
+  const emailClasses = emailHasError
+    ? `${classes["signup-input"]} ${classes["invalid"]}`
+    : classes["signup-input"];
+
+  const passwordClasses = passwordHasError
+    ? `${classes["signup-input"]} ${classes["invalid"]}`
+    : classes["signup-input"];
+
+  let formIsValid = false;
+
+  if (firstNameIsValid && lastNameIsValid && emailIsValid && passwordIsValid) {
+    formIsValid = true;
   }
 
-  const signupSubmitHandler = (event) => {
+  // const firstNameChangeHandler = (event) => {
+  //   setFirstNameInput(event.currentTarget.value);
+  // };
+
+  // const lastNameChangeHandler = (event) => {
+  //   setLastNameInput(event.currentTarget.value);
+  // };
+
+  // const emailChangeHandler = (event) => {
+  //   setEmailNameInput(event.currentTarget.value);
+  // };
+
+  // const passwordChangeHandler = (event) => {
+  //   setPasswordInput(event.currentTarget.value);
+  // };
+
+
+  //NODEJS REST API
+  const signupHandler = async (event) => {
     event.preventDefault();
+    const signupData = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+    };
+    setIsLoading(true);
+    try {
+      const response = await fetch(`${hostURL}/auth/signup`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(signupData),
+      });
+      if (!response.ok) {
+        throw new Error("Could not sign up user!");
+      }
+      const responseData = await response.json();
+      console.log(responseData);
+      setIsMessage(true);
+      setMessage("Account created succesfully!");
 
-    signupUser();
+      setIsLoading(false);
+    } catch (err) {
+      setIsErrorMessage(true);
+      setMessage("Could Not Sign up!");
+      console.log(err);
+    }
+    // CLEAR INPUTS
+    firstNameReset();
+    lastNameReset();
+    emailReset();
+    passwordReset();
+  }
 
-    setFirstNameInput("");
-    setLastNameInput("");
-    setEmailNameInput("");
-    setPasswordInput("");
+  const closeModalHandler = () => {
+    if (!isErrorMessage) {
+      setIsMessage(false);
+      setMessage("");
+      history.push("/login");
+    } else {
+      setIsMessage(false);
+      setIsErrorMessage(false);
+      setMessage("");
+    }
   };
 
   return (
     <div className={classes["sign-up"]}>
-      <form onSubmit={signupSubmitHandler} className={classes["sign-up-form"]}>
+      <form onSubmit={signupHandler} className={classes["sign-up-form"]}>
         <h2 className={classes["sign-up-header"]}>Create Your Free Account!</h2>
-
+        {firstNameHasError && <p>Please enter a valid name!</p>}
         <input
-          className={classes["sign-up-input"]}
+          className={firstNameClasses}
           id="first-name"
           type="text"
           placeholder="first name"
-          value={firstNameInput}
+          value={firstName}
           onChange={firstNameChangeHandler}
+          onBlur={firstNameBlurHandler}
           required
         />
-
+        {lastNameHasError && <p>Please enter a valid name!</p>}
         <input
-          className={classes["sign-up-input"]}
+          className={lastNameClasses}
           id="last-name"
           type="text"
           placeholder="last name"
-          value={lastNameInput}
+          value={lastName}
           onChange={lastNameChangeHandler}
+          onBlur={lastNameBlurHandler}
           required
         />
-
+        {emailHasError && <p>Please enter a valid email!</p>}
         <input
-          className={classes["sign-up-input"]}
+          className={emailClasses}
           id="email"
           type="text"
           placeholder="email"
-          value={emailInput}
+          value={email}
           onChange={emailChangeHandler}
+          onBlur={emailBlurHandler}
           required
         />
-
+        {passwordHasError && <p>Please enter a valid password!</p>}
         <input
-          className={classes["sign-up-input"]}
+          className={passwordClasses}
           id="password"
           type="password"
           placeholder="password"
-          value={passwordInput}
+          value={password}
           onChange={passwordChangeHandler}
+          onBlur={passwordBlurHandler}
           required
         />
 
-        {!isLoading && <button className={classes.button} type="submit">
-          Sign Up
-        </button>}
-        {isLoading && <p className={classes.loading}>LOADING.....</p> }
+        {!isLoading && (
+          <button className={classes.button} type="submit">
+            Sign Up
+          </button>
+        )}
+        {isLoading && <p className={classes.loading}>LOADING.....</p>}
 
         <h3>
           Already have an account?&nbsp;
@@ -137,74 +204,11 @@ export const SignUp = () => {
           </Link>
         </h3>
       </form>
+      {isMessage && (
+        <ModalMessage onCloseModal={closeModalHandler} message={message} />
+      )}
     </div>
   );
 };
 
 export default SignUp;
-
-
-// const whereAmI = async function () {
-//   try {
-//     // Geolocation
-//     const pos = await getPosition();
-//     const { latitude: lat, longitude: lng } = pos.coords;
-
-//     // Reverse geocoding
-//     const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
-//     if (!resGeo.ok) throw new Error("Problem getting location data");
-//     const dataGeo = await resGeo.json();
-
-//     // Country data
-//     const res = await fetch(
-//       `https://restcountries.eu/rest/v2/name/${dataGeo.country}`
-//     );
-//     if (!resGeo.ok) throw new Error("Problem getting country");
-//     const data = await res.json();
-//     renderCountry(data[0]);
-
-//     return `You are in ${dataGeo.city}, ${dataGeo.country}`;
-//   } catch (err) {
-//     console.error(`${err} 💥`);
-//     renderError(`💥 ${err.message}`);
-
-//     // Reject promise returned from async function
-//     throw err;
-//   }
-// };
-
-
-
-
-
-
-
-// const WEB_API_KEY =
-//           'AIzaSyAn9setska2fITb1v9zCbqfFm8FA4wg99c';
-
-   
-//         fetch(
-//             `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${WEB_API_KEY}`, {
-//                 method: 'POST',
-//                 body: JSON.stringify({
-//                     email: emailInput,
-//                     password: passwordInput,
-//                     returnSecureToken: true
-//                 }),
-//                 headers: {
-//                     'Content-Type': 'application/json'
-//                 }
-//           }
-//         ).then(res => {
-//             if (res.ok) {
-//                 res.json().then(data => {
-//                     alert('SUCCESS!')
-//                     console.log(data);
-//                 })
-//             } else {
-//                 res.json().then(data => {
-//                     alert('Something went wrong')
-//                     console.log(data);
-//                 });
-//             }
-//         });

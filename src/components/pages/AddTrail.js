@@ -1,11 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import classes from "./AddTrail.module.css";
 import { storage } from "../../firebase";
-import MessageTrailSubmit from "../MessageTrailSubmit";
-import AddTrailErrorMessage from '../AddTrailErrorMessage';
 import useValidation from '../../hooks/use-validation';
+import ModalMessage from '../notifications/ModalMessage'
+import hostURL from '../../hosturl';
+
 
 const AddTrail = (props) => {
+   const [isMessage, setIsMessage] = useState(false);
+   const [isErrorMessage, setIsErrorMessage] = useState(false);
+  const [message, setMessage] = useState("");
+  
   // Validating User Inputs with custom useValidation hook
   const {
     enteredValue: trailName,
@@ -13,9 +18,9 @@ const AddTrail = (props) => {
     hasError: trailNameHasError,
     valueChangeHandler: trailNameChangeHandler,
     valueBlurHandler: trailNameBlurHandler,
-    reset: trailNameReset
-  } = useValidation(value => value.trim() !== '');
-  
+    reset: trailNameReset,
+  } = useValidation((value) => value.trim() !== "");
+
   const {
     enteredValue: state,
     valueIsValid: stateIsValid,
@@ -59,8 +64,8 @@ const AddTrail = (props) => {
     valueChangeHandler: longitudeChangeHandler,
     valueBlurHandler: longitudeBlurHandler,
     reset: longitudeReset,
-  } = useValidation((value) => value.trim() !== ""
-    // && +value >= -180 && +value <= 180
+  } = useValidation(
+    (value) => value.trim() !== "" && +value >= -180 && +value <= 180
   );
 
   const {
@@ -136,10 +141,13 @@ const AddTrail = (props) => {
   const [progress, setProgress] = useState(0);
 
   const imageInputRef = useRef();
-  
+    // const imageChangeHandler = (event) => {
+    //   setImage(event.target.files[0]);
+    // };
+
   const resetImageInput = () => {
     imageInputRef.current.value = "";
-  }
+  };
 
   const trailheadNameInputChangeHandler = (e) => {
     setTrailheadName(e.target.value);
@@ -150,13 +158,26 @@ const AddTrail = (props) => {
   }, [seasonStart, seasonEnd]);
 
   let formIsValid = false;
-  
-  if (trailNameIsValid && stateIsValid && wildernessAreaIsValid && seasonStartIsValid && seasonEndIsValid && longitudeIsValid && latitudeIsValid && milesIsValid && sceneryIsValid && solitudeIsValid && difficultyIsValid && descriptionIsValid) {
+
+  if (
+    trailNameIsValid &&
+    stateIsValid &&
+    wildernessAreaIsValid &&
+    seasonStartIsValid &&
+    seasonEndIsValid &&
+    longitudeIsValid &&
+    latitudeIsValid &&
+    milesIsValid &&
+    sceneryIsValid &&
+    solitudeIsValid &&
+    difficultyIsValid &&
+    descriptionIsValid
+  ) {
     formIsValid = true;
   }
 
-  //// HANDLES FILE INPUT CHANGE FOR IMG UPLOAD
-  const handleImageInputChange = function (e) {
+  // HANDLES FILE INPUT CHANGE FOR IMG UPLOAD
+  const imageChangeHandler = function (e) {
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
       newImage["id"] = Math.random();
@@ -164,186 +185,119 @@ const AddTrail = (props) => {
     }
   };
 
-  // SENDS TRAIL DATA TO FIREBASE REALTIME DATABASE
-  const postTrail = async function (trail) {
-    const response = await fetch(
-      `https://trail-tracker-image-store-default-rtdb.firebaseio.com/trails.json`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          trail: trail,
-        }),
-      }
-    );
-    const data = await response.json();
-    console.log("POSTED");
-    setIsuploading(false);
-    props.updateTrails();
-  };
 
-  const formSubmitHandler = (e) => {
-    e.preventDefault();
-    if (imageInputRef.current.value === "") {
-      setUploadError(true);
-      // alert('Please include at least one image')
-      return;
-      };
-    if (!formIsValid) {
-      setUploadError(true);
+  const submitTrailHandler = async (event) => {
+    event.preventDefault();
+      if (!formIsValid) {
+        setIsMessage(true);
+        setIsErrorMessage(true);
+        setMessage("Form info is invalid!");
         return;
       }
-    setTrailSubmited(true);
-    setIsuploading(true);
+    // MUST USE FORMDATA TO INCLUDE A FILE/IMAGE
+    const formData = new FormData();
+    formData.append("name", trailName);
+    formData.append("state", state);
+    formData.append("wildernessArea", wildernessArea);
+    formData.append("seasonStart", seasonStart);
+    formData.append("seasonEnd", seasonEnd);
+    formData.append("longitude", longitude);
+    formData.append("latitude", latitude);
+    formData.append("miles", miles);
+    formData.append("scenery", scenery);
+    formData.append("solitude", solitude);
+    formData.append("difficulty", difficulty);
+    formData.append("description", description);
+    formData.append("images", images);
 
-    // SENDS IMAGE TO FIREBASE STORAGE THEN UPLOADS trail to FIREBASE REALTIME DATABASE  /////////////////////
+    const token = localStorage.getItem("token");
 
-    const handleUpload = function () {
-      let urlImages = [];
-      const promises = [];
-
-      /// Starts upload process for each selected image
-      images.map((image, i) => {
-        const uploadTask = storage.ref(`images/${image.name}`).put(image);
-        promises.push(uploadTask);
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const progress = Math.round(
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            );
-            setProgress(progress);
-          },
-          (error) => {
-            console.log(error);
-          },
-          async () => {
-            await storage
-              .ref("images")
-              .child(image.name)
-              .getDownloadURL()
-              .then((url) => {
-                console.log(i);
-                console.log(url);
-                urlImages.push(url);
-                console.log(urlImages);
-              });
-          }
-        );
+    try {
+      const response = await fetch(`${hostURL}/trails/submit-trail`, {
+        method: "PUT",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+        body: formData,
       });
+      if (!response.ok || response.status === 422) {
+        throw new Error("Adding trail failed!");
+      }
+      const responseData = await response.json();
+      console.log(responseData)
+       setIsMessage(true);
+       setMessage("Trail successfully submited!");
+    } catch (err) {
+      console.log(err);
+    }
 
-      Promise.allSettled(promises)
-        .then(() => {
-          // TRAIL SUBMIT GOES IN HERRE
-
-          setTimeout(() => {
-            console.log("PROMISES", promises.length);
-            console.log("URL ARRAY", urlImages.length);
-            console.log(urlImages);
-            console.log("IMAGES SET");
-
-            const trailData = {
-              id: Math.random() * 1000000,
-              trailName: trailName,
-              state: state,
-              wildernessArea: wildernessArea,
-              bestSeason: season,
-              longitude: longitude,
-              latitude: latitude,
-              imageURL: urlImages,
-              miles: miles,
-              scenery: scenery,
-              solitude: solitude,
-              difficulty: difficulty,
-              description: description,
-            };
-
-            postTrail(trailData);
-            resetImageInput();
-          }, 1000);
-        })
-        .catch((err) => console.log(err));
-    };
-
-    handleUpload();
-
-    trailNameReset();
-    stateReset();
-    setTrailheadName('');
-    wildernessAreaReset();
-    seasonStartReset();
-    seasonEndReset();
-    setSeason("");
-    longitudeReset();
-    latitudeReset();
-    milesReset();
-    sceneryReset();
-    solitudeReset();
-    difficultyReset();
-    descriptionReset();
-    setImage("");
   };
 
-  const closeModal = function () {
-    setTrailSubmited((prevState) => !prevState);
-  };
-
-   const closeErrorMsg = function () {
-     setUploadError((prevState) => !prevState);
+   const closeModalHandler = () => {
+     if (!isErrorMessage) {
+       setIsMessage(false);
+       setMessage("");
+     } else {
+       setIsMessage(false);
+       setIsErrorMessage(false);
+       setMessage("");
+     }
    };
 
 
+
   const trailNameClasses = trailNameHasError
-    ? `${classes['text-input-col']} ${classes['invalid']}`
+    ? `${classes["text-input-col"]} ${classes["invalid"]}`
     : classes["text-input-col"];
-  
+
   const stateClasses = stateHasError
     ? `${classes["text-input-col"]} ${classes["invalid"]}`
     : classes["text-input-col"];
-  
+
   const wildernessAreaClasses = wildernessAreaHasError
     ? `${classes["text-input-col"]} ${classes["invalid"]}`
     : classes["text-input-col"];
-  
+
   const seasonStartClasses = seasonStartHasError
     ? `${classes["text-input-col"]} ${classes["invalid"]}`
     : classes["text-input-col"];
-  
+
   const seasonEndClasses = seasonEndHasError
     ? `${classes["text-input-col"]} ${classes["invalid"]}`
     : classes["text-input-col"];
-  
+
   const longitudeClasses = longitudeHasError
     ? `${classes["text-input-col"]} ${classes["invalid"]}`
     : classes["text-input-col"];
-  
+
   const latitudeClasses = latitudeHasError
     ? `${classes["text-input-col"]} ${classes["invalid"]}`
     : classes["text-input-col"];
-  
+
   const milesClasses = milesHasError
     ? `${classes["input-col"]} ${classes["invalid"]}`
     : classes["input-col"];
-  
+
   const sceneryClasses = sceneryHasError
     ? `${classes["input-col"]} ${classes["invalid"]}`
     : classes["input-col"];
-  
+
   const solitudeClasses = solitudeHasError
     ? `${classes["input-col"]} ${classes["invalid"]}`
     : classes["input-col"];
-  
+
   const difficultyClasses = difficultyHasError
     ? `${classes["input-col"]} ${classes["invalid"]}`
     : classes["input-col"];
-  
+
   const descriptionClasses = descriptionHasError
     ? `${classes["description-input"]} ${classes["invalid"]}`
-    : classes["description-input"]; 
+    : classes["description-input"];
 
   return (
     <div className={classes["add-trail-section"]}>
       <h1>Enter Trail Information</h1>
-      <form onSubmit={formSubmitHandler} className={classes["trail-form"]}>
+      <form onSubmit={submitTrailHandler} className={classes["trail-form"]}>
         <div className={classes["text-row"]}>
           <div className={trailNameClasses}>
             <label htmlFor="trail-name">Trail Name</label>
@@ -621,16 +575,15 @@ const AddTrail = (props) => {
           ref={imageInputRef}
           type="file"
           multiple
-          onChange={handleImageInputChange}
+          onChange={imageChangeHandler}
           accept="image/jpg"
         />
         <progress value={progress} max="100" />
         <button type="submit">Submit Trail!</button>
       </form>
-      {trailSubmited && (
-        <MessageTrailSubmit onClose={closeModal} uploading={isUploading} />
+      {isMessage && (
+        <ModalMessage onCloseModal={closeModalHandler} message={message} />
       )}
-      {uploadError && <AddTrailErrorMessage onCloseErrorMsg={closeErrorMsg} />}
     </div>
   );
 };

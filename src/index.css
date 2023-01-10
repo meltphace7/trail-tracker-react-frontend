@@ -1,3 +1,13 @@
+:root {
+  --main-color-1: #7f4ab5;
+  --main-color-2: #cd32b3;
+  --main-color-1-hover: #6b3d9a;
+  --main-big-med-navy: #32324a;
+  --main-big-med-navy-trans: #32324aa7;
+  --white-overlay: #ffffffd7;
+  --main-black-trans-dark: #020202bf;
+}
+
 * { 
  margin: 0;
  padding: 0;

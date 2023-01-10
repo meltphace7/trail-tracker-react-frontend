@@ -1,0 +1,3 @@
+const hostURL = "http://localhost:8080";
+// "http://localhost:8080"
+export default hostURL;

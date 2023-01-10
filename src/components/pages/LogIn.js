@@ -2,103 +2,137 @@ import React, { useState, useContext } from "react";
 import AuthContext from "../../store/auth-context";
 import classes from "./LogIn.module.css";
 import { Link, useHistory } from "react-router-dom";
+import hostURL from '../../hosturl'
+import ModalMessage from '../notifications/ModalMessage'
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/auth-slice";
+import useValidation from '../../hooks/use-validation';
 
-const LogIn = () => {
+const LogIn = (props) => {
   const authCtx = useContext(AuthContext);
   const history = useHistory();
+  const dispatch = useDispatch();
+ const {
+    enteredValue: email,
+    valueIsValid: emailIsValid,
+    hasError: emailHasError,
+    valueChangeHandler: emailChangeHandler,
+    valueBlurHandler: emailBlurHandler,
+    reset: emailReset,
+  } = useValidation(
+    (value) => value.trim() !== "" && value.includes("@")
+  );
 
-  const [emailInput, setEmailNameInput] = useState("");
-  const [passwordInput, setPasswordInput] = useState("");
-  const [isLoading, setIsLoading] = useState('');
+  const {
+    enteredValue: password,
+    valueIsValid: passwordIsValid,
+    hasError: passwordHasError,
+    valueChangeHandler: passwordChangeHandler,
+    valueBlurHandler: passwordBlurHandler,
+    reset: passwordReset,
+  } = useValidation((value) => value.trim() !== "" && value.length > 4);
 
-  const emailChangeHandler = (event) => {
-    setEmailNameInput(event.currentTarget.value);
-  };
+  // const dispatch = useDispatch();
 
-  const passwordChangeHandler = (event) => {
-    setPasswordInput(event.currentTarget.value);
-  };
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const loginUser = async function () {
-    const WEB_API_KEY = "AIzaSyAn9setska2fITb1v9zCbqfFm8FA4wg99c";
+  let formIsValid = false;
 
-    setIsLoading(true);
+  if (emailIsValid && passwordIsValid) {
+    formIsValid = true;
+  }
+   const loginHandler = async (event) => {
+    event.preventDefault();
+    if (!formIsValid) {
+      setIsError(true);
+      setErrorMessage("Your email or password is invalid!");
+      return;
+    }
+
+    const userLoginInput = {
+      email,
+      password,
+    };
+
     try {
-      const resFirebase = await fetch(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${WEB_API_KEY}`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email: emailInput,
-            password: passwordInput,
-            returnSecureToken: true,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      setIsLoading(false);
-      // ERROR
-      if (!resFirebase.ok) {
-        const dataFirebase = await resFirebase.json();
-        let errorMessage = "Problem Logging in!";
-        if (dataFirebase && dataFirebase.error && dataFirebase.error.message) {
-          errorMessage = dataFirebase.error.message;
-        }
-        console.log(dataFirebase.error.message);
-        throw new Error(errorMessage);
+      const response = await fetch(`${hostURL}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userLoginInput),
+      });
+      if (!response.ok || response.status === 422) {
+        throw new Error("Could not authenticate you!");
       }
-      // SUCCESS
-      const dataFirebase = await resFirebase.json();
-      console.log(dataFirebase.idToken);
-      const expirationTime = new Date(
-        new Date().getTime() + +dataFirebase.expiresIn * 1000
-      );
-      authCtx.login(dataFirebase.idToken, expirationTime.toISOString());
-      history.replace("/");
-    } catch (err) {
-      alert(err);
-      console.log(err);
-    }
-  };
-    
-    const loginSubmitHandler = (event) => {
-      event.preventDefault();
-      
-      loginUser();
+      const resData = await response.json();
 
-        setEmailNameInput('');
-        setPasswordInput('');
+      // SAVE RETURNED AUTH TOKEN IN LOCAL STORAGE
+      console.log(resData);
+      // const isAdmin = resData.isAdmin;
+      const token = resData.token;
+      dispatch(authActions.login(resData.userName));
+      // if (isAdmin) {
+      //   dispatch(authActions.adminLogin());
+      // }
+      localStorage.setItem("token", token);
+      localStorage.setItem("userId", resData.userId);
+      const remainingMilliseconds = 60 * 60 * 1000;
+      const expiryDate = new Date(new Date().getTime() + remainingMilliseconds);
+      localStorage.setItem("expiryDate", expiryDate.toISOString());
+      // props.onLogin();
+      history.push("/home");
+    } catch (err) {
+      setErrorMessage(err.message);
+      setIsError(true);
+      console.log();
     }
+    emailReset();
+    passwordReset();
+   };
+  
+   const emailClasses = emailHasError
+     ? `${classes["login-input"]} ${classes["invalid"]}`
+     : classes["login-input"];
+
+   const passwordClasses = passwordHasError
+     ? `${classes["login-input"]} ${classes["invalid"]}`
+     : classes["login-input"];
+
+   const closeModalHandler = () => {
+     setIsError(false);
+   };
 
   return (
     <div className={classes["login"]}>
-      <form onSubmit={loginSubmitHandler} className={classes["log-in-form"]}>
+      <form onSubmit={loginHandler} className={classes["log-in-form"]}>
         <h2 className={classes["log-in-header"]}>Log In and Explore!</h2>
-
+        {emailHasError && <p>Please enter a valid email!</p>}
         <input
-          className={classes["log-in-input"]}
+          className={emailClasses}
           id="email"
           type="text"
           placeholder="email"
-          value={emailInput}
-                  onChange={emailChangeHandler}
-                  required
+          onChange={emailChangeHandler}
+          onBlur={emailBlurHandler}
+          value={email}
+          required
         />
-
+        {passwordHasError && <p>Please enter a valid password!</p>}
         <input
-          className={classes["log-in-input"]}
+          className={passwordClasses}
           id="password"
           type="password"
           placeholder="password"
-          value={passwordInput}
-                  onChange={passwordChangeHandler}
-                  required
+          onChange={passwordChangeHandler}
+          onBlur={passwordBlurHandler}
+          value={password}
+          required
         />
 
         <button className={classes.button} type="submit">
-          Sign Up
+          Log In
         </button>
 
         <h3>
@@ -108,6 +142,9 @@ const LogIn = () => {
           </Link>
         </h3>
       </form>
+      {isError && (
+        <ModalMessage message={errorMessage} onCloseModal={closeModalHandler} />
+      )}
     </div>
   );
 };
