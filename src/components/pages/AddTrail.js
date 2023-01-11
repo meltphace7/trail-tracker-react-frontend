@@ -7,10 +7,10 @@ import hostURL from '../../hosturl';
 
 
 const AddTrail = (props) => {
-   const [isMessage, setIsMessage] = useState(false);
-   const [isErrorMessage, setIsErrorMessage] = useState(false);
+  const [isMessage, setIsMessage] = useState(false);
+  const [isErrorMessage, setIsErrorMessage] = useState(false);
   const [message, setMessage] = useState("");
-  
+
   // Validating User Inputs with custom useValidation hook
   const {
     enteredValue: trailName,
@@ -132,7 +132,7 @@ const AddTrail = (props) => {
 
   const [trailheadName, setTrailheadName] = useState("");
   const [season, setSeason] = useState("");
-  const [_image, setImage] = useState("");
+  const [image, setImage] = useState("");
   const [trailSubmited, setTrailSubmited] = useState(false);
   const [isUploading, setIsuploading] = useState(false);
   const [uploadError, setUploadError] = useState(false);
@@ -141,9 +141,9 @@ const AddTrail = (props) => {
   const [progress, setProgress] = useState(0);
 
   const imageInputRef = useRef();
-    // const imageChangeHandler = (event) => {
-    //   setImage(event.target.files[0]);
-    // };
+  // const imageChangeHandler = (event) => {
+  //   setImage(event.target.files[0]);
+  // };
 
   const resetImageInput = () => {
     imageInputRef.current.value = "";
@@ -177,23 +177,38 @@ const AddTrail = (props) => {
   }
 
   // HANDLES FILE INPUT CHANGE FOR IMG UPLOAD
+  // const imageChangeHandler = function (e) {
+  //   for (let i = 0; i < e.target.files.length; i++) {
+  //     const newImage = e.target.files[i];
+  //     newImage["id"] = Math.random();
+  //     setImages((prevState) => [...prevState, newImage]);
+  //   }
+  // };
+
   const imageChangeHandler = function (e) {
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
-      newImage["id"] = Math.random();
       setImages((prevState) => [...prevState, newImage]);
     }
   };
 
+  // const postMultipleFiles = (fileList) => {
+  //   const formData = new FormData();
+  //   for (let i = 0; i < fileList.length; i++) {
+  //     const newImage = fileList[i];
+  //     formData.append("image", newImage);
+  //   }
+  // }
 
   const submitTrailHandler = async (event) => {
     event.preventDefault();
-      if (!formIsValid) {
-        setIsMessage(true);
-        setIsErrorMessage(true);
-        setMessage("Form info is invalid!");
-        return;
-      }
+    console.log(images);
+    if (!formIsValid) {
+      setIsMessage(true);
+      setIsErrorMessage(true);
+      setMessage("Form info is invalid!");
+      return;
+    }
     // MUST USE FORMDATA TO INCLUDE A FILE/IMAGE
     const formData = new FormData();
     formData.append("name", trailName);
@@ -208,7 +223,11 @@ const AddTrail = (props) => {
     formData.append("solitude", solitude);
     formData.append("difficulty", difficulty);
     formData.append("description", description);
-    formData.append("images", images);
+    images.forEach(image => formData.append('image', image))
+
+    ////
+
+    ////
 
     const token = localStorage.getItem("token");
 
@@ -224,27 +243,25 @@ const AddTrail = (props) => {
         throw new Error("Adding trail failed!");
       }
       const responseData = await response.json();
-      console.log(responseData)
-       setIsMessage(true);
-       setMessage("Trail successfully submited!");
+      console.log(responseData);
+      setIsMessage(true);
+      setMessage("Trail successfully submited!");
     } catch (err) {
       console.log(err);
     }
-
+    setImages([]);
   };
 
-   const closeModalHandler = () => {
-     if (!isErrorMessage) {
-       setIsMessage(false);
-       setMessage("");
-     } else {
-       setIsMessage(false);
-       setIsErrorMessage(false);
-       setMessage("");
-     }
-   };
-
-
+  const closeModalHandler = () => {
+    if (!isErrorMessage) {
+      setIsMessage(false);
+      setMessage("");
+    } else {
+      setIsMessage(false);
+      setIsErrorMessage(false);
+      setMessage("");
+    }
+  };
 
   const trailNameClasses = trailNameHasError
     ? `${classes["text-input-col"]} ${classes["invalid"]}`
@@ -297,7 +314,11 @@ const AddTrail = (props) => {
   return (
     <div className={classes["add-trail-section"]}>
       <h1>Enter Trail Information</h1>
-      <form onSubmit={submitTrailHandler} className={classes["trail-form"]}>
+      <form
+        onSubmit={submitTrailHandler}
+        className={classes["trail-form"]}
+        encType="multipart/form-data"
+      >
         <div className={classes["text-row"]}>
           <div className={trailNameClasses}>
             <label htmlFor="trail-name">Trail Name</label>
@@ -576,7 +597,7 @@ const AddTrail = (props) => {
           type="file"
           multiple
           onChange={imageChangeHandler}
-          accept="image/jpg"
+          // accept="image/jpg"
         />
         <progress value={progress} max="100" />
         <button type="submit">Submit Trail!</button>
@@ -589,3 +610,4 @@ const AddTrail = (props) => {
 };
 
 export default AddTrail;
+

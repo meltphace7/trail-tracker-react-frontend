@@ -13,14 +13,15 @@ import ScrollToTop from "./components/ScrollToTop";
 import Favorites from "./components/pages/Favorites";
 import SignUp from './components/pages/SignUp';
 import LogIn from './components/pages/LogIn'
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
+import hostURL from './hosturl';
 
 function App() {
   // LOAD SUBMITED TRAILS FROM FIREBASE
   const [loadedTrails, setLoadedTrails] = useState([]);
   const authCtx = useContext(AuthContext);
   const isAuth = useSelector((state) => state.auth.isAuth);
-  console.log('isAuth', isAuth)
+  console.log("isAuth", isAuth);
 
   //LOAD FAVORITES from local storage
   const [favorites, setFavorites] = useState(
@@ -32,58 +33,74 @@ function App() {
   const favoriteToggleHandler = function () {
     setFavorites(JSON.parse(localStorage.getItem("favorite-trails")));
   };
-
   const fetchTrails = useCallback(async () => {
     try {
-    const response = await fetch(
-      `https://trail-tracker-image-store-default-rtdb.firebaseio.com/trails.json`
-    );
+      const response = await fetch(`${hostURL}/trails/trails`);
       if (!response.ok) {
-          throw new Error('Could not fetch trails from firebase!')
+        throw new Error("Could not fetch trails");
       }
-    const data = await response.json();
-    const fetchedTrails = [];
-
-      for (const key in data) {
-        fetchedTrails.push({
-          id: key,
-          bestSeason: data[key].trail.bestSeason,
-          description: data[key].trail.description,
-          difficulty: data[key].trail.difficulty,
-          imageURL: data[key].trail.imageURL,
-          latitude: data[key].trail.latitude,
-          longitude: data[key].trail.longitude,
-          miles: data[key].trail.miles,
-          scenery: data[key].trail.scenery,
-          solitude: data[key].trail.solitude,
-          state: data[key].trail.state,
-          trailName: data[key].trail.trailName,
-          wildernessArea: data[key].trail.wildernessArea,
-        });
-      }
-      // Sets ALL firebase trails as state
-      setLoadedTrails(fetchedTrails);
+      const responseData = await response.json();
+      console.log(responseData);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   }, []);
 
   useEffect(() => {
     fetchTrails();
   }, []);
- 
+
+  // const fetchTrails = useCallback(async () => {
+  //   try {
+  //   const response = await fetch(
+  //     `https://trail-tracker-image-store-default-rtdb.firebaseio.com/trails.json`
+  //   );
+  //     if (!response.ok) {
+  //         throw new Error('Could not fetch trails from firebase!')
+  //     }
+  //   const data = await response.json();
+  //   const fetchedTrails = [];
+
+  //     for (const key in data) {
+  //       fetchedTrails.push({
+  //         id: key,
+  //         bestSeason: data[key].trail.bestSeason,
+  //         description: data[key].trail.description,
+  //         difficulty: data[key].trail.difficulty,
+  //         imageURL: data[key].trail.imageURL,
+  //         latitude: data[key].trail.latitude,
+  //         longitude: data[key].trail.longitude,
+  //         miles: data[key].trail.miles,
+  //         scenery: data[key].trail.scenery,
+  //         solitude: data[key].trail.solitude,
+  //         state: data[key].trail.state,
+  //         trailName: data[key].trail.trailName,
+  //         wildernessArea: data[key].trail.wildernessArea,
+  //       });
+  //     }
+  //     // Sets ALL firebase trails as state
+  //     setLoadedTrails(fetchedTrails);
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   fetchTrails();
+  // }, []);
+
   // updates loaded trails on trail submission in AddTrails.js
-  const upDateLoadedTrailsHandler = function () {
-    fetchTrails();
-    console.log("TRAILS UPDATED");
-  };
+  // const upDateLoadedTrailsHandler = function () {
+  //   fetchTrails();
+  //   console.log("TRAILS UPDATED");
+  // };
 
   const alphaSortedTrails = TRAIL_DATA.sort((a, b) =>
     a.trailName.localeCompare(b.trailName)
   );
 
   const [trails, setTrails] = useState(alphaSortedTrails);
- 
+
   useEffect(() => {
     let allTrails = TRAIL_DATA;
     if (loadedTrails.length >= 1) {
@@ -203,7 +220,7 @@ function App() {
           <Route path="/addtrail">
             <AddTrail
               onAddTrail={getAddTrailData}
-              updateTrails={upDateLoadedTrailsHandler}
+              // updateTrails={upDateLoadedTrailsHandler}
             />
           </Route>
         )}
@@ -231,8 +248,8 @@ function App() {
         <Route path="/login">
           <LogIn />
         </Route>
-        <Route path="*" >
-          <Redirect to='/'/>
+        <Route path="*">
+          <Redirect to="/" />
         </Route>
       </Switch>
       <Footer />
