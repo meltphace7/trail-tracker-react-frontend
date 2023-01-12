@@ -43,7 +43,19 @@ const Navigation = () => {
           {isLoggedIn && <Link to="/addtrail">ADD TRAIL</Link>}
           {!isLoggedIn && <Link to="/login">LOG IN</Link>}
         </li>
-        {isLoggedIn && <li><button onClick={logoutHandler} className={classes['logout-button']}>LOG OUT</button></li>}
+        {isLoggedIn && <li>
+          <Link to="/account">ACCOUNT</Link>
+        </li>}
+        {isLoggedIn && (
+          <li>
+            <button
+              onClick={logoutHandler}
+              className={classes["logout-button"]}
+            >
+              LOG OUT
+            </button>
+          </li>
+        )}
       </ul>
     </nav>
   );

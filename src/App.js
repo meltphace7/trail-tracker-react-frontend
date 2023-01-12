@@ -9,6 +9,7 @@ import HomePage from "./components/pages/HomePage";
 import TrailSearchResults from "./components/pages/TrailSearchResults";
 import ScrollToTop from "./components/ScrollToTop";
 import Favorites from "./components/pages/Favorites";
+import Account from './components/pages/Account';
 import SignUp from "./components/pages/SignUp";
 import LogIn from "./components/pages/LogIn";
 import { useSelector, useDispatch } from "react-redux";
@@ -211,6 +212,11 @@ function App() {
               onAddTrail={getAddTrailData}
               updateTrails={upDateLoadedTrailsHandler}
             />
+          </Route>
+        )}
+        {isAuth && (
+          <Route path="/account">
+            <Account />
           </Route>
         )}
         <Route path="/trails">

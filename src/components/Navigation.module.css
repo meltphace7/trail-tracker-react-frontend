@@ -73,7 +73,8 @@ nav a {
 
 .nav-menu {
   margin-right: 3rem;
-  width: 25rem;
+  /* width: 25rem; */
+  width: 65%;
   display: flex;
   justify-content: space-between;
 }
