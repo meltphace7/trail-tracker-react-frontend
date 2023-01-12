@@ -16,20 +16,20 @@ const HomePage = (props) => {
     props.onTrailSelect(id);
   };
    
-  let randomTrails = [];
-  const generateRandomTrails = function () {
-     while (randomTrails.length < 3) {
-       let num =
-         props.trails[Math.round(Math.random() * props.trails.length)];
-       if (!randomTrails.includes(num)) {
-          randomTrails.push(num)
-       } 
+  // let randomTrails = [];
+  // const generateRandomTrails = function () {
+  //    while (randomTrails.length < 3) {
+  //      let num =
+  //        props.trails[Math.round(Math.random() * props.trails.length)];
+  //      if (!randomTrails.includes(num)) {
+  //         randomTrails.push(num)
+  //      } 
       
-     }
-  }
+  //    }
+  // }
 
 
-  generateRandomTrails();
+  // generateRandomTrails();
 
   //   const randomTrails = [
   //     props.trails[Math.round(Math.random() * props.trails.length)],
@@ -53,7 +53,7 @@ const HomePage = (props) => {
       </div>
       <div className={classes["featured-hikes-section"]}>
         <h1>Featured Trails</h1>
-        <div className={classes["featured-hikes-container"]}>
+        {/* <div className={classes["featured-hikes-container"]}>
           {props.trails.slice(3, 6).map((trail) => {
             return (
               <FeaturedHike
@@ -64,7 +64,7 @@ const HomePage = (props) => {
               />
             );
           })}
-        </div>
+        </div> */}
       </div>
     </React.Fragment>
   );

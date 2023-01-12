@@ -12,10 +12,7 @@ const Navigation = () => {
   const authCtx = useContext(AuthContext);
   const isAuth = useSelector((state) => state.auth.isAuth);
   const currentUser = useSelector((state) => state.auth.currentUser);
-  console.log('isAuth', isAuth);
-  if (isAuth) {
- console.log("currentUser", currentUser);
-  }
+
 
   const isLoggedIn = isAuth;
 

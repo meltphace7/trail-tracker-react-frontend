@@ -1,6 +1,8 @@
 import React, { useState, useEffect} from "react";
+import TrailDetail from "./pages/TrailDetail";
 import classes from "./TrailList.module.css";
 import TrailListItem from "./TrailListItem";
+
 
  const monthArray = [
    [1, "January"],
@@ -21,9 +23,6 @@ import TrailListItem from "./TrailListItem";
 const TrailList = (props) => {
   // Converts filter Query to Month Name if filterQuery is month Number
   const [month, setMonth] = useState("");
-
-
-
 
   useEffect(() => {
      if (isNaN(+props.filter.filterQuery)) return;
@@ -72,18 +71,22 @@ const TrailList = (props) => {
 
   const renderFilteredTrails = results.map((trail) => {
     return (
-     
       <TrailListItem
         getTrail={props.onTrailSelect}
-        key={trail.id}
-        id={trail.id}
-        image={trail.imageURL[0]}
-        name={trail.trailName}
+        key={trail._id}
+        _id={trail._id}
+        trailName={trail.trailName}
         state={trail.state}
-        miles={trail.miles}
-        description={trail.description}
-        difficulty={trail.difficulty}
         wildernessArea={trail.wildernessArea}
+        bestSeason={trail.bestSeason}
+        longitude={trail.longitude}
+        latitude={trail.latitude}
+        miles={trail.miles}
+        scenery={trail.scenery}
+        solitude={trail.scenery}
+        difficulty={trail.difficulty}
+        description={trail.description}
+        images={trail.images}
         onFavoriteToggle={props.onFavoriteToggle}
         trail={trail}
         favorites={props.favorites}

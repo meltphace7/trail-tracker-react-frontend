@@ -211,11 +211,12 @@ const AddTrail = (props) => {
     }
     // MUST USE FORMDATA TO INCLUDE A FILE/IMAGE
     const formData = new FormData();
-    formData.append("name", trailName);
+    formData.append("trailName", trailName);
     formData.append("state", state);
     formData.append("wildernessArea", wildernessArea);
     formData.append("seasonStart", seasonStart);
     formData.append("seasonEnd", seasonEnd);
+    // formData.append("bestSeason", [seasonStart, seasonEnd]);
     formData.append("longitude", longitude);
     formData.append("latitude", latitude);
     formData.append("miles", miles);

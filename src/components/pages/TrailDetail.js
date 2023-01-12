@@ -1,36 +1,60 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import classes from "./TrailDetail.module.css";
 import TrailMap from "../TrailMap";
 import ImageSlider from "../ImageSlider";
 import { AiOutlineStar } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
 import WeatherReport from "../WeatherReport";
+import hostURL from '../../hosturl';
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux'
+import { authActions } from '../../store/auth-slice';
+import LoadingSpinner from '../UI/LoadingSpinner'
 
 const TrailDetail = (props) => {
-  const [favorites, setFavorites] = useState(
-    localStorage.getItem("favorite-trails")
-      ? JSON.parse(localStorage.getItem("favorite-trails"))
-      : []
-  );
+  let { trailId } = useParams();
+  const dispatch = useDispatch();
+  const userFavorites = useSelector((state) => state.auth.favorites);
 
+  const [trail, setTrail] = useState({});
+  const [trailIsLoaded, setTrailIsLoaded] = useState(false);
   const [isFavorited, setIsFavorited] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const faveIDs = favorites.map((trail) => trail.id);
+  /// FETCHES TRAIL DETAIL FROM BACKEND
+   const fetchTrailHandler = useCallback(async () => {
+     setIsLoading(true);
+     try {
+       const response = await fetch(
+         `${hostURL}/trails/trail-detail/${trailId}`
+       );
+       if (!response.ok) {
+         throw new Error("Could not find trail!");
+       }
+       const resData = await response.json();
+       setTrail(resData.trail);
+       setTrailIsLoaded(true);
+     } catch (err) {
+       console.log(err);
+     }
+     setIsLoading(false);
+   }, [trailId]);
 
-  useEffect(() => {
-    if (faveIDs.includes(props.trail.id)) {
-      setIsFavorited(true);
-    } else {
-    }
-  }, [favorites, props.trail]);
+   useEffect(() => {
+     fetchTrailHandler();
+   }, [fetchTrailHandler]);
+  
 
-  if (Object.keys(props.trail).length === 0) {
-    const trailID = localStorage.getItem("selectedTrail");
-    const trail = props.trails((trail) => trail.id === +trailID);
-  }
+  // const faveIDs = favorites.map((trail) => trail._id);
+
+
+  // if (Object.keys(props.trail).length === 0) {
+  //   const trailID = localStorage.getItem("selectedTrail");
+  //   const trail = props.trails((trail) => +trail._id === +trailID);
+  // }
 
   const [season, setSeason] = useState("");
-  const coords = [props.trail.latitude, props.trail.longitude];
+  const coords = [trail.latitude, trail.longitude];
   // const [trailIsLoaded, setTrailIsLoaded] = useState(false);
   // Mom-  46.64463, -120.77671
   const monthArray = [
@@ -50,35 +74,17 @@ const TrailDetail = (props) => {
 
   // Gets MONTH NAME from props.trail
   useEffect(() => {
-    if (props.trail.bestSeason === undefined) return;
+    if (trail.bestSeason === undefined) return;
+
     const [monthStart] = monthArray.filter(
-      (month) => month[0] === +props.trail.bestSeason[0]
+      (month) => month[0] === +trail.bestSeason[0]
     );
+   
     const [monthEnd] = monthArray.filter(
-      (month) => month[0] === +props.trail.bestSeason[1]
+      (month) => month[0] === +trail.bestSeason[1]
     );
     setSeason(`${monthStart[1]} - ${monthEnd[1]}`);
-  }, [props.trail]);
-
-  const isFavoritedHandler = function () {
-    if (isFavorited) {
-      setIsFavorited(false);
-      const newFavorites = favorites
-        .filter((trail) => trail.id !== props.trail.id)
-        .sort((a, b) => a.trailName.localeCompare(b.trailName));
-      setFavorites(newFavorites);
-      localStorage.setItem("favorite-trails", JSON.stringify(newFavorites));
-      props.onFavoriteToggle();
-    } else {
-      setIsFavorited(true);
-      const newFavorites = favorites
-        .concat(props.trail)
-        .sort((a, b) => a.trailName.localeCompare(b.trailName));
-      setFavorites(newFavorites);
-      localStorage.setItem("favorite-trails", JSON.stringify(newFavorites));
-      props.onFavoriteToggle();
-    }
-  };
+  }, [trail]);
 
    let difficulty;
    const calcDifficulty = function (diff) {
@@ -88,17 +94,37 @@ const TrailDetail = (props) => {
      if (+diff > 8) difficulty = "very-hard";
    };
 
-  calcDifficulty(props.trail.difficulty);
+  calcDifficulty(trail.difficulty);
+
+  // TOGGLES FAVORITE STATUS OF TRAIL
+  const isFavoritedHandler = function () {
+      console.log('trail to favorite', trail)
+      dispatch(authActions.toggleFavorites(trail));
+      setIsFavorited((prevstate) => !prevstate);
+    };
+
+  // DETERMINES IF TRAIL IS FAVORITED BASED ON USERS FAVORITE TRAILS ARRAY
+  useEffect(() => {
+    const existingFavorite = userFavorites.find(fave => fave.trailId === trail._id);
+      if (existingFavorite) {
+        console.log("trail is a fave");
+        setIsFavorited(true);
+      } else {
+        console.log("trail is NOT a fave");
+        setIsFavorited(false);
+      }
+    }, [trail, userFavorites]);
   
   const favoriteIcon = isFavorited ? (
     <AiFillStar size={50} className={classes["star"]} />
   ) : (
     <AiOutlineStar size={50} className={classes["star"]} />
-  );
-
+    );
+  
   return (
     <div className={classes["trail-detail"]}>
-      <div className={classes["trail-detail-info"]}>
+
+     {trailIsLoaded && <div className={classes["trail-detail-info"]}>
         <div className={classes["info-header"]}>
           <button
             onClick={isFavoritedHandler}
@@ -106,24 +132,24 @@ const TrailDetail = (props) => {
           >
             {favoriteIcon}
           </button>
-          <h1>{props.trail.trailName}</h1>
-          <h3>{`${props.trail.wildernessArea},  ${props.trail.state}`}</h3>
+          <h1>{trail.trailName}</h1>
+          <h3>{`${trail.wildernessArea},  ${trail.state}`}</h3>
           <img
             className={classes["trail-image"]}
-            src={props.trail.imageURL[0] ? props.trail.imageURL[0] : ""}
+            src={trail.images[0] ? trail.images[0] : ""}
           />
         </div>
         <div className={classes["info-sub-header"]}>
-          <h3>{`Length: ${props.trail.miles} miles roundtrip`}</h3>
+          <h3>{`Length: ${trail.miles} miles roundtrip`}</h3>
           <h3 className={classes[difficulty]}>
-            {`Difficulty: ${props.trail.difficulty}/10`}
+            {`Difficulty: ${trail.difficulty}/10`}
           </h3>
-          <h3>{`Scenery: ${props.trail.scenery}/10`}</h3>
-          <h3>{`Solitude: ${props.trail.solitude}/10`}</h3>
+          <h3>{`Scenery: ${trail.scenery}/10`}</h3>
+          <h3>{`Solitude: ${trail.solitude}/10`}</h3>
           <h3>{`Season: ${season}`}</h3>
         </div>
-        <p className={classes["description"]}>{props.trail.description}</p>
-        <ImageSlider images={props.trail.imageURL} />
+        <p className={classes["description"]}>{trail.description}</p>
+        <ImageSlider images={trail.images} />
         {/* <WeatherReport coords={coords} /> */}
         <div className={classes["map-container"]}>
           <h1>Map</h1>
@@ -138,8 +164,11 @@ const TrailDetail = (props) => {
           </div>
           <TrailMap trails={props.trails} coords={coords} />
         </div>
-      </div>
-    </div>
+      </div>}
+      {!trailIsLoaded && <LoadingSpinner />}
+
+    </div >
+ 
   );
 };
 

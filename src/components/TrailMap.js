@@ -3,8 +3,6 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 
-
-
 function ChangeView({ center, zoom }) {
   const map = useMap();
   map.setView(center, zoom);
@@ -28,7 +26,7 @@ const TrailMap = (props) => {
           <Marker
             icon={icon}
             position={[trail.latitude, trail.longitude]}
-            key={trail.id}
+            key={trail._id}
           >
             <Popup>{`${trail.trailName} trailhead`}</Popup>
           </Marker>
