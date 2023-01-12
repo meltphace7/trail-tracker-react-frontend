@@ -20,13 +20,13 @@ export const fetchAuthData = () => {
         throw new Error("Could find User!");
       }
         const responseData = await response.json();
-        console.log(responseData)
+        console.log('reload user data', responseData)
       if (responseData.isAdmin) {
         dispatch(authActions.adminLogin());
       }
       
       dispatch(authActions.loadFavorites(responseData.favorites));
-      dispatch(authActions.login(responseData.firstName));
+      dispatch(authActions.login(responseData.userName));
     } catch (err) {
       console.log(err);
     }

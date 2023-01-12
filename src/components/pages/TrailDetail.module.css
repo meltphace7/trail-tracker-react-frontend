@@ -133,6 +133,10 @@
   align-items: center;
 }
 
+.submitted-by {
+  margin-top: 3rem;
+}
+
 @media (max-width: 53em) {
   .trail-detail {
     width: 100%;

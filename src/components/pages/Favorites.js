@@ -23,7 +23,9 @@ const Favorites = (props) => {
      scenery={trail.scenery}
      solitude={trail.solitude}
      difficulty={trail.difficulty}
-     description={trail.description}
+        description={trail.description}
+        author={trail.author}
+        authorId={trail.authorId}
      images={trail.images}
      onFavoriteToggle={props.onFavoriteToggle}
      trail={trail}

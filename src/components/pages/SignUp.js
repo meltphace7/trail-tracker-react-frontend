@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import AuthContext from '../../store/auth-context'
+import React, { useState } from "react";
 import classes from "./SignUp.module.css";
 import { Link, useHistory } from "react-router-dom";
 import hostURL from '../../hosturl';
@@ -7,12 +6,20 @@ import useValidation from "../../hooks/use-validation";
 import ModalMessage from '../notifications/ModalMessage';
 
 export const SignUp = () => {
-  const authCtx = useContext(AuthContext);
   const history = useHistory();
    const [isMessage, setIsMessage] = useState(false);
    const [isErrorMessage, setIsErrorMessage] = useState(false);
    const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+   const {
+     enteredValue: userName,
+     valueIsValid: userNameIsValid,
+     hasError: userNameHasError,
+     valueChangeHandler: userNameChangeHandler,
+     valueBlurHandler: userNameBlurHandler,
+     reset: userNameReset,
+   } = useValidation((value) => value.trim() !== "" && isNaN(+value));
 
     const {
       enteredValue: firstName,
@@ -69,7 +76,7 @@ export const SignUp = () => {
 
   let formIsValid = false;
 
-  if (firstNameIsValid && lastNameIsValid && emailIsValid && passwordIsValid) {
+  if (userNameIsValid && firstNameIsValid && lastNameIsValid && emailIsValid && passwordIsValid) {
     formIsValid = true;
   }
 
@@ -93,7 +100,15 @@ export const SignUp = () => {
   //NODEJS REST API
   const signupHandler = async (event) => {
     event.preventDefault();
+    if (!formIsValid) {
+      setIsMessage(true);
+      setIsErrorMessage(true);
+      setMessage("Form info is invalid!");
+      return;
+    }
+
     const signupData = {
+      userName: userName,
       firstName: firstName,
       lastName: lastName,
       email: email,
@@ -123,6 +138,7 @@ export const SignUp = () => {
       console.log(err);
     }
     // CLEAR INPUTS
+    userNameReset();
     firstNameReset();
     lastNameReset();
     emailReset();
@@ -145,6 +161,17 @@ export const SignUp = () => {
     <div className={classes["sign-up"]}>
       <form onSubmit={signupHandler} className={classes["sign-up-form"]}>
         <h2 className={classes["sign-up-header"]}>Create Your Free Account!</h2>
+        {userNameHasError && <p>Please enter a user name!</p>}
+        <input
+          className={firstNameClasses}
+          id="user-name"
+          type="text"
+          placeholder="user name"
+          value={userName}
+          onChange={userNameChangeHandler}
+          onBlur={userNameBlurHandler}
+          required
+        />
         {firstNameHasError && <p>Please enter a valid name!</p>}
         <input
           className={firstNameClasses}
@@ -171,7 +198,7 @@ export const SignUp = () => {
         <input
           className={emailClasses}
           id="email"
-          type="text"
+          type="email"
           placeholder="email"
           value={email}
           onChange={emailChangeHandler}

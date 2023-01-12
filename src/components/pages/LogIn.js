@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import AuthContext from "../../store/auth-context";
+import React, { useState } from "react";
 import classes from "./LogIn.module.css";
 import { Link, useHistory } from "react-router-dom";
 import hostURL from '../../hosturl'
@@ -9,7 +8,6 @@ import { authActions } from "../../store/auth-slice";
 import useValidation from '../../hooks/use-validation';
 
 const LogIn = (props) => {
-  const authCtx = useContext(AuthContext);
   const history = useHistory();
   const dispatch = useDispatch();
  const {

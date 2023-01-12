@@ -1,15 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import classes from "./AddTrail.module.css";
-import { storage } from "../../firebase";
 import useValidation from '../../hooks/use-validation';
 import ModalMessage from '../notifications/ModalMessage'
 import hostURL from '../../hosturl';
+import {useSelector} from 'react-redux'
 
 
 const AddTrail = (props) => {
   const [isMessage, setIsMessage] = useState(false);
   const [isErrorMessage, setIsErrorMessage] = useState(false);
   const [message, setMessage] = useState("");
+
+  const author = useSelector(state => state.auth.userName);
+  console.log('author', author)
+  const userId = localStorage.getItem('userId')
 
   // Validating User Inputs with custom useValidation hook
   const {
@@ -209,6 +213,7 @@ const AddTrail = (props) => {
       setMessage("Form info is invalid!");
       return;
     }
+  
     // MUST USE FORMDATA TO INCLUDE A FILE/IMAGE
     const formData = new FormData();
     formData.append("trailName", trailName);
@@ -224,6 +229,8 @@ const AddTrail = (props) => {
     formData.append("solitude", solitude);
     formData.append("difficulty", difficulty);
     formData.append("description", description);
+      formData.append("author", author);
+      formData.append("authorId", userId);
     images.forEach(image => formData.append('image', image))
 
     ////

@@ -1,5 +1,4 @@
-import { useState, useEffect, useContext, useCallback } from "react";
-import AuthContext from "./store/auth-context";
+import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import Navigation from "./components/Navigation";
 import AddTrail from "./components/pages/AddTrail";

@@ -23,6 +23,8 @@ const TrailListItem = (props) => {
     solitude: props.solitude,
     difficulty: props.difficulty,
     description: props.description,
+    author: props.author,
+    authorId: props.authorId,
     images: props.images
   }
 

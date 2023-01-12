@@ -163,6 +163,7 @@ const TrailDetail = (props) => {
             </a>
           </div>
           <TrailMap trails={props.trails} coords={coords} />
+          <p className={classes['submitted-by']}>{`Submitted by ${trail.author}`}</p>
         </div>
       </div>}
       {!trailIsLoaded && <LoadingSpinner />}
