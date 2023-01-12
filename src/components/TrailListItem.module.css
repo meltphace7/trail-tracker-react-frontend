@@ -151,6 +151,7 @@
 
 .star {
   position: relative;
+  right: 1rem;
 }
 
 @media (max-width: 53em) {

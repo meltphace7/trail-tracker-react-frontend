@@ -8,9 +8,26 @@ import { authActions } from "../store/auth-slice";
 
 
 const TrailListItem = (props) => {
-  const trailId = props._id;
-  const thumbnailImage = props.images[0];
-  console.log(thumbnailImage)
+  const trailId = props.id;
+
+  const trail = {
+    _id: props.id,
+    trailName: props.name,
+    state: props.state,
+    wildernessArea: props.wildernessArea,
+    bestSeason: props.bestSeason,
+    longitude: props.longitude,
+    latitude: props.latitude,
+    miles: props.miles,
+    scenery: props.scenery,
+    solitude: props.solitude,
+    difficulty: props.difficulty,
+    description: props.description,
+    images: props.images
+  }
+
+  console.log('currentTrail', trail)
+ 
   // const storageFaves = localStorage.getItem("favorite-trails")
   //   ? JSON.parse(localStorage.getItem("favorite-trails"))
   //   : [];
@@ -20,6 +37,8 @@ const TrailListItem = (props) => {
 
   const dispatch = useDispatch();
   const userFavorites = useSelector((state) => state.auth.favorites);
+
+  console.log('user faves', userFavorites)
 
   // useEffect(() => {
   //   if (localStorage.getItem("favorite-trails")) {
@@ -99,14 +118,14 @@ const TrailListItem = (props) => {
 
   // TOGGLES FAVORITE STATUS OF TRAIL
   const isFavoritedHandler = function () {
-    dispatch(authActions.toggleFavorites(props));
+    dispatch(authActions.toggleFavorites(trail));
     setIsFavorited((prevstate) => !prevstate);
   };
 
   // DETERMINES IF TRAIL IS FAVORITED BASED ON USERS FAVORITE TRAILS ARRAY
   useEffect(() => {
     const existingFavorite = userFavorites.find(
-      (fave) => fave.trailId === trailId
+      (fave) => fave.trailId === trail._id
     );
     if (existingFavorite) {
       console.log("trail is a fave");
@@ -132,30 +151,30 @@ const TrailListItem = (props) => {
   );
 
   return (
-    <Link to={`trail-detail/${props._id}`}
+    <Link to={`trail-detail/${trail._id}`}
       // onClick={linkClickHandler}
     >
       <li
-        key={props.id}
+        key={trail._id}
         // onClick={getIdHandler}
         className={classes["trail-item"]}
       >
         <div className={classes["image-container"]}>
-          {props.image && <img src={thumbnailImage} />}
+          {trail.images && <img src={trail.images[0]} />}
         </div>
         <div className={classes["info-container"]}>
-          <h2>{props.trailName}</h2>
+          <h2>{trail.trailName}</h2>
           {/* <div className={classes["secondary-info"]}> */}
-          <h3>{`${props.state} - ${props.wildernessArea} `}</h3>
+          <h3>{`${trail.state} - ${trail.wildernessArea} `}</h3>
           {/* <h3>{`${props.miles} miles roundtrip - Difficulty:${props.difficulty}/10`}</h3> */}
           <div className={classes["miles-difficulty-container"]}>
-            <h3>{`${props.miles} miles roundtrip -`}&nbsp;</h3>
+            <h3>{`${trail.miles} miles roundtrip -`}&nbsp;</h3>
             <h3 className={classes[difficulty]}>
-              {`Difficulty: ${props.difficulty}/10`}
+              {`Difficulty: ${trail.difficulty}/10`}
             </h3>
           </div>
           <div className={classes["description"]}>
-            <p>{props.description}</p>
+            <p>{trail.description}</p>
           </div>
         </div>
         <button

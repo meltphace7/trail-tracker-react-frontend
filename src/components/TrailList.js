@@ -74,8 +74,8 @@ const TrailList = (props) => {
       <TrailListItem
         getTrail={props.onTrailSelect}
         key={trail._id}
-        _id={trail._id}
-        trailName={trail.trailName}
+        id={trail._id}
+        name={trail.trailName}
         state={trail.state}
         wildernessArea={trail.wildernessArea}
         bestSeason={trail.bestSeason}
@@ -83,7 +83,7 @@ const TrailList = (props) => {
         latitude={trail.latitude}
         miles={trail.miles}
         scenery={trail.scenery}
-        solitude={trail.scenery}
+        solitude={trail.solitude}
         difficulty={trail.difficulty}
         description={trail.description}
         images={trail.images}
@@ -91,6 +91,21 @@ const TrailList = (props) => {
         trail={trail}
         favorites={props.favorites}
       />
+      // <TrailListItem
+      //   getTrail={props.onTrailSelect}
+      //   key={trail._id}
+      //   id={trail._id}
+      //   image={trail.images[0]}
+      //   name={trail.trailName}
+      //   state={trail.state}
+      //   miles={trail.miles}
+      //   description={trail.description}
+      //   difficulty={trail.difficulty}
+      //   wildernessArea={trail.wildernessArea}
+      //   onFavoriteToggle={props.onFavoriteToggle}
+      //   trail={trail}
+      //   favorites={props.favorites}
+      // />
     );
   });
 

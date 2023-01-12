@@ -28,21 +28,26 @@ const authSlice = createSlice({
       state.favorites = favorites;
     },
     toggleFavorites(state, action) {
-      const favoritedItem = action.payload;
+        const favoritedItem = action.payload;
+        // Adds trailId field to trail
       const transformedFave = { trailId: action.payload._id, ...favoritedItem };
       // Check if trail is already in favorite
       const existingFavorite = state.favorites.find(
-        (item) => item._id === favoritedItem._id
+        (item) => item.trailId === favoritedItem._id
       );
 
       if (existingFavorite) {
-        console.log("trail removed from favorites");
+          console.log("trail removed from favorites");
+        //   const updatedFavorites = state.favorites.filter(fave => fave !== favoritedItem);
+        //   state.favorites = updatedFavorites;
         const updatedFavorites = state.favorites.filter(
           (fave) => fave._id !== favoritedItem._id
         );
         state.favorites = updatedFavorites;
       } else {
-        console.log("trail added to favorites");
+          console.log('pushed trail to favorites')
+        //   state.favorites.push(favoritedItem)
+        // console.log("trail added to favorites");
         state.favorites.push(transformedFave);
       }
     },
