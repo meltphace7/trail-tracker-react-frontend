@@ -12,7 +12,7 @@ const AddTrail = (props) => {
   const [message, setMessage] = useState("");
 
   const author = useSelector(state => state.auth.userName);
-  console.log('author', author)
+
   const userId = localStorage.getItem('userId')
 
   // Validating User Inputs with custom useValidation hook
@@ -136,10 +136,7 @@ const AddTrail = (props) => {
 
   const [trailheadName, setTrailheadName] = useState("");
   const [season, setSeason] = useState("");
-  const [image, setImage] = useState("");
-  const [trailSubmited, setTrailSubmited] = useState(false);
-  const [isUploading, setIsuploading] = useState(false);
-  const [uploadError, setUploadError] = useState(false);
+ 
   ///////// image upload state
   const [images, setImages] = useState([]);
   const [progress, setProgress] = useState(0);
@@ -180,15 +177,6 @@ const AddTrail = (props) => {
     formIsValid = true;
   }
 
-  // HANDLES FILE INPUT CHANGE FOR IMG UPLOAD
-  // const imageChangeHandler = function (e) {
-  //   for (let i = 0; i < e.target.files.length; i++) {
-  //     const newImage = e.target.files[i];
-  //     newImage["id"] = Math.random();
-  //     setImages((prevState) => [...prevState, newImage]);
-  //   }
-  // };
-
   const imageChangeHandler = function (e) {
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
@@ -196,13 +184,11 @@ const AddTrail = (props) => {
     }
   };
 
-  // const postMultipleFiles = (fileList) => {
-  //   const formData = new FormData();
-  //   for (let i = 0; i < fileList.length; i++) {
-  //     const newImage = fileList[i];
-  //     formData.append("image", newImage);
-  //   }
-  // }
+  const getTrails = () => {
+    setTimeout(() => {
+    props.onAddTrail()
+    }, 1500)
+  }
 
   const submitTrailHandler = async (event) => {
     event.preventDefault();
@@ -257,7 +243,21 @@ const AddTrail = (props) => {
     } catch (err) {
       console.log(err);
     }
-    setImages([]);
+    trailNameReset();
+    stateReset();
+    wildernessAreaReset();
+    seasonStartReset();
+    seasonEndReset();
+    longitudeReset();
+    latitudeReset();
+    milesReset();
+    sceneryReset();
+    solitudeReset();
+    difficultyReset();
+    descriptionReset();
+    setImages(null);
+    getTrails();
+    
   };
 
   const closeModalHandler = () => {

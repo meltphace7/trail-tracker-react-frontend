@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import Navigation from "./components/Navigation";
 import AddTrail from "./components/pages/AddTrail";
+import EditTrail from "./components/pages/EditTrail";
 import Footer from "./components/Footer";
 import TrailDetail from "./components/pages/TrailDetail";
 import { Switch, Route, Redirect } from "react-router-dom";
@@ -24,7 +25,6 @@ function App() {
   // const [loadedTrails, setLoadedTrails] = useState([]);
   const dispatch = useDispatch();
   const userFavorites = useSelector((state) => state.auth.favorites);
-  console.log('AUTH-USER favorites', userFavorites);
   const isAuth = useSelector((state) => state.auth.isAuth);
   const [trails, setTrails] = useState([]);
 
@@ -209,9 +209,15 @@ function App() {
         {isAuth && (
           <Route path="/addtrail">
             <AddTrail
-              onAddTrail={getAddTrailData}
+              // onAddTrail={getAddTrailData}
+              onAddTrail={fetchTrails}
               updateTrails={upDateLoadedTrailsHandler}
             />
+          </Route>
+        )}
+        {isAuth && (
+          <Route path="/edit-trail/:trailId">
+            <EditTrail onEditTrail={fetchTrails} />
           </Route>
         )}
         {isAuth && (

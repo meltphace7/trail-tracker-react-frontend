@@ -11,6 +11,10 @@ const useValidation = (validateValue) => {
         setEnteredValue(event.target.value);
     }
 
+      const setValueHandler = (value) => {
+        setEnteredValue(value);
+      };
+
     const valueBlurHandler = (event) => {
         setValueWasTouched(true);
     }
@@ -25,6 +29,7 @@ const useValidation = (validateValue) => {
         valueIsValid,
         hasError,
         valueChangeHandler,
+        setValueHandler,
         valueBlurHandler,
         reset
     }

@@ -28,7 +28,6 @@ const TrailListItem = (props) => {
     images: props.images
   }
 
-  console.log('currentTrail', trail)
  
   // const storageFaves = localStorage.getItem("favorite-trails")
   //   ? JSON.parse(localStorage.getItem("favorite-trails"))
@@ -39,8 +38,6 @@ const TrailListItem = (props) => {
 
   const dispatch = useDispatch();
   const userFavorites = useSelector((state) => state.auth.favorites);
-
-  console.log('user faves', userFavorites)
 
   // useEffect(() => {
   //   if (localStorage.getItem("favorite-trails")) {
@@ -130,10 +127,8 @@ const TrailListItem = (props) => {
       (fave) => fave.trailId === trail._id
     );
     if (existingFavorite) {
-      console.log("trail is a fave");
       setIsFavorited(true);
     } else {
-      console.log("trail is NOT a fave");
       setIsFavorited(false);
     }
   }, [trailId, userFavorites]);

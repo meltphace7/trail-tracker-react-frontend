@@ -1,0 +1,141 @@
+.add-trail-section {
+  width: 100%;
+  background-color: rgb(59, 91, 44);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-trail-section h1 {
+  color: var(--tertiary-green);
+  margin: 1rem;
+}
+
+.trail-form {
+  margin-bottom: 5rem;
+  width: 40%;
+  color: white;
+  background-color: var(--secondary-green);
+  border-radius: 15px;
+  /* border: 1px solid var(--tertiary-green); */
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-row {
+  margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.text-input-col {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+.trail-name input {
+  width: 100%;
+}
+
+/* .state input {
+  width: 100%;
+} */
+
+/* .wilderness-area {
+  width: 100%;
+} */
+
+/* .season {
+  width: 100%;
+} */
+
+.number-input {
+  width: 5rem;
+}
+
+.input-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.number-group {
+  margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.description-input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.description {
+  margin: 2rem 0rem;
+}
+
+.trail-form button {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  width: 100%;
+  padding: 1.5rem;
+  text-align: center;
+  color: white;
+  border: none;
+  background: rgb(36,116,7);
+  background: linear-gradient(0deg, rgba(36,116,7,1) 21%, rgba(50,251,23,1) 100%);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 300ms;
+}
+
+.trail-form button:hover {
+  color: rgb(214, 249, 143);
+  
+}
+
+.invalid input {
+  border: 1px solid #b40e0e;
+  background-color: #fddddd;
+}
+
+.invalid input:focus {
+  border-color: #ff8800;
+  background-color: #fbe8d2;
+}
+
+.invalid textarea {
+  border: 1px solid #b40e0e;
+  background-color: #fddddd;
+}
+
+.invalid textarea:focus {
+  border-color: #ff8800;
+  background-color: #fbe8d2;
+}
+
+.invalid select {
+  border: 1px solid #b40e0e;
+  background-color: #fddddd;
+}
+
+.invalid select:focus {
+  border-color: #ff8800;
+  background-color: #fbe8d2;
+}
+
+.error-text {
+  color: #b40e0e;
+}
+
+
+@media (max-width: 53em) { 
+  .trail-form {
+    width: 90%;
+  }
+}

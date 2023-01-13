@@ -10,8 +10,6 @@ const Account = () => {
   const userName = useSelector((state) => state.auth.userName);
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem('token');
-    console.log(userId);
-    console.log(token)
 
   const fetchUserTrails = useCallback(async () => {
     try {
@@ -25,7 +23,6 @@ const Account = () => {
         throw new Error("Could not find users trails!");
       }
       const responseData = await response.json();
-        console.log(responseData);
         setUsersTrails(responseData.submittedTrails)
     } catch (err) {
       console.log(err);

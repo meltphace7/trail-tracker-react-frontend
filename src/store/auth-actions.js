@@ -9,7 +9,6 @@ export const fetchAuthData = () => {
       if (token === "null") {
         return;
       }
-      console.log("FETCHED USER");
       const response = await fetch(`${hostURL}/auth/fetch-auth`, {
         method: "POST",
         headers: {
@@ -20,7 +19,6 @@ export const fetchAuthData = () => {
         throw new Error("Could find User!");
       }
         const responseData = await response.json();
-        console.log('reload user data', responseData)
       if (responseData.isAdmin) {
         dispatch(authActions.adminLogin());
       }
@@ -59,6 +57,5 @@ export const sendAuthData = (favorites) => {
     }
 
     const responseData = await response.json();
-    console.log(responseData);
   };
 };

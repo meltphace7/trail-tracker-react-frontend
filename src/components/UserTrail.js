@@ -23,10 +23,6 @@ const UserTrail = (props) => {
       images: props.images,
     };
 
-    const imageUrl = "https://trail-tracker-image-bucket.s3.us-west-2.amazonaws.com/03a124a5bf112e473afc80b58f84fcbae14b43e72ed0a65a47e6bba96152b208";
-
-    console.log(imageUrl.slice(62))
-
      let difficulty;
      const calcDifficulty = function (diff) {
        if (+diff <= 3) difficulty = "easy";
@@ -81,7 +77,7 @@ const UserTrail = (props) => {
           <p>{trail.description}</p>
         </div>
         <div className={classes["trail-controls"]}>
-          <Link className={classes["edit-link"]} to={`/edit/${trail._id}`}>
+          <Link className={classes["edit-link"]} to={`/edit-trail/${trail._id}`}>
             Edit
           </Link>
                 <button

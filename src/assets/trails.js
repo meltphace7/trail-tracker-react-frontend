@@ -403,7 +403,7 @@ export let TRAIL_DATA = [
     scenery: 10,
     solitude: 7,
     difficulty: 8,
-    description: `A gorgeous journey through the Winds, featuring massive granite peaks, wind swept alpine meadows, and many scenic alpine lakes including the popular Lonesome lake.  This hike is a must do in Winds. `,
+    description: `A gorgeous journey through the Winds, featuring massive granite peaks, wind swept alpine meadows, and many scenic alpine lakes including the popular Lonesome lake.  This hike is a must do in Winds.`,
   },
   {
     id: 22,

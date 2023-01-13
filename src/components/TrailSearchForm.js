@@ -53,8 +53,6 @@ const TrailSearchForm = (props) => {
       filterQuery: filterQuery,
     });
 
-    console.log("SUBMIT");
-
     setTimeout(() => {
       history.push("/trails");
     }, 500);
