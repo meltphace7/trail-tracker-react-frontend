@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import classes from "./WeatherReport.module.css";
 import WeatherDayForecast from "./WeatherDayForecast";
 import WeatherCurrent from "./WeatherCurrent";
+import hostURL from "../hosturl";
 
 const WeatherReport = (props) => {
   const [curTemp, setCurTemp] = useState("");
@@ -10,24 +11,26 @@ const WeatherReport = (props) => {
   const [weatherIcon, setWeatherIcon] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  // weather api key protonmail: c1d64aca00157236debbddc5f2e543ff
-  // weather api key gmail: 9418ca858afd140d5a2ec6a614c1d7a9
-
-  const getWeather = useCallback(async function (coordinates) {
-    setIsLoading(true);
+  const getWeather = useCallback(async function () {
+    const latitude = props.coords[0];
+    const longitude = props.coords[1];
     try {
+      const keyResponse = await fetch(`${hostURL}/trails/get-trail-weather`);
+      if (!keyResponse.ok) {
+        throw new Error("Could not get weather data!");
+      }
+      const keyData = await keyResponse.json();
+      const weatherKey = keyData.openWeatherKey
+      console.log(keyData.openWeatherKey);
+
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${
-          coordinates[0]
-        }&lon=${
-          coordinates[1]
-        }&exclude=minutely&units=imperial&appid=${"9418ca858afd140d5a2ec6a614c1d7a9"}`
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely&units=imperial&appid=${weatherKey}`
       );
       if (!response.ok) {
-        throw new Error('Could not get weather data!')
+        throw new Error("Could not get weather data!");
       }
       const data = await response.json();
-      console.log('got weather data')
+      console.log("got weather data");
       const [currentWeather] = data.current.weather;
       setCurTemp(data.current.temp);
       setCurWeather(currentWeather.description);
@@ -40,8 +43,8 @@ const WeatherReport = (props) => {
   }, []);
 
   useEffect(() => {
-    getWeather(props.coords);
-  }, [props.coords]);
+    getWeather();
+  }, []);
 
   return (
     <div className={classes["weather-container"]}>

@@ -4,7 +4,7 @@ import TrailMap from "../TrailMap";
 import ImageSlider from "../ImageSlider";
 import { AiOutlineStar } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
-// import WeatherReport from "../WeatherReport";
+import WeatherReport from "../WeatherReport";
 import hostURL from '../../hosturl';
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
@@ -109,10 +109,8 @@ const TrailDetail = (props) => {
   useEffect(() => {
     const existingFavorite = userFavorites.find(fave => fave.trailId === trail._id);
       if (existingFavorite) {
-        console.log("trail is a fave");
         setIsFavorited(true);
       } else {
-        console.log("trail is NOT a fave");
         setIsFavorited(false);
       }
     }, [trail, userFavorites]);
@@ -153,7 +151,7 @@ const TrailDetail = (props) => {
           </div>
           <p className={classes["description"]}>{trail.description}</p>
           <ImageSlider images={trail.images} />
-          {/* <WeatherReport coords={coords} /> */}
+          <WeatherReport coords={coords} />
           <div className={classes["map-container"]}>
             <h1>Map</h1>
             <div className={classes["map-text-container"]}>
