@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import UserTrail from '../UserTrail';
 import hostURL from '../../hosturl'
 
-const Account = () => {
+const Account = (props) => {
     const [usersTrails, setUsersTrails] = useState([]);
 
   const userName = useSelector((state) => state.auth.userName);
@@ -27,11 +27,11 @@ const Account = () => {
     } catch (err) {
       console.log(err);
     }
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     fetchUserTrails();
-  }, []);
+  }, [fetchUserTrails]);
 
   return (
     <div className={classes.account}>
@@ -40,23 +40,27 @@ const Account = () => {
         <h2>{`User Name: ${userName}`}</h2>
         <h2>{`User ID: ${userId}`}</h2>
       </div>
-          <h1>Your Submitted Trails</h1>
-          {usersTrails.map(trail => {
-              return (
-                <UserTrail
-                  key={trail._id}
-                  id={trail._id}
-                  trailName={trail.trailName}
-                  state={trail.state}
-                  wildernessArea={trail.wildernessArea}
-                  miles={trail.miles}
-                  difficulty={trail.difficulty}
-                  description={trail.description}
-                  images={trail.images}
-                  onDelete={fetchUserTrails}
-                />
-              );
-          })}
+      <h1>Your Submitted Trails</h1>
+      <ul className={classes["user-trails-container"]}>
+        {usersTrails.map((trail) => {
+          return (
+            <UserTrail
+              key={trail._id}
+              id={trail._id}
+              trailName={trail.trailName}
+              state={trail.state}
+              wildernessArea={trail.wildernessArea}
+              miles={trail.miles}
+              difficulty={trail.difficulty}
+              description={trail.description}
+              images={trail.images}
+              onDeleteTrail={props.onDeleteTrail}
+              onDelete={fetchUserTrails}
+            />
+          );
+        })}
+        {usersTrails.length === 0 && <h2>YOU HAVE NOT SUBMITTED ANY TRAILS YET</h2>}
+      </ul>
     </div>
   );
 };

@@ -1,25 +1,26 @@
 import React, { useState } from "react";
 import classes from "./LogIn.module.css";
 import { Link, useHistory } from "react-router-dom";
-import hostURL from '../../hosturl'
-import ModalMessage from '../notifications/ModalMessage'
+import hostURL from "../../hosturl";
+import ModalMessage from "../notifications/ModalMessage";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth-slice";
-import useValidation from '../../hooks/use-validation';
+import useValidation from "../../hooks/use-validation";
 
 const LogIn = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
- const {
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const {
     enteredValue: email,
     valueIsValid: emailIsValid,
     hasError: emailHasError,
     valueChangeHandler: emailChangeHandler,
     valueBlurHandler: emailBlurHandler,
     reset: emailReset,
-  } = useValidation(
-    (value) => value.trim() !== "" && value.includes("@")
-  );
+  } = useValidation((value) => value.trim() !== "" && value.includes("@"));
 
   const {
     enteredValue: password,
@@ -30,17 +31,12 @@ const LogIn = (props) => {
     reset: passwordReset,
   } = useValidation((value) => value.trim() !== "" && value.length > 4);
 
-  // const dispatch = useDispatch();
-
-  const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-
   let formIsValid = false;
 
   if (emailIsValid && passwordIsValid) {
     formIsValid = true;
   }
-   const loginHandler = async (event) => {
+  const loginHandler = async (event) => {
     event.preventDefault();
     if (!formIsValid) {
       setIsError(true);
@@ -88,19 +84,19 @@ const LogIn = (props) => {
     }
     emailReset();
     passwordReset();
-   };
-  
-   const emailClasses = emailHasError
-     ? `${classes["login-input"]} ${classes["invalid"]}`
-     : classes["login-input"];
+  };
 
-   const passwordClasses = passwordHasError
-     ? `${classes["login-input"]} ${classes["invalid"]}`
-     : classes["login-input"];
+  const emailClasses = emailHasError
+    ? `${classes["login-input"]} ${classes["invalid"]}`
+    : classes["login-input"];
 
-   const closeModalHandler = () => {
-     setIsError(false);
-   };
+  const passwordClasses = passwordHasError
+    ? `${classes["login-input"]} ${classes["invalid"]}`
+    : classes["login-input"];
+
+  const closeModalHandler = () => {
+    setIsError(false);
+  };
 
   return (
     <div className={classes["login"]}>

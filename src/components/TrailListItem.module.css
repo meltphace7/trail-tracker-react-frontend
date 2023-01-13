@@ -34,12 +34,19 @@
   overflow: hidden;
   transform: scale(1.05);
   transition: 300ms ease-in;
+
 }
 
 .image-container img {
   height: 100%;
   width: auto;
   border-radius: 10px;
+  z-index: 5;
+}
+
+.loading-spinner {
+  position: absolute;
+  z-index: 1;
 }
 
 .info-container {

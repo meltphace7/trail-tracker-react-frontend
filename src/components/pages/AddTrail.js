@@ -1,19 +1,21 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import classes from "./AddTrail.module.css";
-import useValidation from '../../hooks/use-validation';
-import ModalMessage from '../notifications/ModalMessage'
-import hostURL from '../../hosturl';
-import {useSelector} from 'react-redux'
-
+import useValidation from "../../hooks/use-validation";
+import ModalMessage from "../notifications/ModalMessage";
+import hostURL from "../../hosturl";
+import { useSelector } from "react-redux";
 
 const AddTrail = (props) => {
   const [isMessage, setIsMessage] = useState(false);
   const [isErrorMessage, setIsErrorMessage] = useState(false);
   const [message, setMessage] = useState("");
+  const [trailheadName, setTrailheadName] = useState("");
+  const [images, setImages] = useState([]);
 
-  const author = useSelector(state => state.auth.userName);
+  const imageInputRef = useRef();
 
-  const userId = localStorage.getItem('userId')
+  const author = useSelector((state) => state.auth.userName);
+  const userId = localStorage.getItem("userId");
 
   // Validating User Inputs with custom useValidation hook
   const {
@@ -134,29 +136,9 @@ const AddTrail = (props) => {
     reset: descriptionReset,
   } = useValidation((value) => value.trim() !== "");
 
-  const [trailheadName, setTrailheadName] = useState("");
-  const [season, setSeason] = useState("");
- 
-  ///////// image upload state
-  const [images, setImages] = useState([]);
-  const [progress, setProgress] = useState(0);
-
-  const imageInputRef = useRef();
-  // const imageChangeHandler = (event) => {
-  //   setImage(event.target.files[0]);
-  // };
-
-  const resetImageInput = () => {
-    imageInputRef.current.value = "";
-  };
-
   const trailheadNameInputChangeHandler = (e) => {
     setTrailheadName(e.target.value);
   };
-
-  useEffect(() => {
-    setSeason([seasonStart, seasonEnd]);
-  }, [seasonStart, seasonEnd]);
 
   let formIsValid = false;
 
@@ -186,9 +168,9 @@ const AddTrail = (props) => {
 
   const getTrails = () => {
     setTimeout(() => {
-    props.onAddTrail()
-    }, 1500)
-  }
+      props.onAddTrail();
+    }, 1500);
+  };
 
   const submitTrailHandler = async (event) => {
     event.preventDefault();
@@ -199,7 +181,7 @@ const AddTrail = (props) => {
       setMessage("Form info is invalid!");
       return;
     }
-  
+
     // MUST USE FORMDATA TO INCLUDE A FILE/IMAGE
     const formData = new FormData();
     formData.append("trailName", trailName);
@@ -215,9 +197,9 @@ const AddTrail = (props) => {
     formData.append("solitude", solitude);
     formData.append("difficulty", difficulty);
     formData.append("description", description);
-      formData.append("author", author);
-      formData.append("authorId", userId);
-    images.forEach(image => formData.append('image', image))
+    formData.append("author", author);
+    formData.append("authorId", userId);
+    images.forEach((image) => formData.append("image", image));
 
     ////
 
@@ -257,7 +239,6 @@ const AddTrail = (props) => {
     descriptionReset();
     setImages(null);
     getTrails();
-    
   };
 
   const closeModalHandler = () => {
@@ -598,16 +579,17 @@ const AddTrail = (props) => {
           )}
         </div>
 
-        <label htmlFor="image-upload">Upload Images (required)</label>
+        <label htmlFor="image-upload">
+          Please upload multiple images from your trail
+        </label>
         <input
           id="file-input"
           ref={imageInputRef}
           type="file"
           multiple
           onChange={imageChangeHandler}
-          // accept="image/jpg"
+          accept="image/jpg, image/jpeg, image/png"
         />
-        <progress value={progress} max="100" />
         <button type="submit">Submit Trail!</button>
       </form>
       {isMessage && (
@@ -618,4 +600,3 @@ const AddTrail = (props) => {
 };
 
 export default AddTrail;
-

@@ -68,11 +68,12 @@ function App() {
 
     // IF USER AUTHENTICATED, UPDATE FAVORITES ON FAVORITES CHANGE
     dispatch(sendAuthData(userFavorites));
-  }, [userFavorites]);
+  }, [userFavorites, dispatch]);
   
 
   // FETCHES TRAILS FROM BACKEND
   const fetchTrails = useCallback(async () => {
+    console.log('FETCHING TRAILS from APP')
     try {
       const response = await fetch(`${hostURL}/trails/trails`);
       if (!response.ok) {
@@ -105,11 +106,11 @@ function App() {
   const [selectedTrail, setSelectedTrail] = useState(selectTrail);
 
   ////////////////////////////////////////////////
-  const getAddTrailData = (trailData) => {
-    setTrails((prevState) => {
-      return [...prevState, trailData];
-    });
-  };
+  // const getAddTrailData = (trailData) => {
+  //   setTrails((prevState) => {
+  //     return [...prevState, trailData];
+  //   });
+  // };
 
   const getFilter = (filterSetting) => {
     setFilter(filterSetting);
@@ -222,7 +223,7 @@ function App() {
         )}
         {isAuth && (
           <Route path="/account">
-            <Account />
+            <Account onDeleteTrail={fetchTrails} />
           </Route>
         )}
         <Route path="/trails">

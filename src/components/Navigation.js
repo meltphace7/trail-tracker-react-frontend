@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import AuthContext from '../store/auth-context';
+import React from "react";
 import classes from "./Navigation.module.css";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,10 +8,7 @@ import Logo from './Logo'
 const Navigation = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const authCtx = useContext(AuthContext);
   const isAuth = useSelector((state) => state.auth.isAuth);
-  const currentUser = useSelector((state) => state.auth.currentUser);
-
 
   const isLoggedIn = isAuth;
 

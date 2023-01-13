@@ -1,62 +1,61 @@
 import React, { useState } from "react";
 import classes from "./SignUp.module.css";
 import { Link, useHistory } from "react-router-dom";
-import hostURL from '../../hosturl';
+import hostURL from "../../hosturl";
 import useValidation from "../../hooks/use-validation";
-import ModalMessage from '../notifications/ModalMessage';
+import ModalMessage from "../notifications/ModalMessage";
 
 export const SignUp = () => {
   const history = useHistory();
-   const [isMessage, setIsMessage] = useState(false);
-   const [isErrorMessage, setIsErrorMessage] = useState(false);
-   const [message, setMessage] = useState("");
+  const [isMessage, setIsMessage] = useState(false);
+  const [isErrorMessage, setIsErrorMessage] = useState(false);
+  const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-   const {
-     enteredValue: userName,
-     valueIsValid: userNameIsValid,
-     hasError: userNameHasError,
-     valueChangeHandler: userNameChangeHandler,
-     valueBlurHandler: userNameBlurHandler,
-     reset: userNameReset,
-   } = useValidation((value) => value.trim() !== "" && isNaN(+value));
+  const {
+    enteredValue: userName,
+    valueIsValid: userNameIsValid,
+    hasError: userNameHasError,
+    valueChangeHandler: userNameChangeHandler,
+    valueBlurHandler: userNameBlurHandler,
+    reset: userNameReset,
+  } = useValidation((value) => value.trim() !== "" && isNaN(+value));
 
-    const {
-      enteredValue: firstName,
-      valueIsValid: firstNameIsValid,
-      hasError: firstNameHasError,
-      valueChangeHandler: firstNameChangeHandler,
-      valueBlurHandler: firstNameBlurHandler,
-      reset: firstNameReset,
-    } = useValidation((value) => value.trim() !== "" && isNaN(+value));
+  const {
+    enteredValue: firstName,
+    valueIsValid: firstNameIsValid,
+    hasError: firstNameHasError,
+    valueChangeHandler: firstNameChangeHandler,
+    valueBlurHandler: firstNameBlurHandler,
+    reset: firstNameReset,
+  } = useValidation((value) => value.trim() !== "" && isNaN(+value));
 
-    const {
-      enteredValue: lastName,
-      valueIsValid: lastNameIsValid,
-      hasError: lastNameHasError,
-      valueChangeHandler: lastNameChangeHandler,
-      valueBlurHandler: lastNameBlurHandler,
-      reset: lastNameReset,
-    } = useValidation((value) => value.trim() !== "" && isNaN(+value));
+  const {
+    enteredValue: lastName,
+    valueIsValid: lastNameIsValid,
+    hasError: lastNameHasError,
+    valueChangeHandler: lastNameChangeHandler,
+    valueBlurHandler: lastNameBlurHandler,
+    reset: lastNameReset,
+  } = useValidation((value) => value.trim() !== "" && isNaN(+value));
 
-    const {
-      enteredValue: email,
-      valueIsValid: emailIsValid,
-      hasError: emailHasError,
-      valueChangeHandler: emailChangeHandler,
-      valueBlurHandler: emailBlurHandler,
-      reset: emailReset,
-    } = useValidation((value) => value.trim() !== "" && value.includes("@"));
+  const {
+    enteredValue: email,
+    valueIsValid: emailIsValid,
+    hasError: emailHasError,
+    valueChangeHandler: emailChangeHandler,
+    valueBlurHandler: emailBlurHandler,
+    reset: emailReset,
+  } = useValidation((value) => value.trim() !== "" && value.includes("@"));
 
-    const {
-      enteredValue: password,
-      valueIsValid: passwordIsValid,
-      hasError: passwordHasError,
-      valueChangeHandler: passwordChangeHandler,
-      valueBlurHandler: passwordBlurHandler,
-      reset: passwordReset,
-    } = useValidation((value) => value.trim() !== "" && value.length > 5);
-  
+  const {
+    enteredValue: password,
+    valueIsValid: passwordIsValid,
+    hasError: passwordHasError,
+    valueChangeHandler: passwordChangeHandler,
+    valueBlurHandler: passwordBlurHandler,
+    reset: passwordReset,
+  } = useValidation((value) => value.trim() !== "" && value.length > 5);
 
   const firstNameClasses = firstNameHasError
     ? `${classes["signup-input"]} ${classes["invalid"]}`
@@ -76,28 +75,17 @@ export const SignUp = () => {
 
   let formIsValid = false;
 
-  if (userNameIsValid && firstNameIsValid && lastNameIsValid && emailIsValid && passwordIsValid) {
+  if (
+    userNameIsValid &&
+    firstNameIsValid &&
+    lastNameIsValid &&
+    emailIsValid &&
+    passwordIsValid
+  ) {
     formIsValid = true;
   }
 
-  // const firstNameChangeHandler = (event) => {
-  //   setFirstNameInput(event.currentTarget.value);
-  // };
-
-  // const lastNameChangeHandler = (event) => {
-  //   setLastNameInput(event.currentTarget.value);
-  // };
-
-  // const emailChangeHandler = (event) => {
-  //   setEmailNameInput(event.currentTarget.value);
-  // };
-
-  // const passwordChangeHandler = (event) => {
-  //   setPasswordInput(event.currentTarget.value);
-  // };
-
-
-  //NODEJS REST API
+  //CREATES USER ACCOUNT IN MONGODB
   const signupHandler = async (event) => {
     event.preventDefault();
     if (!formIsValid) {
@@ -143,7 +131,7 @@ export const SignUp = () => {
     lastNameReset();
     emailReset();
     passwordReset();
-  }
+  };
 
   const closeModalHandler = () => {
     if (!isErrorMessage) {
