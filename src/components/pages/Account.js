@@ -59,7 +59,7 @@ const Account = (props) => {
             />
           );
         })}
-        {usersTrails.length === 0 && <h2>YOU HAVE NOT SUBMITTED ANY TRAILS YET</h2>}
+        {usersTrails.length === 0 && <h3>YOU HAVE NOT SUBMITTED ANY TRAILS YET</h3>}
       </ul>
     </div>
   );

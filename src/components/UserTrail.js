@@ -88,10 +88,10 @@ const UserTrail = (props) => {
         <h3>{`${trail.state} - ${trail.wildernessArea} `}</h3>
 
         <div className={classes["miles-difficulty-container"]}>
-          <h3>{`${trail.miles} miles roundtrip -`}&nbsp;</h3>
-          <h3 className={classes[difficulty]}>
+          <p>{`${trail.miles} miles roundtrip -`}&nbsp;</p>
+          <p className={classes[difficulty]}>
             {`Difficulty: ${trail.difficulty}/10`}
-          </h3>
+          </p>
         </div>
         <div className={classes["description"]}>
           <p>{trail.description}</p>

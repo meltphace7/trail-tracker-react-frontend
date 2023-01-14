@@ -66,13 +66,13 @@ const TrailListItem = (props) => {
   const favoriteIcon = isFavorited ? (
     <AiFillStar
       onClick={svgClickHandler}
-      size={50}
+      size={30}
       className={classes["star"]}
     />
   ) : (
     <AiOutlineStar
       onClick={svgClickHandler}
-      size={50}
+      size={30}
       className={classes["star"]}
     />
   );

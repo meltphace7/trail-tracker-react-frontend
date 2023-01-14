@@ -16,6 +16,10 @@
 
 }
 
+.user-info h2 {
+    color: var(--green);
+}
+
 .user-trails-container {
     width: 100%;
     margin-top: 2rem;

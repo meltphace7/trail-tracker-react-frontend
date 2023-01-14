@@ -9,6 +9,13 @@
     align-items: center;
 }
 
+.home-search-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .featured-hikes-section {
     margin: 2rem 0rem 4rem 0rem;
     width: 100%;

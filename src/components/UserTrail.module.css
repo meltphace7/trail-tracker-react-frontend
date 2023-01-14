@@ -6,7 +6,6 @@
 }
 
 .trail-item {
-  font-size: 1.12rem;
   margin: .32rem 0rem;
   border-radius: 16px;
   padding: 1.2rem .8rem;
@@ -83,10 +82,6 @@
   color: yellowgreen;
 }
 
-.secondary-info h3 {
-  margin-bottom: 2.72rem .8rem;
-  font-size: .75rem;
-}
 
 .miles-difficulty-container {
   display: flex;
@@ -178,9 +173,60 @@
 
 }
 
-
-
 @media (max-width: 53em) {
+  .trail-link {
+  position: absolute;
+  width: 55%;
+  height: 35rem;
+
+}
+
+  .trail-item {
+    height: 40rem;
+    width: 38rem;
+    flex-direction: column;
+  }
+
+  .image-container {
+    width: 90%;
+    height: 18rem;
+    margin: 1rem 0;
+  }
+
+  .image-container img {
+    width: 100%;
+    height: auto;
+  }
+
+  .info-container {
+    width: 100%;
+    overflow: hidden;
+    align-items: center;
+  }
+
+  .star {
+    display: none;
+  }
+
+  .trail-item {
+  padding: 1rem 2rem;
+
+}
+
+.trail-controls {
+  width: 100%;
+  margin-left: auto;
+  display: flex;
+  flex-direction: unset;
+  justify-content: space-around;
+  align-items: center;
+}
+}
+
+
+
+
+/* @media (max-width: 53em) {
   .trail-item {
     height: 18rem;
     width: 22rem;
@@ -201,4 +247,4 @@
     overflow: hidden;
   }
 
-}
+} */
