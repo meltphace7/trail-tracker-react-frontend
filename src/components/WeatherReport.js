@@ -21,8 +21,6 @@ const WeatherReport = (props) => {
       }
       const keyData = await keyResponse.json();
       const weatherKey = keyData.openWeatherKey
-      console.log(keyData.openWeatherKey);
-
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely&units=imperial&appid=${weatherKey}`
       );
