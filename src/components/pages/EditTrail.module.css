@@ -8,12 +8,12 @@
 
 .add-trail-section h1 {
   color: var(--tertiary-green);
-  margin: 1rem;
+  margin: 1.6rem;
 }
 
 .trail-form {
   margin-bottom: 5rem;
-  width: 40%;
+  width: 64rem;
   color: white;
   background-color: var(--secondary-green);
   border-radius: 15px;
@@ -62,7 +62,7 @@
 }
 
 .number-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.6rem;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -73,6 +73,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  padding: 2rem;
 }
 
 .description {
@@ -80,9 +81,9 @@
 }
 
 .trail-form button {
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin-top: 2rem;
-  width: 100%;
+  width: 80%;
   padding: 1.5rem;
   text-align: center;
   color: white;

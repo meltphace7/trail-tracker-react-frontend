@@ -35,11 +35,11 @@ const Favorites = (props) => {
 
   return (
     <div className={classes["favorites-container"]}>
-      <h1>FAVORITES</h1>
+      <h1 className={classes["title"]}>FAVORITES</h1>
       <p>
         {userFavorites.length !== 0 ? `${props.favorites.length} results` : ""}
       </p>
-      {userFavorites.length !== 0 ? renderFavorites : "NO FAVORITES YET"}
+      {userFavorites.length !== 0 ? renderFavorites : <h3>No Favorites Yet</h3>}
     </div>
   );
 };

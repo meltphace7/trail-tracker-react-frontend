@@ -2,10 +2,7 @@
 .trail-search {
   display: flex;
   align-items: center;
-}
-
-.search-container {
-  margin: 1rem;
+  margin: 5rem 1rem;
 }
 
 .search-group {
@@ -15,21 +12,21 @@
 }
 
 .trail-search label {
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   margin-right: 1rem;
   color: white;
 }
 
 .trail-search input {
-  width: 12rem;
-  height: 2rem;
+  width: 18rem;
+  height: 4rem;
   border-radius: 5px;
 }
 
 .trail-search button {
-  font-size: 1rem;
+  font-size: 2rem;
   margin: .5rem 1rem;
-  width: 9rem;
+  width: 17rem;
   border-radius: 10px;
   padding: 1rem;
   border: none;
@@ -40,11 +37,15 @@
 
 }
 
+.trail-search optgroup {
+  font-size: 3rem;
+
+}
+
 .trail-search select {
-  width: 20rem;
+  width: 30rem;
   padding-left: .5rem;
-  font-size: 1.2rem;
-  height: 2rem;
+  height: 3rem;
   border-radius: 20px
 }
 
