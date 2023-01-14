@@ -50,7 +50,7 @@ const UserTrail = (props) => {
     console.log(trailData);
 
     try {
-      const response = await fetch(`${hostURL}/auth/delete-trail`, {
+      const response = await fetch(`${hostURL}/trails/delete-trail`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,

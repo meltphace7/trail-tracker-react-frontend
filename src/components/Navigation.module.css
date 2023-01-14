@@ -18,10 +18,17 @@
 
 .nav-link {
   color: black;
+  padding-bottom: .5rem;
+  transition: all 200ms ease-in;
 }
 
 .nav-link:hover {
   color: green;
+}
+
+.nav-menu li a.active {
+  color: green;
+  border-bottom: 1px solid green;
 }
 
 .logout-button {
@@ -47,3 +54,11 @@
     width: 99%;
   }
 }
+
+@media (max-width: 44em) {
+  .nav {
+    display: none;
+  }
+}
+
+

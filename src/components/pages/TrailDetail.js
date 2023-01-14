@@ -107,6 +107,9 @@ const TrailDetail = (props) => {
 
   // DETERMINES IF TRAIL IS FAVORITED BASED ON USERS FAVORITE TRAILS ARRAY
   useEffect(() => {
+    if (!userFavorites) {
+      return
+    }
     const existingFavorite = userFavorites.find(fave => fave.trailId === trail._id);
       if (existingFavorite) {
         setIsFavorited(true);

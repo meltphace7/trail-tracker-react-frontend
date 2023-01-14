@@ -157,3 +157,13 @@
     right: -1rem;
   }
 }
+
+@media (max-width: 44em) {
+  .info-sub-header {
+  padding: .5rem .2rem;
+}
+  .info-sub-header h3 {
+    font-size: 1rem;
+    margin: 0 .4rem;
+  }
+}

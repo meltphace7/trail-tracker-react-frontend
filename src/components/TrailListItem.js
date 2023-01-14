@@ -53,6 +53,10 @@ const TrailListItem = (props) => {
 
   // DETERMINES IF TRAIL IS FAVORITED BASED ON USERS FAVORITE TRAILS ARRAY
   useEffect(() => {
+    console.log('user faves', userFavorites)
+    if (!userFavorites) {
+      return
+    }
     const existingFavorite = userFavorites.find(
       (fave) => fave.trailId === trail._id
     );
@@ -90,7 +94,7 @@ const TrailListItem = (props) => {
         </div>
       </div>
       <div className={classes["info-container"]}>
-        <h2>{trail.trailName}</h2>
+        <h2 className={classes["trail-title"]}>{trail.trailName}</h2>
         <h3>{`${trail.state} - ${trail.wildernessArea} `}</h3>
         <div className={classes["miles-difficulty-container"]}>
           <h3>{`${trail.miles} miles roundtrip -`}&nbsp;</h3>

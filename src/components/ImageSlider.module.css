@@ -7,10 +7,9 @@
 }
 
 .slider {
-  /* height: 38rem; */
    height: 60rem;
-   /* width: 55rem; */
-    width: 88rem;
+    /* width: 88rem; */
+    width: 95%;
    border-radius: 10px;
    position: relative;
    display: flex;
@@ -73,7 +72,6 @@
 
 @media (max-width: 40em) {
   .slider {
-    width: 48rem;
     height:  44.8rem;
   }
 
@@ -93,7 +91,7 @@
 
 @media (max-width: 30em) {
   .slider {
-    width: 37.6rem;
+    
     height:  44.8rem;
   }
 

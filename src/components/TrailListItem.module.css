@@ -19,7 +19,11 @@
   width: 60%;
   height: 15rem;
   z-index: 666;
+}
 
+.trail-title {
+  font-size: 2rem;
+  margin: 1rem 0 0 0;
 }
 
 .trail-item p {
@@ -158,7 +162,7 @@
 }
 
   .trail-item {
-    height: 35rem;
+    height: 42rem;
     width: 38rem;
     flex-direction: column;
   }
@@ -192,29 +196,29 @@
 
 
 @media (max-width: 44em) {
-  .trail-link {
+    .trail-link {
   position: absolute;
-  width: 55%;
-  height: 35rem;
+  width: 99%;
+  height: 34rem;
 
 }
-
   .trail-item {
-    height: 35rem;
     width: 100%;
+    height: 34rem;
     flex-direction: column;
     border-radius: unset;
   }
 
   .image-container {
-    width: 90%;
-    height: 18rem;
-    margin: 1rem 0;
+    width: 100%;
+    height: 19rem;
+    margin: 0;
   }
 
   .image-container img {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 25rem;
+    transform: scale(1.2);
   }
 
   .info-container {
@@ -231,4 +235,10 @@
   padding: 1rem 2rem;
 
 }
+
+/* .star {
+  position: absolute;
+  right: -3rem;
+  z-index: 8;
+} */
 }

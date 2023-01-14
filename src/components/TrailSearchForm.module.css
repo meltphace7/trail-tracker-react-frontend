@@ -27,7 +27,7 @@
   font-size: 2rem;
   margin: .5rem 1rem;
   width: 17rem;
-  border-radius: 10px;
+  border-radius: 20rem;
   padding: 1rem;
   border: none;
   color: white;
@@ -52,6 +52,13 @@
 @media (max-width: 48em) {
   .trail-search {
     flex-direction: column;
+    margin: 1rem 1rem;
   }
+/* 
+  .trail-search {
+  display: flex;
+  align-items: center;
+  margin: 5rem 1rem;
+} */
   
 }

@@ -12,13 +12,16 @@ const authSlice = createSlice({
   initialState: initialAuthState,
   reducers: {
     login(state, action) {
-      const userName = action.payload;
+      const userName = action.payload.userName;
+      const favorites = action.payload.favorites;
       state.userName = userName;
       state.isAuth = true;
+      state.favorites = favorites;
     },
     logout(state) {
       state.isAuth = false;
       state.isAdmin = false;
+      state.favorites = [];
     },
     adminLogin(state) {
       state.isAdmin = true;

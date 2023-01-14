@@ -38,9 +38,9 @@ const Account = (props) => {
       <h1 className={classes.title}>Your Account</h1>
       <div className={classes["user-info"]}>
         <h2>{`User Name: ${userName}`}</h2>
-        <h2>{`User ID: ${userId}`}</h2>
       </div>
       <h1>Your Submitted Trails</h1>
+      <p>{`${usersTrails.length} trails`}</p>
       <ul className={classes["user-trails-container"]}>
         {usersTrails.map((trail) => {
           return (

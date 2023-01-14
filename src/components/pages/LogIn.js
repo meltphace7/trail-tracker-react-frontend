@@ -61,12 +61,16 @@ const LogIn = (props) => {
         throw new Error("Could not authenticate you!");
       }
       const resData = await response.json();
-
-      // SAVE RETURNED AUTH TOKEN IN LOCAL STORAGE
-      console.log(resData);
+    
       // const isAdmin = resData.isAdmin;
       const token = resData.token;
-      dispatch(authActions.login(resData.userName));
+      const favorites = resData.favorites
+      const userName = resData.userName
+      const loginData = {
+        userName,
+        favorites
+      }
+      dispatch(authActions.login(loginData));
       // if (isAdmin) {
       //   dispatch(authActions.adminLogin());
       // }

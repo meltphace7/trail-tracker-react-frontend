@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import Navigation from "./components/Navigation";
+import MobileNavigation from './components/MobileNavigation';
 import AddTrail from "./components/pages/AddTrail";
 import EditTrail from "./components/pages/EditTrail";
 import Footer from "./components/Footer";
@@ -25,6 +26,10 @@ function App() {
   // const [loadedTrails, setLoadedTrails] = useState([]);
   const dispatch = useDispatch();
   const userFavorites = useSelector((state) => state.auth.favorites);
+  const currentTrailQuery = useSelector(
+    (state) => state.trails.currentSearchQuery
+  );
+
   const isAuth = useSelector((state) => state.auth.isAuth);
   const [trails, setTrails] = useState([]);
 
@@ -181,6 +186,7 @@ function App() {
 
   return (
     <div className="App">
+      <MobileNavigation />
       <Navigation
       // trails={trails}
       // onFilterSelect={getFilter}

@@ -30,20 +30,49 @@ select {
 }
 
 .leaflet-container {
-  width: 50rem;
-  height: 35rem;
+ width: 100rem;
+  height: 60rem;
 }
 
-@media (max-width: 56em) {
+@media (max-width: 70em) {
   .leaflet-container {
-  width: 35rem;
-  height: 35rem;
+  width: 80rem;
+  height: 50rem;
+}
+}
+
+@media (max-width: 60em) {
+  .leaflet-container {
+  width: 80rem;
+  height: 50rem;
+}
+}
+
+
+@media (max-width: 50em) {
+  .leaflet-container {
+  width: 70rem;
+  height: 40rem;
 }
 }
 
 @media (max-width: 40em) {
   .leaflet-container {
-  width: 23rem;
-  height: 23rem;
+  width: 55rem;
+  height: 40rem;
+}
+}
+
+@media (max-width: 32em) {
+  .leaflet-container {
+  width: 55rem;
+  height: 40rem;
+}
+}
+
+@media (max-width: 30em) {
+  .leaflet-container {
+  width: 40rem;
+  height: 40rem;
 }
 }

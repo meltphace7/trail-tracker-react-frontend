@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from "react";
 import classes from "./TrailSearchForm.module.css";
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import {trailActions }from '../store/trail-slice'
 
 const TrailSearchForm = (props) => {
   const history = useHistory();
+  const dispatch = useDispatch();
+    const currentQueryType = useSelector(
+      (state) => state.trails.currentQueryType
+    );
+  const currentTrailQuery = useSelector(state => state.trails.currentSearchQuery);
+  console.log('Search form, cur query', currentTrailQuery)
+  console.log("Query Type, form", currentQueryType);
   // FINDS UNIQUE VALUES OF props.trails ARRAY
   const getUniqueValues = function (property) {
     const uniqueValues = [
@@ -25,8 +34,10 @@ const TrailSearchForm = (props) => {
     ? props.filter.filterType
     : "All";
 
-  const [filterType, setFilterType] = useState(initialStateType);
-  const [filterQuery, setFilterQuery] = useState(props.filter.filterQuery);
+  // const [filterType, setFilterType] = useState(initialStateType);
+  // const [filterQuery, setFilterQuery] = useState(props.filter.filterQuery);
+  const [filterType, setFilterType] = useState(currentQueryType);
+  const [filterQuery, setFilterQuery] = useState(currentTrailQuery);
 
   const [filter, setFilter] = useState({
     filterType: filterType,
@@ -52,6 +63,11 @@ const TrailSearchForm = (props) => {
       filterType: filterType,
       filterQuery: filterQuery,
     });
+    const searchQuery = {
+      filterType: filterType,
+      filterQuery: filterQuery,
+    };
+    dispatch(trailActions.setQuery(searchQuery));
 
     setTimeout(() => {
       history.push("/trails");
