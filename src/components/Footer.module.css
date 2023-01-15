@@ -1,4 +1,4 @@
-footer{
+.footer{
     width: 100%;
     height: 9.6rem;
     background-color: white;
@@ -9,7 +9,15 @@ footer{
     align-items: center;
 }
 
-footer h2 {
+.footer h2 {
   margin-left: 3.2rem;
   font-size: 1.92rem;  
+}
+
+@media (max-width: 30em) {
+  .footer {
+    background-color: var(--color-dark);
+    color: white;
+  }
+
 }

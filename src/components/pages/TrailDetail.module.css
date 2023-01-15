@@ -9,6 +9,10 @@
   min-height: 58.85rem;
 }
 
+.loading-spinner {
+  margin-top: 20rem;
+}
+
 .favorites-button {
   font-size: 1.2rem;;
   margin-left: auto;
@@ -48,7 +52,6 @@
 
 .info-header {
   width: 100%;
-  /* min-height: 25rem; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -135,6 +138,10 @@
 
 .submitted-by {
   margin-top: 3rem;
+}
+
+.description {
+  width: 90%;
 }
 
 @media (max-width: 53em) {

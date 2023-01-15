@@ -174,7 +174,11 @@ const TrailDetail = (props) => {
           </div>
         </div>
       )}
-      {!trailIsLoaded && <LoadingSpinner />}
+      {!trailIsLoaded && (
+        <div className={classes['loading-spinner']}>
+          <LoadingSpinner />
+        </div>
+      )}
     </div>
   );
 };
