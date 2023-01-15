@@ -1,11 +1,41 @@
 :root {
-  --main-color-1: #7f4ab5;
-  --main-color-2: #cd32b3;
-  --main-color-1-hover: #6b3d9a;
-  --main-big-med-navy: #32324a;
-  --main-big-med-navy-trans: #32324aa7;
-  --white-overlay: #ffffffd7;
-  --main-black-trans-dark: #020202bf;
+  --green: rgb(122, 171, 24);
+  --primary-green: rgb(30, 34, 24);
+  --secondary-green: rgb(42, 55, 42);
+  --quatrary-green: rgb(42, 55, 42);
+  --tertiary-green: rgb(192, 247, 83);
+  --primary-orange: rgb(238, 117, 72);
+  --secondary-orange: rgb(196, 63, 14);
+}
+
+@font-face {
+  font-family: "barlow";
+  src: url("./fonts/Barlow-Thin-webfont.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "barlow";
+  src: url("./fonts/Barlow-Regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+    font-family: 'barlow';
+    src: url('./fonts/Barlow-Light-webfont.woff') format('woff');
+    font-weight: 200;
+    font-style: normal;
+}
+
+
+
+@font-face {
+  font-family: "barlow";
+  src: url("./fonts/Barlow-Medium-webfont.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
 }
 
 *,
@@ -38,7 +68,7 @@ html {
 body {
   overflow-x: hidden;
   width: 100%;
-  font-family: "barlow", sans-serif;
+  font-family: "Raleway", "barlow", sans-serif;
   font-weight: 200;
   line-height: 1.6;
   letter-spacing: 0.05rem;
@@ -83,4 +113,51 @@ label {
   font-size: 1.6rem;
 }
 
+.leaflet-container {
+ width: 100rem;
+  height: 60rem;
+}
+
+@media (max-width: 70em) {
+  .leaflet-container {
+  width: 80rem;
+  height: 50rem;
+}
+}
+
+@media (max-width: 60em) {
+  .leaflet-container {
+  width: 80rem;
+  height: 50rem;
+}
+}
+
+
+@media (max-width: 50em) {
+  .leaflet-container {
+  width: 70rem;
+  height: 40rem;
+}
+}
+
+@media (max-width: 40em) {
+  .leaflet-container {
+  width: 55rem;
+  height: 40rem;
+}
+}
+
+@media (max-width: 32em) {
+  .leaflet-container {
+  width: 55rem;
+  height: 40rem;
+}
+}
+
+@media (max-width: 30em) {
+  .leaflet-container {
+  width: 40rem;
+  height: 40rem;
+}
+}
 
