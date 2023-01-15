@@ -107,6 +107,9 @@ const TrailDetail = (props) => {
 
   // DETERMINES IF TRAIL IS FAVORITED BASED ON USERS FAVORITE TRAILS ARRAY
   useEffect(() => {
+    if (!userFavorites) {
+      return
+    }
     const existingFavorite = userFavorites.find(fave => fave.trailId === trail._id);
       if (existingFavorite) {
         setIsFavorited(true);
@@ -151,7 +154,7 @@ const TrailDetail = (props) => {
           </div>
           <p className={classes["description"]}>{trail.description}</p>
           <ImageSlider images={trail.images} />
-          <WeatherReport coords={coords} />
+          {/* <WeatherReport coords={coords} /> */}
           <div className={classes["map-container"]}>
             <h1>Map</h1>
             <div className={classes["map-text-container"]}>

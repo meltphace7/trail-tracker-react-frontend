@@ -53,6 +53,10 @@ const TrailListItem = (props) => {
 
   // DETERMINES IF TRAIL IS FAVORITED BASED ON USERS FAVORITE TRAILS ARRAY
   useEffect(() => {
+    console.log('user faves', userFavorites)
+    if (!userFavorites) {
+      return
+    }
     const existingFavorite = userFavorites.find(
       (fave) => fave.trailId === trail._id
     );
@@ -66,47 +70,49 @@ const TrailListItem = (props) => {
   const favoriteIcon = isFavorited ? (
     <AiFillStar
       onClick={svgClickHandler}
-      size={50}
+      size={30}
       className={classes["star"]}
     />
   ) : (
     <AiOutlineStar
       onClick={svgClickHandler}
-      size={50}
+      size={30}
       className={classes["star"]}
     />
   );
 
   return (
-    <Link to={`trail-detail/${trail._id}`}>
-      <li key={trail._id} className={classes["trail-item"]}>
-        <div className={classes["image-container"]}>
-          {trail.images && <img src={trail.images[0]} alt={trail.trailName} />}
-          <div className={classes["loading-spinner"]}>
-            <LoadingSpinner />
-          </div>
+    <li key={trail._id} className={classes["trail-item"]}>
+      <Link
+        className={classes["trail-link"]}
+        to={`trail-detail/${trail._id}`}
+      ></Link>
+      <div className={classes["image-container"]}>
+        {trail.images && <img src={trail.images[0]} alt={trail.trailName} />}
+        <div className={classes["loading-spinner"]}>
+          <LoadingSpinner />
         </div>
-        <div className={classes["info-container"]}>
-          <h2>{trail.trailName}</h2>
-          <h3>{`${trail.state} - ${trail.wildernessArea} `}</h3>
-          <div className={classes["miles-difficulty-container"]}>
-            <h3>{`${trail.miles} miles roundtrip -`}&nbsp;</h3>
-            <h3 className={classes[difficulty]}>
-              {`Difficulty: ${trail.difficulty}/10`}
-            </h3>
-          </div>
-          <div className={classes["description"]}>
-            <p>{trail.description}</p>
-          </div>
+      </div>
+      <div className={classes["info-container"]}>
+        <h2 className={classes["trail-title"]}>{trail.trailName}</h2>
+        <h3>{`${trail.state} - ${trail.wildernessArea} `}</h3>
+        <div className={classes["miles-difficulty-container"]}>
+          <h3>{`${trail.miles} miles roundtrip -`}&nbsp;</h3>
+          <h3 className={classes[difficulty]}>
+            {`Difficulty: ${trail.difficulty}/10`}
+          </h3>
         </div>
-        <button
-          onClick={isFavoritedHandler}
-          className={classes["favorites-button"]}
-        >
-          {favoriteIcon}
-        </button>
-      </li>
-    </Link>
+        <div className={classes["description"]}>
+          <p>{trail.description}</p>
+        </div>
+      </div>
+      <button
+        onClick={isFavoritedHandler}
+        className={classes["favorites-button"]}
+      >
+        {favoriteIcon}
+      </button>
+    </li>
   );
 };
 

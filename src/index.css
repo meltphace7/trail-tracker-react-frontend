@@ -8,18 +8,79 @@
   --main-black-trans-dark: #020202bf;
 }
 
-* { 
- margin: 0;
- padding: 0;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
 
 html {
-    width: 100%;
+  box-sizing: inherit;
+  width: 100%;
+  font-size: 62.5%;
+  overflow-x: hidden;
 }
 
-body {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@media (max-width: 65em) {
+  html {
+    font-size: 55%;
+  }
 }
+
+/* @media (max-width: 40em) {
+  html {
+    font-size: 50%;
+  }
+} */
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+  font-family: "barlow", sans-serif;
+  font-weight: 200;
+  line-height: 1.6;
+  letter-spacing: 0.05rem;
+}
+
+p {
+  font-size: 1.6rem;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  font-size: 1.6rem;
+  text-decoration: none;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+button {
+  font-size: 1.6rem;
+  border: unset;
+  cursor: pointer;
+}
+
+label {
+  font-size: 1.6rem;
+}
+
+

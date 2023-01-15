@@ -2,6 +2,7 @@ import React, { useState, useEffect} from "react";
 import TrailDetail from "./pages/TrailDetail";
 import classes from "./TrailList.module.css";
 import TrailListItem from "./TrailListItem";
+import {useSelector} from 'react-redux'
 
 
  const monthArray = [
@@ -21,6 +22,7 @@ import TrailListItem from "./TrailListItem";
 
 
 const TrailList = (props) => {
+  const searchQuery = useSelector(state => state.trails.currentSearchQuery);
   // Converts filter Query to Month Name if filterQuery is month Number
   const [month, setMonth] = useState("");
 
@@ -32,7 +34,7 @@ const TrailList = (props) => {
    }, [props.trailFilter, props.filter]);
 
   //Pagination
-  const resultsPerPage = 5;
+  const resultsPerPage = 6;
   const [page, setPage] = useState(1);
   const [results, setResults] = useState(props.trails.slice(0, resultsPerPage));
 
@@ -116,12 +118,13 @@ const TrailList = (props) => {
     <div className={classes["trail-list-container"]}>
       <div className={classes["results-container"]}>
     
-          <h1 className={classes["results-title"]}>
-            {`${
+        <h1 className={classes["results-title"]}>
+          {`${searchQuery} Trails`}
+            {/* {`${
               props.filter.filterType === "by-season"
                 ? month
                 : props.filter.filterQuery
-            } Trails`}
+            } Trails`} */}
           </h1>
           <p>{`${props.trails.length} results for "${
             props.filter.filterType === "by-season"

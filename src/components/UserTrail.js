@@ -2,9 +2,14 @@ import React from "react";
 import classes from "./UserTrail.module.css";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
+import { authActions } from "../store/auth-slice";
+import { useDispatch, useSelector } from "react-redux";
 import hostURL from "../hosturl";
 
 const UserTrail = (props) => {
+  const dispatch = useDispatch();
+  const favorites = useSelector((state) => state.auth.favorites);
+  console.log("favorites", favorites);
   const trailId = props.id;
   const trail = {
     _id: props.id,
@@ -42,6 +47,12 @@ const UserTrail = (props) => {
   // DELETES TRAIL FROM MONGODB AND TRAIL IMAGES FROM S3 BUCKETS
   const deleteTrailHandler = async (e) => {
     e.preventDefault();
+    // Checks if item to be deleted is a favorite, and if it is, trail is removed from user's favorites array
+    const existingFavorite = favorites.find((item) => item.trailId === trailId);
+    if (existingFavorite) {
+      console.log("trail was a favorite and is now being deleted");
+      dispatch(authActions.toggleFavorites(trailId));
+    }
     const token = localStorage.getItem("token");
     const trailData = {
       trailId: trailId,
@@ -50,7 +61,7 @@ const UserTrail = (props) => {
     console.log(trailData);
 
     try {
-      const response = await fetch(`${hostURL}/auth/delete-trail`, {
+      const response = await fetch(`${hostURL}/trails/delete-trail`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,
@@ -88,10 +99,10 @@ const UserTrail = (props) => {
         <h3>{`${trail.state} - ${trail.wildernessArea} `}</h3>
 
         <div className={classes["miles-difficulty-container"]}>
-          <h3>{`${trail.miles} miles roundtrip -`}&nbsp;</h3>
-          <h3 className={classes[difficulty]}>
+          <p>{`${trail.miles} miles roundtrip -`}&nbsp;</p>
+          <p className={classes[difficulty]}>
             {`Difficulty: ${trail.difficulty}/10`}
-          </h3>
+          </p>
         </div>
         <div className={classes["description"]}>
           <p>{trail.description}</p>

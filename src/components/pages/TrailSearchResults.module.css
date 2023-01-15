@@ -17,3 +17,15 @@
         margin-top: 2rem;
     }
 }
+
+@media (max-width: 44em) {
+    .trail-search-form-container {
+    height: 4rem;
+    padding-right: 1rem;
+    display: flex;
+    justify-content: center;
+}
+    .trail-search-results {
+        margin-top: 0rem;
+    }
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Navigation.module.css";
-import { Link, useHistory } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store/auth-slice";
 import Logo from './Logo'
@@ -21,27 +21,73 @@ const Navigation = () => {
     };
  
   return (
-    <nav>
+    <nav className={classes.nav}>
       <div className={classes["logo-container"]}>
-        <Link to="/home">
+        <Link className={classes["nav-link"]} to="/home">
           <Logo />
         </Link>
       </div>
-      <ul className={classes["nav-menu"]}>
+      <ul className={classes['nav-menu']}>
         <li>
-          <Link to="/home">HOME</Link>
+          <NavLink
+            className={classes["nav-link"]}
+            activeClassName={classes.active}
+            to="/home"
+          >
+            HOME
+          </NavLink>
         </li>
         <li>
-          {isLoggedIn && <Link to="/favorites">FAVORITES</Link>}
-          {!isLoggedIn && <Link to="/signup">SIGN UP</Link>}
+          {isLoggedIn && (
+            <NavLink
+              className={classes["nav-link"]}
+              activeClassName={classes.active}
+              to="/favorites"
+            >
+              FAVORITES
+            </NavLink>
+          )}
+          {!isLoggedIn && (
+            <NavLink
+              activeClassName={classes.active}
+              className={classes["nav-link"]}
+              to="/signup"
+            >
+              SIGN UP
+            </NavLink>
+          )}
         </li>
         <li>
-          {isLoggedIn && <Link to="/addtrail">ADD TRAIL</Link>}
-          {!isLoggedIn && <Link to="/login">LOG IN</Link>}
+          {isLoggedIn && (
+            <NavLink
+              activeClassName={classes.active}
+              className={classes["nav-link"]}
+              to="/addtrail"
+            >
+              ADD TRAIL
+            </NavLink>
+          )}
+          {!isLoggedIn && (
+            <NavLink
+              activeClassName={classes.active}
+              className={classes["nav-link"]}
+              to="/login"
+            >
+              LOG IN
+            </NavLink>
+          )}
         </li>
-        {isLoggedIn && <li>
-          <Link to="/account">ACCOUNT</Link>
-        </li>}
+        {isLoggedIn && (
+          <li>
+            <NavLink
+              activeClassName={classes.active}
+              className={classes["nav-link"]}
+              to="/account"
+            >
+              ACCOUNT
+            </NavLink>
+          </li>
+        )}
         {isLoggedIn && (
           <li>
             <button
