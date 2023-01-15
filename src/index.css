@@ -60,11 +60,11 @@ html {
   }
 }
 
-/* @media (max-width: 40em) {
+@media (max-width: 40em) {
   html {
     font-size: 50%;
   }
-} */
+}
 
 body {
   overflow-x: hidden;

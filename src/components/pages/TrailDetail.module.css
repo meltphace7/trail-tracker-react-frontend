@@ -159,6 +159,15 @@
 }
 
 @media (max-width: 44em) {
+
+  .info-header h1 {
+ font-size: 2.3rem;
+}
+
+.info-header h3 {
+  font-size: 1.5rem;
+
+}
   .info-sub-header {
   padding: .5rem .2rem;
 }
