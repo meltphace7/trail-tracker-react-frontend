@@ -30,9 +30,11 @@ const MobileNavigation = () => {
 
   return (
     <nav className={classes.nav}>
-      <div className={classes.logo}>
+          <Link
+              to="/home"
+              className={classes.logo}>
         <h3>TRAIL TRACKER</h3>
-      </div>
+      </Link>
       <div className={classes.navigation}>
         <input
           type="checkbox"
