@@ -76,6 +76,7 @@ a:hover {
 button {
   font-size: 1.6rem;
   border: unset;
+  cursor: pointer;
 }
 
 label {

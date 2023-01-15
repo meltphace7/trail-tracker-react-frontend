@@ -27,7 +27,7 @@ const Navigation = () => {
           <Logo />
         </Link>
       </div>
-      <ul className={classes["nav-menu"]}>
+      <ul className={classes['nav-menu']}>
         <li>
           <NavLink
             className={classes["nav-link"]}
