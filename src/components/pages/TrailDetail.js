@@ -4,7 +4,7 @@ import TrailMap from "../TrailMap";
 import ImageSlider from "../ImageSlider";
 import { AiOutlineStar } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
-import WeatherReport from "../WeatherReport";
+// import WeatherReport from "../WeatherReport";
 import hostURL from '../../hosturl';
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
