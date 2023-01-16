@@ -180,3 +180,14 @@
     margin: 0 .4rem;
   }
 }
+
+@media (max-width: 40em) {
+
+.trail-detail {
+  background-color: var(--color-main-dark);
+}
+
+.info-header {
+  background-color: var(--color-main-dark);
+}
+}
