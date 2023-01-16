@@ -9,10 +9,6 @@
   color: gray;
 }
 
-.trail-list-container h3 {
-  color: gray;
-}
-
 .results-container {
   color: white;
   display: flex;
@@ -56,7 +52,6 @@
     rgba(50, 251, 23, 1) 100%
   );
   color: white;
-  border: 1px solid white;
   cursor: pointer;
   transition: 300ms ease-in;
 }
@@ -91,4 +86,18 @@
   .results-title {
     font-size: 2rem;
   }
+}
+
+@media (max-width: 40em) {
+ .results-title {
+  color: white;
+}
+
+.trail-list-container p {
+  color: rgb(206, 206, 206);
+}
+
+.pagination-container h3 {
+  color: white;
+}
 }

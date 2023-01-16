@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from "react";
-import "./App.css";
 import Navigation from "./components/Navigation";
 import MobileNavigation from './components/MobileNavigation';
 import AddTrail from "./components/pages/AddTrail";

@@ -3,6 +3,7 @@ import classes from "./LogIn.module.css";
 import { Link, useHistory } from "react-router-dom";
 import hostURL from "../../hosturl";
 import ModalMessage from "../notifications/ModalMessage";
+import LoadingScreen from '../notifications/LoadingScreen';
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth-slice";
 import useValidation from "../../hooks/use-validation";
@@ -12,6 +13,7 @@ const LogIn = (props) => {
   const dispatch = useDispatch();
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     enteredValue: email,
@@ -43,6 +45,7 @@ const LogIn = (props) => {
       setErrorMessage("Your email or password is invalid!");
       return;
     }
+    setIsLoading(true);
 
     const userLoginInput = {
       email,
@@ -61,7 +64,7 @@ const LogIn = (props) => {
         throw new Error("Could not authenticate you!");
       }
       const resData = await response.json();
-    
+      setIsLoading(false);
       // const isAdmin = resData.isAdmin;
       const token = resData.token;
       const favorites = resData.favorites
@@ -82,6 +85,7 @@ const LogIn = (props) => {
       // props.onLogin();
       history.push("/home");
     } catch (err) {
+      setIsLoading(false);
       setErrorMessage(err.message);
       setIsError(true);
       console.log();
@@ -143,6 +147,7 @@ const LogIn = (props) => {
       {isError && (
         <ModalMessage message={errorMessage} onCloseModal={closeModalHandler} />
       )}
+      {isLoading && <LoadingScreen />}
     </div>
   );
 };

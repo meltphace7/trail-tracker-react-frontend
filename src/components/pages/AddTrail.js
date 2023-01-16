@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import classes from "./AddTrail.module.css";
 import useValidation from "../../hooks/use-validation";
 import ModalMessage from "../notifications/ModalMessage";
+import LoadingScreen from '../notifications/LoadingScreen';
 import hostURL from "../../hosturl";
 import { useSelector } from "react-redux";
 
@@ -10,6 +11,7 @@ const AddTrail = (props) => {
   const [isErrorMessage, setIsErrorMessage] = useState(false);
   const [message, setMessage] = useState("");
   const [trailheadName, setTrailheadName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [images, setImages] = useState([]);
 
   const imageInputRef = useRef();
@@ -181,6 +183,7 @@ const AddTrail = (props) => {
       setMessage("Form info is invalid!");
       return;
     }
+    setIsLoading(true);
 
     // MUST USE FORMDATA TO INCLUDE A FILE/IMAGE
     const formData = new FormData();
@@ -220,10 +223,13 @@ const AddTrail = (props) => {
       }
       const responseData = await response.json();
       console.log(responseData);
+      setIsLoading(false);
       setIsMessage(true);
       setMessage("Trail successfully submited!");
     } catch (err) {
-      console.log(err);
+      setIsLoading(false);
+       setIsMessage(true);
+       setMessage(err);
     }
     trailNameReset();
     stateReset();
@@ -595,6 +601,7 @@ const AddTrail = (props) => {
       {isMessage && (
         <ModalMessage onCloseModal={closeModalHandler} message={message} />
       )}
+      {isLoading && <LoadingScreen />}
     </div>
   );
 };

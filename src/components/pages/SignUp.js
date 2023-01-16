@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import classes from "./SignUp.module.css";
 import { Link, useHistory } from "react-router-dom";
+import LoadingScreen from '../notifications/LoadingScreen';
 import hostURL from "../../hosturl";
 import useValidation from "../../hooks/use-validation";
 import ModalMessage from "../notifications/ModalMessage";
@@ -121,6 +122,7 @@ export const SignUp = () => {
 
       setIsLoading(false);
     } catch (err) {
+      setIsLoading(false);
       setIsErrorMessage(true);
       setMessage("Could Not Sign up!");
       console.log(err);
@@ -222,6 +224,7 @@ export const SignUp = () => {
       {isMessage && (
         <ModalMessage onCloseModal={closeModalHandler} message={message} />
       )}
+      {isLoading && <LoadingScreen />}
     </div>
   );
 };

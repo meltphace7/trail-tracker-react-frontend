@@ -3,9 +3,12 @@
   --color-main-mid: #2a372a;
   --color-main-dark: #1e2218;
 
-  --color-dark: rgb(21, 24, 17);
+  --color-dark: #151811;
 
-  --color-text-grey: grey;
+  --color-text-grey: #808080;
+
+  --main-color-bg-light: #f4f4f4;
+  --main-color-bg-dark: #14170f;
 }
 
 @font-face {
@@ -72,6 +75,12 @@ body {
   font-weight: 200;
   line-height: 1.6;
   letter-spacing: 0.05rem;
+}
+
+@media (max-width: 40em) {
+ body {
+   background-color: var(--main-color-bg-dark);
+ }
 }
 
 p {

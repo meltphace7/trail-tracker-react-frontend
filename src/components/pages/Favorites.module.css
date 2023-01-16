@@ -23,3 +23,13 @@
     flex-direction: column;
     align-items: center;
 }
+
+@media (max-width: 40em) {
+.favorites {
+  color: white;
+}
+
+.title {
+  color: white;
+}
+}

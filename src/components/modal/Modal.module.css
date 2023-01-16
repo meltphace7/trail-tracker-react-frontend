@@ -10,9 +10,13 @@
 
 .modal {
   position: fixed;
-  top: 20vh;
+  top: 25vh;
   left: 5%;
   width: 90%;
+  min-height: 30rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--color-main-dark);
   color: white;
   border: 1px solid white;

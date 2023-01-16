@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import TrailSearchForm from "../TrailSearchForm";
 import classes from "./HomePage.module.css";
-import FeaturedHike from "../FeaturedHike";
+// import TrailMap from '../TrailMap';
+// import FeaturedHike from "../FeaturedHike";
 
 const HomePage = (props) => {
   const getFilterSelection = function (filter) {
@@ -52,7 +53,10 @@ const HomePage = (props) => {
         </div>
       </div>
       <div className={classes["featured-hikes-section"]}>
-        <h1>Featured Trails</h1>
+        {/* <TrailMap trails={props.trails}
+          coords={coords}
+        /> */}
+        {/* <h1>Featured Trails</h1> */}
         {/* <div className={classes["featured-hikes-container"]}>
           {props.trails.slice(3, 6).map((trail) => {
             return (

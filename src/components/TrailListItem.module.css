@@ -228,3 +228,9 @@
     padding: 1rem 2rem;
   }
 }
+
+@media (max-width: 40em) {
+ .trail-item {
+  box-shadow: 3px 3px 3px #171717;
+}
+}
