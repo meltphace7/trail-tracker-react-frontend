@@ -94,7 +94,7 @@ const UserTrail = (props) => {
         </div>
       </div>
       <div className={classes["info-container"]}>
-        <h2>{trail.trailName}</h2>
+        <h2 className={classes['trail-title']}>{trail.trailName}</h2>
 
         <h3>{`${trail.state} - ${trail.wildernessArea} `}</h3>
 

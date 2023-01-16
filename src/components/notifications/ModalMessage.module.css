@@ -6,8 +6,7 @@
 
 .ok-btn {
     border-radius: 20rem;
-    border: 1px solid white;
-    background-color: black;
+    background-color: var(--color-main-light);
     color: white;
     margin-top: 4rem;
      height: 5rem;
@@ -15,8 +14,7 @@
 }
 
 .ok-btn:hover {
-    border: 1px solid lime;
-    background-color: black;
-    color: lime;
+    background-color: white;
+    color: var(--color-main-light);
 }
 

@@ -34,7 +34,7 @@ const Favorites = (props) => {
   // });
 
   return (
-    <div className={classes["favorites-container"]}>
+    <div className={classes["favorites"]}>
       <h1 className={classes["title"]}>FAVORITES</h1>
       <p>
         {userFavorites.length !== 0 ? `${userFavorites.length} results` : ""}

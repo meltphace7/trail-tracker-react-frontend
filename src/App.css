@@ -1,4 +1,3 @@
-
 .App {
   width: 100%;
   display: flex;
@@ -9,61 +8,3 @@
   letter-spacing: .05rem;
   overflow: hidden;
 }
-
-/* button {
-  font-family: 'Raleway', sans-serif;
-  letter-spacing: .05rem;
-}
-
-select {
-  font-family: 'Raleway', sans-serif;
-  letter-spacing: .05rem;
-} */
-
-/* .leaflet-container {
- width: 100rem;
-  height: 60rem;
-}
-
-@media (max-width: 70em) {
-  .leaflet-container {
-  width: 80rem;
-  height: 50rem;
-}
-}
-
-@media (max-width: 60em) {
-  .leaflet-container {
-  width: 80rem;
-  height: 50rem;
-}
-}
-
-
-@media (max-width: 50em) {
-  .leaflet-container {
-  width: 70rem;
-  height: 40rem;
-}
-}
-
-@media (max-width: 40em) {
-  .leaflet-container {
-  width: 55rem;
-  height: 40rem;
-}
-}
-
-@media (max-width: 32em) {
-  .leaflet-container {
-  width: 55rem;
-  height: 40rem;
-}
-}
-
-@media (max-width: 30em) {
-  .leaflet-container {
-  width: 40rem;
-  height: 40rem;
-}
-} */

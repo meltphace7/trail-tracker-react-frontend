@@ -1,9 +1,9 @@
 .weather-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5rem;
 }
 
 .forecast {
@@ -26,8 +26,7 @@
 }
 
 @media (max-width: 53em) {
-  .forecast{
+  .forecast {
     flex-direction: column;
-
   }
 }

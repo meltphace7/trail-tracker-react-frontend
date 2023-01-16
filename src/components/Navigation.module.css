@@ -3,7 +3,7 @@
   height: 9rem;
   color: black;
   background-color: white;
-  border-bottom: 1px solid rgb(205, 205, 205);
+  border-bottom: 1px solid #cdcdcd;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,8 +17,8 @@
 }
 
 .nav-link {
-  color: black;
-  padding-bottom: .5rem;
+  color: var(--main-color-dark);
+  padding-bottom: 0.5rem;
   transition: all 200ms ease-in;
 }
 
@@ -28,20 +28,20 @@
 
 .nav-menu li a.active {
   color: green;
-  border-bottom: 1px solid green;
+  border-bottom: 1px solid #008000;
 }
 
 .logout-button {
-  margin-top: .4rem;
+  margin-top: 0.4rem;
   background-color: transparent;
   text-decoration: none;
   cursor: pointer;
   transition: 200ms ease-in-out;
-  color: var(--secondary-green);
+  color: var(--main-color-dark);
 }
 
 .logout-button:hover {
-  color: rgb(64, 155, 64);
+  color: #409b40;
 }
 
 @media (max-width: 53em) {
@@ -60,5 +60,3 @@
     display: none;
   }
 }
-
-

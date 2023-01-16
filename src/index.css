@@ -1,12 +1,11 @@
 :root {
-  --green: rgb(122, 171, 24);
-  --primary-green: rgb(30, 34, 24);
-   --color-dark: rgb(21, 24, 17);
-  --secondary-green: rgb(42, 55, 42);
-  --quatrary-green: rgb(42, 55, 42);
-  --tertiary-green: rgb(192, 247, 83);
-  --primary-orange: rgb(238, 117, 72);
-  --secondary-orange: rgb(196, 63, 14);
+  --color-main-light: #7aab18;
+  --color-main-mid: #2a372a;
+  --color-main-dark: #1e2218;
+
+  --color-dark: rgb(21, 24, 17);
+
+  --color-text-grey: grey;
 }
 
 @font-face {
@@ -107,6 +106,7 @@ a:hover {
 button {
   font-size: 1.6rem;
   border: unset;
+  font-family: inherit;
   cursor: pointer;
 }
 

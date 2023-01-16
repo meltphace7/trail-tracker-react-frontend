@@ -6,15 +6,15 @@
 }
 
 .trail-item {
-  margin: .32rem 0rem;
+  margin: 0.32rem 0rem;
   border-radius: 16px;
-  padding: 1.2rem .8rem;
+  padding: 1.2rem 0.8rem;
   width: 70%;
   height: 16rem;
   display: flex;
   align-items: center;
   color: white;
-  background-color: var(--secondary-green);
+  background-color: var(--color-main-mid);
   cursor: pointer;
   transition: 300ms ease-in;
   box-shadow: 3px 3px 3px rgb(171, 171, 171);
@@ -32,8 +32,8 @@
 .image-container {
   width: 25.6rem;
   height: 16rem;
-  margin: 1.6rem 1.6rem 1.6rem .8rem;
-  background-color: var(--secondary-green);
+  margin: 1.6rem 1.6rem 1.6rem 0.8rem;
+  background-color: var(--color-main-mid);
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -69,21 +69,30 @@
 .trail-item h2 {
   color: yellowgreen;
   transition: 300ms ease-in;
+  font-size: 2.2rem;
 }
 
+.trail-item h3 {
+  transition: 300ms ease-in;
+  font-size: 1.8rem;
+}
+
+.trail-item p {
+  transition: 300ms ease-in;
+  font-size: 1.4rem;
+}
 
 .trail-item:hover {
-  background-color: var(--primary-green);
+  background-color: var(--color-main-dark);
 }
 
 .trail-item:hover .image-container {
-  background-color: var(--primary-green);
+  background-color: var(--color-main-dark);
 }
 
 .trail-item:hover h2 {
   color: yellowgreen;
 }
-
 
 .miles-difficulty-container {
   display: flex;
@@ -91,39 +100,37 @@
 }
 
 .easy {
-  padding: .32rem;
+  padding: 0.32rem;
   border-radius: 5px;
   background-color: green;
 }
 
 .moderate {
-  padding: .32rem;
+  padding: 0.32rem;
   border-radius: 5px;
   background-color: rgb(237, 116, 11);
 }
 
 .hard {
-  padding: .32rem;
+  padding: 0.32rem;
   border-radius: 5px;
-  background-color: red
+  background-color: red;
 }
 
 .very-hard {
-  padding: .32rem;
+  padding: 0.32rem;
   border-radius: 5px;
-  background-color: rgb(133, 1, 1)
+  background-color: rgb(133, 1, 1);
 }
 
 .description {
-   line-height: 2.4rem;
-    height: 4.8rem;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    width: 48rem;
-  /* background-color: red; */
+  line-height: 2.4rem;
+  height: 4.8rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 48rem;
 }
-
 
 .trail-controls {
   width: 14.4rem;
@@ -134,58 +141,55 @@
 }
 
 .edit-btn {
-  /* font-size: 1rem; */
   color: white;
   width: 11.2rem;
   height: 4.8rem;
-  background-color: var(--green);
+  background-color: var(--color-main-light);
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 20rem;
-  margin: .5rem;
-   z-index: 999;
+  margin: 0.5rem;
+  z-index: 999;
 }
 
 .delete-btn {
-  /* font-size: 1rem; */
   color: white;
- width: 11.2rem;
+  width: 11.2rem;
   height: 4.8rem;
-  background-color: var(--green);
-    display: flex;
+  background-color: var(--color-main-light);
+  display: flex;
   justify-content: center;
   align-items: center;
-   border-radius: 20rem;
-   border: unset;
-   margin: .5rem;
-   cursor: pointer;
-   transition: all 200ms ease-in;
-   z-index: 999;
+  border-radius: 20rem;
+  border: unset;
+  margin: 0.5rem;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+  z-index: 999;
 }
 
 .edit-btn:hover {
-  background-color: black;
-  color: var(--green);
+  background-color: white;
+  color: var(--color-main-dark);
 }
 
 .delete-btn:hover {
-  background-color: black;
-  color: var(--green);
-
+  background-color: white;
+  color: var(--color-main-dark);
 }
 
 @media (max-width: 53em) {
   .trail-link {
-  position: absolute;
-  width: 55%;
-  height: 35rem;
-
-}
+    position: absolute;
+    width: 55%;
+    height: 35rem;
+  }
 
   .trail-item {
     height: 40rem;
     width: 38rem;
+    border-radius: 10px;
     flex-direction: column;
   }
 
@@ -213,45 +217,40 @@
   }
 
   .trail-item {
-  padding: 1rem 2rem;
+    padding: 1rem 2rem;
+  }
 
+  .trail-controls {
+    width: 100%;
+    margin-left: auto;
+    display: flex;
+    flex-direction: unset;
+    justify-content: space-around;
+    align-items: center;
+  }
 }
 
-.trail-controls {
-  width: 100%;
-  margin-left: auto;
-  display: flex;
-  flex-direction: unset;
-  justify-content: space-around;
-  align-items: center;
-}
-}
-
-
- @media (max-width: 44em) {
-    .trail-link {
-  position: absolute;
-  width: 99%;
-  height: 32rem;
-
-}
+@media (max-width: 44em) {
+  .trail-link {
+    position: absolute;
+    width: 99%;
+    height: 32rem;
+  }
   .trail-item {
     padding: 0;
     height: 40rem;
     width: 100%;
     flex-direction: column;
-    border-radius: unset;
+    border-radius: 5px;
   }
 
   .image-container {
     width: 100%;
     height: 19rem;
-    margin: 0;
-    background-color: red;
+    margin: 1.6rem 0rem 1.6rem 0rem;
   }
 
   .image-container img {
-    /* width: 20rem; */
     height: 24rem;
   }
 
@@ -266,10 +265,6 @@
   }
 
   .trail-item {
-  padding: 1rem 2rem;
-
+    padding: 1rem 2rem;
+  }
 }
-} 
-
-
-

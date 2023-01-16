@@ -1,7 +1,7 @@
 .trail-detail {
   width: 90%;
   padding-bottom: 4rem;
-  background-color: var(--secondary-green);
+  background-color: var(--color-main-mid);
   color: white;
   display: flex;
   flex-direction: column;
@@ -21,7 +21,7 @@
   top: 2rem;
   border: none;
   color: yellowgreen;
-  background-color: var(--primary-secondary);
+  background-color: unset;
   cursor: pointer;
 }
 
@@ -56,14 +56,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--secondary-green);
-
+  background-color: var(--color-main-mid);
 }
 
 .info-header h1 {
  padding: 1.6rem;
  margin: .8rem;
- background-color: var(--green);
+ background-color: var(--color-main-light);
  border-radius: 10px;
 }
 
@@ -75,7 +74,7 @@
 .info-sub-header {
   width: 100%;
   padding: 2rem 0;
-  background-color: var(--green);
+  background-color: var(--color-main-light);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -106,15 +105,10 @@
 }
 
 .description {
-  width: 75%;
+  width: 90%;
   min-height: 16rem;
   line-height: 2rem;
   margin: 4rem 0rem;
-}
-
-.select-trail-message {
-  margin-top: 2rem;
-  color: var(--primary-orange);
 }
 
 .map-container {
@@ -138,10 +132,6 @@
 
 .submitted-by {
   margin-top: 3rem;
-}
-
-.description {
-  width: 90%;
 }
 
 @media (max-width: 53em) {

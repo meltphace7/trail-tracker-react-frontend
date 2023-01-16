@@ -16,38 +16,6 @@
   color: white;
 }
 
-
-.cart-container {
-  width: 8rem;
-  margin-right: 6rem;
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cart-not-empty {
-  color: var(--main-color-1);
-  font-size: 1.5rem;
-  margin-left: 0.5rem;
-}
-
-.cart-empty {
-  position: relative;
-  right: 0.5rem;
-  z-index: 0;
-  color: white;
-  width: 3rem;
-  height: 3rem;
-  background-color: var(--main-color-2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  margin-left: 0.5rem;
-}
-
 .navigation__checkbox {
   display: none;
 }

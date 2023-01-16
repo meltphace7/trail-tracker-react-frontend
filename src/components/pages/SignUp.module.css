@@ -14,7 +14,7 @@
   width: 35.2rem;
   height: 48rem;
   padding: 1.6rem;
-  background-color: white;
+   background-color: rgba(255, 255, 255, 0.927);
   box-shadow: 0 8px 16px 0 rgb(0 0 0 / 24%), 0 0 8px 0 rgb(0 0 0 / 8%);
   border-radius: 10px;
   display: flex;
@@ -40,20 +40,18 @@
   border: none;
   border-radius: 40px;
   color: white;
-  background-color: var(--green);
+  background-color: var(--color-main-light);
   height: 6rem;
   width: 32rem;
-  cursor: pointer;
   transition: all 200ms ease-in;
 }
 
 .button:hover {
-  background-color: var(--secondary-green);
+  background-color: var(--color-main-mid);
 }
 
 .login {
   color: green;
-  cursor: pointer;
 }
 
 .loading {

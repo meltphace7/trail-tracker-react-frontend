@@ -41,7 +41,7 @@ const Account = (props) => {
       </div>
       <h1>Your Submitted Trails</h1>
       <p>{`${usersTrails.length} trails`}</p>
-      <ul className={classes["user-trails-container"]}>
+      <ul className={classes["user-trails-list"]}>
         {usersTrails.map((trail) => {
           return (
             <UserTrail

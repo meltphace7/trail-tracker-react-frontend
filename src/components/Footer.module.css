@@ -1,23 +1,23 @@
-.footer{
-    width: 100%;
-    height: 9.6rem;
-    background-color: white;
-    border-top: 1px solid gray;
-    color: var(--secondary-green);
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+.footer {
+  width: 100%;
+  height: 9.6rem;
+  background-color: white;
+  border-top: 1px solid gray;
+  color: var(--color-main-mid);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .footer h2 {
   margin-left: 3.2rem;
-  font-size: 1.92rem;  
+  font-size: 1.92rem;
 }
 
 @media (max-width: 30em) {
   .footer {
     background-color: var(--color-dark);
     color: white;
+    border-top: unset;
   }
-
 }

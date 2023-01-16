@@ -1,48 +1,48 @@
 .slider-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 3.2rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3.2rem;
 }
 
 .slider {
-   height: 60rem;
-    width: 95%;
-   border-radius: 10px;
-   position: relative;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   overflow: hidden;
+  height: 60rem;
+  width: 95%;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .image {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
 }
 
 .slider-button {
-    cursor: pointer;
-    border: none;
-    margin: 2.4rem;
-    width: 9.6rem;
-    height: 4.8rem;
-    border-radius: 5px;
-    color: white;
-    border: 1px solid white;
+  cursor: pointer;
+  border: none;
+  margin: 2.4rem;
+  width: 9.6rem;
+  height: 4.8rem;
+  border-radius: 5px;
+  color: #ffffff;
+  border: 1px solid #ffffff;
 }
 
 .mobile-slider-button {
-    cursor: pointer;
-    border: none;
-    margin: 1.5rem;
-    width: 9.6rem;
-    height: 4.8rem;
-    border-radius: 5px;
-    color: white;
-    border: 1px solid white;
+  cursor: pointer;
+  border: none;
+  margin: 1.5rem;
+  width: 9.6rem;
+  height: 4.8rem;
+  border-radius: 5px;
+  color: #ffffff;
+  border: 1px solid #ffffff;
 }
 
 .slide {
@@ -51,9 +51,9 @@
 }
 
 .slide.active {
-    opacity: .6;
-    transition-duration: 1s;
-    transform: scale(1.08);
+  opacity: 0.6;
+  transition-duration: 1s;
+  transform: scale(1.08);
 }
 
 .slider-controls-container {
@@ -65,19 +65,9 @@
   align-items: center;
 }
 
-/* @media (max-width: 40em) {
-
-   .slider-controls-container {
-     margin-top: rem;
-   }
-
-} */
-
-
-
 @media (max-width: 40em) {
   .slider {
-    height:  44.8rem;
+    height: 44.8rem;
   }
 
   .slider-button {
@@ -88,17 +78,14 @@
     flex-direction: column;
   }
 
-   .slider-controls-container {
-     margin-top: 3rem;
-     display: flex;
-   }
-
+  .slider-controls-container {
+    margin-top: 3rem;
+    display: flex;
+  }
 }
 
 @media (max-width: 30em) {
   .slider {
-    
-    height:  44.8rem;
+    height: 44.8rem;
   }
-
 }

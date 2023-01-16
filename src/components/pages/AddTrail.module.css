@@ -15,9 +15,8 @@
   margin-bottom: 5rem;
   width: 64rem;
   color: white;
-  background-color: var(--secondary-green);
+  background-color: var(--color-main-dark);
   border-radius: 15px;
-  /* border: 1px solid var(--tertiary-green); */
   padding: 4.8rem;
   display: flex;
   flex-direction: column;
@@ -39,18 +38,6 @@
 .trail-name input {
   width: 100%;
 }
-
-/* .state input {
-  width: 100%;
-} */
-
-/* .wilderness-area {
-  width: 100%;
-} */
-
-/* .season {
-  width: 100%;
-} */
 
 .number-input {
   width: 8rem;
@@ -87,15 +74,18 @@
   text-align: center;
   color: white;
   border: none;
-  background: rgb(36,116,7);
-  background: linear-gradient(0deg, rgba(36,116,7,1) 21%, rgba(50,251,23,1) 100%);
-  border-radius: 10px;
+  /* background: rgb(36,116,7);
+  background: linear-gradient(0deg, rgba(36,116,7,1) 21%, rgba(50,251,23,1) 100%); */
+  background-color: var(--color-main-light);
+  border-radius: 20rem;
   cursor: pointer;
   transition: 300ms;
+    border: 1px solid var(--color-main-light)
 }
 
 .trail-form button:hover {
-  color: rgb(214, 249, 143);
+  background-color: black;
+  border: 1px solid var(--color-main-light);
   
 }
 
