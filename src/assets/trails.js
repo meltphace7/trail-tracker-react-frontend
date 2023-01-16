@@ -871,7 +871,7 @@ export let TRAIL_DATA = [
     id: 43,
     trailName: "Yellow Aster Butte",
     state: "Washington",
-    wildernessArea: "Mt. Baker-Snoqualmie National Forest",
+    wildernessArea: "Mount Baker Wilderness",
     bestSeason: ["7", "10"],
     imageURL: [
       "/imgs/WA-yellowaster-1.jpg",

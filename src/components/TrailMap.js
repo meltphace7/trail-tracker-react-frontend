@@ -1,6 +1,7 @@
 import React from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { Link } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 
 function ChangeView({ center, zoom }) {
@@ -30,7 +31,11 @@ const TrailMap = (props) => {
             position={[trail.latitude, trail.longitude]}
             key={trail._id}
           >
-            <Popup>{`${trail.trailName} trailhead`}</Popup>
+            <Popup>
+              <Link to={`/trail-detail/${trail._id}`}>
+                {`${trail.trailName}`}
+              </Link>
+            </Popup>
           </Marker>
         ))}
       </MapContainer>

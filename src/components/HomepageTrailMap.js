@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
@@ -11,15 +11,9 @@ function ChangeView({ center, zoom }) {
 }
 
 const TrailMap = (props) => {
+  const icon = L.icon({ iconUrl: "/imgs/marker-icon.png" });
 
-    const icon = L.icon({ iconUrl: "/imgs/marker-icon.png" });
-    
-    const startingCoords = [43.345422346759506, -115.65009275810509];
-
-    const handleOpen = (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-    }
+  const startingCoords = [43.345422346759506, -115.65009275810509];
 
   return (
     <div>
@@ -33,15 +27,14 @@ const TrailMap = (props) => {
         <ChangeView center={startingCoords} zoom={5} />
         {props.trails.map((trail) => (
           <Marker
-            
             icon={icon}
             position={[trail.latitude, trail.longitude]}
             key={trail._id}
           >
-            <Popup onClick={handleOpen}>
-              <Link
-                to={`/trail-detail/${trail._id}`}
-              >{`${trail.trailName}`}</Link>
+            <Popup>
+              <Link to={`/trail-detail/${trail._id}`}>
+                {`${trail.trailName}`}
+              </Link>
             </Popup>
           </Marker>
         ))}
