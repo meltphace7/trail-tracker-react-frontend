@@ -59,11 +59,13 @@ const TrailList = (props) => {
   const prevPageHandler = () => {
     if (page === 1) return;
     setPage((prevState) => prevState - 1);
+    window.scrollTo(0, 0);
   };
 
   const nextPageHandler = () => {
     if (page === pages) return;
     setPage((prevState) => prevState + 1);
+    window.scrollTo(0, 0);
   };
 
   // const getTrailHandler = function (e) {
