@@ -9,7 +9,6 @@ import hostURL from "../hosturl";
 const UserTrail = (props) => {
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.auth.favorites);
-  console.log("favorites", favorites);
   const trailId = props.id;
   const trail = {
     _id: props.id,

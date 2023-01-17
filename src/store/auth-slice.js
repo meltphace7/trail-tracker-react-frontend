@@ -66,8 +66,11 @@ const authSlice = createSlice({
         );
       }
     },
-    setFavoritesFromLocalStorage(state, action) {
-      state.favorites = action.payload;
+    setFavoritesFromLocalStorage(state) {
+      const favoritesArray = localStorage.getItem("favorite-trails")
+        ? JSON.parse(localStorage.getItem("favorite-trails"))
+        : [];
+      state.favorites = favoritesArray;
     }
   },
 });

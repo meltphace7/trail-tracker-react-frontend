@@ -3,6 +3,7 @@ import classes from "./Navigation.module.css";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store/auth-slice";
+import trailLogo from '../assets/trail-tracker-icon.png'
 import Logo from './Logo'
 
 const Navigation = () => {

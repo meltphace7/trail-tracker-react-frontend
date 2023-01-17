@@ -1,19 +1,17 @@
-.logo-container {
-  margin-left: 1rem;
-  border-radius: 5px;
+.logo {
+  margin-left: 4rem;
+  font-size: 1.6rem;
   display: flex;
-  overflow: hidden;
+  align-items: center;
 }
 
-.logo-first {
-  color: black;
-  background-color: yellowgreen;
-  border: 2px solid black;
-  padding: .25rem;
+.logo img {
+  height: 5rem;
 }
 
-.logo-second {
-  color: yellowgreen;
-  background-color: black;
-  padding: .25rem;
+.logo p {
+  margin-left: .5rem;
+  font-size: 2.5rem;
+  height: 3rem;
 }
+

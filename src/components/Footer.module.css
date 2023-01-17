@@ -9,6 +9,25 @@
   align-items: center;
 }
 
+.logo {
+  margin-left: 4rem;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 5rem;
+}
+
+.logo p {
+  margin-left: 1rem;
+}
+
+.legal {
+  font-size: 1.6rem;
+}
+
 .footer h2 {
   margin-left: 3.2rem;
   font-size: 1.92rem;

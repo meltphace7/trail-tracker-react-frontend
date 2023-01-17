@@ -1,11 +1,12 @@
 import React from 'react'
 import classes from './Logo.module.css'
+import trailLogo from "../assets/trail-tracker-icon.png";
 
 const Logo = () => {
     return (
-      <div className={classes["logo-container"]}>
-        <h1 className={classes["logo-first"]}>TRAIL</h1>
-        <h1 className={classes["logo-second"]}>TRACKER</h1>
+      <div className={classes["logo"]}>
+        <img src={trailLogo} alt="trail tracker logo" />
+        <p>Trail Tracker</p>
       </div>
     );
 }

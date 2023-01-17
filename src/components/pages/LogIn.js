@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import classes from "./LogIn.module.css";
+import classes from "./Login.module.css";
 import { Link, useHistory } from "react-router-dom";
 import hostURL from "../../hosturl";
 import ModalMessage from "../notifications/ModalMessage";
@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/auth-slice";
 import useValidation from "../../hooks/use-validation";
 
-const LogIn = (props) => {
+const Login = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [isError, setIsError] = useState(false);
@@ -174,4 +174,4 @@ const LogIn = (props) => {
   );
 };
 
-export default LogIn;
+export default Login;

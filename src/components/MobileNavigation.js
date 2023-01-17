@@ -3,6 +3,7 @@ import classes from "./MobileNavigation.module.css";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store/auth-slice";
+import Logo from './Logo';
 
 const MobileNavigation = () => {
   const history = useHistory();
@@ -31,7 +32,7 @@ const MobileNavigation = () => {
   return (
     <nav className={classes.nav}>
       <Link to="/home" className={classes.logo}>
-        <h3>TRAIL TRACKER</h3>
+        <Logo />
       </Link>
       <div className={classes.navigation}>
         <input

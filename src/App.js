@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import Navigation from "./components/Navigation";
-import MobileNavigation from './components/MobileNavigation';
+import MobileNavigation from "./components/MobileNavigation";
 import AddTrail from "./components/pages/AddTrail";
 import EditTrail from "./components/pages/EditTrail";
 import Footer from "./components/Footer";
@@ -10,47 +10,28 @@ import HomePage from "./components/pages/HomePage";
 import TrailSearchResults from "./components/pages/TrailSearchResults";
 import ScrollToTop from "./components/ScrollToTop";
 import Favorites from "./components/pages/Favorites";
-import Account from './components/pages/Account';
+import Account from "./components/pages/Account";
 import SignUp from "./components/pages/SignUp";
-import LogIn from "./components/pages/LogIn";
+import Login from "./components/pages/Login";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAuthData } from "./store/auth-actions";
 import { sendAuthData } from "./store/auth-actions";
 import hostURL from "./hosturl";
-import { authActions } from "./store/auth-slice";
 
 let isInitial = true;
 let render = 1;
 
 function App() {
-  // const [loadedTrails, setLoadedTrails] = useState([]);
-  const dispatch = useDispatch();
-  const userFavorites = useSelector((state) => state.auth.favorites);
-  const currentTrailQuery = useSelector(
-    (state) => state.trails.currentSearchQuery
-  );
-
-  const isAuth = useSelector((state) => state.auth.isAuth);
   const [trails, setTrails] = useState([]);
-
-  //LOAD FAVORITES from local storage
-  const [favorites, setFavorites] = useState(
-    localStorage.getItem("favorite-trails")
-      ? JSON.parse(localStorage.getItem("favorite-trails"))
-      : []
-  );
-  // if (!isAuth) {
-  //   dispatch(authActions.setFavoritesFromLocalStorage(favorites));
-  // }
-
   const [filteredTrails, setFilteredTrails] = useState([]);
   const [filter, setFilter] = useState("");
 
-  const favoriteToggleHandler = function () {
-    setFavorites(JSON.parse(localStorage.getItem("favorite-trails")));
-  };
+  const dispatch = useDispatch();
 
-  //FETCH CART DATA IF CURRENT USER IS AUTHENTICATED
+  const userFavorites = useSelector((state) => state.auth.favorites);
+  const isAuth = useSelector((state) => state.auth.isAuth);
+
+  //FETCH AUTH DATA IF CURRENT USER IS AUTHENTICATED
   useEffect(() => {
     dispatch(fetchAuthData());
     if (isInitial) {
@@ -63,7 +44,7 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    // PREVENTS CART UPDATE ON FIRST RENDER
+    // PREVENTS AUTH UPDATE ON FIRST RENDER
     if (isInitial) {
       isInitial = false;
       render = 2;
@@ -78,11 +59,10 @@ function App() {
     // IF USER AUTHENTICATED, UPDATE FAVORITES ON FAVORITES CHANGE
     dispatch(sendAuthData(userFavorites));
   }, [userFavorites, dispatch]);
-  
 
   // FETCHES TRAILS FROM BACKEND
   const fetchTrails = useCallback(async () => {
-    console.log('FETCHING TRAILS from APP')
+    console.log("FETCHING TRAILS from APP");
     try {
       const response = await fetch(`${hostURL}/trails/trails`);
       if (!response.ok) {
@@ -104,23 +84,8 @@ function App() {
     fetchTrails();
   }, [fetchTrails]);
 
-  //updates loaded trails on trail submission in AddTrails.js
-  const upDateLoadedTrailsHandler = function () {
-    fetchTrails();
-    console.log("TRAILS UPDATED");
-  };
-
-  const trailID = localStorage.getItem("selectedTrail");
-  const [selectTrail] = trails.filter((trail) => trail._id === trailID);
-  const [selectedTrail, setSelectedTrail] = useState(selectTrail);
-
-  ////////////////////////////////////////////////
-  // const getAddTrailData = (trailData) => {
-  //   setTrails((prevState) => {
-  //     return [...prevState, trailData];
-  //   });
-  // };
-
+  ////////////////// FILTER-RESULTS //////////////////////////
+  // Gets filter from TrailSearchResultsComponent
   const getFilter = (filterSetting) => {
     setFilter(filterSetting);
   };
@@ -179,22 +144,10 @@ function App() {
     }
   }, [filter, trails]);
 
-  // // GETS Indiviual Trail data for TrailDetail rendering
-  const getSelectedTrail = function (id) {
-    const [selectTrail] = trails.filter((trail) => trail._id === id);
-    setSelectedTrail(selectTrail);
-    localStorage.setItem("selectedTrail", id);
-  };
-
-  // console.log("RENDER");
-
   return (
     <div className="App">
       <MobileNavigation />
-      <Navigation
-      // trails={trails}
-      // onFilterSelect={getFilter}
-      />
+      <Navigation />
       <ScrollToTop />
       <Switch>
         <Route path="/" exact>
@@ -204,24 +157,15 @@ function App() {
           <HomePage
             trails={trails}
             onFilterSelect={getFilter}
-            onTrailSelect={getSelectedTrail}
             trailFilter={filter}
           />
         </Route>
-          <Route path="/favorites">
-            <Favorites
-              onTrailSelect={getSelectedTrail}
-              onFavoriteToggle={favoriteToggleHandler}
-              favorites={favorites}
-            />
-          </Route>
+        <Route path="/favorites">
+          <Favorites />
+        </Route>
         {isAuth && (
           <Route path="/addtrail">
-            <AddTrail
-              // onAddTrail={getAddTrailData}
-              onAddTrail={fetchTrails}
-              updateTrails={upDateLoadedTrailsHandler}
-            />
+            <AddTrail onAddTrail={fetchTrails} />
           </Route>
         )}
         {isAuth && (
@@ -236,27 +180,20 @@ function App() {
         )}
         <Route path="/trails">
           <TrailSearchResults
-            onTrailSelect={getSelectedTrail}
             filteredTrails={filteredTrails}
             trails={trails}
             trailFilter={filter}
             onFilterSelect={getFilter}
-            onFavoriteToggle={favoriteToggleHandler}
-            favorites={favorites}
           />
         </Route>
         <Route path="/trail-detail/:trailId">
-          <TrailDetail
-            trail={selectedTrail}
-            trails={filteredTrails}
-            onFavoriteToggle={favoriteToggleHandler}
-          />
+          <TrailDetail trails={filteredTrails} />
         </Route>
         <Route path="/signup">
           <SignUp />
         </Route>
         <Route path="/login">
-          <LogIn />
+          <Login />
         </Route>
         <Route path="*">
           <Redirect to="/" />
