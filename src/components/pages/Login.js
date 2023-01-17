@@ -9,7 +9,6 @@ import { authActions } from "../../store/auth-slice";
 import useValidation from "../../hooks/use-validation";
 
 const Login = (props) => {
-  console.log("test");
   const history = useHistory();
   const dispatch = useDispatch();
   const [isError, setIsError] = useState(false);
