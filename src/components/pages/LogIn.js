@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import classes from "./LogIn.module.css";
 import { Link, useHistory } from "react-router-dom";
 import hostURL from "../../hosturl";
 import ModalMessage from "../notifications/ModalMessage";
-import LoadingScreen from '../notifications/LoadingScreen';
-import { useDispatch } from "react-redux";
+import LoadingScreen from "../notifications/LoadingScreen";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/auth-slice";
 import useValidation from "../../hooks/use-validation";
 
@@ -38,6 +38,17 @@ const LogIn = (props) => {
   if (emailIsValid && passwordIsValid) {
     formIsValid = true;
   }
+
+
+  const logoutHandler = () => {
+    dispatch(authActions.logout());
+    localStorage.setItem("token", null);
+    localStorage.setItem("userId", null);
+    localStorage.setItem("expiryDate", null);
+    history.replace("/home");
+  };
+
+  // LOGINS IN USER
   const loginHandler = async (event) => {
     event.preventDefault();
     if (!formIsValid) {
@@ -67,12 +78,12 @@ const LogIn = (props) => {
       setIsLoading(false);
       // const isAdmin = resData.isAdmin;
       const token = resData.token;
-      const favorites = resData.favorites
-      const userName = resData.userName
+      const favorites = resData.favorites;
+      const userName = resData.userName;
       const loginData = {
         userName,
-        favorites
-      }
+        favorites,
+      };
       dispatch(authActions.login(loginData));
       // if (isAdmin) {
       //   dispatch(authActions.adminLogin());
@@ -82,7 +93,9 @@ const LogIn = (props) => {
       const remainingMilliseconds = 60 * 60 * 1000;
       const expiryDate = new Date(new Date().getTime() + remainingMilliseconds);
       localStorage.setItem("expiryDate", expiryDate.toISOString());
-      // props.onLogin();
+      // AUTO LOGOUT ///
+      setAutoLogout(remainingMilliseconds);
+      ///////////
       history.push("/home");
     } catch (err) {
       setIsLoading(false);
@@ -93,6 +106,15 @@ const LogIn = (props) => {
     emailReset();
     passwordReset();
   };
+
+  const setAutoLogout = (milliseconds) => {
+    console.log("AUTO LOG TIMER STARTED");
+     setTimeout(() => {
+       logoutHandler();
+       console.log('AUTO LOG OUT')
+     }, milliseconds);
+  };
+
 
   const emailClasses = emailHasError
     ? `${classes["login-input"]} ${classes["invalid"]}`

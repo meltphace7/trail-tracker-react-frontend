@@ -11,8 +11,6 @@ const TrailSearchForm = (props) => {
       (state) => state.trails.currentQueryType
     );
   const currentTrailQuery = useSelector(state => state.trails.currentSearchQuery);
-  console.log('Search form, cur query', currentTrailQuery)
-  console.log("Query Type, form", currentQueryType);
   // FINDS UNIQUE VALUES OF props.trails ARRAY
   const getUniqueValues = function (property) {
     const uniqueValues = [
