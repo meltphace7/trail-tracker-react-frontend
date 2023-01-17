@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 const Favorites = (props) => {
   const userFavorites = useSelector((state) => state.auth.favorites);
 
+ 
+
   // const renderFavorites = userFavorites.map((trail) => {
   //   return (
   //     <TrailListItem

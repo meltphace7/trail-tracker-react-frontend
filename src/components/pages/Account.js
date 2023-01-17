@@ -28,8 +28,12 @@ const Account = (props) => {
         throw new Error("Could not find users trails!");
       }
       const responseData = await response.json();
-      setUsersTrails(responseData.submittedTrails);
-      setResults(responseData.submittedTrails.slice(0, resultsPerPage));
+         const alphaSortedTrails = responseData.submittedTrails.sort((a, b) =>
+           a.trailName.localeCompare(b.trailName)
+         );
+      
+      setUsersTrails(alphaSortedTrails);
+      setResults(alphaSortedTrails.slice(0, resultsPerPage));
     } catch (err) {
       console.log(err);
     }

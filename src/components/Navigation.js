@@ -27,7 +27,7 @@ const Navigation = () => {
           <Logo />
         </Link>
       </div>
-      <ul className={classes['nav-menu']}>
+      <ul className={classes["nav-menu"]}>
         <li>
           <NavLink
             className={classes["nav-link"]}
@@ -38,16 +38,16 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li>
-          {isLoggedIn && (
-            <NavLink
-              className={classes["nav-link"]}
-              activeClassName={classes.active}
-              to="/favorites"
-            >
-              FAVORITES
-            </NavLink>
-          )}
-          {!isLoggedIn && (
+          <NavLink
+            className={classes["nav-link"]}
+            activeClassName={classes.active}
+            to="/favorites"
+          >
+            FAVORITES
+          </NavLink>
+        </li>
+        {!isLoggedIn && (
+          <li>
             <NavLink
               activeClassName={classes.active}
               className={classes["nav-link"]}
@@ -55,8 +55,8 @@ const Navigation = () => {
             >
               SIGN UP
             </NavLink>
-          )}
-        </li>
+          </li>
+        )}
         <li>
           {isLoggedIn && (
             <NavLink

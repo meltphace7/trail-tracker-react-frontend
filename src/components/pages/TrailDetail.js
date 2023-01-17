@@ -4,7 +4,7 @@ import TrailMap from "../TrailMap";
 import ImageSlider from "../ImageSlider";
 import { AiOutlineStar } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
-// import WeatherReport from "../WeatherReport";
+import WeatherReport from "../WeatherReport";
 import hostURL from '../../hosturl';
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
@@ -44,21 +44,7 @@ const TrailDetail = (props) => {
 
   const [season, setSeason] = useState("");
   const coords = [trail.latitude, trail.longitude];
-  // Mom-  46.64463, -120.77671
-  // const monthArray = [
-  //   [1, "January"],
-  //   [2, "Febuary"],
-  //   [3, "March"],
-  //   [4, "April"],
-  //   [5, "May"],
-  //   [6, "June"],
-  //   [7, "July"],
-  //   [8, "August"],
-  //   [9, "September"],
-  //   [10, "October"],
-  //   [11, "November"],
-  //   [12, "December"],
-  // ];
+  // M-  46.64463, -120.77671
 
   // Gets MONTH NAME from props.trail
   useEffect(() => {
@@ -155,7 +141,7 @@ const TrailDetail = (props) => {
             </div>
             <p className={classes["description"]}>{trail.description}</p>
             <ImageSlider images={trail.images} />
-            {/* <WeatherReport coords={coords} /> */}
+            <WeatherReport coords={coords} />
             <div className={classes["map-container"]}>
               <h1>Map</h1>
               <div className={classes["map-text-container"]}>

@@ -17,6 +17,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchAuthData } from "./store/auth-actions";
 import { sendAuthData } from "./store/auth-actions";
 import hostURL from "./hosturl";
+import { authActions } from "./store/auth-slice";
 
 let isInitial = true;
 let render = 1;
@@ -38,6 +39,10 @@ function App() {
       ? JSON.parse(localStorage.getItem("favorite-trails"))
       : []
   );
+  // if (!isAuth) {
+  //   dispatch(authActions.setFavoritesFromLocalStorage(favorites));
+  // }
+
   const [filteredTrails, setFilteredTrails] = useState([]);
   const [filter, setFilter] = useState("");
 
@@ -203,7 +208,6 @@ function App() {
             trailFilter={filter}
           />
         </Route>
-        {isAuth && (
           <Route path="/favorites">
             <Favorites
               onTrailSelect={getSelectedTrail}
@@ -211,7 +215,6 @@ function App() {
               favorites={favorites}
             />
           </Route>
-        )}
         {isAuth && (
           <Route path="/addtrail">
             <AddTrail

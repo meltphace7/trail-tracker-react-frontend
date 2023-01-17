@@ -54,27 +54,12 @@ const HomePage = (props) => {
         </div>
       </div>
       <div className={classes["map-section"]}>
-        <h1>{`Trails`}</h1>
-        <HomepageTrailMap trails={props.trails} />
+       
+          <h1>{`Trails`}</h1>
+          <HomepageTrailMap trails={props.trails} />
+  
       </div>
-      <div className={classes["featured-hikes-section"]}>
-        {/* <TrailMap trails={props.trails}
-          coords={coords}
-        /> */}
-        {/* <h1>Featured Trails</h1> */}
-        {/* <div className={classes["featured-hikes-container"]}>
-          {props.trails.slice(3, 6).map((trail) => {
-            return (
-              <FeaturedHike
-                getTrailId={getIdHandler}
-                key={trail.id}
-                trailData={trail}
-                getTrail={getTrailData}
-              />
-            );
-          })}
-        </div> */}
-      </div>
+
     </React.Fragment>
   );
 };

@@ -30,9 +30,7 @@ const MobileNavigation = () => {
 
   return (
     <nav className={classes.nav}>
-          <Link
-              to="/home"
-              className={classes.logo}>
+      <Link to="/home" className={classes.logo}>
         <h3>TRAIL TRACKER</h3>
       </Link>
       <div className={classes.navigation}>
@@ -58,7 +56,15 @@ const MobileNavigation = () => {
                 Home
               </Link>
             </li>
-
+            <li className={classes["navigation__item"]}>
+              <Link
+                onClick={closeMenuHandler}
+                className={classes["navigation__link"]}
+                to="/favorites"
+              >
+                FAVORITES
+              </Link>
+            </li>
             {!isAuth && (
               <li className={classes["navigation__item"]}>
                 <Link
@@ -67,17 +73,6 @@ const MobileNavigation = () => {
                   to="/signup"
                 >
                   Signup
-                </Link>
-              </li>
-            )}
-            {isAuth && (
-              <li className={classes["navigation__item"]}>
-                <Link
-                  onClick={closeMenuHandler}
-                  className={classes["navigation__link"]}
-                  to="/favorites"
-                >
-                  FAVORITES
                 </Link>
               </li>
             )}
