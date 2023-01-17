@@ -3,7 +3,7 @@
   --color-main-mid: #2a372a;
   --color-main-dark: #1e2218;
 
-  --color-dark: #151811;
+  --color-main-dark-2: #151811;
 
   --color-text-grey: #808080;
 
@@ -79,7 +79,7 @@ body {
 
 @media (max-width: 40em) {
  body {
-   background-color: var(--main-color-bg-dark);
+    background-color: black;
  }
 }
 

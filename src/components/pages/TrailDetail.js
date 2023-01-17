@@ -141,7 +141,7 @@ const TrailDetail = (props) => {
             </div>
             <p className={classes["description"]}>{trail.description}</p>
             <ImageSlider images={trail.images} />
-            <WeatherReport coords={coords} />
+            {/* <WeatherReport coords={coords} /> */}
             <div className={classes["map-container"]}>
               <h1>Map</h1>
               <div className={classes["map-text-container"]}>

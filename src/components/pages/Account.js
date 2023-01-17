@@ -43,6 +43,7 @@ const Account = (props) => {
     fetchUserTrails();
   }, [fetchUserTrails]);
 
+  ////// PAGINATION //////////////////////
   useEffect(() => {
     setPage(1);
   }, [props.trails]);

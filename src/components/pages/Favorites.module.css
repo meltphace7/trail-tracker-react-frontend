@@ -24,12 +24,54 @@
     align-items: center;
 }
 
+.pagination-container {
+  width: 80%;
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.button-container {
+  width: 9.6rem;
+  height: 3.36rem;
+}
+
+.pagination-button {
+  width: 9rem;
+  height: 4rem;
+  margin: 1rem;
+  border-radius: 5px;
+  background: rgb(36, 116, 7);
+  background: linear-gradient(
+    0deg,
+    rgba(36, 116, 7, 1) 21%,
+    rgba(50, 251, 23, 1) 100%
+  );
+  color: white;
+  cursor: pointer;
+  transition: 300ms ease-in;
+}
+
+.results-title {
+  color: var(--color-main-dark);
+}
+
+.pagination-container h3 {
+  color: var(--color-main-dark);
+}
+
+
 @media (max-width: 40em) {
 .favorites {
   color: white;
 }
 
 .title {
+  color: white;
+}
+
+.pagination-container h3 {
   color: white;
 }
 }

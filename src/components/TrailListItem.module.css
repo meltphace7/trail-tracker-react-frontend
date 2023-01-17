@@ -70,7 +70,7 @@
 }
 
 .trail-item h2 {
-  color: yellowgreen;
+  color: greenyellow;
   transition: 300ms ease-in;
 }
 
@@ -230,7 +230,12 @@
 }
 
 @media (max-width: 40em) {
- .trail-item {
-  box-shadow: 3px 3px 3px #171717;
-}
+  .trail-item {
+    background-color: var(--color-main-dark);
+    box-shadow: 3px 3px 3px #171717;
+  }
+
+  .image-container {
+    background-color: var(--color-main-dark);
+  }
 }
