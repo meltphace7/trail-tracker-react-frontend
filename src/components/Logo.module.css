@@ -15,3 +15,9 @@
   height: 3rem;
 }
 
+@media (max-width: 44em) {
+  .logo {
+  margin-left: 0rem;
+}
+}
+

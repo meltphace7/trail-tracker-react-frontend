@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import hostURL from "../../hosturl";
 import ModalMessage from "../notifications/ModalMessage";
 import LoadingScreen from "../notifications/LoadingScreen";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth-slice";
 import useValidation from "../../hooks/use-validation";
 

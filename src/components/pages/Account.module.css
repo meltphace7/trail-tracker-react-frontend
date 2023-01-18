@@ -29,7 +29,7 @@
 
 .pagination-container {
   width: 80%;
-  margin-bottom: 3rem;
+  margin: 3rem 0 2rem 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -37,13 +37,12 @@
 
 .button-container {
   width: 9.6rem;
-  height: 3.36rem;
+  height: 4rem;
 }
 
 .pagination-button {
   width: 9rem;
   height: 4rem;
-  margin: 1rem;
   border-radius: 5px;
   background: rgb(36, 116, 7);
   background: linear-gradient(
