@@ -1,5 +1,4 @@
 import React, { useState, useEffect} from "react";
-import TrailDetail from "./pages/TrailDetail";
 import classes from "./TrailList.module.css";
 import TrailListItem from "./TrailListItem";
 import {useSelector} from 'react-redux'
@@ -119,14 +118,8 @@ const TrailList = (props) => {
   return (
     <div className={classes["trail-list-container"]}>
       <div className={classes["results-container"]}>
-    
         <h1 className={classes["results-title"]}>
           {`${searchQuery} Trails`}
-            {/* {`${
-              props.filter.filterType === "by-season"
-                ? month
-                : props.filter.filterQuery
-            } Trails`} */}
           </h1>
           <p>{`${props.trails.length} results for "${
             props.filter.filterType === "by-season"
@@ -152,7 +145,7 @@ const TrailList = (props) => {
             </button>
           )}
         </div>
-        <h3 className={classes["pagination-num"]}>{`${page} of ${pages}`}</h3>
+        <p className={classes["pagination-num"]}>{`${page} of ${pages}`}</p>
         <div className={classes["button-container"]}>
           {page < pages && (
             <button

@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import classes from "./TrailSearchForm.module.css";
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-import {trailActions }from '../store/trail-slice'
+import { useSelector, useDispatch } from "react-redux";
+import { trailActions } from "../store/trail-slice";
 
 const TrailSearchForm = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
-    const currentQueryType = useSelector(
-      (state) => state.trails.currentQueryType
-    );
-  const currentTrailQuery = useSelector(state => state.trails.currentSearchQuery);
+  const currentQueryType = useSelector(
+    (state) => state.trails.currentQueryType
+  );
+  const currentTrailQuery = useSelector(
+    (state) => state.trails.currentSearchQuery
+  );
   // FINDS UNIQUE VALUES OF props.trails ARRAY
   const getUniqueValues = function (property) {
     const uniqueValues = [
@@ -23,17 +25,9 @@ const TrailSearchForm = (props) => {
   const states = getUniqueValues("state");
   const wilderness = getUniqueValues("wildernessArea");
   // Alpha-Sort
-  const alphaSortedStates = states.sort((a, b) =>
-    a.localeCompare(b)
-  );
-   const alphaSortedWilderness = wilderness.sort((a, b) => a.localeCompare(b));
+  const alphaSortedStates = states.sort((a, b) => a.localeCompare(b));
+  const alphaSortedWilderness = wilderness.sort((a, b) => a.localeCompare(b));
 
-  const initialStateType = props.filter.filterType
-    ? props.filter.filterType
-    : "All";
-
-  // const [filterType, setFilterType] = useState(initialStateType);
-  // const [filterQuery, setFilterQuery] = useState(props.filter.filterQuery);
   const [filterType, setFilterType] = useState(currentQueryType);
   const [filterQuery, setFilterQuery] = useState(currentTrailQuery);
 
@@ -74,7 +68,7 @@ const TrailSearchForm = (props) => {
 
   useEffect(() => {
     props.onFilterSelection(filter);
-  }, [filter]);
+  }, [filter, props]);
 
   // JSX TO BE DYNAMICALLY RENDERED DEPENDING ON FILTER SELECTION
 

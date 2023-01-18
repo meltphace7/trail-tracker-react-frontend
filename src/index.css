@@ -113,6 +113,7 @@ a:hover {
 }
 
 button {
+  letter-spacing: 0.05rem;
   font-size: 1.6rem;
   border: unset;
   font-family: inherit;
@@ -121,6 +122,11 @@ button {
 
 label {
   font-size: 1.6rem;
+  font-family: inherit;
+}
+
+select {
+  font-family: inherit;
 }
 
 .leaflet-container {

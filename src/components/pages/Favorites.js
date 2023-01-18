@@ -97,7 +97,7 @@ const Favorites = (props) => {
             </button>
           )}
         </div>
-        <h3 className={classes["pagination-num"]}>{`${page} of ${pages}`}</h3>
+        <p className={classes["pagination-num"]}>{`${page} of ${pages}`}</p>
         <div className={classes["button-container"]}>
           {page < pages && (
             <button

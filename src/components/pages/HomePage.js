@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import TrailSearchForm from "../TrailSearchForm";
 import classes from "./HomePage.module.css";
-import HomepageTrailMap from '../HomepageTrailMap';
-// import TrailMap from '../TrailMap';
+import HomepageTrailMap from "../HomepageTrailMap";
 // import FeaturedHike from "../FeaturedHike";
 
 const HomePage = (props) => {
@@ -10,14 +9,14 @@ const HomePage = (props) => {
     props.onFilterSelect(filter);
   };
 
-  const getIdHandler = () => {
-    props.getTrail(props.id);
-  };
+  // const getIdHandler = () => {
+  //   props.getTrail(props.id);
+  // };
 
-  const getTrailData = function (id) {
-    props.onTrailSelect(id);
-  };
-   
+  // const getTrailData = function (id) {
+  //   props.onTrailSelect(id);
+  // };
+
   // let randomTrails = [];
   // const generateRandomTrails = function () {
   //    while (randomTrails.length < 3) {
@@ -25,11 +24,10 @@ const HomePage = (props) => {
   //        props.trails[Math.round(Math.random() * props.trails.length)];
   //      if (!randomTrails.includes(num)) {
   //         randomTrails.push(num)
-  //      } 
-      
+  //      }
+
   //    }
   // }
-
 
   // generateRandomTrails();
 
@@ -38,7 +36,7 @@ const HomePage = (props) => {
   //     props.trails[Math.round(Math.random() * props.trails.length)],
   //     props.trails[Math.round(Math.random() * props.trails.length)],
   //   ];
-  
+
   // console.log(randomTrails);
 
   return (
@@ -54,12 +52,9 @@ const HomePage = (props) => {
         </div>
       </div>
       <div className={classes["map-section"]}>
-       
-          <h1>{`Trails`}</h1>
-          <HomepageTrailMap trails={props.trails} />
-  
+        <h1>Trails</h1>
+        <HomepageTrailMap trails={props.trails} />
       </div>
-
     </React.Fragment>
   );
 };

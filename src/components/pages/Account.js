@@ -13,7 +13,6 @@ const Account = (props) => {
   const [results, setResults] = useState([]);
 
   const userName = useSelector((state) => state.auth.userName);
-  const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
   const fetchUserTrails = useCallback(async () => {
@@ -114,7 +113,7 @@ const Account = (props) => {
             </button>
           )}
         </div>
-        <h3 className={classes["pagination-num"]}>{`${page} of ${pages}`}</h3>
+        <p className={classes["pagination-num"]}>{`${page} of ${pages}`}</p>
         <div className={classes["button-container"]}>
           {page < pages && (
             <button

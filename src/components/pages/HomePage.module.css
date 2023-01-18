@@ -28,6 +28,12 @@
     color: white;
 }
 
+.map-section h1 {
+    letter-spacing: .2rem;
+    font-size: 4rem;
+    margin-bottom: 2rem;
+}
+
 
 
 .featured-hikes-section {

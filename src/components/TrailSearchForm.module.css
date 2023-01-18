@@ -10,13 +10,8 @@
   align-items: flex-start;
 }
 
-.trail-search label {
-  font-size: 1.6rem;
-  margin-right: 1rem;
-  color: white;
-}
-
 .trail-search input {
+  color: black;
   width: 18rem;
   height: 4rem;
   border-radius: 5px;
@@ -28,7 +23,6 @@
   width: 17rem;
   border-radius: 20rem;
   padding: 1rem;
-  border: none;
   color: white;
   background: rgb(36, 116, 7);
   background: linear-gradient(
@@ -36,17 +30,22 @@
     rgba(36, 116, 7, 1) 21%,
     rgba(50, 251, 23, 1) 100%
   );
-  cursor: pointer;
 }
 
 .trail-search optgroup {
+  color: black;
   font-size: 3rem;
 }
 
 .trail-search select {
+  color: black;
+  font-family: inherit;
+  font-size: 2rem;
+  font-weight: 100;
   width: 30rem;
   padding-left: 0.5rem;
-  height: 3rem;
+  height: 3.5rem;
+  /* border: 2px solid black; */
   border-radius: 20px;
 }
 
