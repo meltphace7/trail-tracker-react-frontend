@@ -61,14 +61,14 @@
   color: #409b40;
 }
 
-@media (max-width: 53em) {
+@media (max-width: 60em) {
   nav {
     flex-direction: column;
   }
 
   .nav-menu {
     margin-right: 0;
-    width: 99%;
+    width: 92%;
   }
 }
 

@@ -149,7 +149,13 @@
   z-index: 9999;
 }
 
-@media (max-width: 53em) {
+@media (max-width: 65em) {
+  .trail-item {
+    width: 90%;
+  }
+}
+
+@media (max-width: 48em) {
   .trail-link {
     position: absolute;
     width: 55%;
@@ -187,13 +193,28 @@
     align-items: center;
   }
 
-  /* .star {
-    top: -3rem;
-    right: -1rem;
-  } */
+   .star {
+    display: none;
+  }
 }
 
-@media (max-width: 44em) {
+@media (max-width: 48em) { 
+  .trail-link {
+    position: absolute;
+    /* width: 80%; */
+    height: 33rem;
+  }
+
+  .trail-item {
+    width: 60%;
+    height: 34rem;
+    flex-direction: column;
+    border-radius: 5px;
+    padding: 1rem 2rem;
+  }
+}
+
+@media (max-width: 40em) {
   .trail-link {
     position: absolute;
     width: 99%;
@@ -222,18 +243,11 @@
     overflow: hidden;
     align-items: center;
   }
-  
-  .star {
-    display: none;
-  }
 
   .trail-item {
     padding: 1rem 2rem;
   }
-}
-
-@media (max-width: 40em) {
-  .trail-item {
+    .trail-item {
     background-color: var(--color-main-dark-2);
     box-shadow: 3px 3px 3px #171717;
   }
@@ -242,3 +256,14 @@
     background-color: var(--color-main-dark-2);
   }
 }
+
+/* @media (max-width: 40em) {
+  .trail-item {
+    background-color: var(--color-main-dark-2);
+    box-shadow: 3px 3px 3px #171717;
+  }
+
+  .image-container {
+    background-color: var(--color-main-dark-2);
+  }
+} */

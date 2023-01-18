@@ -21,7 +21,7 @@
 }
 
 .favorites-button {
-  font-size: 1.2rem;;
+  font-size: 1.2rem;
   margin-left: auto;
   margin-right: 1rem;
   position: relative;
@@ -46,10 +46,10 @@
 }
 
 .trail-detail-info {
- width: 100%;
- display: flex;
- flex-direction: column;
- align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .trail-image {
@@ -67,15 +67,14 @@
 }
 
 .info-header h1 {
- padding: 1.6rem;
- margin: .8rem;
- background-color: var(--color-main-light);
- border-radius: 10px;
+  padding: 1.6rem;
+  margin: 0.8rem;
+  background-color: var(--color-main-light);
+  border-radius: 10px;
 }
 
 .info-header h3 {
- margin-bottom: .7rem;
-
+  margin-bottom: 0.7rem;
 }
 
 .info-sub-header {
@@ -88,27 +87,27 @@
 }
 
 .easy {
-  padding: .4rem;
+  padding: 0.4rem;
   border-radius: 5px;
   background-color: green;
 }
 
 .moderate {
-  padding: .4rem;
+  padding: 0.4rem;
   border-radius: 5px;
   background-color: rgb(237, 116, 11);
 }
 
 .hard {
-  padding: .4rem;
+  padding: 0.4rem;
   border-radius: 5px;
-  background-color: red
+  background-color: red;
 }
 
 .very-hard {
-  padding: .4rem;
+  padding: 0.4rem;
   border-radius: 5px;
-  background-color: rgb(133, 1, 1)
+  background-color: rgb(133, 1, 1);
 }
 
 .description {
@@ -125,8 +124,8 @@
   align-items: center;
 }
 
-.map-container h1{
- margin-bottom: 3.7rem;
+.map-container h1 {
+  margin-bottom: 3.7rem;
 }
 
 .map-text-container {
@@ -147,47 +146,45 @@
   }
 
   .info-header h1 {
-    transform: scale(.7);
-    margin: 0;
+    font-size: 2.3rem;
   }
 
   .info-sub-header {
-    font-size: .7rem;
+    font-size: 0.7rem;
   }
 
   .star {
-    transform: scale(.7);
+    transform: scale(0.7);
     top: -1rem;
     right: -1rem;
   }
 }
 
 @media (max-width: 44em) {
-
   .info-header h1 {
- font-size: 2.3rem;
-}
+    font-size: 1.7rem;
+    padding: 0.8rem 0.5rem;
+    margin: 1.5rem 6rem;
+  }
 
-.info-header h3 {
-  font-size: 1.5rem;
-
-}
+  .info-header h3 {
+    font-size: 1.5rem;
+  }
   .info-sub-header {
-  padding: .5rem .2rem;
-}
+    padding: 0.5rem 0.2rem;
+  }
   .info-sub-header h3 {
     font-size: 1rem;
-    margin: 0 .4rem;
+    margin: 0 0.4rem;
   }
 }
 
 @media (max-width: 40em) {
+  .trail-detail {
+    background-color: var(--color-main-dark);
+  }
 
-.trail-detail {
-  background-color: var(--color-main-dark);
-}
-
-.info-header {
-  background-color: var(--color-main-dark);
-}
+  .info-header {
+    background-color: var(--color-main-dark);
+  }
 }

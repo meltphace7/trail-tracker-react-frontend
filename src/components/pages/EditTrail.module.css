@@ -1,6 +1,6 @@
 .add-trail-section {
   width: 100%;
-  background-color: rgb(59, 91, 44);
+  background-color: var(--color-main-mid);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,6 +12,7 @@
 }
 
 .trail-form {
+  border: 2px solid var(--color-main-light);
   margin-bottom: 5rem;
   width: 64rem;
   color: white;
