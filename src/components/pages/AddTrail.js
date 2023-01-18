@@ -10,7 +10,6 @@ const AddTrail = (props) => {
   const [isMessage, setIsMessage] = useState(false);
   const [isErrorMessage, setIsErrorMessage] = useState(false);
   const [message, setMessage] = useState("");
-  const [trailheadName, setTrailheadName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [images, setImages] = useState([]);
 
@@ -46,6 +45,13 @@ const AddTrail = (props) => {
     valueBlurHandler: wildernessAreaBlurHandler,
     reset: wildernessAreaReset,
   } = useValidation((value) => value.trim() !== "");
+
+     const {
+       enteredValue: trailheadName,
+       valueChangeHandler: trailheadNameChangeHandler,
+       setValueHandler: setTrailheadName,
+       reset: trailheadNameReset,
+     } = useValidation((value) => value);
 
   const {
     enteredValue: seasonStart,
@@ -138,10 +144,6 @@ const AddTrail = (props) => {
     reset: descriptionReset,
   } = useValidation((value) => value.trim() !== "");
 
-  const trailheadNameInputChangeHandler = (e) => {
-    setTrailheadName(e.target.value);
-  };
-
   let formIsValid = false;
 
   if (
@@ -190,9 +192,9 @@ const AddTrail = (props) => {
     formData.append("trailName", trailName);
     formData.append("state", state);
     formData.append("wildernessArea", wildernessArea);
+    formData.append("trailheadName", trailheadName);
     formData.append("seasonStart", seasonStart);
     formData.append("seasonEnd", seasonEnd);
-    // formData.append("bestSeason", [seasonStart, seasonEnd]);
     formData.append("longitude", longitude);
     formData.append("latitude", latitude);
     formData.append("miles", miles);
@@ -203,10 +205,6 @@ const AddTrail = (props) => {
     formData.append("author", author);
     formData.append("authorId", userId);
     images.forEach((image) => formData.append("image", image));
-
-    ////
-
-    ////
 
     const token = localStorage.getItem("token");
 
@@ -222,7 +220,6 @@ const AddTrail = (props) => {
         throw new Error("Adding trail failed!");
       }
       const responseData = await response.json();
-      console.log(responseData);
       setIsLoading(false);
       setIsMessage(true);
       setMessage("Trail successfully submited!");
@@ -245,6 +242,7 @@ const AddTrail = (props) => {
     descriptionReset();
     setImages(null);
     getTrails();
+    trailheadNameReset();
   };
 
   const closeModalHandler = () => {
@@ -375,7 +373,7 @@ const AddTrail = (props) => {
               className={classes["trailhead-name"]}
               type="text"
               id="trailhead-name"
-              onChange={trailheadNameInputChangeHandler}
+              onChange={trailheadNameChangeHandler}
               value={trailheadName}
             />
           </div>

@@ -110,8 +110,6 @@ const TrailDetail = (props) => {
     <AiOutlineStar size={50} className={classes["star"]} />
     );
   
-  console.log(trail.images)
-  
   return (
     <div className={classes["trail-detail-container"]}>
       <div className={classes["trail-detail"]}>
@@ -146,6 +144,14 @@ const TrailDetail = (props) => {
             {/* <WeatherReport coords={coords} /> */}
             <div className={classes["map-container"]}>
               <h1>Map</h1>
+              {trail.trailheadName && (
+                <h3 className={classes["trailhead"]}>
+                  Trailhead:&nbsp;
+                  <span
+                    className={classes["trailhead-name"]}
+                  >{`${trail.trailheadName}`}</span>
+                </h3>
+              )}
               <div className={classes["map-text-container"]}>
                 <p>{`Trailhead coordinates: ${coords[0]}, ${coords[1]}`}</p>
                 <a

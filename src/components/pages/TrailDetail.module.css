@@ -124,8 +124,12 @@
   align-items: center;
 }
 
-.map-container h1 {
-  margin-bottom: 3.7rem;
+.trailhead {
+ margin: 2rem;
+}
+
+.trailhead-name {
+  color: greenyellow;
 }
 
 .map-text-container {

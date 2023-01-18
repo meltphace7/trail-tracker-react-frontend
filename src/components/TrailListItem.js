@@ -53,7 +53,6 @@ const TrailListItem = (props) => {
 
   // DETERMINES IF TRAIL IS FAVORITED BASED ON USERS FAVORITE TRAILS ARRAY
   useEffect(() => {
-    console.log('user faves', userFavorites)
     if (!userFavorites) {
       return
     }
