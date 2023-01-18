@@ -51,6 +51,9 @@ const Favorites = (props) => {
   return (
     <div className={classes["favorites"]}>
       <h1 className={classes["title"]}>FAVORITES</h1>
+      {userFavorites.length === 0 && (
+        <h3 className={classes["no-favorites"]}>No Favorites Yet</h3>
+      )}
       <p>
         {userFavorites.length !== 0 ? `${userFavorites.length} results` : ""}
       </p>
@@ -85,30 +88,31 @@ const Favorites = (props) => {
           })}
         </ul>
       )}
-      {userFavorites.length === 0 && <h3>No Favorites Yet</h3>}
-     {userFavorites.length !== 0 && <div className={classes["pagination-container"]}>
-        <div className={classes["button-container"]}>
-          {page > 1 && (
-            <button
-              onClick={prevPageHandler}
-              className={classes["pagination-button"]}
-            >
-              Prev
-            </button>
-          )}
+      {userFavorites.length !== 0 && (
+        <div className={classes["pagination-container"]}>
+          <div className={classes["button-container"]}>
+            {page > 1 && (
+              <button
+                onClick={prevPageHandler}
+                className={classes["pagination-button"]}
+              >
+                Prev
+              </button>
+            )}
+          </div>
+          <p className={classes["pagination-num"]}>{`${page} of ${pages}`}</p>
+          <div className={classes["button-container"]}>
+            {page < pages && (
+              <button
+                onClick={nextPageHandler}
+                className={classes["pagination-button"]}
+              >
+                Next
+              </button>
+            )}
+          </div>
         </div>
-        <p className={classes["pagination-num"]}>{`${page} of ${pages}`}</p>
-        <div className={classes["button-container"]}>
-          {page < pages && (
-            <button
-              onClick={nextPageHandler}
-              className={classes["pagination-button"]}
-            >
-              Next
-            </button>
-          )}
-        </div>
-      </div>}
+      )}
     </div>
   );
 };

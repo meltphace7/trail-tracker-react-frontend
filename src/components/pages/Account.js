@@ -102,7 +102,7 @@ const Account = (props) => {
           <h3>YOU HAVE NOT SUBMITTED ANY TRAILS YET</h3>
         )}
       </ul>
-      <div className={classes["pagination-container"]}>
+      {usersTrails.length !== 0 && <div className={classes["pagination-container"]}>
         <div className={classes["button-container"]}>
           {page > 1 && (
             <button
@@ -124,7 +124,7 @@ const Account = (props) => {
             </button>
           )}
         </div>
-      </div>
+      </div>}
     </div>
   );
 };
