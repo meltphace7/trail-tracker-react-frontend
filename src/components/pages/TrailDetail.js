@@ -110,6 +110,8 @@ const TrailDetail = (props) => {
     <AiOutlineStar size={50} className={classes["star"]} />
     );
   
+  console.log(trail.images)
+  
   return (
     <div className={classes["trail-detail-container"]}>
       <div className={classes["trail-detail"]}>
