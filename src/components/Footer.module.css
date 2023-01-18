@@ -33,16 +33,20 @@
   font-size: 1.92rem;
 }
 
-@media (max-width: 44em) {
+/* @media (max-width: 44em) {
   .logo {
   margin-left: 2rem;
 }
+} */
+
+
+@media (max-width: 44em) {
+    .logo {
+  margin-left: 2rem;
 }
 
-
-@media (max-width: 30em) {
   .footer {
-    background-color: var(--color-dark);
+    background-color: var(--color-main-dark-2);
     color: white;
     border-top: unset;
   }
