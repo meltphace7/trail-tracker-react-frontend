@@ -147,9 +147,12 @@ const TrailDetail = (props) => {
               {trail.trailheadName && (
                 <h3 className={classes["trailhead"]}>
                   Trailhead:&nbsp;
-                  <span
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${trail.trailheadName}`}
+                    target="_blank"
+                    rel="noreferrer"
                     className={classes["trailhead-name"]}
-                  >{`${trail.trailheadName}`}</span>
+                  >{`${trail.trailheadName}`}</a>
                 </h3>
               )}
               <div className={classes["map-text-container"]}>
