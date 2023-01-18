@@ -32,6 +32,7 @@
 
 .trail-item h3 {
   font-size: 1.6rem;
+  font-weight: normal;
   color: white;
 }
 
@@ -62,7 +63,6 @@
 }
 
 .info-container {
-  min-height: 8rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -75,12 +75,10 @@
 }
 
 .trail-item:hover {
-  /* background-color: var(--primary-green); */
   background-color: var(--color-main-dark);
 }
 
 .trail-item:hover .image-container {
-  /* background-color: var(--primary-green); */
   background-color: var(--color-main-dark);
 }
 
@@ -95,37 +93,37 @@
 }
 
 .easy {
-  padding: 0.2rem;
+  padding: 0.1rem;
   border-radius: 5px;
   background-color: green;
 }
 
 .moderate {
-  padding: 0.2rem;
+  padding: 0.1rem;
   border-radius: 5px;
   background-color: rgb(237, 116, 11);
 }
 
 .hard {
-  padding: 0.2rem;
+  padding: 0.1rem;
   border-radius: 5px;
   background-color: red;
 }
 
 .very-hard {
-  padding: 0.2rem;
+  padding: 0.1rem;
   border-radius: 5px;
   background-color: rgb(133, 1, 1);
 }
 
-.description {
-  /* line-height: 1.5em; */
-  /* height: 3rem; */
-  overflow: hidden;
+.description-container {
   white-space: nowrap;
-  text-overflow: ellipsis;
-  width: 30rem;
-  /* background-color: red; */
+  width: 34rem;
+}
+
+.description {
+   text-overflow: ellipsis;
+   overflow: hidden;
 }
 
 .favorites-button {
@@ -148,69 +146,38 @@
 .star {
   position: absolute;
   right: 1rem;
+  z-index: 9999;
 }
 
 @media (max-width: 53em) {
   .trail-link {
     position: absolute;
     width: 55%;
-    height: 35rem;
+    height: 33rem;
   }
 
   .trail-item {
-    height: 42rem;
     width: 38rem;
+    height: 34rem;
     flex-direction: column;
     border-radius: 5px;
+    padding: 1rem 2rem;
+  }
+
+  .description-container {
+    display: none;
   }
 
   .image-container {
-    width: 90%;
-    height: 18rem;
+    width: 99%;
+    height: 25rem;
     margin: 1rem 0;
   }
 
   .image-container img {
     width: 100%;
     height: auto;
-  }
-
-  .info-container {
-    width: 100%;
-    overflow: hidden;
-    align-items: center;
-  }
-
-  .star {
-    display: none;
-  }
-
-  .trail-item {
-    padding: 1rem 2rem;
-  }
-}
-
-@media (max-width: 44em) {
-  .trail-link {
-    position: absolute;
-    width: 99%;
-    height: 36rem;
-  }
-  .trail-item {
-    width: 98%;
-    height: 36rem;
-    flex-direction: column;
-  }
-
-  .image-container {
-    width: 100%;
-    height: 19rem;
-    margin: 1rem 0rem 0rem 0rem;
-  }
-
-  .image-container img {
-    width: auto;
-    height: 25rem;
+     height: 25rem;
     transform: scale(1.2);
   }
 
@@ -220,6 +187,42 @@
     align-items: center;
   }
 
+  /* .star {
+    top: -3rem;
+    right: -1rem;
+  } */
+}
+
+@media (max-width: 44em) {
+  .trail-link {
+    position: absolute;
+    width: 99%;
+    height: 34rem;
+  }
+  .trail-item {
+    width: 98%;
+    height: 34rem;
+    flex-direction: column;
+  }
+
+  .image-container {
+    width: 100%;
+    height: 27rem;
+    margin: 1rem 0rem 0rem 0rem;
+  }
+
+  .image-container img {
+    width: auto;
+    height: 25rem;
+  }
+
+  .info-container {
+    margin-top: 1rem;
+    width: 100%;
+    overflow: hidden;
+    align-items: center;
+  }
+  
   .star {
     display: none;
   }
@@ -231,11 +234,11 @@
 
 @media (max-width: 40em) {
   .trail-item {
-    background-color: var(--color-main-dark);
+    background-color: var(--color-main-dark-2);
     box-shadow: 3px 3px 3px #171717;
   }
 
   .image-container {
-    background-color: var(--color-main-dark);
+    background-color: var(--color-main-dark-2);
   }
 }
