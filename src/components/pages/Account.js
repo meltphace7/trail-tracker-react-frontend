@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import classes from "./Account.module.css";
 import { useSelector } from "react-redux";
-import UserTrail from '../UserTrail';
-import hostURL from '../../hosturl'
+import UserTrail from "../UserTrail";
+import hostURL from "../../hosturl";
 
 const Account = (props) => {
   const [usersTrails, setUsersTrails] = useState([]);
@@ -11,10 +11,11 @@ const Account = (props) => {
   const resultsPerPage = 6;
   const [page, setPage] = useState(1);
   const [results, setResults] = useState([]);
+  ///
 
   const userName = useSelector((state) => state.auth.userName);
   const token = localStorage.getItem("token");
-
+  // Fetches User's Submitted trails from database
   const fetchUserTrails = useCallback(async () => {
     try {
       const response = await fetch(`${hostURL}/auth/fetch-user-trails`, {
@@ -27,10 +28,10 @@ const Account = (props) => {
         throw new Error("Could not find users trails!");
       }
       const responseData = await response.json();
-         const alphaSortedTrails = responseData.submittedTrails.sort((a, b) =>
-           a.trailName.localeCompare(b.trailName)
-         );
-      
+      const alphaSortedTrails = responseData.submittedTrails.sort((a, b) =>
+        a.trailName.localeCompare(b.trailName)
+      );
+
       setUsersTrails(alphaSortedTrails);
       setResults(alphaSortedTrails.slice(0, resultsPerPage));
     } catch (err) {
@@ -71,7 +72,7 @@ const Account = (props) => {
     setPage((prevState) => prevState + 1);
     window.scrollTo(0, 0);
   };
-
+  /////////////
   return (
     <div className={classes.account}>
       <h1 className={classes.title}>Your Account</h1>
@@ -102,29 +103,31 @@ const Account = (props) => {
           <h3>YOU HAVE NOT SUBMITTED ANY TRAILS YET</h3>
         )}
       </ul>
-      {usersTrails.length !== 0 && <div className={classes["pagination-container"]}>
-        <div className={classes["button-container"]}>
-          {page > 1 && (
-            <button
-              onClick={prevPageHandler}
-              className={classes["pagination-button"]}
-            >
-              Prev
-            </button>
-          )}
+      {usersTrails.length !== 0 && (
+        <div className={classes["pagination-container"]}>
+          <div className={classes["button-container"]}>
+            {page > 1 && (
+              <button
+                onClick={prevPageHandler}
+                className={classes["pagination-button"]}
+              >
+                Prev
+              </button>
+            )}
+          </div>
+          <p className={classes["pagination-num"]}>{`${page} of ${pages}`}</p>
+          <div className={classes["button-container"]}>
+            {page < pages && (
+              <button
+                onClick={nextPageHandler}
+                className={classes["pagination-button"]}
+              >
+                Next
+              </button>
+            )}
+          </div>
         </div>
-        <p className={classes["pagination-num"]}>{`${page} of ${pages}`}</p>
-        <div className={classes["button-container"]}>
-          {page < pages && (
-            <button
-              onClick={nextPageHandler}
-              className={classes["pagination-button"]}
-            >
-              Next
-            </button>
-          )}
-        </div>
-      </div>}
+      )}
     </div>
   );
 };

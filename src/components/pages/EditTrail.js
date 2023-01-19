@@ -9,11 +9,11 @@ import { useSelector } from "react-redux";
 
 const EditTrail = (props) => {
   let { trailId } = useParams();
+
   const [isMessage, setIsMessage] = useState(false);
   const [isErrorMessage, setIsErrorMessage] = useState(false);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  // const [trailheadName, setTrailheadName] = useState("");
   const [images, setImages] = useState([]);
 
   const imageInputRef = useRef();
@@ -52,12 +52,12 @@ const EditTrail = (props) => {
     reset: wildernessAreaReset,
   } = useValidation((value) => value.trim() !== "");
 
-   const {
-     enteredValue: trailheadName,
-     valueChangeHandler: trailheadNameChangeHandler,
-     setValueHandler: setTrailheadName,
-     reset: trailheadNameReset,
-   } = useValidation((value) => value);
+  const {
+    enteredValue: trailheadName,
+    valueChangeHandler: trailheadNameChangeHandler,
+    setValueHandler: setTrailheadName,
+    reset: trailheadNameReset,
+  } = useValidation((value) => value);
 
   const {
     enteredValue: seasonStart,
@@ -177,20 +177,20 @@ const EditTrail = (props) => {
   ) {
     formIsValid = true;
   }
-
+  // Handles multiple image uploads from file input
   const imageChangeHandler = function (e) {
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
       setImages((prevState) => [...prevState, newImage]);
     }
   };
-
+  // Refreshes Trails after trail edit is made
   const getTrails = () => {
     setTimeout(() => {
       props.onEditTrail();
     }, 1500);
   };
-
+  // Fetches trail data to edit
   const fetchEditTrailHandler = useCallback(async () => {
     const token = localStorage.getItem("token");
     try {
@@ -206,7 +206,6 @@ const EditTrail = (props) => {
 
       const responseData = await response.json();
       const fetchedTrail = responseData.trail;
-      console.log(fetchedTrail);
       setTrailName(fetchedTrail.trailName);
       setState(fetchedTrail.state);
       setWildernessArea(fetchedTrail.wildernessArea);
@@ -229,7 +228,7 @@ const EditTrail = (props) => {
   useEffect(() => {
     fetchEditTrailHandler();
   }, [fetchEditTrailHandler]);
-
+  // Sends edited trail data
   const editTrailHandler = async (event) => {
     event.preventDefault();
     console.log(images);
@@ -262,10 +261,6 @@ const EditTrail = (props) => {
     formData.append("authorId", userId);
     images.forEach((image) => formData.append("image", image));
 
-    ////
-
-    ////
-
     const token = localStorage.getItem("token");
     try {
       const response = await fetch(`${hostURL}/trails/edit-trail`, {
@@ -284,8 +279,8 @@ const EditTrail = (props) => {
       setMessage("Trail successfully Edited!");
     } catch (err) {
       setIsLoading(true);
-       setIsMessage(true);
-       setMessage(err);
+      setIsMessage(true);
+      setMessage(err);
     }
     trailNameReset();
     stateReset();
@@ -314,7 +309,7 @@ const EditTrail = (props) => {
       setMessage("");
     }
   };
-
+  // Styles for inputs change depending on error state
   const trailNameClasses = trailNameHasError
     ? `${classes["text-input-col"]} ${classes["invalid"]}`
     : classes["text-input-col"];

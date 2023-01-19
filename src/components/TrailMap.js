@@ -13,8 +13,6 @@ function ChangeView({ center, zoom }) {
 const TrailMap = (props) => {
   const icon = L.icon({ iconUrl: "/imgs/marker-icon.png" });
 
-  console.log("coords", props.coords);
-
   return (
     <div>
       <MapContainer center={props.coords} zoom={14} scrollWheelZoom={true}>

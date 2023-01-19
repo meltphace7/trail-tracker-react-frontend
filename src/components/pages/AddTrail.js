@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import classes from "./AddTrail.module.css";
 import useValidation from "../../hooks/use-validation";
 import ModalMessage from "../notifications/ModalMessage";
-import LoadingScreen from '../notifications/LoadingScreen';
+import LoadingScreen from "../notifications/LoadingScreen";
 import hostURL from "../../hosturl";
 import { useSelector } from "react-redux";
 
@@ -46,12 +46,12 @@ const AddTrail = (props) => {
     reset: wildernessAreaReset,
   } = useValidation((value) => value.trim() !== "");
 
-     const {
-       enteredValue: trailheadName,
-       valueChangeHandler: trailheadNameChangeHandler,
-       setValueHandler: setTrailheadName,
-       reset: trailheadNameReset,
-     } = useValidation((value) => value);
+  const {
+    enteredValue: trailheadName,
+    valueChangeHandler: trailheadNameChangeHandler,
+    setValueHandler: setTrailheadName,
+    reset: trailheadNameReset,
+  } = useValidation((value) => value);
 
   const {
     enteredValue: seasonStart,
@@ -162,20 +162,20 @@ const AddTrail = (props) => {
   ) {
     formIsValid = true;
   }
-
+  // Handles multiple image uploads from file input
   const imageChangeHandler = function (e) {
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
       setImages((prevState) => [...prevState, newImage]);
     }
   };
-
+  // Refreshes Trails after trail edit is made
   const getTrails = () => {
     setTimeout(() => {
       props.onAddTrail();
     }, 1500);
   };
-
+  // Submits trail data to database
   const submitTrailHandler = async (event) => {
     event.preventDefault();
     console.log(images);
@@ -225,8 +225,8 @@ const AddTrail = (props) => {
       setMessage("Trail successfully submited!");
     } catch (err) {
       setIsLoading(false);
-       setIsMessage(true);
-       setMessage(err);
+      setIsMessage(true);
+      setMessage(err);
     }
     trailNameReset();
     stateReset();
@@ -255,7 +255,7 @@ const AddTrail = (props) => {
       setMessage("");
     }
   };
-
+  // Styles for inputs change depending on error state
   const trailNameClasses = trailNameHasError
     ? `${classes["text-input-col"]} ${classes["invalid"]}`
     : classes["text-input-col"];

@@ -11,7 +11,6 @@ const MobileNavigation = () => {
   const isAuth = useSelector((state) => state.auth.isAuth);
 
   const [isChecked, setIsChecked] = useState(false);
-  const [cartIsEmpty, setCartIsEmpty] = useState(true);
 
   const handleCheck = () => {
     setIsChecked((prevState) => !prevState);

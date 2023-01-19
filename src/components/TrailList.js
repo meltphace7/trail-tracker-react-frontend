@@ -1,42 +1,39 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./TrailList.module.css";
 import TrailListItem from "./TrailListItem";
-import {useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
 
-
- const monthArray = [
-   [1, "January"],
-   [2, "Febuary"],
-   [3, "March"],
-   [4, "April"],
-   [5, "May"],
-   [6, "June"],
-   [7, "July"],
-   [8, "August"],
-   [9, "September"],
-   [10, "October"],
-   [11, "November"],
-   [12, "December"],
- ];
-
+const monthArray = [
+  [1, "January"],
+  [2, "Febuary"],
+  [3, "March"],
+  [4, "April"],
+  [5, "May"],
+  [6, "June"],
+  [7, "July"],
+  [8, "August"],
+  [9, "September"],
+  [10, "October"],
+  [11, "November"],
+  [12, "December"],
+];
 
 const TrailList = (props) => {
-  const searchQuery = useSelector(state => state.trails.currentSearchQuery);
+  const searchQuery = useSelector((state) => state.trails.currentSearchQuery);
   // Converts filter Query to Month Name if filterQuery is month Number
   const [month, setMonth] = useState("");
 
   useEffect(() => {
-     if (isNaN(+props.filter.filterQuery)) return;
-     const seasonNum = parseInt(props.filter.filterQuery, 10);
-     const [season] = monthArray.filter((month) => month[0] === seasonNum);
-     setMonth(season[1]);
-   }, [props.trailFilter, props.filter]);
+    if (isNaN(+props.filter.filterQuery)) return;
+    const seasonNum = parseInt(props.filter.filterQuery, 10);
+    const [season] = monthArray.filter((month) => month[0] === seasonNum);
+    setMonth(season[1]);
+  }, [props.trailFilter, props.filter]);
 
-  //Pagination
+  //Pagination ////////////////
   const resultsPerPage = 6;
   const [page, setPage] = useState(1);
   const [results, setResults] = useState(props.trails.slice(0, resultsPerPage));
-
 
   useEffect(() => {
     setPage(1);
@@ -66,11 +63,7 @@ const TrailList = (props) => {
     setPage((prevState) => prevState + 1);
     window.scrollTo(0, 0);
   };
-
-  // const getTrailHandler = function (e) {
-  //   console.log(e);
-  //   props.onTrailSelect();
-  // }
+  ///////////////
 
   const renderFilteredTrails = results.map((trail) => {
     return (
@@ -96,36 +89,18 @@ const TrailList = (props) => {
         trail={trail}
         favorites={props.favorites}
       />
-      // <TrailListItem
-      //   getTrail={props.onTrailSelect}
-      //   key={trail._id}
-      //   id={trail._id}
-      //   image={trail.images[0]}
-      //   name={trail.trailName}
-      //   state={trail.state}
-      //   miles={trail.miles}
-      //   description={trail.description}
-      //   difficulty={trail.difficulty}
-      //   wildernessArea={trail.wildernessArea}
-      //   onFavoriteToggle={props.onFavoriteToggle}
-      //   trail={trail}
-      //   favorites={props.favorites}
-      // />
     );
   });
-
 
   return (
     <div className={classes["trail-list-container"]}>
       <div className={classes["results-container"]}>
-        <h1 className={classes["results-title"]}>
-          {`${searchQuery} Trails`}
-          </h1>
-          <p>{`${props.trails.length} results for "${
-            props.filter.filterType === "by-season"
-              ? month
-              : props.filter.filterQuery
-          }"  - page ${page} of ${pages}`}</p>
+        <h1 className={classes["results-title"]}>{`${searchQuery} Trails`}</h1>
+        <p>{`${props.trails.length} results for "${
+          props.filter.filterType === "by-season"
+            ? month
+            : props.filter.filterQuery
+        }"  - page ${page} of ${pages}`}</p>
       </div>
       <ul className={classes["trail-list"]}>
         {props.trails.length === 0 ? (

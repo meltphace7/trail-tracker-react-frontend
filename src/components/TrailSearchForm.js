@@ -121,7 +121,6 @@ const TrailSearchForm = (props) => {
   );
 
   // RENDERS MONTH OPTIONS FOR filter by season OPTION
-
   const chooseMonth = (
     <div className="search-container">
       {/* <label htmlFor="choose-month">Choose Month</label> */}
@@ -154,13 +153,11 @@ const TrailSearchForm = (props) => {
     <form onSubmit={formSubmitHandler} className={classes["trail-search"]}>
       <div className={classes["search-group"]}>
         <div className="search-container">
-          {/* <label htmlFor="filter-trails">Filter Trails</label> */}
           <select
             id="filter-trails"
             name="filter-trails"
             value={filterType}
             onChange={handleFilterSelect}
-            // defaultValue={'All'}
           >
             <optgroup label="Filter By">
               <option value="All">All Trails</option>

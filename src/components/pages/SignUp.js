@@ -12,7 +12,7 @@ export const SignUp = () => {
   const [isErrorMessage, setIsErrorMessage] = useState(false);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+// Validates user input with custom hook
   const {
     enteredValue: userName,
     valueIsValid: userNameIsValid,
@@ -57,7 +57,7 @@ export const SignUp = () => {
     valueBlurHandler: passwordBlurHandler,
     reset: passwordReset,
   } = useValidation((value) => value.trim() !== "" && value.length > 5);
-
+// Input styles change depending on error state from validation hook
   const firstNameClasses = firstNameHasError
     ? `${classes["signup-input"]} ${classes["invalid"]}`
     : classes["signup-input"];

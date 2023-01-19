@@ -4,19 +4,17 @@ import TrailListItem from "../TrailListItem";
 import { useSelector } from "react-redux";
 
 const Favorites = (props) => {
-  //Pagination
+  /////Pagination
   const resultsPerPage = 6;
   const [page, setPage] = useState(1);
   const [results, setResults] = useState([]);
+  /////
 
   const userFavorites = useSelector((state) => state.auth.favorites);
 
   useEffect(() => {
     setResults(userFavorites.slice(0, resultsPerPage));
   }, [userFavorites]);
-
-
-  // console.log('results', alphaSortedFavorites)
 
   ////// PAGINATION //////////////////////
   useEffect(() => {
@@ -47,7 +45,7 @@ const Favorites = (props) => {
     setPage((prevState) => prevState + 1);
     window.scrollTo(0, 0);
   };
-
+  /////////////
   return (
     <div className={classes["favorites"]}>
       <h1 className={classes["title"]}>FAVORITES</h1>

@@ -57,7 +57,6 @@ const UserTrail = (props) => {
       trailId: trailId,
       trailImages: trail.images,
     };
-    console.log(trailData);
 
     try {
       const response = await fetch(`${hostURL}/trails/delete-trail`, {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import classes from "./Login.module.css";
 import { Link, useHistory } from "react-router-dom";
 import hostURL from "../../hosturl";
@@ -14,7 +14,7 @@ const Login = (props) => {
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+// User Input validated with custom hook
   const {
     enteredValue: email,
     valueIsValid: emailIsValid,
@@ -113,7 +113,7 @@ const Login = (props) => {
       console.log("AUTO LOG OUT");
     }, milliseconds);
   };
-
+// Input styles change depending on error state from validation hook
   const emailClasses = emailHasError
     ? `${classes["login-input"]} ${classes["invalid"]}`
     : classes["login-input"];
