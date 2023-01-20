@@ -47,7 +47,7 @@ const WeatherReport = (props) => {
 
   return (
     <div className={classes["weather-container"]}>
-      <h1>Weather</h1>
+      <h1 className={classes["weather-title"]}>Weather</h1>
       {isLoading && <h3>Loading...</h3>}
       {!isLoading && (
         <WeatherCurrent
@@ -57,7 +57,7 @@ const WeatherReport = (props) => {
         />
       )}
       <div className={classes["forecast-container"]}>
-        <h1>5 Day Forecast</h1>
+        <h2 className={classes["forecast-title"]}>5 Day Forecast</h2>
         <div className={classes["forecast"]}>
           {weatherForecast &&
             weatherForecast.slice(0, 5).map((day) => {

@@ -15,14 +15,17 @@ const WeatherDayForecast = (props) => {
 
   return (
     <div className={classes["day-container"]}>
-      <h1>{day}</h1>
-      <h3>{weatherDescription}</h3>
-      <img
-        src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
-        alt="weather icon"
-      />
-      <p>{`High: ${high}° F`}</p>
-      <p>{`Low: ${low}° F`}</p>
+      <h1 className={classes["day"]}>{day}</h1>
+      <div className={classes["weather-stats"]}>
+        <h3 className={classes["weather-description"]}>{weatherDescription}</h3>
+        <img
+          className={classes["weather-icon"]}
+          src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+          alt="weather icon"
+        />
+        <p className={classes["weather-temp"]}>{`High: ${high}° F`}</p>
+        <p className={classes["weather-temp"]}>{`Low: ${low}° F`}</p>
+      </div>
     </div>
   );
 };

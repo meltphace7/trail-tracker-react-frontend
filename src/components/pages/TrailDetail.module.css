@@ -9,6 +9,7 @@
   width: 90%;
   padding-bottom: 4rem;
   background-color: var(--color-main-mid);
+   background-color: var(--color-main-dark);
   color: white;
   display: flex;
   flex-direction: column;

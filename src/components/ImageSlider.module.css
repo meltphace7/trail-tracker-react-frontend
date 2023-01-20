@@ -102,7 +102,7 @@ overflow-x: hidden;
   opacity: 0;
 }
 
-@media (max-width: 40em) {
+@media (max-width: 48em) {
   .slider {
     height: 44.8rem;
   }
@@ -116,7 +116,7 @@ overflow-x: hidden;
   }
 
   .mobile-slider-controls-container {
-    margin-top: 3rem;
+    /* margin-top: 3rem; */
     display: flex;
   }
 }
@@ -133,4 +133,9 @@ overflow-x: hidden;
   .image {
   border-radius: 5px;
 }
+
+ /* .mobile-slider-controls-container {
+    margin-top: 0rem;
+    display: flex;
+  } */
 }

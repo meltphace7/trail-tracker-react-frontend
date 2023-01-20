@@ -21,12 +21,18 @@
   align-items: center;
 }
 
-.forecast-container h1 {
+.weather-title {
   margin-bottom: 2rem;
 }
 
-@media (max-width: 53em) {
+.forecast-title {
+  margin-bottom: 2rem;
+  font-size: 2.4rem;
+
+}
+
+/* @media (max-width: 45em) {
   .forecast {
     flex-direction: column;
   }
-}
+} */
