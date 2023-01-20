@@ -15,6 +15,7 @@
   width: 18rem;
   height: 4rem;
   border-radius: 5px;
+  font-size: 17px;
 }
 
 .trail-search button {
@@ -34,13 +35,15 @@
 
 .trail-search optgroup {
   color: black;
-  font-size: 3rem;
+  /* font-size: 3rem; */
+  font-size: 17px;
 }
 
 .trail-search select {
   color: black;
   font-family: inherit;
-  font-size: 2rem;
+  /* font-size: 2rem; */
+  font-size: 17px;
   font-weight: 100;
   width: 30rem;
   padding-left: 0.5rem;
