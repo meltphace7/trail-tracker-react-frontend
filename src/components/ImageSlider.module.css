@@ -122,7 +122,15 @@ overflow-x: hidden;
 }
 
 @media (max-width: 30em) {
+  .slider-display {
+  width: 96%;
+
+}
   .slider {
     height: 35rem;
   }
+
+  .image {
+  border-radius: 5px;
+}
 }

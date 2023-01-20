@@ -1,8 +1,8 @@
 import React from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { Link } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { Link } from "react-router-dom";
 
 function ChangeView({ center, zoom }) {
   const map = useMap();
