@@ -29,7 +29,7 @@ const WeatherReport = (props) => {
         throw new Error("Could not get weather data!");
       }
       const data = await response.json();
-      console.log("got weather data");
+     
       const [currentWeather] = data.current.weather;
       setCurTemp(data.current.temp);
       setCurWeather(currentWeather.description);
