@@ -18,25 +18,52 @@ const ImageSlider = (props) => {
   const nextHandler = function () {
     setCurrent(current === length - 1 ? 0 : current + 1);
   };
+
+  const dotsContainerClasses =
+    props.images.length > 20
+      ? `${classes["dots-container"]} ${classes["noShow"]}`
+      : classes["dots-container"];
+    
+
+ 
+  
+
   return (
     <div className={classes["slider-container"]}>
       <IoIosArrowBack
         className={classes["slider-button"]}
         onClick={prevHandler}
       />
-      <div className={classes.slider}>
-        {props.images.map((slide, index) => {
-          return (
-            <div
-              className={index === current ? "slide active" : "slide"}
-              key={index}
-            >
-              {index === current && (
-                <img src={slide} className={classes.image} />
-              )}
-            </div>
-          );
-        })}
+      <div className={classes["slider-display"]}>
+        <div className={classes.slider}>
+          {props.images.map((slide, index) => {
+            return (
+              <div
+                className={index === current ? "slide active" : "slide"}
+                key={index}
+              >
+                {index === current && (
+                  <img src={slide} className={classes.image} />
+                )}
+              </div>
+            );
+          })}
+        </div>
+        <div className={dotsContainerClasses}>
+          {props.images.map((img, index) => {
+            return (
+              <div
+                key={index}
+                className={
+                  index === current
+                    ? `${classes["dot"]} ${classes["active"]}`
+                    : classes["dot"]
+                }
+              ></div>
+            );
+          })}
+        </div>
+        {props.images.length > 20 && <p>{`${current + 1} / ${props.images.length + 1}`}</p>}
       </div>
       <IoIosArrowForward
         className={classes["slider-button"]}
