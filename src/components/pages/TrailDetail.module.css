@@ -9,7 +9,7 @@
   width: 90%;
   padding-bottom: 4rem;
   background-color: var(--color-main-mid);
-   background-color: var(--color-main-dark);
+  background-color: var(--color-main-dark);
   color: white;
   display: flex;
   flex-direction: column;
@@ -45,10 +45,6 @@
   right: 1.5rem;
 }
 
-.trail-detail a {
-  color: rgb(185, 245, 65);
-}
-
 .trail-detail-info {
   width: 100%;
   display: flex;
@@ -70,24 +66,42 @@
   background-color: var(--color-main-mid);
 }
 
-.info-header h1 {
+.trail-name {
   padding: 1.6rem;
   margin: 0.8rem;
   background-color: var(--color-main-light);
   border-radius: 10px;
 }
 
-.info-header h3 {
+.trail-wilderness {
   margin-bottom: 0.7rem;
 }
 
 .info-sub-header {
   width: 100%;
-  padding: 2rem 0;
-  background-color: var(--color-main-light);
+  padding: 1rem 0;
+  /* background-color: var(--color-main-light); */
+  background-color: rgb(45, 131, 2);
+  /* background-color: rgb(58, 169, 2); */
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+.trail-stat {
+  /* position: relative;
+top: -3rem; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.trail-stat h3 {
+  line-height: 1;
+}
+
+.trail-stat-icon {
+  height: 5rem;
 }
 
 .easy {
@@ -140,6 +154,14 @@
 
 .trailhead-name:hover {
   color: white;
+}
+
+.google-earth-link {
+  color: greenyellow;
+}
+
+.google-earth-link:hover {
+  color: #ffffff;
 }
 
 .map-text-container {
@@ -200,5 +222,14 @@
 
   .info-header {
     background-color: var(--color-main-dark);
+  }
+  .trail-stat-icon {
+    height: 4rem;
+  }
+}
+
+@media (max-width: 35em) {
+    .trail-stat-icon {
+    height: 3.5rem;
   }
 }

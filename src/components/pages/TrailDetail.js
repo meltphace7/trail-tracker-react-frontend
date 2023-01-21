@@ -10,6 +10,11 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { authActions } from '../../store/auth-slice';
 import LoadingSpinner from '../UI/LoadingSpinner'
+import difficultyIcon from '../../assets/difficulty-icon.png'
+import solitudeIcon from "../../assets/solitude-icon.png";
+import sceneryIcon from "../../assets/scenery-icon-white.png";
+import mileageIcon from "../../assets/mileage-icon.png";
+import seasonIcon from "../../assets/calender-icon.png";
 
 const TrailDetail = (props) => {
   let { trailId } = useParams();
@@ -110,6 +115,8 @@ const TrailDetail = (props) => {
     <AiOutlineStar size={50} className={classes["star"]} />
     );
   
+  console.log(difficulty);
+  
   return (
     <div className={classes["trail-detail-container"]}>
       <div className={classes["trail-detail"]}>
@@ -122,8 +129,10 @@ const TrailDetail = (props) => {
               >
                 {favoriteIcon}
               </button>
-              <h1>{trail.trailName}</h1>
-              <h3>{`${trail.wildernessArea},  ${trail.state}`}</h3>
+              <h1 className={classes["trail-name"]}>{trail.trailName}</h1>
+              <h3
+                className={classes["trail-wilderness"]}
+              >{`${trail.wildernessArea},  ${trail.state}`}</h3>
               <img
                 className={classes["trail-image"]}
                 src={trail.images[0] ? trail.images[0] : ""}
@@ -131,17 +140,50 @@ const TrailDetail = (props) => {
               />
             </div>
             <div className={classes["info-sub-header"]}>
-              <h3>{`Length: ${trail.miles} miles roundtrip`}</h3>
-              <h3 className={classes[difficulty]}>
+              {/* <h3>{`Length: ${trail.miles} miles roundtrip`}</h3> */}
+              <div className={classes["trail-stat"]}>
+                <img className={classes["trail-stat-icon"]} src={mileageIcon} />
+                <h3>{`Length: `}</h3>
+                <h3>{`${trail.miles} miles`}</h3>
+              </div>
+              <div className={classes["trail-stat"]}>
+                <img
+                  className={classes["trail-stat-icon"]}
+                  src={difficultyIcon}
+                />
+                <h3>{`Difficulty:`}</h3>
+                <h3
+                  className={classes[difficulty]}
+                >{`${trail.difficulty}/10`}</h3>
+              </div>
+              <div className={classes["trail-stat"]}>
+                <img className={classes["trail-stat-icon"]} src={sceneryIcon} />
+                <h3>{`Scenery:`}</h3>
+                <h3>{`${trail.scenery}/10`}</h3>
+              </div>
+              <div className={classes["trail-stat"]}>
+                <img
+                  className={classes["trail-stat-icon"]}
+                  src={solitudeIcon}
+                />
+                <h3>{`Solitude:`}</h3>
+                <h3>{`${trail.solitude}/10`}</h3>
+              </div>
+              <div className={classes["trail-stat"]}>
+                <img className={classes["trail-stat-icon"]} src={seasonIcon} />
+                <h3>{`Best Season:`}</h3>
+                <h3>{season}</h3>
+              </div>
+              {/* <h3 className={classes[difficulty]}>
                 {`Difficulty: ${trail.difficulty}/10`}
-              </h3>
-              <h3>{`Scenery: ${trail.scenery}/10`}</h3>
-              <h3>{`Solitude: ${trail.solitude}/10`}</h3>
-              <h3>{`Season: ${season}`}</h3>
+              </h3> */}
+              {/* <h3>{`Scenery: ${trail.scenery}/10`}</h3> */}
+              {/* <h3>{`Solitude: ${trail.solitude}/10`}</h3> */}
+              {/* <h3>{`Season: ${season}`}</h3> */}
             </div>
             <p className={classes["description"]}>{trail.description}</p>
             <ImageSlider images={trail.images} />
-            <WeatherReport coords={coords} />
+            {/* <WeatherReport coords={coords} /> */}
             <div className={classes["map-container"]}>
               <h1>Map</h1>
               {trail.trailheadName && (
@@ -158,6 +200,7 @@ const TrailDetail = (props) => {
               <div className={classes["map-text-container"]}>
                 <p>{`Trailhead coordinates: ${coords[0]}, ${coords[1]}`}</p>
                 <a
+                  className={classes["google-earth-link"]}
                   href={`https://earth.google.com/web/search/${coords[0]},${coords[1]}/`}
                   target="_blank"
                   rel="noreferrer"
