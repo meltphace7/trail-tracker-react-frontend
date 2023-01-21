@@ -25,30 +25,27 @@
   border-radius: 20rem;
   padding: 1rem;
   color: white;
-  background: rgb(36, 116, 7);
+  background: #247407;
   background: linear-gradient(
     0deg,
-    rgba(36, 116, 7, 1) 21%,
-    rgba(50, 251, 23, 1) 100%
+    #247407 21%,
+    #32fb17 100%
   );
 }
 
 .trail-search optgroup {
-  color: black;
-  /* font-size: 3rem; */
+  color: #000000;
   font-size: 17px;
 }
 
 .trail-search select {
-  color: black;
+  color: #000000;
   font-family: inherit;
-  /* font-size: 2rem; */
   font-size: 17px;
   font-weight: 100;
   width: 30rem;
   padding-left: 0.5rem;
   height: 3.5rem;
-  /* border: 2px solid black; */
   border-radius: 20px;
 }
 

@@ -129,16 +129,21 @@ const TrailDetail = (props) => {
               >
                 {favoriteIcon}
               </button>
-              <h1 className={classes["trail-name"]}>{trail.trailName}</h1>
-              <h3
-                className={classes["trail-wilderness"]}
-              >{`${trail.wildernessArea},  ${trail.state}`}</h3>
+              <div className={classes["trail-name-container"]}>
+                <div className={classes["trail-name-container-overlay"]}>
+                  <h1 className={classes["trail-name"]}>{trail.trailName}</h1>
+                  <h3
+                    className={classes["trail-wilderness"]}
+                  >{`${trail.wildernessArea},  ${trail.state}`}</h3>
+                </div>
+              </div>
               <img
                 className={classes["trail-image"]}
                 src={trail.images[0] ? trail.images[0] : ""}
                 alt={trail.trailName}
               />
             </div>
+
             <div className={classes["info-sub-header"]}>
               <div className={classes["info-sub-header-overlay"]}>
                 {/* <h3>{`Length: ${trail.miles} miles roundtrip`}</h3> */}

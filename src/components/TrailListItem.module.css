@@ -7,11 +7,11 @@
   height: 16rem;
   display: flex;
   align-items: center;
-  color: white;
+  color: #ffffff;
   background-color: var(--color-main-mid);
   cursor: pointer;
   transition: 300ms ease-in;
-  box-shadow: 3px 3px 3px rgb(171, 171, 171);
+  box-shadow: 3px 3px 3px #ababab;
 }
 
 .trail-link {
@@ -27,13 +27,13 @@
 }
 
 .trail-item p {
-  color: white;
+  color: #ffffff;
 }
 
 .trail-item h3 {
   font-size: 1.6rem;
   font-weight: normal;
-  color: white;
+  color: #ffffff;
 }
 
 .image-container {
@@ -70,7 +70,7 @@
 }
 
 .trail-item h2 {
-  color: greenyellow;
+  color: #adff2f;
   transition: 300ms ease-in;
 }
 
@@ -83,7 +83,7 @@
 }
 
 .trail-item:hover h2 {
-  color: yellowgreen;
+  color: #9acd32;
 }
 
 .miles-difficulty-container {
@@ -95,25 +95,25 @@
 .easy {
   padding: 0.1rem;
   border-radius: 5px;
-  background-color: green;
+  background-color: #008000;
 }
 
 .moderate {
   padding: 0.1rem;
   border-radius: 5px;
-  background-color: rgb(237, 116, 11);
+  background-color: #ed740b;
 }
 
 .hard {
   padding: 0.1rem;
   border-radius: 5px;
-  background-color: red;
+  background-color: #ff0000;
 }
 
 .very-hard {
   padding: 0.1rem;
   border-radius: 5px;
-  background-color: rgb(133, 1, 1);
+  background-color: #850101;
 }
 
 .description-container {
@@ -131,7 +131,7 @@
   margin-bottom: auto;
   position: relative;
   border: none;
-  color: yellowgreen;
+   color: #adff2f;
   background-color: unset;
   cursor: pointer;
   width: 2rem;
@@ -140,7 +140,7 @@
 }
 
 .favorites-button:hover {
-  color: white;
+  color: #ffffff;
 }
 
 .star {

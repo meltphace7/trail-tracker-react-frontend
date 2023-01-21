@@ -43,7 +43,7 @@
 }
 
 .slider-button:hover {
-  background-color: rgba(0, 0, 0, 0.527);
+  background-color: #00000086;
 }
 
 .mobile-slider-controls-container {
@@ -89,13 +89,13 @@ overflow-x: hidden;
   height: 1.5rem;
   width: 1.5rem;
   border-radius: 20rem;
-  border: 1px solid white;
+  border: 1px solid #ffffff;
   margin: .25rem;
   transition: all 200ms ease-in;
 }
 
 .active {
-  background-color: white;
+  background-color: #ffffff;
 }
 
 .no-show {
@@ -133,9 +133,4 @@ overflow-x: hidden;
   .image {
   border-radius: 5px;
 }
-
- /* .mobile-slider-controls-container {
-    margin-top: 0rem;
-    display: flex;
-  } */
 }

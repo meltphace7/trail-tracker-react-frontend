@@ -8,7 +8,7 @@
 }
 
 .title {
-  color: black;
+  color: #000000;
   margin-top: 1.6rem;
 }
 
@@ -43,11 +43,10 @@
   width: 9rem;
   height: 4rem;
   border-radius: 5px;
-  background: rgb(36, 116, 7);
   background: linear-gradient(
     0deg,
-    rgba(36, 116, 7, 1) 21%,
-    rgba(50, 251, 23, 1) 100%
+    #247407 21%,
+    #32fb17 100%
   );
   color: white;
   cursor: pointer;
@@ -64,14 +63,14 @@
 
 @media (max-width: 40em) {
   .favorites {
-    color: white;
+    color: #ffffff;
   }
 
   .title {
-    color: white;
+    color: #ffffff;
   }
 
   .pagination-container h3 {
-    color: white;
+    color: #ffffff;
   }
 }

@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(230, 230, 230);
+  background-color: #e6e6e6;
   background-image: url("/public/imgs/wonderland-trail-1.jpg");
   background-position: 50% 10%;
   background-size: cover;
@@ -14,7 +14,7 @@
   width: 35.2rem;
   height: 48rem;
   padding: 1.6rem;
-   background-color: rgba(255, 255, 255, 0.927);
+   background-color: #ffffffec;
   box-shadow: 0 8px 16px 0 rgb(0 0 0 / 24%), 0 0 8px 0 rgb(0 0 0 / 8%);
   border-radius: 10px;
   display: flex;
@@ -30,7 +30,7 @@
   width: 32rem;
   padding: 0 0.4rem;
   height: 5rem;
-  border: 1px solid rgb(193, 193, 193);
+  border: 1px solid #c1c1c1;
   border-radius: 7px;
   margin-bottom: 1rem;
 }

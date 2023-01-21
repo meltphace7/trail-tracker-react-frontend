@@ -53,7 +53,7 @@
 .featured-hikes-container {
     height: 25rem;
     width: 100%;
-    background-color: rgb(218, 217, 217);
+    background-color: #dad9d9;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -67,7 +67,7 @@
 
 @media (max-width: 40em) {
 .map-section {
-    color: white;
+    color: #ffffff;
 }
 
 }

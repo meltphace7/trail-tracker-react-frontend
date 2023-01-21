@@ -3,7 +3,7 @@
     height: 18rem;
     border-radius: 10px;
     overflow: hidden;
-    color: rgb(63, 63, 63);
+    color: #3f3f3f;
     cursor: pointer;
     
 }
@@ -23,7 +23,7 @@
 }
 
 .featured-hike h1 {
-    color: green;
+    color: #008000;
 }
 
 .featured-hike-image {
@@ -33,7 +33,7 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: white;
+    background-color: #ffffff;
 }
 
 .featured-hike-image img {
@@ -44,7 +44,7 @@
 .featured-hike-text {
     width: 100%;
     height: 9rem;
-    background-color: white;
+    background-color: #ffffff;
     line-height: 1.4rem;
     display: flex;
     flex-direction: column;

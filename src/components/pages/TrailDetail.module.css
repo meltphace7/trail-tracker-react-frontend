@@ -15,9 +15,9 @@
   flex-direction: column;
   align-items: center;
   min-height: 58.85rem;
-  -webkit-box-shadow: 0px 3px 26px 0px rgba(0, 0, 0, 0.64);
-  -moz-box-shadow: 0px 3px 26px 0px rgba(0, 0, 0, 0.64);
-  box-shadow: 0px 3px 26px 0px rgba(0, 0, 0, 0.64);
+  -webkit-box-shadow: 0px 3px 26px 0px #000000a3;
+  -moz-box-shadow: 0px 3px 26px 0px #000000a3;
+  box-shadow: 0px 3px 26px 0px #000000a3;
 }
 
 .loading-spinner {
@@ -31,13 +31,13 @@
   position: relative;
   top: 2rem;
   border: none;
-  color: yellowgreen;
+  color: #adff2f;
   background-color: unset;
   cursor: pointer;
 }
 
 .favorites-button:hover {
-  color: white;
+  color: #ffffff;
 }
 
 .star {
@@ -58,18 +58,35 @@
 }
 
 .info-header {
-  width: 100%;
+ width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-main-mid);
+}
+
+.trail-name-container {
+  width: 100%;
+  background-image: url('../../assets/images/spectacle-lake-1.jpg');
+  background-size: cover;
+  background-position: 50% 10%;
+}
+
+.trail-name-container-overlay {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #2d8302;
+background: linear-gradient(0deg, #2d830288 0%, #0e2901df 69%, #000000df 100%);
 }
 
 .trail-name {
   padding: 1.6rem;
   margin: 0.8rem;
-  background-color: var(--color-main-light);
+  background-color: var(--color-main-green);
+  background: rgb(62,176,12);
+background: linear-gradient(0deg, rgba(62,176,12,1) 0%, rgba(19,56,1,1) 100%);
   border-radius: 10px;
 }
 
@@ -87,15 +104,17 @@
 .info-sub-header-overlay {
   width: 100%;
   padding: .5rem 0;
-  background-color: rgba(45, 131, 2, 0.685);
+  background: #2d8302;
+background: linear-gradient(180deg, #2d830288 0%, #0e2901 100%);
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
+  box-shadow: -1px 13px 18px -4px #000000e3;
+-webkit-box-shadow: -1px 13px 18px -4px #000000e3;
+-moz-box-shadow: -1px 13px 18px -4px #000000e3;
 }
 
 .trail-stat {
-  /* position: relative;
-top: -3rem; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -112,25 +131,25 @@ top: -3rem; */
 .easy {
   padding: 0.4rem;
   border-radius: 5px;
-  background-color: green;
+  background-color: #008000;
 }
 
 .moderate {
   padding: 0.4rem;
   border-radius: 5px;
-  background-color: rgb(237, 116, 11);
+  background-color: #ed740b;
 }
 
 .hard {
   padding: 0.4rem;
   border-radius: 5px;
-  background-color: red;
+  background-color: #ff0000;
 }
 
 .very-hard {
   padding: 0.4rem;
   border-radius: 5px;
-  background-color: rgb(133, 1, 1);
+  background-color: #850101;
 }
 
 .description {
@@ -153,16 +172,16 @@ top: -3rem; */
 
 .trailhead-name {
   font-size: 2rem;
-  color: greenyellow;
+  color: #adff2f;
   transition: color 200ms ease-in;
 }
 
 .trailhead-name:hover {
-  color: white;
+  color: #ffffff;
 }
 
 .google-earth-link {
-  color: greenyellow;
+  color: #adff2f;
 }
 
 .google-earth-link:hover {
@@ -211,9 +230,7 @@ top: -3rem; */
   .info-header h3 {
     font-size: 1.5rem;
   }
-  /* .info-sub-header {
-    padding: 0.5rem 0.2rem;
-  } */
+
   .info-sub-header h3 {
     font-size: 1.2rem;
     margin: 0 0.4rem;

@@ -6,11 +6,11 @@
 }
 
 .trail-list-container p {
-  color: gray;
+  color: #808080;
 }
 
 .results-container {
-  color: white;
+  color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,11 +44,11 @@
   width: 9rem;
   height: 4rem;
   border-radius: 5px;
-  background: rgb(36, 116, 7);
+  background: #247407;
   background: linear-gradient(
     0deg,
-    rgba(36, 116, 7, 1) 21%,
-    rgba(50, 251, 23, 1) 100%
+    #247407 21%,
+    #32fb17 100%
   );
   color: white;
   cursor: pointer;
@@ -89,14 +89,14 @@
 
 @media (max-width: 40em) {
  .results-title {
-  color: white;
+  color: #ffffff;
 }
 
 .trail-list-container p {
-  color: rgb(206, 206, 206);
+  color: #cecece;
 }
 
 .pagination-container h3 {
-  color: white;
+  color: #ffffff;
 }
 }
