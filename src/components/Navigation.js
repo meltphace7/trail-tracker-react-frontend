@@ -18,6 +18,7 @@ const Navigation = () => {
       localStorage.setItem("token", null);
       localStorage.setItem("userId", null);
       localStorage.setItem("expiryDate", null);
+      // localStorage.setItem("favorite-trails", []);
       history.replace("/home");
     };
  

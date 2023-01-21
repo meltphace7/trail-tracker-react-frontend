@@ -17,6 +17,7 @@ const authSlice = createSlice({
       state.userName = userName;
       state.isAuth = true;
       state.favorites = favorites;
+       localStorage.setItem("favorite-trails", JSON.stringify(favorites));
     },
     logout(state) {
       state.isAuth = false;
@@ -31,9 +32,7 @@ const authSlice = createSlice({
       state.favorites = favorites;
     },
     toggleFavorites(state, action) {
-      const userId = localStorage.getItem("userId");
       const favoritedItem = action.payload;
-
       // Adds trailId field to trail
       const transformedFave = { trailId: action.payload._id, ...favoritedItem };
       // Check if trail is already in favorite
@@ -48,14 +47,15 @@ const authSlice = createSlice({
         state.favorites = updatedFavorites;
          localStorage.setItem(
            "favorite-trails",
-           JSON.stringify(state.favorites)
+           JSON.stringify(updatedFavorites)
          );
       } else {
-        state.favorites.push(transformedFave);
+        const transformedFavorites = state.favorites.concat(transformedFave);
+        state.favorites = transformedFavorites;
 
         localStorage.setItem(
           "favorite-trails",
-          JSON.stringify(state.favorites)
+          JSON.stringify(transformedFavorites)
         );
       }
     },

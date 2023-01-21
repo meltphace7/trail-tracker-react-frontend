@@ -54,8 +54,6 @@ const TrailSearchForm = (props) => {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    console.log('filterQuery', filterQuery)
-    console.log("filterType", filterType);
     if (filterQuery === "All" && filterType === 'by-state') {
       setIsMessage(true);
       setMessage('Please select a state')

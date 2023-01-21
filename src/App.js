@@ -17,6 +17,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchAuthData } from "./store/auth-actions";
 import { sendAuthData } from "./store/auth-actions";
 import hostURL from "./hosturl";
+import { authActions } from "./store/auth-slice";
 
 let isInitial = true;
 let render = 1;
@@ -30,7 +31,6 @@ function App() {
 
   const userFavorites = useSelector((state) => state.auth.favorites);
   const isAuth = useSelector((state) => state.auth.isAuth);
-  console.log('user favorites', userFavorites);
 
   //FETCH AUTH DATA IF CURRENT USER IS AUTHENTICATED
   useEffect(() => {
@@ -59,6 +59,14 @@ function App() {
     // IF USER AUTHENTICATED, UPDATE FAVORITES ON FAVORITES CHANGE
     dispatch(sendAuthData(userFavorites));
   }, [userFavorites, dispatch]);
+
+  /// Get faves depending on auth status
+  useEffect(() => {
+    if (isAuth) return;
+    dispatch(authActions.setFavoritesFromLocalStorage());
+}, [isAuth,])
+
+  ///
 
   // FETCHES TRAILS FROM BACKEND
   const fetchTrails = useCallback(async () => {
