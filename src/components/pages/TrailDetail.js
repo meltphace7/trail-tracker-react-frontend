@@ -140,46 +140,57 @@ const TrailDetail = (props) => {
               />
             </div>
             <div className={classes["info-sub-header"]}>
-              {/* <h3>{`Length: ${trail.miles} miles roundtrip`}</h3> */}
-              <div className={classes["trail-stat"]}>
-                <img className={classes["trail-stat-icon"]} src={mileageIcon} />
-                <h3>{`Length: `}</h3>
-                <h3>{`${trail.miles} miles`}</h3>
-              </div>
-              <div className={classes["trail-stat"]}>
-                <img
-                  className={classes["trail-stat-icon"]}
-                  src={difficultyIcon}
-                />
-                <h3>{`Difficulty:`}</h3>
-                <h3
-                  className={classes[difficulty]}
-                >{`${trail.difficulty}/10`}</h3>
-              </div>
-              <div className={classes["trail-stat"]}>
-                <img className={classes["trail-stat-icon"]} src={sceneryIcon} />
-                <h3>{`Scenery:`}</h3>
-                <h3>{`${trail.scenery}/10`}</h3>
-              </div>
-              <div className={classes["trail-stat"]}>
-                <img
-                  className={classes["trail-stat-icon"]}
-                  src={solitudeIcon}
-                />
-                <h3>{`Solitude:`}</h3>
-                <h3>{`${trail.solitude}/10`}</h3>
-              </div>
-              <div className={classes["trail-stat"]}>
-                <img className={classes["trail-stat-icon"]} src={seasonIcon} />
-                <h3>{`Best Season:`}</h3>
-                <h3>{season}</h3>
-              </div>
-              {/* <h3 className={classes[difficulty]}>
+              <div className={classes["info-sub-header-overlay"]}>
+                {/* <h3>{`Length: ${trail.miles} miles roundtrip`}</h3> */}
+                <div className={classes["trail-stat"]}>
+                  <img
+                    className={classes["trail-stat-icon"]}
+                    src={mileageIcon}
+                  />
+                  <h3>{`Length: `}</h3>
+                  <h3>{`${trail.miles} miles`}</h3>
+                </div>
+                <div className={classes["trail-stat"]}>
+                  <img
+                    className={classes["trail-stat-icon"]}
+                    src={difficultyIcon}
+                  />
+                  <h3>{`Difficulty:`}</h3>
+                  <h3
+                    className={classes[difficulty]}
+                  >{`${trail.difficulty}/10`}</h3>
+                </div>
+                <div className={classes["trail-stat"]}>
+                  <img
+                    className={classes["trail-stat-icon"]}
+                    src={sceneryIcon}
+                  />
+                  <h3>{`Scenery:`}</h3>
+                  <h3>{`${trail.scenery}/10`}</h3>
+                </div>
+                <div className={classes["trail-stat"]}>
+                  <img
+                    className={classes["trail-stat-icon"]}
+                    src={solitudeIcon}
+                  />
+                  <h3>{`Solitude:`}</h3>
+                  <h3>{`${trail.solitude}/10`}</h3>
+                </div>
+                <div className={classes["trail-stat"]}>
+                  <img
+                    className={classes["trail-stat-icon"]}
+                    src={seasonIcon}
+                  />
+                  <h3>{`Best Season:`}</h3>
+                  <h3>{season}</h3>
+                </div>
+                {/* <h3 className={classes[difficulty]}>
                 {`Difficulty: ${trail.difficulty}/10`}
               </h3> */}
-              {/* <h3>{`Scenery: ${trail.scenery}/10`}</h3> */}
-              {/* <h3>{`Solitude: ${trail.solitude}/10`}</h3> */}
-              {/* <h3>{`Season: ${season}`}</h3> */}
+                {/* <h3>{`Scenery: ${trail.scenery}/10`}</h3> */}
+                {/* <h3>{`Solitude: ${trail.solitude}/10`}</h3> */}
+                {/* <h3>{`Season: ${season}`}</h3> */}
+              </div>
             </div>
             <p className={classes["description"]}>{trail.description}</p>
             <ImageSlider images={trail.images} />
