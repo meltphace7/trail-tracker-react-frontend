@@ -30,6 +30,7 @@ function App() {
 
   const userFavorites = useSelector((state) => state.auth.favorites);
   const isAuth = useSelector((state) => state.auth.isAuth);
+  console.log('user favorites', userFavorites);
 
   //FETCH AUTH DATA IF CURRENT USER IS AUTHENTICATED
   useEffect(() => {
@@ -55,7 +56,6 @@ function App() {
       render = 3;
       return;
     }
-
     // IF USER AUTHENTICATED, UPDATE FAVORITES ON FAVORITES CHANGE
     dispatch(sendAuthData(userFavorites));
   }, [userFavorites, dispatch]);

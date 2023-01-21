@@ -20,6 +20,7 @@
 
 .trail-search button {
   font-size: 2rem;
+  font-weight: unset;
   margin: 0.5rem 1rem;
   width: 17rem;
   border-radius: 20rem;

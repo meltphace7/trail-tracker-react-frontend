@@ -3,6 +3,7 @@ import classes from "./TrailSearchForm.module.css";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { trailActions } from "../store/trail-slice";
+import ModalMessage from '../components/notifications/ModalMessage';
 
 const TrailSearchForm = (props) => {
   const history = useHistory();
@@ -35,6 +36,9 @@ const TrailSearchForm = (props) => {
     filterType: filterType,
     filterQuery: filterQuery,
   });
+  // Error Message
+  const [isMessage, setIsMessage] = useState(false);
+  const [message, setMessage] = useState('');
 
   const handleFilterSelect = (e) => {
     setFilterType(e.target.value);
@@ -50,6 +54,23 @@ const TrailSearchForm = (props) => {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
+    console.log('filterQuery', filterQuery)
+    console.log("filterType", filterType);
+    if (filterQuery === "All" && filterType === 'by-state') {
+      setIsMessage(true);
+      setMessage('Please select a state')
+      return
+    }
+     if (filterQuery === "All" && filterType === "by-season") {
+        setIsMessage(true);
+        setMessage("Please select a month");
+        return;
+     }
+      if (filterQuery === "All" && filterType === "by-wilderness") {
+         setIsMessage(true);
+         setMessage("Please select a wilderness area");
+         return;
+      }
     if (filterQuery === "select") return;
     setFilter({
       filterType: filterType,
@@ -69,6 +90,11 @@ const TrailSearchForm = (props) => {
   useEffect(() => {
     props.onFilterSelection(filter);
   }, [filter, props]);
+
+  const closeModalHandler = () => {
+    setIsMessage(false);
+    setMessage('');
+  }
 
   // JSX TO BE DYNAMICALLY RENDERED DEPENDING ON FILTER SELECTION
 
@@ -172,6 +198,7 @@ const TrailSearchForm = (props) => {
         {filterType === "by-season" && chooseMonth}
       </div>
       <button type="submit">Search Trails</button>
+      {isMessage && <ModalMessage onCloseModal={closeModalHandler} message={message} />}
     </form>
   );
 };

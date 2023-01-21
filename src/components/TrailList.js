@@ -95,7 +95,8 @@ const TrailList = (props) => {
   return (
     <div className={classes["trail-list-container"]}>
       <div className={classes["results-container"]}>
-        <h1 className={classes["results-title"]}>{`${searchQuery} Trails`}</h1>
+        <h1 className={classes["results-title"]}>{`${props.filter.filterType === "by-season"
+            ? month : props.filter.filterQuery} Trails`}</h1>
         <p>{`${props.trails.length} results for "${
           props.filter.filterType === "by-season"
             ? month

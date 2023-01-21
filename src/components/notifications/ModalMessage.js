@@ -6,6 +6,7 @@ const ModalMessage = (props) => {
   const closeModalHandler = () => {
     props.onCloseModal();
   };
+  
   return (
     <Modal onCloseModal={closeModalHandler}>
       <div className={classes.background}>
