@@ -5,12 +5,12 @@ import ImageSlider from "../ImageSlider";
 import { AiOutlineStar } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
 import WeatherReport from "../WeatherReport";
-import hostURL from '../../hosturl';
+import hostURL from "../../hosturl";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux'
-import { authActions } from '../../store/auth-slice';
-import LoadingSpinner from '../UI/LoadingSpinner'
-import difficultyIcon from '../../assets/difficulty-icon.png'
+import { useSelector, useDispatch } from "react-redux";
+import { authActions } from "../../store/auth-slice";
+import LoadingSpinner from "../UI/LoadingSpinner";
+import difficultyIcon from "../../assets/difficulty-icon.png";
 import solitudeIcon from "../../assets/solitude-icon.png";
 import sceneryIcon from "../../assets/scenery-icon-white.png";
 import mileageIcon from "../../assets/mileage-icon.png";
@@ -25,27 +25,36 @@ const TrailDetail = (props) => {
   const [trailIsLoaded, setTrailIsLoaded] = useState(false);
   const [isFavorited, setIsFavorited] = useState(false);
 
-  /// FETCHES TRAIL DETAIL FROM BACKEND
-   const fetchTrailHandler = useCallback(async () => {
-     try {
-       const response = await fetch(
-         `${hostURL}/trails/trail-detail/${trailId}`
-       );
-       if (!response.ok) {
-         throw new Error("Could not find trail!");
-       }
-       const resData = await response.json();
-       setTrail(resData.trail);
-       setTrailIsLoaded(true);
-     } catch (err) {
-       console.log(err);
-     }
-   }, [trailId]);
+  // Parallax effect for Header
+  const [offsetY, setOffsetY] = useState(0);
+  const handleScroll = () => {
+    setOffsetY(window.pageYOffset);
+  };
 
-   useEffect(() => {
-     fetchTrailHandler();
-   }, [fetchTrailHandler]);
-  
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  /// FETCHES TRAIL DETAIL FROM BACKEND
+  const fetchTrailHandler = useCallback(async () => {
+    try {
+      const response = await fetch(`${hostURL}/trails/trail-detail/${trailId}`);
+      if (!response.ok) {
+        throw new Error("Could not find trail!");
+      }
+      const resData = await response.json();
+      setTrail(resData.trail);
+      setTrailIsLoaded(true);
+    } catch (err) {
+      console.log(err);
+    }
+  }, [trailId]);
+
+  useEffect(() => {
+    fetchTrailHandler();
+  }, [fetchTrailHandler]);
 
   const [season, setSeason] = useState("");
   const coords = [trail.latitude, trail.longitude];
@@ -53,70 +62,70 @@ const TrailDetail = (props) => {
 
   // Gets MONTH NAME from props.trail
   useEffect(() => {
-      const monthArray = [
-        [1, "January"],
-        [2, "Febuary"],
-        [3, "March"],
-        [4, "April"],
-        [5, "May"],
-        [6, "June"],
-        [7, "July"],
-        [8, "August"],
-        [9, "September"],
-        [10, "October"],
-        [11, "November"],
-        [12, "December"],
-      ];
+    const monthArray = [
+      [1, "January"],
+      [2, "Febuary"],
+      [3, "March"],
+      [4, "April"],
+      [5, "May"],
+      [6, "June"],
+      [7, "July"],
+      [8, "August"],
+      [9, "September"],
+      [10, "October"],
+      [11, "November"],
+      [12, "December"],
+    ];
     if (trail.bestSeason === undefined) return;
 
     const [monthStart] = monthArray.filter(
       (month) => month[0] === +trail.bestSeason[0]
     );
-   
+
     const [monthEnd] = monthArray.filter(
       (month) => month[0] === +trail.bestSeason[1]
     );
     setSeason(`${monthStart[1]} - ${monthEnd[1]}`);
   }, [trail]);
 
-   let difficulty;
-   const calcDifficulty = function (diff) {
-     if (+diff <= 3) difficulty = "easy";
-     if (+diff > 3 && +diff < 7) difficulty = "moderate";
-     if (+diff >= 7 && +diff <= 8) difficulty = "hard";
-     if (+diff > 8) difficulty = "very-hard";
-   };
+  let difficulty;
+  const calcDifficulty = function (diff) {
+    if (+diff <= 3) difficulty = "easy";
+    if (+diff > 3 && +diff < 7) difficulty = "moderate";
+    if (+diff >= 7 && +diff <= 8) difficulty = "hard";
+    if (+diff > 8) difficulty = "very-hard";
+  };
 
   calcDifficulty(trail.difficulty);
 
   // TOGGLES FAVORITE STATUS OF TRAIL
   const isFavoritedHandler = function () {
-      console.log('trail to favorite', trail)
-      dispatch(authActions.toggleFavorites(trail));
-      setIsFavorited((prevstate) => !prevstate);
-    };
+    console.log("trail to favorite", trail);
+    dispatch(authActions.toggleFavorites(trail));
+    setIsFavorited((prevstate) => !prevstate);
+  };
 
   // DETERMINES IF TRAIL IS FAVORITED BASED ON USERS FAVORITE TRAILS ARRAY
   useEffect(() => {
     if (!userFavorites) {
-      return
+      return;
     }
-    const existingFavorite = userFavorites.find(fave => fave.trailId === trail._id);
-      if (existingFavorite) {
-        setIsFavorited(true);
-      } else {
-        setIsFavorited(false);
-      }
-    }, [trail, userFavorites]);
-  
+    const existingFavorite = userFavorites.find(
+      (fave) => fave.trailId === trail._id
+    );
+    if (existingFavorite) {
+      setIsFavorited(true);
+    } else {
+      setIsFavorited(false);
+    }
+  }, [trail, userFavorites]);
+
   const favoriteIcon = isFavorited ? (
     <AiFillStar size={50} className={classes["star"]} />
   ) : (
     <AiOutlineStar size={50} className={classes["star"]} />
-    );
-  
-  console.log(difficulty);
-  
+  );
+
   return (
     <div className={classes["trail-detail-container"]}>
       <div className={classes["trail-detail"]}>
@@ -141,6 +150,7 @@ const TrailDetail = (props) => {
                 className={classes["trail-image"]}
                 src={trail.images[0] ? trail.images[0] : ""}
                 alt={trail.trailName}
+                style={{ transform: `translateY(${offsetY * 0.1}px)` }}
               />
             </div>
 
@@ -151,6 +161,7 @@ const TrailDetail = (props) => {
                   <img
                     className={classes["trail-stat-icon"]}
                     src={mileageIcon}
+                    alt="mileage-icon"
                   />
                   <h3>{`Length: `}</h3>
                   <h3>{`${trail.miles} miles`}</h3>
@@ -159,6 +170,7 @@ const TrailDetail = (props) => {
                   <img
                     className={classes["trail-stat-icon"]}
                     src={difficultyIcon}
+                    alt="difficulty-icon"
                   />
                   <h3>{`Difficulty:`}</h3>
                   <h3
@@ -169,6 +181,7 @@ const TrailDetail = (props) => {
                   <img
                     className={classes["trail-stat-icon"]}
                     src={sceneryIcon}
+                    alt="scenery-icon"
                   />
                   <h3>{`Scenery:`}</h3>
                   <h3>{`${trail.scenery}/10`}</h3>
@@ -177,6 +190,7 @@ const TrailDetail = (props) => {
                   <img
                     className={classes["trail-stat-icon"]}
                     src={solitudeIcon}
+                    alt="solitude-icon"
                   />
                   <h3>{`Solitude:`}</h3>
                   <h3>{`${trail.solitude}/10`}</h3>
@@ -185,21 +199,16 @@ const TrailDetail = (props) => {
                   <img
                     className={classes["trail-stat-icon"]}
                     src={seasonIcon}
+                    alt="season-icon"
                   />
                   <h3>{`Best Season:`}</h3>
                   <h3>{season}</h3>
                 </div>
-                {/* <h3 className={classes[difficulty]}>
-                {`Difficulty: ${trail.difficulty}/10`}
-              </h3> */}
-                {/* <h3>{`Scenery: ${trail.scenery}/10`}</h3> */}
-                {/* <h3>{`Solitude: ${trail.solitude}/10`}</h3> */}
-                {/* <h3>{`Season: ${season}`}</h3> */}
               </div>
             </div>
             <p className={classes["description"]}>{trail.description}</p>
             <ImageSlider images={trail.images} />
-            {/* <WeatherReport coords={coords} /> */}
+            <WeatherReport coords={coords} />
             <div className={classes["map-container"]}>
               <h1>Map</h1>
               {trail.trailheadName && (
