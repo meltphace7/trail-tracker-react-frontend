@@ -220,13 +220,14 @@ const AddTrail = (props) => {
         throw new Error("Adding trail failed!");
       }
       const responseData = await response.json();
+      console.log(responseData)
       setIsLoading(false);
       setIsMessage(true);
       setMessage("Trail successfully submited!");
     } catch (err) {
       setIsLoading(false);
       setIsMessage(true);
-      setMessage(err);
+      setMessage('Something went wrong!');
     }
     trailNameReset();
     stateReset();
@@ -591,6 +592,7 @@ const AddTrail = (props) => {
           ref={imageInputRef}
           type="file"
           multiple
+          required
           onChange={imageChangeHandler}
           accept="image/jpg, image/jpeg, image/png"
         />
