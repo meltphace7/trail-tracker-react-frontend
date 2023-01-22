@@ -220,7 +220,7 @@ const AddTrail = (props) => {
         throw new Error("Adding trail failed!");
       }
       const responseData = await response.json();
-      console.log(responseData)
+      console.log('responseData', responseData)
       setIsLoading(false);
       setIsMessage(true);
       setMessage("Trail successfully submited!");
@@ -228,6 +228,7 @@ const AddTrail = (props) => {
       setIsLoading(false);
       setIsMessage(true);
       setMessage('Something went wrong!');
+      console.log('error!', err)
     }
     trailNameReset();
     stateReset();
