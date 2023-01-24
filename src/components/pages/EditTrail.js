@@ -644,7 +644,8 @@ const EditTrail = (props) => {
           type="file"
           multiple
           onChange={imageChangeHandler}
-          accept="image/jpg, image/jpeg, image/png"
+          accept="image/*"
+          // accept="image/jpg, image/jpeg, image/png"
         />
         <button type="submit">Submit Trail!</button>
       </form>

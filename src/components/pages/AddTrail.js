@@ -595,7 +595,8 @@ const AddTrail = (props) => {
           multiple
           required
           onChange={imageChangeHandler}
-          accept="image/jpg, image/jpeg, image/png"
+          accept="image/*"
+          // accept="image/jpg, image/jpeg, image/png"
         />
         <button type="submit">Submit Trail!</button>
       </form>
