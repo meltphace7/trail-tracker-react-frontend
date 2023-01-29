@@ -1,14 +1,18 @@
 import React from "react";
+import classes from './HomepageTrailMap.module.css'
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import { Link } from "react-router-dom";
 
+
 function ChangeView({ center, zoom }) {
+
   const map = useMap();
   map.setView(center, zoom);
   return null;
 }
+
 
 const TrailMap = (props) => {
   const icon = L.icon({ iconUrl: "/imgs/marker-icon.png" });

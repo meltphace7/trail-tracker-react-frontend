@@ -28,13 +28,39 @@
     color: white;
 }
 
-.map-section h1 {
-    letter-spacing: .2rem;
+.map-section-title {
+    height: 6.82rem;
+ letter-spacing: .2rem;
     font-size: 4rem;
     margin-bottom: 2rem;
 }
 
+.loading-message {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.spinner {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner:after {
+  content: ' ';
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 3px solid white;
+  border-color: lime transparent lime  transparent;
+  animation: spinner 1.2s linear infinite;
+}
 
 .featured-hikes-section {
     margin: 2rem 0rem 4rem 0rem;
@@ -45,18 +71,26 @@
     align-items: center;
 }
 
-.featured-hikes-section h1 {
+/* .featured-hikes-section h1 {
   color: var(--color-main-dark);
-}
+} */
 
 
-.featured-hikes-container {
+/* .featured-hikes-container {
     height: 25rem;
     width: 100%;
     background-color: #dad9d9;
     display: flex;
     justify-content: space-around;
     align-items: center;
+} */
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 48em) {
