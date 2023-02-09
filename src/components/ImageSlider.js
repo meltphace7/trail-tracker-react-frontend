@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./ImageSlider.module.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
@@ -6,6 +6,13 @@ import { IoIosArrowForward } from "react-icons/io";
 const ImageSlider = (props) => {
   const [current, setCurrent] = useState(1);
   const length = props.images.length;
+
+  useEffect(() => {
+  if (length === 1) {
+    setCurrent(0);
+  }
+  }, [length])
+
 
   if (!Array.isArray(props.images) || props.images.length <= 0) {
     return null;
@@ -41,7 +48,7 @@ const ImageSlider = (props) => {
                 key={index}
               >
                 {index === current && (
-                  <img src={slide} className={classes.image} />
+                  <img src={slide} className={classes.image} alt="trail pic" />
                 )}
               </div>
             );
