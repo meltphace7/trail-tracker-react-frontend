@@ -57,6 +57,7 @@
 }
 
 .trail-image {
+  min-height: 45rem;
   width: 100%;
   z-index: 1;
   position: relative;

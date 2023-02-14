@@ -94,7 +94,6 @@ const TrailSearchForm = (props) => {
     setMessage('');
   }
 
-  // JSX TO BE DYNAMICALLY RENDERED DEPENDING ON FILTER SELECTION
 
   // RENDERS STATE OPTIONS FOR filter by state OPTION
   const chooseState = (

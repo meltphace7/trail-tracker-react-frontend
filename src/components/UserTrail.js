@@ -49,7 +49,6 @@ const UserTrail = (props) => {
     // Checks if item to be deleted is a favorite, and if it is, trail is removed from user's favorites array
     const existingFavorite = favorites.find((item) => item.trailId === trailId);
     if (existingFavorite) {
-      console.log("trail was a favorite and is now being deleted");
       dispatch(authActions.toggleFavorites(trailId));
     }
     const token = localStorage.getItem("token");
