@@ -1,13 +1,12 @@
 import React from "react";
 import classes from "./Navigation.module.css";
-import { Link, NavLink, useHistory } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store/auth-slice";
-import trailLogo from '../assets/trail-tracker-icon.png'
 import Logo from './Logo'
 
 const Navigation = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.auth.isAuth);
 
@@ -19,7 +18,7 @@ const Navigation = () => {
       localStorage.setItem("userId", null);
       localStorage.setItem("expiryDate", null);
       // localStorage.setItem("favorite-trails", []);
-      history.replace("/home");
+       navigate("/home", { replace: true });
     };
  
   return (
@@ -32,8 +31,9 @@ const Navigation = () => {
       <ul className={classes["nav-menu"]}>
         <li>
           <NavLink
-            className={classes["nav-link"]}
-            activeClassName={classes.active}
+            className={(navData) =>
+              navData.isActive ? classes.active : classes["nav-link"]
+            }
             to="/home"
           >
             HOME
@@ -41,8 +41,9 @@ const Navigation = () => {
         </li>
         <li>
           <NavLink
-            className={classes["nav-link"]}
-            activeClassName={classes.active}
+            className={(navData) =>
+              navData.isActive ? classes.active : classes["nav-link"]
+            }
             to="/favorites"
           >
             FAVORITES
@@ -51,8 +52,9 @@ const Navigation = () => {
         {!isLoggedIn && (
           <li>
             <NavLink
-              activeClassName={classes.active}
-              className={classes["nav-link"]}
+              className={(navData) =>
+                navData.isActive ? classes.active : classes["nav-link"]
+              }
               to="/signup"
             >
               SIGN UP
@@ -62,8 +64,9 @@ const Navigation = () => {
         <li>
           {isLoggedIn && (
             <NavLink
-              activeClassName={classes.active}
-              className={classes["nav-link"]}
+              className={(navData) =>
+                navData.isActive ? classes.active : classes["nav-link"]
+              }
               to="/addtrail"
             >
               ADD TRAIL
@@ -71,8 +74,9 @@ const Navigation = () => {
           )}
           {!isLoggedIn && (
             <NavLink
-              activeClassName={classes.active}
-              className={classes["nav-link"]}
+              className={(navData) =>
+                navData.isActive ? classes.active : classes["nav-link"]
+              }
               to="/login"
             >
               LOG IN
@@ -82,8 +86,9 @@ const Navigation = () => {
         {isLoggedIn && (
           <li>
             <NavLink
-              activeClassName={classes.active}
-              className={classes["nav-link"]}
+              className={(navData) =>
+                navData.isActive ? classes.active : classes["nav-link"]
+              }
               to="/account"
             >
               ACCOUNT

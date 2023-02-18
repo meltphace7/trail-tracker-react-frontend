@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./TrailList.module.css";
 import TrailListItem from "./TrailListItem";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 const monthArray = [
   [1, "January"],
@@ -19,7 +19,7 @@ const monthArray = [
 ];
 
 const TrailList = (props) => {
-  const searchQuery = useSelector((state) => state.trails.currentSearchQuery);
+  // const searchQuery = useSelector((state) => state.trails.currentSearchQuery);
   // Converts filter Query to Month Name if filterQuery is month Number
   const [month, setMonth] = useState("");
 

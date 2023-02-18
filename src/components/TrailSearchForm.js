@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import classes from "./TrailSearchForm.module.css";
-import { useHistory } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { trailActions } from "../store/trail-slice";
 import ModalMessage from '../components/notifications/ModalMessage';
 
 const TrailSearchForm = (props) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentQueryType = useSelector(
     (state) => state.trails.currentQueryType
@@ -81,7 +81,8 @@ const TrailSearchForm = (props) => {
     dispatch(trailActions.setQuery(searchQuery));
 
     setTimeout(() => {
-      history.push("/trails");
+      // history.push("/trails");
+       navigate("/trails");
     }, 500);
   };
 

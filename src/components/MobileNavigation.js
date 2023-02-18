@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import classes from "./MobileNavigation.module.css";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store/auth-slice";
 import Logo from './Logo';
 
 const MobileNavigation = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.auth.isAuth);
 
@@ -25,7 +25,8 @@ const MobileNavigation = () => {
     localStorage.setItem("token", null);
     localStorage.setItem("userId", null);
     localStorage.setItem("expiryDate", null);
-    history.replace("/home");
+    navigate('/home', {replace: true})
+   
   };
 
   return (

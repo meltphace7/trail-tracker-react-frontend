@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import classes from "./SignUp.module.css";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoadingScreen from '../notifications/LoadingScreen';
 import hostURL from "../../hosturl";
 import useValidation from "../../hooks/use-validation";
 import ModalMessage from "../notifications/ModalMessage";
 
 export const SignUp = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [isMessage, setIsMessage] = useState(false);
   const [isErrorMessage, setIsErrorMessage] = useState(false);
   const [message, setMessage] = useState("");
@@ -139,7 +139,7 @@ export const SignUp = () => {
     if (!isErrorMessage) {
       setIsMessage(false);
       setMessage("");
-      history.push("/login");
+       navigate("/login", { replace: true });
     } else {
       setIsMessage(false);
       setIsErrorMessage(false);

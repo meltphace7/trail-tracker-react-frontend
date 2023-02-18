@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import classes from "./Login.module.css";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import hostURL from "../../hosturl";
 import ModalMessage from "../notifications/ModalMessage";
 import LoadingScreen from "../notifications/LoadingScreen";
@@ -9,7 +9,7 @@ import { authActions } from "../../store/auth-slice";
 import useValidation from "../../hooks/use-validation";
 
 const Login = (props) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -44,7 +44,7 @@ const Login = (props) => {
     localStorage.setItem("token", null);
     localStorage.setItem("userId", null);
     localStorage.setItem("expiryDate", null);
-    history.replace("/home");
+     navigate("/home", { replace: true });
   };
 
   // LOGINS IN USER
@@ -95,7 +95,8 @@ const Login = (props) => {
       // AUTO LOGOUT ///
       setAutoLogout(remainingMilliseconds);
       ///////////
-      history.push("/home");
+       navigate("/home");
+      // history.push("/home");
     } catch (err) {
       setIsLoading(false);
       setErrorMessage(err.message);

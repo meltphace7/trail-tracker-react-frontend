@@ -5,7 +5,7 @@ import AddTrail from "./components/pages/AddTrail";
 import EditTrail from "./components/pages/EditTrail";
 import Footer from "./components/Footer";
 import TrailDetail from "./components/pages/TrailDetail";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./components/pages/HomePage";
 import TrailSearchResults from "./components/pages/TrailSearchResults";
 import ScrollToTop from "./components/ScrollToTop";
@@ -64,7 +64,7 @@ function App() {
   useEffect(() => {
     if (isAuth) return;
     dispatch(authActions.setFavoritesFromLocalStorage());
-}, [isAuth,])
+  }, [isAuth]);
 
   ///
 
@@ -157,56 +157,62 @@ function App() {
       <MobileNavigation />
       <Navigation />
       <ScrollToTop />
-      <Switch>
-        <Route path="/" exact>
-          <Redirect to="/home" />
-        </Route>
-        <Route path="/home">
-          <HomePage
-            trails={trails}
-            onFilterSelect={getFilter}
-            trailFilter={filter}
+      <Routes>
+        <Route path="/" element={<Navigate to="/home" />} />
+
+        <Route
+          path="/home"
+          element={
+            <HomePage
+              trails={trails}
+              onFilterSelect={getFilter}
+              trailFilter={filter}
+            />
+          }
+        />
+        <Route path="/favorites" element={<Favorites />} />
+
+        {isAuth && (
+          <Route
+            path="/addtrail"
+            element={<AddTrail onAddTrail={fetchTrails} />}
           />
-        </Route>
-        <Route path="/favorites">
-          <Favorites />
-        </Route>
-        {isAuth && (
-          <Route path="/addtrail">
-            <AddTrail onAddTrail={fetchTrails} />
-          </Route>
         )}
         {isAuth && (
-          <Route path="/edit-trail/:trailId">
-            <EditTrail onEditTrail={fetchTrails} />
-          </Route>
-        )}
-        {isAuth && (
-          <Route path="/account">
-            <Account onDeleteTrail={fetchTrails} />
-          </Route>
-        )}
-        <Route path="/trails">
-          <TrailSearchResults
-            filteredTrails={filteredTrails}
-            trails={trails}
-            trailFilter={filter}
-            onFilterSelect={getFilter}
+          <Route
+            path="/edit-trail/:trailId"
+            element={<EditTrail onEditTrail={fetchTrails} />}
           />
-        </Route>
-        <Route path="/trail-detail/:trailId">
-          <TrailDetail trails={filteredTrails} />
-        </Route>
-        <Route path="/signup">
-          <SignUp />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="*">
-          <Redirect to="/" />
-        </Route>
-      </Switch>
+        )}
+        {isAuth && (
+          <Route
+            path="/account"
+            element={<Account onDeleteTrail={fetchTrails} />}
+          />
+        )}
+        <Route
+          path="/trails"
+          element={
+            <TrailSearchResults
+              filteredTrails={filteredTrails}
+              trails={trails}
+              trailFilter={filter}
+              onFilterSelect={getFilter}
+            />
+          }
+        />
+
+        <Route
+          path="/trail-detail/:trailId"
+          element={<TrailDetail trails={filteredTrails} />}
+        />
+
+        <Route path="/signup" element={<SignUp />} />
+
+        <Route path="/login" element={<Login />} />
+
+        <Route path="*" element={<Navigate replace to="/" />} />
+      </Routes>
       <Footer />
     </div>
   );
