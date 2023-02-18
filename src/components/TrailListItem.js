@@ -84,7 +84,7 @@ const TrailListItem = (props) => {
     <li key={trail._id} className={classes["trail-item"]}>
       <Link
         className={classes["trail-link"]}
-        to={`trail-detail/${trail._id}`}
+        to={`/trail-detail/${trail._id}`}
       ></Link>
       <div className={classes["image-container"]}>
         {trail.images && <img src={trail.images[0]} alt={trail.trailName} />}
@@ -102,9 +102,7 @@ const TrailListItem = (props) => {
           </p>
         </div>
         <div className={classes["description-container"]}>
-          <p className={classes["description"]}>
-            {trail.description}
-          </p>
+          <p className={classes["description"]}>{trail.description}</p>
         </div>
       </div>
       <button

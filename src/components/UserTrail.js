@@ -82,7 +82,7 @@ const UserTrail = (props) => {
     <li key={trail._id} className={classes["trail-item"]}>
       <Link
         className={classes["trail-link"]}
-        to={`trail-detail/${trail._id}`}
+        to={`/trail-detail/${trail._id}`}
       ></Link>
       <div className={classes["image-container"]}>
         {trail.images && <img src={trail.images[0]} alt={trail.trailName} />}
