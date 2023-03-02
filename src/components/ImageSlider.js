@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import classes from "./ImageSlider.module.css";
-import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowBack, IoMdFingerPrint } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
+import {useParams} from 'react-router-dom'
 
 const ImageSlider = (props) => {
+  const { trailId } = useParams();
   const [current, setCurrent] = useState(1);
   const length = props.images.length;
 
+    useEffect(() => {
+      setCurrent(0);
+    }, [trailId]);
+  
   useEffect(() => {
   if (length === 1) {
     setCurrent(0);
@@ -20,10 +26,12 @@ const ImageSlider = (props) => {
 
   const prevHandler = function () {
     setCurrent(current === 0 ? length - 1 : current - 1);
+    console.log('prev');
   };
 
   const nextHandler = function () {
     setCurrent(current === length - 1 ? 0 : current + 1);
+    console.log('next');
   };
 
   // Hides dots if there are too many to fit on screen
