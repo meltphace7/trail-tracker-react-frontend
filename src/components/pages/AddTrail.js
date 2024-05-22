@@ -12,9 +12,7 @@ const AddTrail = (props) => {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [images, setImages] = useState([]);
-
   const imageInputRef = useRef();
-
   const author = useSelector((state) => state.auth.userName);
   const userId = localStorage.getItem("userId");
 
