@@ -70,7 +70,6 @@ function App() {
 
   // FETCHES TRAILS FROM BACKEND
   const fetchTrails = useCallback(async () => {
-    console.log("FETCHING TRAILS from APP");
     try {
       const response = await fetch(`${hostURL}/trails/trails`);
       if (!response.ok) {

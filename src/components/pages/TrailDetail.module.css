@@ -173,10 +173,11 @@
 }
 
 .description {
-  width: 90%;
+  width: 70%;
   min-height: 16rem;
   line-height: 2rem;
-  margin: 4rem 0rem;
+  padding: 2rem 5rem;
+
 }
 
 .map-container {
@@ -273,5 +274,9 @@
 @media (max-width: 35em) {
   .trail-stat-icon {
     height: 3.5rem;
+  }
+
+  .description {
+    width: 90%;
   }
 }
