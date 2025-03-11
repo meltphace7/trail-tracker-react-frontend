@@ -25,7 +25,12 @@ const TrailMap = (props) => {
 
   return (
     <div>
-      <MapContainer center={startingCoords} zoom={14} scrollWheelZoom={true}>
+      <MapContainer
+        center={startingCoords}
+        zoom={14}
+        scrollWheelZoom={true}
+        style={{ borderRadius: "15px", overflow: "hidden" }}
+      >
         <TileLayer
           // attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
           // url="https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg"

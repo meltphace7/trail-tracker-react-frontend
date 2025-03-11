@@ -51,11 +51,11 @@ const HomePage = (props) => {
 
   const featuredTrails = [
     props.trails[3],
-    props.trails[5],
-    props.trails[7],
-    props.trails[10],
+    props.trails[12],
+    props.trails[9],
+    props.trails[17],
     props.trails[30],
-    props.trails[40],
+    props.trails[39],
   ];
 
   const loadingMessage = (
@@ -81,7 +81,7 @@ const HomePage = (props) => {
       <FeaturedTrails featuredTrails={featuredTrails} />
       <div className={classes["map-section"]}>
         <div className={classes["map-section-title"]}>
-          {trailsAreLoaded ? <h1>Trails</h1> : loadingMessage}
+          {trailsAreLoaded ? <h2>SELECT FROM MAP</h2> : loadingMessage}
         </div>
         <HomepageTrailMap trails={props.trails} />
       </div>
