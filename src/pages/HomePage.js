@@ -81,7 +81,7 @@ const HomePage = (props) => {
       <FeaturedTrails featuredTrails={featuredTrails} />
       <div className={classes["map-section"]}>
         <div className={classes["map-section-title"]}>
-          {trailsAreLoaded ? <h2>SELECT FROM MAP</h2> : loadingMessage}
+          {trailsAreLoaded ? <h2>Select From Map</h2> : loadingMessage}
         </div>
         <HomepageTrailMap trails={props.trails} />
       </div>

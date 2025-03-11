@@ -3,9 +3,13 @@
     grid-template-rows: min-content;
     gap: 0.5rem;
     padding: 1rem;
-   
+   color: #000;
     border-radius: 5px;
-   
+
+  }
+
+  .featured-trail-item a {
+    color: inherit;
   }
 
   .image-container {

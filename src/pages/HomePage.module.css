@@ -28,6 +28,10 @@
     color: white;
 }
 
+.map-section h2 {
+  font-size: 4rem;
+}
+
 .map-section-title {
     height: 6.82rem;
  letter-spacing: .2rem;
