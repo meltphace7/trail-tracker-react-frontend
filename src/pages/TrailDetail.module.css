@@ -74,7 +74,7 @@
 
 .trail-name-container {
   width: 100%;
-  background-image: url("../../assets/images/spectacle-lake-1.jpg");
+  background-image: url("../assets/images/spectacle-lake-1.jpg");
   background-size: cover;
   background-position: 50% 10%;
   z-index: 8;
@@ -113,7 +113,7 @@
 
 .info-sub-header {
   width: 100%;
-  background-image: url("../../assets/images/trail-detail-bg.jpg");
+  background-image: url("../assets/images/trail-detail-bg.jpg");
   background-size: cover;
   background-position: 50% 0%;
   z-index: 8;

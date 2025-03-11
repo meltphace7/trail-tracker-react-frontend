@@ -1,20 +1,20 @@
 import React, { useState, useEffect, useCallback } from "react";
 import classes from "./TrailDetail.module.css";
-import TrailMap from "../TrailMap";
-import ImageSlider from "../ImageSlider";
+import TrailMap from "../components/trail-detail/TrailMap";
+import ImageSlider from "../components/trail-detail/ImageSlider";
 import { AiOutlineStar } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
-import WeatherReport from "../WeatherReport";
-import hostURL from "../../hosturl";
+import WeatherReport from "../components/trail-detail/WeatherReport";
+import hostURL from "../hosturl";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { authActions } from "../../store/auth-slice";
-import LoadingSpinner from "../UI/LoadingSpinner";
-import difficultyIcon from "../../assets/difficulty-icon.png";
-import solitudeIcon from "../../assets/solitude-icon.png";
-import sceneryIcon from "../../assets/scenery-icon-white.png";
-import mileageIcon from "../../assets/mileage-icon.png";
-import seasonIcon from "../../assets/calender-icon.png";
+import { authActions } from "../store/auth-slice";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
+import difficultyIcon from "../assets/difficulty-icon.png";
+import solitudeIcon from "../assets/solitude-icon.png";
+import sceneryIcon from "../assets/scenery-icon-white.png";
+import mileageIcon from "../assets/mileage-icon.png";
+import seasonIcon from "../assets/calender-icon.png";
 
 const TrailDetail = (props) => {
   let { trailId } = useParams();

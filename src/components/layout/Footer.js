@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './Footer.module.css';
-import trailLogo from "../../src/assets/trail-tracker-icon.png";
+import trailLogo from "../../../src/assets/trail-tracker-icon.png";
 
 
 const Footer = () => {

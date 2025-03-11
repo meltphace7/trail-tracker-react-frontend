@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { AiOutlineStar } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
-import { authActions } from "../store/auth-slice";
-import LoadingSpinner from "../components/UI/LoadingSpinner";
+import { authActions } from "../../store/auth-slice";
+import LoadingSpinner from "../UI/LoadingSpinner";
 
 const TrailListItem = (props) => {
   const trailId = props.id;
@@ -54,7 +54,7 @@ const TrailListItem = (props) => {
   // DETERMINES IF TRAIL IS FAVORITED BASED ON USERS FAVORITE TRAILS ARRAY
   useEffect(() => {
     if (!userFavorites) {
-      return
+      return;
     }
     const existingFavorite = userFavorites.find(
       (fave) => fave.trailId === trail._id

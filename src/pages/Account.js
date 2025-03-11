@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import classes from "./Account.module.css";
 import { useSelector } from "react-redux";
-import UserTrail from "../UserTrail";
-import hostURL from "../../hosturl";
+import UserTrail from "../components/account/UserTrail";
+import hostURL from "../hosturl";
 
 const Account = (props) => {
   const [usersTrails, setUsersTrails] = useState([]);

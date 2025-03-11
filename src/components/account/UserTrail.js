@@ -1,10 +1,10 @@
 import React from "react";
 import classes from "./UserTrail.module.css";
 import { Link } from "react-router-dom";
-import LoadingSpinner from "../components/UI/LoadingSpinner";
-import { authActions } from "../store/auth-slice";
+import LoadingSpinner from "../UI/LoadingSpinner";
+import { authActions } from "../../store/auth-slice";
 import { useDispatch, useSelector } from "react-redux";
-import hostURL from "../hosturl";
+import hostURL from "../../hosturl";
 
 const UserTrail = (props) => {
   const dispatch = useDispatch();
@@ -70,7 +70,6 @@ const UserTrail = (props) => {
         throw new Error("Could not delete trail!");
       }
       const responseData = await response.json();
-      console.log(responseData);
       props.onDelete();
       getTrails();
     } catch (err) {
@@ -91,7 +90,7 @@ const UserTrail = (props) => {
         </div>
       </div>
       <div className={classes["info-container"]}>
-        <h2 className={classes['trail-title']}>{trail.trailName}</h2>
+        <h2 className={classes["trail-title"]}>{trail.trailName}</h2>
 
         <h3>{`${trail.state} - ${trail.wildernessArea} `}</h3>
 

@@ -1,5 +1,5 @@
 import React from "react";
-import classes from './HomepageTrailMap.module.css'
+// import classes from './HomepageTrailMap.module.css'
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import classes from "./WeatherReport.module.css";
 import WeatherDayForecast from "./WeatherDayForecast";
 import WeatherCurrent from "./WeatherCurrent";
-import hostURL from "../hosturl";
+import hostURL from "../../hosturl";
 
 const WeatherReport = (props) => {
   const [curTemp, setCurTemp] = useState("");

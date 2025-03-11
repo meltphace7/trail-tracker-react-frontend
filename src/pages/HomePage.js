@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import TrailSearchForm from "../TrailSearchForm";
+import TrailSearchForm from "../components/trail-search-form/TrailSearchForm";
 import classes from "./HomePage.module.css";
-import HomepageTrailMap from "../HomepageTrailMap";
-import LoadingSpinner from "../UI/LoadingSpinner";
+import HomepageTrailMap from "../components/home/HomepageTrailMap";
+// import LoadingSpinner from "../components/UI/LoadingSpinner";
+import FeaturedTrails from '../components/home/FeaturedTrails';
 
 
 const HomePage = (props) => {
@@ -48,6 +49,15 @@ const HomePage = (props) => {
 
   // console.log(randomTrails);
 
+  const featuredTrails = [
+    props.trails[3],
+    props.trails[5],
+    props.trails[7],
+    props.trails[10],
+    props.trails[30],
+    props.trails[40],
+  ];
+
   const loadingMessage = (
     <div className={classes["loading-message"]}>
       <div className={classes.spinner}>
@@ -68,6 +78,7 @@ const HomePage = (props) => {
           />
         </div>
       </div>
+      <FeaturedTrails featuredTrails={featuredTrails} />
       <div className={classes["map-section"]}>
         <div className={classes["map-section-title"]}>
           {trailsAreLoaded ? <h1>Trails</h1> : loadingMessage}

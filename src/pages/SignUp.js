@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import classes from "./SignUp.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import LoadingScreen from '../notifications/LoadingScreen';
-import hostURL from "../../hosturl";
-import useValidation from "../../hooks/use-validation";
-import ModalMessage from "../notifications/ModalMessage";
+import LoadingScreen from '../components/notifications/LoadingScreen';
+import hostURL from "../hosturl";
+import useValidation from "../hooks/use-validation";
+import ModalMessage from "../components/notifications/ModalMessage";
 
 export const SignUp = () => {
   const navigate = useNavigate();

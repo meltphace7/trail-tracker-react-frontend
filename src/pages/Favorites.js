@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./Favorites.module.css";
-import TrailListItem from "../TrailListItem";
+import TrailListItem from "../components/trail-list/TrailListItem";
 import { useSelector } from "react-redux";
 
 const Favorites = (props) => {

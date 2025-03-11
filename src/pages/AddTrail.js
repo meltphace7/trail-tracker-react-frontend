@@ -1,23 +1,18 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import classes from "./EditTrail.module.css";
-import { useParams } from "react-router-dom";
-import useValidation from "../../hooks/use-validation";
-import ModalMessage from "../notifications/ModalMessage";
-import LoadingScreen from "../notifications/LoadingScreen";
-import hostURL from "../../hosturl";
+import React, { useState, useRef } from "react";
+import classes from "./AddTrail.module.css";
+import useValidation from "../hooks/use-validation";
+import ModalMessage from "../components/notifications/ModalMessage";
+import LoadingScreen from "../components/notifications/LoadingScreen";
+import hostURL from "../hosturl";
 import { useSelector } from "react-redux";
 
-const EditTrail = (props) => {
-  let { trailId } = useParams();
-
+const AddTrail = (props) => {
   const [isMessage, setIsMessage] = useState(false);
   const [isErrorMessage, setIsErrorMessage] = useState(false);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [images, setImages] = useState([]);
-
   const imageInputRef = useRef();
-
   const author = useSelector((state) => state.auth.userName);
   const userId = localStorage.getItem("userId");
 
@@ -27,7 +22,6 @@ const EditTrail = (props) => {
     valueIsValid: trailNameIsValid,
     hasError: trailNameHasError,
     valueChangeHandler: trailNameChangeHandler,
-    setValueHandler: setTrailName,
     valueBlurHandler: trailNameBlurHandler,
     reset: trailNameReset,
   } = useValidation((value) => value.trim() !== "");
@@ -37,7 +31,6 @@ const EditTrail = (props) => {
     valueIsValid: stateIsValid,
     hasError: stateHasError,
     valueChangeHandler: stateChangeHandler,
-    setValueHandler: setState,
     valueBlurHandler: stateBlurHandler,
     reset: stateReset,
   } = useValidation((value) => value.trim() !== "");
@@ -47,7 +40,6 @@ const EditTrail = (props) => {
     valueIsValid: wildernessAreaIsValid,
     hasError: wildernessAreaHasError,
     valueChangeHandler: wildernessAreaChangeHandler,
-    setValueHandler: setWildernessArea,
     valueBlurHandler: wildernessAreaBlurHandler,
     reset: wildernessAreaReset,
   } = useValidation((value) => value.trim() !== "");
@@ -64,7 +56,6 @@ const EditTrail = (props) => {
     valueIsValid: seasonStartIsValid,
     hasError: seasonStartHasError,
     valueChangeHandler: seasonStartChangeHandler,
-    setValueHandler: setSeasonStart,
     valueBlurHandler: seasonStartBlurHandler,
     reset: seasonStartReset,
   } = useValidation((value) => value.trim() !== "");
@@ -74,7 +65,6 @@ const EditTrail = (props) => {
     valueIsValid: seasonEndIsValid,
     hasError: seasonEndHasError,
     valueChangeHandler: seasonEndChangeHandler,
-    setValueHandler: setSeasonEnd,
     valueBlurHandler: seasonEndBlurHandler,
     reset: seasonEndReset,
   } = useValidation((value) => value.trim() !== "");
@@ -84,7 +74,6 @@ const EditTrail = (props) => {
     valueIsValid: longitudeIsValid,
     hasError: longitudeHasError,
     valueChangeHandler: longitudeChangeHandler,
-    setValueHandler: setLongitude,
     valueBlurHandler: longitudeBlurHandler,
     reset: longitudeReset,
   } = useValidation(
@@ -96,7 +85,6 @@ const EditTrail = (props) => {
     valueIsValid: latitudeIsValid,
     hasError: latitudeHasError,
     valueChangeHandler: latitudeChangeHandler,
-    setValueHandler: setLatitude,
     valueBlurHandler: latitudeBlurHandler,
     reset: latitudeReset,
   } = useValidation(
@@ -108,7 +96,6 @@ const EditTrail = (props) => {
     valueIsValid: milesIsValid,
     hasError: milesHasError,
     valueChangeHandler: milesChangeHandler,
-    setValueHandler: setMiles,
     valueBlurHandler: milesBlurHandler,
     reset: milesReset,
   } = useValidation((value) => value.trim() !== "" && +value > 0);
@@ -118,7 +105,6 @@ const EditTrail = (props) => {
     valueIsValid: sceneryIsValid,
     hasError: sceneryHasError,
     valueChangeHandler: sceneryChangeHandler,
-    setValueHandler: setScenery,
     valueBlurHandler: sceneryBlurHandler,
     reset: sceneryReset,
   } = useValidation(
@@ -130,7 +116,6 @@ const EditTrail = (props) => {
     valueIsValid: solitudeIsValid,
     hasError: solitudeHasError,
     valueChangeHandler: solitudeChangeHandler,
-    setValueHandler: setSolitude,
     valueBlurHandler: solitudeBlurHandler,
     reset: solitudeReset,
   } = useValidation(
@@ -142,7 +127,6 @@ const EditTrail = (props) => {
     valueIsValid: difficultyIsValid,
     hasError: difficultyHasError,
     valueChangeHandler: difficultyChangeHandler,
-    setValueHandler: setDifficulty,
     valueBlurHandler: difficultyBlurHandler,
     reset: difficultyReset,
   } = useValidation(
@@ -154,7 +138,6 @@ const EditTrail = (props) => {
     valueIsValid: descriptionIsValid,
     hasError: descriptionHasError,
     valueChangeHandler: descriptionChangeHandler,
-    setValueHandler: setDescription,
     valueBlurHandler: descriptionBlurHandler,
     reset: descriptionReset,
   } = useValidation((value) => value.trim() !== "");
@@ -187,49 +170,11 @@ const EditTrail = (props) => {
   // Refreshes Trails after trail edit is made
   const getTrails = () => {
     setTimeout(() => {
-      props.onEditTrail();
+      props.onAddTrail();
     }, 1500);
   };
-  // Fetches trail data to edit
-  const fetchEditTrailHandler = useCallback(async () => {
-    const token = localStorage.getItem("token");
-    try {
-      const response = await fetch(`${hostURL}/trails/edit-trail/${trailId}`, {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      if (!response.ok) {
-        throw new Error("Could not find trail!");
-      }
-
-      const responseData = await response.json();
-      const fetchedTrail = responseData.trail;
-      setTrailName(fetchedTrail.trailName);
-      setState(fetchedTrail.state);
-      setWildernessArea(fetchedTrail.wildernessArea);
-      setSeasonStart(fetchedTrail.bestSeason[0].toString());
-      setSeasonEnd(fetchedTrail.bestSeason[1].toString());
-      setLongitude(fetchedTrail.longitude.toString());
-      setLatitude(fetchedTrail.latitude.toString());
-      setMiles(fetchedTrail.miles.toString());
-      setScenery(fetchedTrail.scenery.toString());
-      setSolitude(fetchedTrail.solitude.toString());
-      setDifficulty(fetchedTrail.difficulty.toString());
-      setDescription(fetchedTrail.description);
-      fetchedTrail.trailheadName &&
-        setTrailheadName(fetchedTrail.trailheadName);
-    } catch (err) {
-      console.log(err);
-    }
-  }, [trailId]);
-
-  useEffect(() => {
-    fetchEditTrailHandler();
-  }, [fetchEditTrailHandler]);
-  // Sends edited trail data
-  const editTrailHandler = async (event) => {
+  // Submits trail data to database
+  const submitTrailHandler = async (event) => {
     event.preventDefault();
     console.log(images);
     if (!formIsValid) {
@@ -238,12 +183,10 @@ const EditTrail = (props) => {
       setMessage("Form info is invalid!");
       return;
     }
-
     setIsLoading(true);
 
     // MUST USE FORMDATA TO INCLUDE A FILE/IMAGE
     const formData = new FormData();
-    formData.append("trailId", trailId);
     formData.append("trailName", trailName);
     formData.append("state", state);
     formData.append("wildernessArea", wildernessArea);
@@ -262,8 +205,9 @@ const EditTrail = (props) => {
     images.forEach((image) => formData.append("image", image));
 
     const token = localStorage.getItem("token");
+
     try {
-      const response = await fetch(`${hostURL}/trails/edit-trail`, {
+      const response = await fetch(`${hostURL}/trails/submit-trail`, {
         method: "PUT",
         headers: {
           Authorization: "Bearer " + token,
@@ -274,13 +218,15 @@ const EditTrail = (props) => {
         throw new Error("Adding trail failed!");
       }
       const responseData = await response.json();
+      console.log('responseData', responseData)
       setIsLoading(false);
       setIsMessage(true);
-      setMessage("Trail successfully Edited!");
+      setMessage("Trail successfully submited!");
     } catch (err) {
-      setIsLoading(true);
+      setIsLoading(false);
       setIsMessage(true);
-      setMessage(err);
+      setMessage('Something went wrong!');
+      console.log('error!', err)
     }
     trailNameReset();
     stateReset();
@@ -360,9 +306,9 @@ const EditTrail = (props) => {
 
   return (
     <div className={classes["add-trail-section"]}>
-      <h1>Edit Trail</h1>
+      <h1>Enter Trail Information</h1>
       <form
-        onSubmit={editTrailHandler}
+        onSubmit={submitTrailHandler}
         className={classes["trail-form"]}
         encType="multipart/form-data"
       >
@@ -637,12 +583,15 @@ const EditTrail = (props) => {
           )}
         </div>
 
-        <label htmlFor="image-upload">Upload Images (required)</label>
+        <label htmlFor="image-upload">
+          Please upload multiple images from your trail
+        </label>
         <input
           id="file-input"
           ref={imageInputRef}
           type="file"
           multiple
+          required
           onChange={imageChangeHandler}
           accept="image/*"
           // accept="image/jpg, image/jpeg, image/png"
@@ -657,4 +606,4 @@ const EditTrail = (props) => {
   );
 };
 
-export default EditTrail;
+export default AddTrail;

@@ -16,7 +16,7 @@ export const fetchAuthData = () => {
         },
       });
       if (!response.ok) {
-        throw new Error("Could find User!");
+        throw new Error("Could not find User!");
       }
         const responseData = await response.json();
       // if (responseData.isAdmin) {
@@ -58,7 +58,7 @@ export const sendAuthData = (favorites) => {
     });
 
     if (!response.ok) {
-      throw new Error("Sending cart data failed!");
+      throw new Error("Updating favorites failed!");
     }
 
     const responseData = await response.json();

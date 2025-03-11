@@ -2,8 +2,8 @@ import React from "react";
 import classes from "./Navigation.module.css";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { authActions } from "../store/auth-slice";
-import Logo from './Logo'
+import { authActions } from "../../store/auth-slice";
+import Logo from '../logo/Logo'
 
 const Navigation = () => {
   const navigate = useNavigate();
@@ -12,15 +12,15 @@ const Navigation = () => {
 
   const isLoggedIn = isAuth;
 
-    const logoutHandler = () => {
-      dispatch(authActions.logout());
-      localStorage.setItem("token", null);
-      localStorage.setItem("userId", null);
-      localStorage.setItem("expiryDate", null);
-      // localStorage.setItem("favorite-trails", []);
-       navigate("/home", { replace: true });
-    };
- 
+  const logoutHandler = () => {
+    dispatch(authActions.logout());
+    localStorage.setItem("token", null);
+    localStorage.setItem("userId", null);
+    localStorage.setItem("expiryDate", null);
+    // localStorage.setItem("favorite-trails", []);
+    navigate("/home", { replace: true });
+  };
+
   return (
     <nav className={classes.nav}>
       <div className={classes["logo-container"]}>

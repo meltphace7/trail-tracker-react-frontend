@@ -15,21 +15,21 @@
 
 @font-face {
   font-family: "barlow";
-  src: url("./fonts/Barlow-Thin-webfont.woff") format("woff");
+  src: url("./assets/fonts/Barlow-Thin-webfont.woff") format("woff");
   font-weight: 100;
   font-style: normal;
 }
 
 @font-face {
   font-family: "barlow";
-  src: url("./fonts/Barlow-Regular-webfont.woff") format("woff");
+  src: url("./assets/fonts/Barlow-Regular-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
     font-family: 'barlow';
-    src: url('./fonts/Barlow-Light-webfont.woff') format('woff');
+    src: url('./assets/fonts/Barlow-Light-webfont.woff') format('woff');
     font-weight: 200;
     font-style: normal;
 }
@@ -38,7 +38,7 @@
 
 @font-face {
   font-family: "barlow";
-  src: url("./fonts/Barlow-Medium-webfont.woff") format("woff");
+  src: url("./assets/fonts/Barlow-Medium-webfont.woff") format("woff");
   font-weight: bold;
   font-style: normal;
 }
@@ -109,6 +109,7 @@ li {
 }
 
 a {
+  color: inherit;
   font-size: 1.6rem;
   text-decoration: none;
 }

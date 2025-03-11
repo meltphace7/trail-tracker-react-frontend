@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import classes from "./Login.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import hostURL from "../../hosturl";
-import ModalMessage from "../notifications/ModalMessage";
-import LoadingScreen from "../notifications/LoadingScreen";
+import hostURL from "../hosturl";
+import ModalMessage from "../components/notifications/ModalMessage";
+import LoadingScreen from "../components/notifications/LoadingScreen";
 import { useDispatch } from "react-redux";
-import { authActions } from "../../store/auth-slice";
-import useValidation from "../../hooks/use-validation";
+import { authActions } from "../store/auth-slice";
+import useValidation from "../hooks/use-validation";
 
 const Login = (props) => {
   const navigate = useNavigate();

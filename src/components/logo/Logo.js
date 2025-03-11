@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './Logo.module.css'
-import trailLogo from "../assets/trail-tracker-icon.png";
+import trailLogo from "../../assets/trail-tracker-icon.png";
 
 const Logo = () => {
     return (
