@@ -193,7 +193,7 @@
 
 .trailhead-name {
   font-size: 2rem;
-  color: #adff2f;
+  color: var(--color-green-highlight);
   transition: color 200ms ease-in;
 }
 
@@ -202,7 +202,7 @@
 }
 
 .google-earth-link {
-  color: #adff2f;
+  color: var(--color-green-highlight);
 }
 
 .google-earth-link:hover {

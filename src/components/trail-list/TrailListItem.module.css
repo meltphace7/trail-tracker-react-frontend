@@ -70,7 +70,8 @@
 }
 
 .trail-item h2 {
-  color: #adff2f;
+  color: var(--color-green-highlight);
+
   transition: 300ms ease-in;
 }
 
@@ -82,9 +83,6 @@
   background-color: var(--color-main-dark);
 }
 
-.trail-item:hover h2 {
-  color: #9acd32;
-}
 
 .miles-difficulty-container {
   display: flex;
@@ -131,7 +129,7 @@
   margin-bottom: auto;
   position: relative;
   border: none;
-   color: #adff2f;
+   color: var(--color-green-highlight);
   background-color: unset;
   cursor: pointer;
   width: 2rem;

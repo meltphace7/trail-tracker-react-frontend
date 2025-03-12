@@ -51,9 +51,9 @@
   left: 0;
   content: "";
   width: 5rem;
-  height: 0.5rem;
+  height: 0.25rem;
   border-radius: 30rem;
-  background-color: green;
+  background-color: var(--color-main-green);
 }
 
 .about-page p {
