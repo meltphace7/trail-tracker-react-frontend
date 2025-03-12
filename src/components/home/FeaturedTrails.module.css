@@ -118,6 +118,7 @@
 
 @media (max-width: 28em) {
   .media-scroller {
+    grid-auto-columns: 88%;
     padding: 5rem 1rem;
     scroll-padding-inline-start: 1rem;
   }
