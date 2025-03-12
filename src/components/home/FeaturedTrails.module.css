@@ -97,11 +97,11 @@
 @media (max-width: 60em) {
   .media-scroller {
     padding: 5rem 2rem;
-      scroll-padding-inline-start: 2rem;
+    scroll-padding-inline-start: 2rem;
   }
   .snaps-inline {
-  scroll-padding-inline: 2rem;
-}
+    scroll-padding-inline: 2rem;
+  }
 }
 
 @media (max-width: 55em) {
@@ -113,5 +113,15 @@
 @media (max-width: 50em) {
   .media-scroller {
     grid-auto-columns: 72%;
+  }
+}
+
+@media (max-width: 28em) {
+  .media-scroller {
+    padding: 5rem 1rem;
+    scroll-padding-inline-start: 1rem;
+  }
+  .snaps-inline {
+    scroll-padding-inline: 1rem;
   }
 }

@@ -48,3 +48,12 @@
   align-items: center;
   gap: 2rem;
 }
+
+
+@media (max-width: 28em) {
+ 
+.featured-trail-item {
+  padding: 0rem;
+
+}
+}
