@@ -23,11 +23,11 @@ const About = () => {
             and connect with fellow outdoor enthusiasts.
           </p>
         </div>
-        <img src="/imgs/HELLS-CANYON-BROCK-VIEWPOINT.jpg" alt="Hiker" />
+        <img src="/imgs/HELLS-CANYON-BROCK-VIEWPOINT.jpg" alt="Brock Dallman, Creator of Trail Tracker" />
       </section>
 
       <section className={classes["overlay-split"]}>
-        <img src="/imgs/EVOLUTION-LAKE.jpg" alt="Hiker" />
+        <img src="/imgs/EVOLUTION-LAKE.jpg" alt="Alpine Lake in The Sierras" />
         <div className={classes["overlay-split__text"]}>
           <h2>Discover New Trails</h2>
           <p>
@@ -55,7 +55,7 @@ const About = () => {
             Find Your Trail
           </Link>
         </div>
-        <img className={classes['find-trail-img']} src="/imgs/PARADISE-LAKE.jpg" alt="Hiker" />
+        <img className={classes['find-trail-img']} src="/imgs/PARADISE-LAKE.jpg" alt="Alpine Lake In Kings Canyon National Park" />
       </section>
 
       <section className={classes["sign-up-overlay"]}>
@@ -65,7 +65,7 @@ const About = () => {
             Sign up today to submit your own trails, and become part of the
             Trail Tracker community.
           </p>
-          <Link className="link-btn" to="/sign-up">
+          <Link className="link-btn" to="/signup">
             Sign Up
           </Link>
         </div>

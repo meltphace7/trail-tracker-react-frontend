@@ -66,8 +66,11 @@
 }
 
 @media (max-width: 45em) {
+    .about-section {
+        padding: 5rem 1rem;
+    }
     .about-container {
-        width: 98%;
+        width: 100%;
     }
     .about-text {
         padding: 0rem 4rem;
