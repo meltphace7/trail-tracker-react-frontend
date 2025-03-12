@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const FeaturedTrailItem = (props) => {
     
     return (
-      <li className={classes["featured-trail-item"]}>
+      <div className={classes["featured-trail-item"]}>
         <Link to={props.link}>
           <div className={classes["image-container"]}>
             <img src={props.img} alt={props.trailName} />
@@ -20,7 +20,7 @@ const FeaturedTrailItem = (props) => {
           </div>
           </div>
         </Link>
-      </li>
+      </div>
     );
 }
 

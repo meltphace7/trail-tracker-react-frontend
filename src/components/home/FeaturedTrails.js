@@ -51,12 +51,11 @@ const FeaturedTrails = (props) => {
     <section className={classes["featured-trails-section"]}>
       <h2>Featured Trails</h2>
       {!trailsAreLoaded && loadingMessage}
-     
-      <ul
-        className={`${classes["featured-trails__list"]} ${classes["media-scroller"]} ${classes["snaps-inline"]}`}
-      >
-        {trailsAreLoaded && renderFeaturedTrails}
-      </ul>
+        <div
+          className={`${classes["media-scroller"]} ${classes["snaps-inline"]}`}
+        >
+          {trailsAreLoaded && renderFeaturedTrails}
+        </div>
     </section>
   );
 }

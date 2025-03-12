@@ -1,62 +1,61 @@
 .featured-trails-section {
-    width: 100%;
-    min-height: 40rem;
-    padding: 3rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #fff;
-    color: #000;
+  position: relative;
+  width: 100%;
+  min-height: 55rem;
+  padding: 5rem 0;
+  background-color: #fff;
+  color: #000;
 }
 
 .featured-trails-section h2 {
-    font-size: 4rem;
-}
-
-.featured-trails__list {
-    width: 100%;
-
+  font-size: 4rem;
+  text-align: center;
 }
 
 .media-scroller {
-  padding: 3rem 1rem; /* Padding for visual spacing */
   display: grid;
+  gap: 1rem;
   grid-auto-flow: column;
-  grid-auto-columns: 29%; /* Default width of each item */
-  gap: 1rem; /* Space between items */
-  overflow-x: auto; /* Enable horizontal scrolling */
-  overscroll-behavior-inline: contain; /* Prevent scroll chaining */
-  /* scroll-padding-inline-start: 1rem; */
-
+  grid-auto-columns: 32%;
+  padding: 3rem 5rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-padding-inline-start: 5rem;
 }
 
 /* Scroll snapping for inline scroll behavior */
 .snaps-inline {
   scroll-snap-type: inline mandatory;
-  scroll-padding-inline: 1rem;
+  scroll-padding-inline: 5rem;
 }
 
 .snaps-inline > * {
-    scroll-snap-align: start;
+  scroll-snap-align: start;
 }
 
 .media-scroller::-webkit-scrollbar {
-  /* height: 0.5rem; */
+  height: 0.5rem;
   display: none;
 }
 
-/* .media-scroller::-webkit-scrollbar-track {
+.media-scroller::-webkit-scrollbar-track {
   background: gray;
 }
 
 .media-scroller::-webkit-scrollbar-thumb {
   border-radius: 100vw;
-} */
+  background-color: black;
+}
 
 .loading-message {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50% -50%);
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .spinner {
@@ -69,14 +68,14 @@
 }
 
 .spinner:after {
-  content: ' ';
+  content: " ";
   display: block;
   width: 30px;
   height: 30px;
   margin: 8px;
   border-radius: 50%;
   border: 3px solid white;
-  border-color: lime transparent lime  transparent;
+  border-color: lime transparent lime transparent;
   animation: spinner 1.2s linear infinite;
 }
 
@@ -89,16 +88,30 @@
   }
 }
 
-@media (max-width: 60em) {
-    .media-scroller {
-        grid-auto-columns: 42%; 
-    }
+@media (max-width: 72em) {
+  .media-scroller {
+    grid-auto-columns: 42%;
+  }
+}
 
+@media (max-width: 60em) {
+  .media-scroller {
+    padding: 5rem 2rem;
+      scroll-padding-inline-start: 2rem;
+  }
+  .snaps-inline {
+  scroll-padding-inline: 2rem;
+}
+}
+
+@media (max-width: 55em) {
+  .media-scroller {
+    grid-auto-columns: 62%;
+  }
 }
 
 @media (max-width: 50em) {
-    .media-scroller {
-        grid-auto-columns: 72%; 
-    }
-
+  .media-scroller {
+    grid-auto-columns: 72%;
+  }
 }
