@@ -44,6 +44,16 @@ const Navigation = () => {
             className={(navData) =>
               navData.isActive ? classes.active : classes["nav-link"]
             }
+            to="/about"
+          >
+            ABOUT
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            className={(navData) =>
+              navData.isActive ? classes.active : classes["nav-link"]
+            }
             to="/favorites"
           >
             FAVORITES

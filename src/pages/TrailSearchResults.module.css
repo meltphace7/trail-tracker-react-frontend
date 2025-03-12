@@ -5,7 +5,7 @@
 
 .trail-search-form-container {
     height: 4.5rem;
-    padding-right: 1rem;
+    padding: 5rem 0rem 0 0;
     display: flex;
     justify-content: flex-end;
 }

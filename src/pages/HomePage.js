@@ -4,6 +4,7 @@ import classes from "./HomePage.module.css";
 import HomepageTrailMap from "../components/home/HomepageTrailMap";
 // import LoadingSpinner from "../components/UI/LoadingSpinner";
 import FeaturedTrails from '../components/home/FeaturedTrails';
+import AboutSection from '../components/home/AboutSection'
 
 
 const HomePage = (props) => {
@@ -70,7 +71,7 @@ const HomePage = (props) => {
     <React.Fragment>
       <div className={classes["home-container"]}>
         <div className={classes["home-search-container"]}>
-          <h1>FIND A TRAIL!</h1>
+          <h1>FIND YOUR TRAIL</h1>
           <TrailSearchForm
             trails={props.trails}
             onFilterSelection={getFilterSelection}
@@ -85,6 +86,7 @@ const HomePage = (props) => {
         </div>
         <HomepageTrailMap trails={props.trails} />
       </div>
+      <AboutSection />
     </React.Fragment>
   );
 };

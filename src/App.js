@@ -9,6 +9,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import TrailSearchResults from "./pages/TrailSearchResults";
 import ScrollToTop from "./components/scroll-to-top/ScrollToTop";
+import About from "./pages/About";
 import Favorites from "./pages/Favorites";
 import Account from "./pages/Account";
 import SignUp from "./pages/SignUp";
@@ -166,6 +167,13 @@ function App() {
               trails={trails}
               onFilterSelect={getFilter}
               trailFilter={filter}
+            />
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <About
             />
           }
         />
