@@ -152,6 +152,8 @@ function App() {
     }
   }, [filter, trails]);
 
+  console.log('APP RENDER')
+
   return (
     <div className="App">
       <MobileNavigation />
