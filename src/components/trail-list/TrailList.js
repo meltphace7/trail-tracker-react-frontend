@@ -31,7 +31,7 @@ const TrailList = (props) => {
   }, [props.trailFilter, props.filter]);
 
   //Pagination ////////////////
-  const resultsPerPage = 6;
+  const resultsPerPage = 10;
   const [page, setPage] = useState(1);
   const [results, setResults] = useState(props.trails.slice(0, resultsPerPage));
 

@@ -218,7 +218,8 @@
 }
 
 .submitted-by {
-  margin-top: 3rem;
+  margin: 3rem;
+
 }
 
 @media (max-width: 53em) {

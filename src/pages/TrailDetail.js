@@ -15,6 +15,7 @@ import solitudeIcon from "../assets/solitude-icon.png";
 import sceneryIcon from "../assets/scenery-icon-white.png";
 import mileageIcon from "../assets/mileage-icon.png";
 import seasonIcon from "../assets/calender-icon.png";
+import { Link } from "react-router-dom";
 
 const TrailDetail = (props) => {
   let { trailId } = useParams();
@@ -238,6 +239,7 @@ const TrailDetail = (props) => {
                 className={classes["submitted-by"]}
               >{`Submitted by ${trail.author}`}</p>
             </div>
+            <Link className="link-btn" to="/trails">FIND MORE TRAILS</Link>
           </div>
         )}
         {!trailIsLoaded && (

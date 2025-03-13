@@ -60,6 +60,15 @@ const MobileNavigation = () => {
               <Link
                 onClick={closeMenuHandler}
                 className={classes["navigation__link"]}
+                to="/trails"
+              >
+                Trails
+              </Link>
+            </li>
+            <li className={classes["navigation__item"]}>
+              <Link
+                onClick={closeMenuHandler}
+                className={classes["navigation__link"]}
                 to="/about"
               >
                 About
