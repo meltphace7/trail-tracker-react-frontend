@@ -19,11 +19,14 @@ import { fetchAuthData } from "./store/auth-actions";
 import { sendAuthData } from "./store/auth-actions";
 import hostURL from "./hosturl";
 import { authActions } from "./store/auth-slice";
+import { useRef } from "react";
 
 let isInitial = true;
 let render = 1;
 
 function App() {
+  const didFetchTrails = useRef(false);
+
   const [trails, setTrails] = useState([]);
   const [filteredTrails, setFilteredTrails] = useState([]);
   const [filter, setFilter] = useState("");
@@ -43,29 +46,28 @@ function App() {
     if (render === 2) {
       return;
     }
+   
   }, [dispatch]);
 
   useEffect(() => {
     // PREVENTS AUTH UPDATE ON FIRST RENDER
+    // if (isInitial || !isAuth) return;
     if (isInitial) {
       isInitial = false;
       render = 2;
       return;
     }
-
-    if (render === 2) {
-      render = 3;
-      return;
-    }
+  
     // IF USER AUTHENTICATED, UPDATE FAVORITES ON FAVORITES CHANGE
     dispatch(sendAuthData(userFavorites));
-  }, [userFavorites, dispatch]);
+  
+  }, [userFavorites, dispatch, isAuth]);
 
   /// Get faves depending on auth status
   useEffect(() => {
     if (isAuth) return;
     dispatch(authActions.setFavoritesFromLocalStorage());
-  }, [isAuth]);
+  }, [isAuth, dispatch]);
 
   ///
 
@@ -82,14 +84,22 @@ function App() {
       const alphaSortedTrails = fetchedTrails.sort((a, b) =>
         a.trailName.localeCompare(b.trailName)
       );
+      console.log('TRAILS FETCHED')
       setTrails(alphaSortedTrails);
+      // setFilteredTrails(alphaSortedTrails);
     } catch (err) {
       console.log(err);
     }
   }, []);
 
+
   useEffect(() => {
-    fetchTrails();
+      if (!didFetchTrails.current) {
+        fetchTrails();
+        didFetchTrails.current = true;
+      }
+
+    // fetchTrails();
   }, [fetchTrails]);
 
   ////////////////// FILTER-RESULTS //////////////////////////
@@ -98,31 +108,49 @@ function App() {
     setFilter(filterSetting);
   };
 
-  useEffect(() => {
-    setFilteredTrails(trails);
-  }, [trails]);
+  // useEffect(() => {
+  //   setFilteredTrails(trails);
+  //   console.log('SET FILTERED TRAILS')
+  // }, [trails]);
 
   // FILTERS TRAILS BASED ON FILTER TYPE AND FILTER QUERY
   useEffect(() => {
-    if (filter === undefined || filter.filterType === "") {
-      setFilteredTrails(trails);
-      return;
+    // if (filter === undefined || filter.filterType === "") {
+    //   setFilteredTrails(trails);
+    //   return;
+    // }
+    // SEARCH BY NAME - USER TEXT INPUT
+    if (filter.filterType === "search") {
+      const regex = new RegExp(filter.filterQuery, "i");
+      // const filteredTrails = trails.filter((trail) =>
+      //   regex.test(trail.trailName)
+      // );
+      const filteredTrails = trails.filter(
+        (trail, index, self) =>
+          (regex.test(trail.trailName) || regex.test(trail.description)) &&
+          self.findIndex((t) => t.trailName === trail.trailName) === index
+      );
+      setFilteredTrails(filteredTrails);
     }
+    // ALL TRAILS
     if (filter.filterType === "All") {
       setFilteredTrails(trails);
     }
+    // FILTERING BY STATE
     if (filter.filterType === "by-state") {
       const filterTrails = trails.filter(
         (trail) => trail.state === filter.filterQuery
       );
       setFilteredTrails(filterTrails);
     }
+    // FILTERING BY WILDERNESS AREA
     if (filter.filterType === "by-wilderness") {
       const filterTrails = trails.filter(
         (trail) => trail.wildernessArea === filter.filterQuery
       );
       setFilteredTrails(filterTrails);
     }
+    // FILTERING BY BEST SEASON TO HIKE
     if (filter.filterType === "by-season") {
       // FIND Inverted Date Hikes(where start month numbers > end month numbers)
       const invertedDateHikes = trails.filter(
@@ -149,9 +177,18 @@ function App() {
         ...matchingStandardHikes,
       ];
       setFilteredTrails(seasonFilteredHikes);
+     
     }
+
   }, [filter, trails]);
 
+  let trailsLoaded = false;
+  if (trails.length > 0) {
+    trailsLoaded = true;
+  } 
+ 
+
+console.log('APP RENDER, TRAILS-LOADED=', trailsLoaded)
   return (
     <div className="App">
       <MobileNavigation />
@@ -170,13 +207,7 @@ function App() {
             />
           }
         />
-        <Route
-          path="/about"
-          element={
-            <About
-            />
-          }
-        />
+        <Route path="/about" element={<About />} />
         <Route path="/favorites" element={<Favorites />} />
 
         {isAuth && (

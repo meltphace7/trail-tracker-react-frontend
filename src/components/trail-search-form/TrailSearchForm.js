@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import classes from "./TrailSearchForm.module.css";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { trailActions } from "../../store/trail-slice";
-import ModalMessage from '../notifications/ModalMessage';
+import ModalMessage from "../notifications/ModalMessage";
 
 const TrailSearchForm = (props) => {
   const navigate = useNavigate();
@@ -14,6 +14,8 @@ const TrailSearchForm = (props) => {
   const currentTrailQuery = useSelector(
     (state) => state.trails.currentSearchQuery
   );
+
+
   // FINDS UNIQUE VALUES OF props.trails ARRAY
   const getUniqueValues = function (property) {
     const uniqueValues = [
@@ -38,7 +40,19 @@ const TrailSearchForm = (props) => {
   });
   // Error Message
   const [isMessage, setIsMessage] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
+
+  const [userSearchQuery, setUserSearchQuery] = useState("");
+
+  const userSearchQueryChangeHandler = function (e) {
+    setUserSearchQuery(e.target.value);
+    setFilterQuery(e.target.value);
+  };
+
+  useEffect(() => {
+    setFilterType(currentQueryType);
+    setFilterQuery(currentTrailQuery);
+  }, [currentQueryType, currentTrailQuery]);
 
   const handleFilterSelect = (e) => {
     setFilterType(e.target.value);
@@ -52,38 +66,47 @@ const TrailSearchForm = (props) => {
     setFilterQuery(e.target.value);
   };
 
+//////// FORM SUBMIT ///////////////////
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    if (filterQuery === "All" && filterType === 'by-state') {
-      setIsMessage(true);
-      setMessage('Please select a state')
-      return
-    }
-     if (filterQuery === "All" && filterType === "by-season") {
-        setIsMessage(true);
-        setMessage("Please select a month");
-        return;
+     if (filterQuery === "All" && filterType === "search") {
+       setIsMessage(true);
+       setMessage("Please enter a trail name");
+       return;
      }
-      if (filterQuery === "All" && filterType === "by-wilderness") {
-         setIsMessage(true);
-         setMessage("Please select a wilderness area");
-         return;
-      }
+    if (filterQuery === "All" && filterType === "by-state") {
+      setIsMessage(true);
+      setMessage("Please select a state");
+      return;
+    }
+    if (filterQuery === "All" && filterType === "by-season") {
+      setIsMessage(true);
+      setMessage("Please select a month");
+      return;
+    }
+    if (filterQuery === "All" && filterType === "by-wilderness") {
+      setIsMessage(true);
+      setMessage("Please select a wilderness area");
+      return;
+    }
     if (filterQuery === "select") return;
     setFilter({
       filterType: filterType,
       filterQuery: filterQuery,
     });
+
+
     const searchQuery = {
       filterType: filterType,
       filterQuery: filterQuery,
     };
+    
     dispatch(trailActions.setQuery(searchQuery));
 
     setTimeout(() => {
       // history.push("/trails");
-       navigate("/trails");
-    }, 500);
+      navigate("/trails");
+    }, 100);
   };
 
   useEffect(() => {
@@ -92,9 +115,8 @@ const TrailSearchForm = (props) => {
 
   const closeModalHandler = () => {
     setIsMessage(false);
-    setMessage('');
-  }
-
+    setMessage("");
+  };
 
   // RENDERS STATE OPTIONS FOR filter by state OPTION
   const chooseState = (
@@ -105,6 +127,7 @@ const TrailSearchForm = (props) => {
         name="choose-state"
         value={filterQuery}
         onChange={handleFilterQuerySelect}
+        className={classes["filter-select"]}
       >
         <optgroup label="Choose State">
           <option key={Math.random()} value="select">
@@ -131,6 +154,7 @@ const TrailSearchForm = (props) => {
         name="choose-wilderness"
         value={filterQuery}
         onChange={handleFilterQuerySelect}
+        className={classes["filter-select"]}
       >
         <optgroup label="Choose Wilderness">
           <option key={Math.random()} value="select">
@@ -153,6 +177,7 @@ const TrailSearchForm = (props) => {
         name="choose-month"
         value={filterQuery}
         onChange={handleFilterQuerySelect}
+        className={classes["filter-select"]}
       >
         <optgroup label="Month">
           <option value="0">Select Month</option>
@@ -173,6 +198,19 @@ const TrailSearchForm = (props) => {
     </div>
   );
 
+  const chooseSearch = (
+    <div className="search-container">
+      <input
+        id="search"
+        type="text"
+        placeholder="Enter Trail Name"
+        className={classes["search-input"]}
+        value={userSearchQuery}
+        onChange={userSearchQueryChangeHandler}
+      />
+    </div>
+  );
+
   return (
     <form onSubmit={formSubmitHandler} className={classes["trail-search"]}>
       <div className={classes["search-group"]}>
@@ -184,6 +222,7 @@ const TrailSearchForm = (props) => {
             onChange={handleFilterSelect}
           >
             <optgroup label="Filter By">
+              <option value="search">Search By Name</option>
               <option value="All">All Trails</option>
               <option value="by-state">Filter By State</option>
               <option value="by-wilderness">Filter By Wilderness Area</option>
@@ -191,12 +230,16 @@ const TrailSearchForm = (props) => {
             </optgroup>
           </select>
         </div>
+       
+        {filterType === "search" && chooseSearch}
         {filterType === "by-state" && chooseState}
         {filterType === "by-wilderness" && chooseWilderness}
         {filterType === "by-season" && chooseMonth}
       </div>
       <button type="submit">Search Trails</button>
-      {isMessage && <ModalMessage onCloseModal={closeModalHandler} message={message} />}
+      {isMessage && (
+        <ModalMessage onCloseModal={closeModalHandler} message={message} />
+      )}
     </form>
   );
 };
