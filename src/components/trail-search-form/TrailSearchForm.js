@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import classes from "./TrailSearchForm.module.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,7 +14,6 @@ const TrailSearchForm = (props) => {
   const currentTrailQuery = useSelector(
     (state) => state.trails.currentSearchQuery
   );
-
 
   // FINDS UNIQUE VALUES OF props.trails ARRAY
   const getUniqueValues = function (property) {
@@ -49,10 +48,10 @@ const TrailSearchForm = (props) => {
     setFilterQuery(e.target.value);
   };
 
-  useEffect(() => {
-    setFilterType(currentQueryType);
-    setFilterQuery(currentTrailQuery);
-  }, [currentQueryType, currentTrailQuery]);
+  // useEffect(() => {
+  //   setFilterType(currentQueryType);
+  //   setFilterQuery(currentTrailQuery);
+  // }, [currentQueryType, currentTrailQuery]);
 
   const handleFilterSelect = (e) => {
     setFilterType(e.target.value);
@@ -104,8 +103,8 @@ const TrailSearchForm = (props) => {
     dispatch(trailActions.setQuery(searchQuery));
 
     setTimeout(() => {
-      // history.push("/trails");
       navigate("/trails");
+      setUserSearchQuery('');
     }, 100);
   };
 
@@ -130,12 +129,13 @@ const TrailSearchForm = (props) => {
         className={classes["filter-select"]}
       >
         <optgroup label="Choose State">
-          <option key={Math.random()} value="select">
+          <option
+            value="select">
             Select a State
           </option>
-          {alphaSortedStates.map((trail) => {
+          {alphaSortedStates.map((trail, index) => {
             return (
-              <option key={Math.random()} value={trail}>
+              <option key={index} value={trail}>
                 {trail}
               </option>
             );
@@ -148,7 +148,6 @@ const TrailSearchForm = (props) => {
   // RENDERS WILDERNESS OPTIONS FOR filter by wilderness OPTION
   const chooseWilderness = (
     <div className="search-container">
-      {/* <label htmlFor="choose-wilderness">Choose Wilderness</label> */}
       <select
         id="choose-wilderness"
         name="choose-wilderness"
@@ -157,11 +156,12 @@ const TrailSearchForm = (props) => {
         className={classes["filter-select"]}
       >
         <optgroup label="Choose Wilderness">
-          <option key={Math.random()} value="select">
+          <option
+            value="select">
             Select Wilderness
           </option>
-          {alphaSortedWilderness.map((trail) => {
-            return <option key={Math.random()}>{trail}</option>;
+          {alphaSortedWilderness.map((trail, index) => {
+            return <option key={index}>{trail}</option>;
           })}
         </optgroup>
       </select>
@@ -171,7 +171,6 @@ const TrailSearchForm = (props) => {
   // RENDERS MONTH OPTIONS FOR filter by season OPTION
   const chooseMonth = (
     <div className="search-container">
-      {/* <label htmlFor="choose-month">Choose Month</label> */}
       <select
         id="choose-month"
         name="choose-month"
@@ -203,7 +202,7 @@ const TrailSearchForm = (props) => {
       <input
         id="search"
         type="text"
-        placeholder="Enter Trail Name"
+        placeholder="Enter Trail Name or Keyword"
         className={classes["search-input"]}
         value={userSearchQuery}
         onChange={userSearchQueryChangeHandler}

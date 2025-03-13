@@ -43,15 +43,14 @@ function App() {
       return;
     }
 
-    if (render === 2) {
-      return;
-    }
+    // if (render === 2) {
+    //   return;
+    // }
    
   }, [dispatch]);
 
   useEffect(() => {
     // PREVENTS AUTH UPDATE ON FIRST RENDER
-    // if (isInitial || !isAuth) return;
     if (isInitial) {
       isInitial = false;
       render = 2;
@@ -61,7 +60,7 @@ function App() {
     // IF USER AUTHENTICATED, UPDATE FAVORITES ON FAVORITES CHANGE
     dispatch(sendAuthData(userFavorites));
   
-  }, [userFavorites, dispatch, isAuth]);
+  }, [userFavorites, dispatch]);
 
   /// Get faves depending on auth status
   useEffect(() => {
@@ -99,7 +98,6 @@ function App() {
         didFetchTrails.current = true;
       }
 
-    // fetchTrails();
   }, [fetchTrails]);
 
   ////////////////// FILTER-RESULTS //////////////////////////
@@ -115,10 +113,6 @@ function App() {
 
   // FILTERS TRAILS BASED ON FILTER TYPE AND FILTER QUERY
   useEffect(() => {
-    // if (filter === undefined || filter.filterType === "") {
-    //   setFilteredTrails(trails);
-    //   return;
-    // }
     // SEARCH BY NAME - USER TEXT INPUT
     if (filter.filterType === "search") {
       const regex = new RegExp(filter.filterQuery, "i");
@@ -186,9 +180,8 @@ function App() {
   if (trails.length > 0) {
     trailsLoaded = true;
   } 
- 
-
-console.log('APP RENDER, TRAILS-LOADED=', trailsLoaded)
+  console.log('APP RENDER, TRAILS-LOADED=', trailsLoaded)
+  
   return (
     <div className="App">
       <MobileNavigation />
