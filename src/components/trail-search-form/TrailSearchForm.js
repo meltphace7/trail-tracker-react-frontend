@@ -26,10 +26,12 @@ const TrailSearchForm = (props) => {
   // UNIQUE PROPERTY VALUES AS VARIABLES
   const states = getUniqueValues("state");
   const wilderness = getUniqueValues("wildernessArea");
-  // Alpha-Sort
+
+  // ALPHABETICALLY-SORT FIELDS FOR OPTIONS
   const alphaSortedStates = states.sort((a, b) => a.localeCompare(b));
   const alphaSortedWilderness = wilderness.sort((a, b) => a.localeCompare(b));
 
+  // DERIVE STATE FROM REDUX
   const [filterType, setFilterType] = useState(currentQueryType);
   const [filterQuery, setFilterQuery] = useState(currentTrailQuery);
 
@@ -37,42 +39,41 @@ const TrailSearchForm = (props) => {
     filterType: filterType,
     filterQuery: filterQuery,
   });
-  // Error Message
+
+  // ERROR MESSAGE
   const [isMessage, setIsMessage] = useState(false);
   const [message, setMessage] = useState("");
 
+  // USER INPUT SEARCH TEXT
   const [userSearchQuery, setUserSearchQuery] = useState("");
 
+  // CHANGE HANDLERS FOR FORM INPUTS
   const userSearchQueryChangeHandler = function (e) {
     setUserSearchQuery(e.target.value);
     setFilterQuery(e.target.value);
   };
 
-  // useEffect(() => {
-  //   setFilterType(currentQueryType);
-  //   setFilterQuery(currentTrailQuery);
-  // }, [currentQueryType, currentTrailQuery]);
-
-  const handleFilterSelect = (e) => {
+  const filterSelectChangeHandler = (e) => {
     setFilterType(e.target.value);
   };
 
-  useEffect(() => {
-    if (filterType === "All") setFilterQuery("All");
-  }, [filterType]);
-
-  const handleFilterQuerySelect = (e) => {
+  const filterQuerySelectChangeHandler = (e) => {
     setFilterQuery(e.target.value);
   };
 
-//////// FORM SUBMIT ///////////////////
+   const closeModalHandler = () => {
+     setIsMessage(false);
+     setMessage("");
+   };
+
+  //////// FORM SUBMIT //////////////////////////////////////////////
   const formSubmitHandler = (e) => {
     e.preventDefault();
-     if (filterQuery === "All" && filterType === "search") {
-       setIsMessage(true);
-       setMessage("Please enter a trail name");
-       return;
-     }
+    if (filterQuery === "All" && filterType === "search") {
+      setIsMessage(true);
+      setMessage("Please enter a trail name");
+      return;
+    }
     if (filterQuery === "All" && filterType === "by-state") {
       setIsMessage(true);
       setMessage("Please select a state");
@@ -94,29 +95,25 @@ const TrailSearchForm = (props) => {
       filterQuery: filterQuery,
     });
 
-
     const searchQuery = {
       filterType: filterType,
       filterQuery: filterQuery,
     };
-    
+
     dispatch(trailActions.setQuery(searchQuery));
 
     setTimeout(() => {
       navigate("/trails");
-      setUserSearchQuery('');
+      setUserSearchQuery("");
     }, 100);
   };
 
+  /////////////////////////////////////////////
+///// UPDATES PROPS TO APP.JS
   useEffect(() => {
     props.onFilterSelection(filter);
-  }, [filter, props]);
-
-  const closeModalHandler = () => {
-    setIsMessage(false);
-    setMessage("");
-  };
-
+  }, [filter]);
+  
   // RENDERS STATE OPTIONS FOR filter by state OPTION
   const chooseState = (
     <div className="search-container">
@@ -125,14 +122,11 @@ const TrailSearchForm = (props) => {
         id="choose-state"
         name="choose-state"
         value={filterQuery}
-        onChange={handleFilterQuerySelect}
+        onChange={filterQuerySelectChangeHandler}
         className={classes["filter-select"]}
       >
         <optgroup label="Choose State">
-          <option
-            value="select">
-            Select a State
-          </option>
+          <option value="select">Select a State</option>
           {alphaSortedStates.map((trail, index) => {
             return (
               <option key={index} value={trail}>
@@ -152,14 +146,11 @@ const TrailSearchForm = (props) => {
         id="choose-wilderness"
         name="choose-wilderness"
         value={filterQuery}
-        onChange={handleFilterQuerySelect}
+        onChange={filterQuerySelectChangeHandler}
         className={classes["filter-select"]}
       >
         <optgroup label="Choose Wilderness">
-          <option
-            value="select">
-            Select Wilderness
-          </option>
+          <option value="select">Select Wilderness</option>
           {alphaSortedWilderness.map((trail, index) => {
             return <option key={index}>{trail}</option>;
           })}
@@ -175,7 +166,7 @@ const TrailSearchForm = (props) => {
         id="choose-month"
         name="choose-month"
         value={filterQuery}
-        onChange={handleFilterQuerySelect}
+        onChange={filterQuerySelectChangeHandler}
         className={classes["filter-select"]}
       >
         <optgroup label="Month">
@@ -218,7 +209,7 @@ const TrailSearchForm = (props) => {
             id="filter-trails"
             name="filter-trails"
             value={filterType}
-            onChange={handleFilterSelect}
+            onChange={filterSelectChangeHandler}
           >
             <optgroup label="Filter By">
               <option value="search">Search By Name</option>
@@ -229,7 +220,7 @@ const TrailSearchForm = (props) => {
             </optgroup>
           </select>
         </div>
-       
+
         {filterType === "search" && chooseSearch}
         {filterType === "by-state" && chooseState}
         {filterType === "by-wilderness" && chooseWilderness}

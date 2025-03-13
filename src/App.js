@@ -22,7 +22,7 @@ import { authActions } from "./store/auth-slice";
 import { useRef } from "react";
 
 let isInitial = true;
-let render = 1;
+// let render = 1;
 
 function App() {
   const didFetchTrails = useRef(false);
@@ -42,10 +42,6 @@ function App() {
     if (isInitial) {
       return;
     }
-
-    // if (render === 2) {
-    //   return;
-    // }
    
   }, [dispatch]);
 
@@ -53,7 +49,7 @@ function App() {
     // PREVENTS AUTH UPDATE ON FIRST RENDER
     if (isInitial) {
       isInitial = false;
-      render = 2;
+      // render = 2;
       return;
     }
   
@@ -196,7 +192,7 @@ function App() {
             <HomePage
               trails={trails}
               onFilterSelect={getFilter}
-              trailFilter={filter}
+              // trailFilter={filter}
             />
           }
         />

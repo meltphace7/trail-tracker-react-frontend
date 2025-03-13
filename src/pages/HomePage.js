@@ -20,36 +20,6 @@ const HomePage = (props) => {
 }
   }, [props.trails])
 
-  // const getIdHandler = () => {
-  //   props.getTrail(props.id);
-  // };
-
-  // const getTrailData = function (id) {
-  //   props.onTrailSelect(id);
-  // };
-
-  // let randomTrails = [];
-  // const generateRandomTrails = function () {
-  //    while (randomTrails.length < 3) {
-  //      let num =
-  //        props.trails[Math.round(Math.random() * props.trails.length)];
-  //      if (!randomTrails.includes(num)) {
-  //         randomTrails.push(num)
-  //      }
-
-  //    }
-  // }
-
-  // generateRandomTrails();
-
-  //   const randomTrails = [
-  //     props.trails[Math.round(Math.random() * props.trails.length)],
-  //     props.trails[Math.round(Math.random() * props.trails.length)],
-  //     props.trails[Math.round(Math.random() * props.trails.length)],
-  //   ];
-
-  // console.log(randomTrails);
-
   const featuredTrails = [
     props.trails[3],
     props.trails[12],
@@ -75,7 +45,7 @@ const HomePage = (props) => {
           <TrailSearchForm
             trails={props.trails}
             onFilterSelection={getFilterSelection}
-            filter={props.trailFilter}
+            // filter={props.trailFilter}
           />
         </div>
       </div>
