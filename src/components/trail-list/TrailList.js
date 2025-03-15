@@ -121,23 +121,23 @@ const TrailList = (props) => {
     title = `${reduxQuery} Trails`;
   }
 
+  let paginationResults;
+  if (reduxType === 'by-season' && reduxQuery !== 'select') {
+    paginationResults = `${props.trails.length} results for ${month} - page ${page} of ${pages}`;
+  } else if (reduxQuery !== 'select') {
+    paginationResults = `${props.trails.length} results for ${reduxQuery} - page ${page} of ${pages}`;
+  } else {
+    paginationResults = '';
+  }
+
+
   return (
     <div className={classes["trail-list-container"]}>
       <div className={classes["results-container"]}>
         <h1 className={classes["results-title"]}>
           {title}
         </h1>
-
-        {(reduxType === "All") & (reduxQuery === "select") && (
-          <p>{`${props.trails.length} results for "${
-            reduxType === "by-season" ? month : reduxQuery
-          }"  - page ${page} of ${pages}`}</p>
-        )}
-        {reduxQuery !== "select" && (
-          <p>{`${props.trails.length} results for "${
-            reduxType === "by-season" ? month : reduxQuery
-          }"  - page ${page} of ${pages}`}</p>
-        )}
+        <p>{paginationResults}</p>
       </div>
       <ul className={classes["trail-list"]}>
         {props.trails.length === 0 ? (
