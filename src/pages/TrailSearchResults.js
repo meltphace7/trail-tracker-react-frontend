@@ -14,7 +14,6 @@ const TrailSearchResults = (props) => {
         <TrailSearchForm
           trails={props.trails}
           onFilterSelection={getFilterSelection}
-          filter={props.trailFilter}
         />
       </div>
 

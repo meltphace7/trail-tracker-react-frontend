@@ -19,19 +19,23 @@ import { fetchAuthData } from "./store/auth-actions";
 import { sendAuthData } from "./store/auth-actions";
 import hostURL from "./hosturl";
 import { authActions } from "./store/auth-slice";
+import { useRef } from "react";
+
+import { useMemo } from "react";
 
 let isInitial = true;
-let render = 1;
 
 function App() {
-  const [trails, setTrails] = useState([]);
-  const [filteredTrails, setFilteredTrails] = useState([]);
-  const [filter, setFilter] = useState("");
-
+  const didFetchTrails = useRef(false);
   const dispatch = useDispatch();
+
+  const reduxType = useSelector((state) => state.trails.currentQueryType);
+  const reduxQuery = useSelector((state) => state.trails.currentSearchQuery);
 
   const userFavorites = useSelector((state) => state.auth.favorites);
   const isAuth = useSelector((state) => state.auth.isAuth);
+
+  const [trails, setTrails] = useState([]);
 
   //FETCH AUTH DATA IF CURRENT USER IS AUTHENTICATED
   useEffect(() => {
@@ -39,24 +43,16 @@ function App() {
     if (isInitial) {
       return;
     }
-
-    if (render === 2) {
-      return;
-    }
   }, [dispatch]);
 
   useEffect(() => {
     // PREVENTS AUTH UPDATE ON FIRST RENDER
+
     if (isInitial) {
       isInitial = false;
-      render = 2;
       return;
     }
 
-    if (render === 2) {
-      render = 3;
-      return;
-    }
     // IF USER AUTHENTICATED, UPDATE FAVORITES ON FAVORITES CHANGE
     dispatch(sendAuthData(userFavorites));
   }, [userFavorites, dispatch]);
@@ -65,11 +61,9 @@ function App() {
   useEffect(() => {
     if (isAuth) return;
     dispatch(authActions.setFavoritesFromLocalStorage());
-  }, [isAuth]);
+  }, [isAuth, dispatch]);
 
-  ///
-
-  // FETCHES TRAILS FROM BACKEND
+  ///////// FETCHES TRAILS FROM BACKEND ////////
   const fetchTrails = useCallback(async () => {
     try {
       const response = await fetch(`${hostURL}/trails/trails`);
@@ -89,68 +83,53 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetchTrails();
+    if (!didFetchTrails.current) {
+      fetchTrails();
+      didFetchTrails.current = true;
+    }
   }, [fetchTrails]);
 
   ////////////////// FILTER-RESULTS //////////////////////////
-  // Gets filter from TrailSearchResultsComponent
-  const getFilter = (filterSetting) => {
-    setFilter(filterSetting);
-  };
 
-  useEffect(() => {
-    setFilteredTrails(trails);
-  }, [trails]);
-
-  // FILTERS TRAILS BASED ON FILTER TYPE AND FILTER QUERY
-  useEffect(() => {
-    if (filter === undefined || filter.filterType === "") {
-      setFilteredTrails(trails);
-      return;
-    }
-    if (filter.filterType === "All") {
-      setFilteredTrails(trails);
-    }
-    if (filter.filterType === "by-state") {
-      const filterTrails = trails.filter(
-        (trail) => trail.state === filter.filterQuery
+  const filteredTrails = useMemo(() => {
+    if (reduxType === "search") {
+      const regex = new RegExp(reduxQuery, "i");
+      return trails.filter(
+        (trail, index, self) =>
+          (regex.test(trail.trailName) || regex.test(trail.description)) &&
+          self.findIndex((t) => t.trailName === trail.trailName) === index
       );
-      setFilteredTrails(filterTrails);
     }
-    if (filter.filterType === "by-wilderness") {
-      const filterTrails = trails.filter(
-        (trail) => trail.wildernessArea === filter.filterQuery
-      );
-      setFilteredTrails(filterTrails);
+    if (reduxType === "All") {
+      return trails;
     }
-    if (filter.filterType === "by-season") {
-      // FIND Inverted Date Hikes(where start month numbers > end month numbers)
+    if (reduxType === "by-state") {
+      return trails.filter((trail) => trail.state === reduxQuery);
+    }
+    if (reduxType === "by-wilderness") {
+      return trails.filter((trail) => trail.wildernessArea === reduxQuery);
+    }
+    if (reduxType === "by-season") {
       const invertedDateHikes = trails.filter(
         (trail) => +trail.bestSeason[0] > +trail.bestSeason[1]
       );
-      // Filter Inverted Date hikes from standard
       const standardDateHikes = trails.filter(
         (trail) => +trail.bestSeason[0] < +trail.bestSeason[1]
       );
-      // Apply Filter logic to Inverted Date hikes
       const matchingInvertedHikes = invertedDateHikes.filter(
         (trail) =>
-          (+filter.filterQuery >= +trail.bestSeason[0] && 12) ||
-          +filter.filterQuery <= +trail.bestSeason[1]
+          (+reduxQuery >= +trail.bestSeason[0] && 12) ||
+          +reduxQuery <= +trail.bestSeason[1]
       );
-      // Apply Filter Login to Standard Date Hikes
       const matchingStandardHikes = standardDateHikes.filter(
         (trail) =>
-          +filter.filterQuery >= +trail.bestSeason[0] &&
-          +filter.filterQuery <= +trail.bestSeason[1]
+          +reduxQuery >= +trail.bestSeason[0] &&
+          +reduxQuery <= +trail.bestSeason[1]
       );
-      const seasonFilteredHikes = [
-        ...matchingInvertedHikes,
-        ...matchingStandardHikes,
-      ];
-      setFilteredTrails(seasonFilteredHikes);
+      return [...matchingInvertedHikes, ...matchingStandardHikes];
     }
-  }, [filter, trails]);
+    return [];
+  }, [trails, reduxType, reduxQuery]);
 
   console.log('APP RENDER')
 
@@ -162,23 +141,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/home" />} />
 
-        <Route
-          path="/home"
-          element={
-            <HomePage
-              trails={trails}
-              onFilterSelect={getFilter}
-              trailFilter={filter}
-            />
-          }
-        />
-        <Route
-          path="/about"
-          element={
-            <About
-            />
-          }
-        />
+        <Route path="/home" element={<HomePage trails={trails} />} />
+        <Route path="/about" element={<About />} />
         <Route path="/favorites" element={<Favorites />} />
 
         {isAuth && (
@@ -205,8 +169,6 @@ function App() {
             <TrailSearchResults
               filteredTrails={filteredTrails}
               trails={trails}
-              trailFilter={filter}
-              onFilterSelect={getFilter}
             />
           }
         />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./TrailList.module.css";
 import TrailListItem from "./TrailListItem";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const monthArray = [
   [1, "January"],
@@ -19,16 +19,24 @@ const monthArray = [
 ];
 
 const TrailList = (props) => {
+      const reduxType = useSelector(
+        (state) => state.trails.currentQueryType
+      );
+      const reduxQuery = useSelector(
+        (state) => state.trails.currentSearchQuery
+      );
+  
   // const searchQuery = useSelector((state) => state.trails.currentSearchQuery);
   // Converts filter Query to Month Name if filterQuery is month Number
   const [month, setMonth] = useState("");
 
   useEffect(() => {
-    if (isNaN(+props.filter.filterQuery)) return;
-    const seasonNum = parseInt(props.filter.filterQuery, 10);
+    if (isNaN(+reduxQuery)) return;
+    if (reduxQuery === undefined || reduxQuery === '') return;
+    const seasonNum = parseInt(reduxQuery, 10);
     const [season] = monthArray.filter((month) => month[0] === seasonNum);
     setMonth(season[1]);
-  }, [props.trailFilter, props.filter]);
+  }, [reduxQuery]);
 
   //Pagination ////////////////
   const resultsPerPage = 10;
@@ -92,16 +100,44 @@ const TrailList = (props) => {
     );
   });
 
+  let title;
+
+  if (reduxType === 'ALL') {
+    title = "All Trails"
+  } else if ((reduxType === "by-state") & (reduxQuery === "select")) {
+    title = "Select A State"
+  }
+  else if ((reduxType === "by-season") & (reduxQuery === "select")) {
+    title = "Select A Month";
+  } else if (reduxType === "by-season") {
+    title = `${month} Trails`;
+  } else if ((reduxType === "by-wilderness") & (reduxQuery === "select")) {
+    title = "Select Wilderness Area";
+  } else if ((reduxType === "search") & (reduxQuery === "select")) {
+    title = `Search Trail`;
+  } else if (reduxType === "search") {
+    title = `"${reduxQuery}" Trails`
+  } else {
+    title = `${reduxQuery} Trails`;
+  }
+
   return (
     <div className={classes["trail-list-container"]}>
       <div className={classes["results-container"]}>
-        <h1 className={classes["results-title"]}>{`${props.filter.filterType === "by-season"
-            ? month : props.filter.filterQuery} Trails`}</h1>
-        <p>{`${props.trails.length} results for "${
-          props.filter.filterType === "by-season"
-            ? month
-            : props.filter.filterQuery
-        }"  - page ${page} of ${pages}`}</p>
+        <h1 className={classes["results-title"]}>
+          {title}
+        </h1>
+
+        {(reduxType === "All") & (reduxQuery === "select") && (
+          <p>{`${props.trails.length} results for "${
+            reduxType === "by-season" ? month : reduxQuery
+          }"  - page ${page} of ${pages}`}</p>
+        )}
+        {reduxQuery !== "select" && (
+          <p>{`${props.trails.length} results for "${
+            reduxType === "by-season" ? month : reduxQuery
+          }"  - page ${page} of ${pages}`}</p>
+        )}
       </div>
       <ul className={classes["trail-list"]}>
         {props.trails.length === 0 ? (
