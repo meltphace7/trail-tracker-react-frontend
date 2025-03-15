@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import TrailSearchForm from "../components/trail-search-form/TrailSearchForm";
 import classes from "./HomePage.module.css";
 import HomepageTrailMap from "../components/home/HomepageTrailMap";
-// import LoadingSpinner from "../components/UI/LoadingSpinner";
 import FeaturedTrails from '../components/home/FeaturedTrails';
 import AboutSection from '../components/home/AboutSection'
 
@@ -44,8 +43,6 @@ const HomePage = (props) => {
           <h1>FIND YOUR TRAIL</h1>
           <TrailSearchForm
             trails={props.trails}
-            onFilterSelection={getFilterSelection}
-            // filter={props.trailFilter}
           />
         </div>
       </div>

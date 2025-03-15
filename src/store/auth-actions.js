@@ -61,6 +61,7 @@ export const sendAuthData = (favorites) => {
       throw new Error("Updating favorites failed!");
     }
 
-    const responseData = await response.json();
+    // const responseData = await response.json();
+   
   };
 };

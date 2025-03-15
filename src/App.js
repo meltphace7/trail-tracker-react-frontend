@@ -21,20 +21,21 @@ import hostURL from "./hosturl";
 import { authActions } from "./store/auth-slice";
 import { useRef } from "react";
 
+import { useMemo } from "react";
+
 let isInitial = true;
-// let render = 1;
 
 function App() {
   const didFetchTrails = useRef(false);
-
-  const [trails, setTrails] = useState([]);
-  const [filteredTrails, setFilteredTrails] = useState([]);
-  const [filter, setFilter] = useState("");
-
   const dispatch = useDispatch();
+
+  const reduxType = useSelector((state) => state.trails.currentQueryType);
+  const reduxQuery = useSelector((state) => state.trails.currentSearchQuery);
 
   const userFavorites = useSelector((state) => state.auth.favorites);
   const isAuth = useSelector((state) => state.auth.isAuth);
+
+  const [trails, setTrails] = useState([]);
 
   //FETCH AUTH DATA IF CURRENT USER IS AUTHENTICATED
   useEffect(() => {
@@ -42,20 +43,18 @@ function App() {
     if (isInitial) {
       return;
     }
-   
   }, [dispatch]);
 
   useEffect(() => {
     // PREVENTS AUTH UPDATE ON FIRST RENDER
+
     if (isInitial) {
       isInitial = false;
-      // render = 2;
       return;
     }
-  
+
     // IF USER AUTHENTICATED, UPDATE FAVORITES ON FAVORITES CHANGE
     dispatch(sendAuthData(userFavorites));
-  
   }, [userFavorites, dispatch]);
 
   /// Get faves depending on auth status
@@ -64,9 +63,7 @@ function App() {
     dispatch(authActions.setFavoritesFromLocalStorage());
   }, [isAuth, dispatch]);
 
-  ///
-
-  // FETCHES TRAILS FROM BACKEND
+  ///////// FETCHES TRAILS FROM BACKEND ////////
   const fetchTrails = useCallback(async () => {
     try {
       const response = await fetch(`${hostURL}/trails/trails`);
@@ -79,105 +76,61 @@ function App() {
       const alphaSortedTrails = fetchedTrails.sort((a, b) =>
         a.trailName.localeCompare(b.trailName)
       );
-      console.log('TRAILS FETCHED')
       setTrails(alphaSortedTrails);
-      // setFilteredTrails(alphaSortedTrails);
     } catch (err) {
       console.log(err);
     }
   }, []);
 
-
   useEffect(() => {
-      if (!didFetchTrails.current) {
-        fetchTrails();
-        didFetchTrails.current = true;
-      }
-
+    if (!didFetchTrails.current) {
+      fetchTrails();
+      didFetchTrails.current = true;
+    }
   }, [fetchTrails]);
 
   ////////////////// FILTER-RESULTS //////////////////////////
-  // Gets filter from TrailSearchResultsComponent
-  const getFilter = (filterSetting) => {
-    setFilter(filterSetting);
-  };
 
-  // useEffect(() => {
-  //   setFilteredTrails(trails);
-  //   console.log('SET FILTERED TRAILS')
-  // }, [trails]);
-
-  // FILTERS TRAILS BASED ON FILTER TYPE AND FILTER QUERY
-  useEffect(() => {
-    // SEARCH BY NAME - USER TEXT INPUT
-    if (filter.filterType === "search") {
-      const regex = new RegExp(filter.filterQuery, "i");
-      // const filteredTrails = trails.filter((trail) =>
-      //   regex.test(trail.trailName)
-      // );
-      const filteredTrails = trails.filter(
+  const filteredTrails = useMemo(() => {
+    if (reduxType === "search") {
+      const regex = new RegExp(reduxQuery, "i");
+      return trails.filter(
         (trail, index, self) =>
           (regex.test(trail.trailName) || regex.test(trail.description)) &&
           self.findIndex((t) => t.trailName === trail.trailName) === index
       );
-      setFilteredTrails(filteredTrails);
     }
-    // ALL TRAILS
-    if (filter.filterType === "All") {
-      setFilteredTrails(trails);
+    if (reduxType === "All") {
+      return trails;
     }
-    // FILTERING BY STATE
-    if (filter.filterType === "by-state") {
-      const filterTrails = trails.filter(
-        (trail) => trail.state === filter.filterQuery
-      );
-      setFilteredTrails(filterTrails);
+    if (reduxType === "by-state") {
+      return trails.filter((trail) => trail.state === reduxQuery);
     }
-    // FILTERING BY WILDERNESS AREA
-    if (filter.filterType === "by-wilderness") {
-      const filterTrails = trails.filter(
-        (trail) => trail.wildernessArea === filter.filterQuery
-      );
-      setFilteredTrails(filterTrails);
+    if (reduxType === "by-wilderness") {
+      return trails.filter((trail) => trail.wildernessArea === reduxQuery);
     }
-    // FILTERING BY BEST SEASON TO HIKE
-    if (filter.filterType === "by-season") {
-      // FIND Inverted Date Hikes(where start month numbers > end month numbers)
+    if (reduxType === "by-season") {
       const invertedDateHikes = trails.filter(
         (trail) => +trail.bestSeason[0] > +trail.bestSeason[1]
       );
-      // Filter Inverted Date hikes from standard
       const standardDateHikes = trails.filter(
         (trail) => +trail.bestSeason[0] < +trail.bestSeason[1]
       );
-      // Apply Filter logic to Inverted Date hikes
       const matchingInvertedHikes = invertedDateHikes.filter(
         (trail) =>
-          (+filter.filterQuery >= +trail.bestSeason[0] && 12) ||
-          +filter.filterQuery <= +trail.bestSeason[1]
+          (+reduxQuery >= +trail.bestSeason[0] && 12) ||
+          +reduxQuery <= +trail.bestSeason[1]
       );
-      // Apply Filter Login to Standard Date Hikes
       const matchingStandardHikes = standardDateHikes.filter(
         (trail) =>
-          +filter.filterQuery >= +trail.bestSeason[0] &&
-          +filter.filterQuery <= +trail.bestSeason[1]
+          +reduxQuery >= +trail.bestSeason[0] &&
+          +reduxQuery <= +trail.bestSeason[1]
       );
-      const seasonFilteredHikes = [
-        ...matchingInvertedHikes,
-        ...matchingStandardHikes,
-      ];
-      setFilteredTrails(seasonFilteredHikes);
-     
+      return [...matchingInvertedHikes, ...matchingStandardHikes];
     }
+    return [];
+  }, [trails, reduxType, reduxQuery]);
 
-  }, [filter, trails]);
-
-  let trailsLoaded = false;
-  if (trails.length > 0) {
-    trailsLoaded = true;
-  } 
-  console.log('APP RENDER, TRAILS-LOADED=', trailsLoaded)
-  
   return (
     <div className="App">
       <MobileNavigation />
@@ -186,16 +139,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/home" />} />
 
-        <Route
-          path="/home"
-          element={
-            <HomePage
-              trails={trails}
-              onFilterSelect={getFilter}
-              // trailFilter={filter}
-            />
-          }
-        />
+        <Route path="/home" element={<HomePage trails={trails} />} />
         <Route path="/about" element={<About />} />
         <Route path="/favorites" element={<Favorites />} />
 
@@ -223,8 +167,6 @@ function App() {
             <TrailSearchResults
               filteredTrails={filteredTrails}
               trails={trails}
-              trailFilter={filter}
-              onFilterSelect={getFilter}
             />
           }
         />

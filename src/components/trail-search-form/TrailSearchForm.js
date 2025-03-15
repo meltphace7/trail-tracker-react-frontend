@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState } from "react";
 import classes from "./TrailSearchForm.module.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,12 +8,8 @@ import ModalMessage from "../notifications/ModalMessage";
 const TrailSearchForm = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const currentQueryType = useSelector(
-    (state) => state.trails.currentQueryType
-  );
-  const currentTrailQuery = useSelector(
-    (state) => state.trails.currentSearchQuery
-  );
+  const filterType = useSelector((state) => state.trails.currentQueryType);
+  const filterQuery = useSelector((state) => state.trails.currentSearchQuery);
 
   // FINDS UNIQUE VALUES OF props.trails ARRAY
   const getUniqueValues = function (property) {
@@ -31,15 +27,6 @@ const TrailSearchForm = (props) => {
   const alphaSortedStates = states.sort((a, b) => a.localeCompare(b));
   const alphaSortedWilderness = wilderness.sort((a, b) => a.localeCompare(b));
 
-  // DERIVE STATE FROM REDUX
-  const [filterType, setFilterType] = useState(currentQueryType);
-  const [filterQuery, setFilterQuery] = useState(currentTrailQuery);
-
-  const [filter, setFilter] = useState({
-    filterType: filterType,
-    filterQuery: filterQuery,
-  });
-
   // ERROR MESSAGE
   const [isMessage, setIsMessage] = useState(false);
   const [message, setMessage] = useState("");
@@ -50,57 +37,72 @@ const TrailSearchForm = (props) => {
   // CHANGE HANDLERS FOR FORM INPUTS
   const userSearchQueryChangeHandler = function (e) {
     setUserSearchQuery(e.target.value);
-    setFilterQuery(e.target.value);
+    dispatch(
+      trailActions.setQuery({
+        filterType: filterType,
+        filterQuery: e.target.value,
+      })
+    );
   };
 
+  // FILTER TYPE
   const filterSelectChangeHandler = (e) => {
-    setFilterType(e.target.value);
+    if (e.target.value === "All") {
+         dispatch(
+           trailActions.setQuery({
+             filterType: e.target.value,
+             filterQuery: "All",
+           })
+         );
+    } else {
+         dispatch(
+           trailActions.setQuery({
+             filterType: e.target.value,
+             filterQuery: "select",
+           })
+         );
+    }
+ 
   };
-
+  // QUERY
   const filterQuerySelectChangeHandler = (e) => {
-    setFilterQuery(e.target.value);
+    dispatch(
+      trailActions.setQuery({
+        filterType: filterType,
+        filterQuery: e.target.value,
+      })
+    );
   };
 
-   const closeModalHandler = () => {
-     setIsMessage(false);
-     setMessage("");
-   };
+  const closeModalHandler = () => {
+    setIsMessage(false);
+    setMessage("");
+  };
 
   //////// FORM SUBMIT //////////////////////////////////////////////
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    if (filterQuery === "All" && filterType === "search") {
+    if (filterQuery === "select" && filterType === "search") {
       setIsMessage(true);
       setMessage("Please enter a trail name");
       return;
     }
-    if (filterQuery === "All" && filterType === "by-state") {
+    if (filterQuery === "select" && filterType === "by-state") {
       setIsMessage(true);
       setMessage("Please select a state");
       return;
     }
-    if (filterQuery === "All" && filterType === "by-season") {
+    if (filterQuery === "select" && filterType === "by-season") {
       setIsMessage(true);
       setMessage("Please select a month");
       return;
     }
-    if (filterQuery === "All" && filterType === "by-wilderness") {
+    if (filterQuery === "select" && filterType === "by-wilderness") {
       setIsMessage(true);
       setMessage("Please select a wilderness area");
       return;
     }
     if (filterQuery === "select") return;
-    setFilter({
-      filterType: filterType,
-      filterQuery: filterQuery,
-    });
-
-    const searchQuery = {
-      filterType: filterType,
-      filterQuery: filterQuery,
-    };
-
-    dispatch(trailActions.setQuery(searchQuery));
 
     setTimeout(() => {
       navigate("/trails");
@@ -109,15 +111,10 @@ const TrailSearchForm = (props) => {
   };
 
   /////////////////////////////////////////////
-///// UPDATES PROPS TO APP.JS
-  useEffect(() => {
-    props.onFilterSelection(filter);
-  }, [filter]);
-  
+
   // RENDERS STATE OPTIONS FOR filter by state OPTION
   const chooseState = (
     <div className="search-container">
-      {/* <label htmlFor="choose-state">Choose State</label> */}
       <select
         id="choose-state"
         name="choose-state"

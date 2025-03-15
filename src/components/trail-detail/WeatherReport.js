@@ -14,7 +14,6 @@ const WeatherReport = (props) => {
   const getWeather = useCallback(async function () {
     const latitude = props.coords[0];
     const longitude = props.coords[1];
-    console.log('WEATHER REQUEST')
     try {
       const keyResponse = await fetch(`${hostURL}/trails/get-trail-weather`);
       if (!keyResponse.ok) {
