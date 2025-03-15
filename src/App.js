@@ -131,8 +131,6 @@ function App() {
     return [];
   }, [trails, reduxType, reduxQuery]);
 
-  console.log('APP RENDER')
-
   return (
     <div className="App">
       <MobileNavigation />
