@@ -43,9 +43,9 @@ const WeatherReport = (props) => {
           throw new Error("Could not get weather data!");
         }
         const data = await response.json();
-        console.log(data);
+ 
         setCurTemp(Math.round(data.currently.temperature));
-        setCurWeather(data.daily.data[0].summary);
+        setCurWeather(data.currently.summary);
         setCurIcon(data.currently.icon)
 
         const forecast = [];

@@ -72,14 +72,12 @@ const TrailDetail = (props) => {
 
   /////// FETCHES TRAIL DETAIL FROM BACKEND
   const fetchTrailHandler = useCallback(async () => {
-    console.log("FETCHING TRAIL DETAIL DATA");
     try {
       const response = await fetch(`${hostURL}/trails/trail-detail/${trailId}`);
       if (!response.ok) {
         throw new Error("Could not find trail!");
       }
       const resData = await response.json();
-      console.log(resData);
       calcMonth(resData.trail.bestSeason);
       setTrail(resData.trail);
       setTrailIsLoaded(true);
