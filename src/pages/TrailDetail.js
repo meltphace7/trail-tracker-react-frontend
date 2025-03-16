@@ -18,6 +18,7 @@ import seasonIcon from "../assets/calender-icon.png";
 import { Link } from "react-router-dom";
 
 const TrailDetail = (props) => {
+  console.log('TRAIL DETAIL RENDER')
   let { trailId } = useParams();
   const dispatch = useDispatch();
   const userFavorites = useSelector((state) => state.auth.favorites);
@@ -157,7 +158,6 @@ const TrailDetail = (props) => {
 
             <div className={classes["info-sub-header"]}>
               <div className={classes["info-sub-header-overlay"]}>
-                {/* <h3>{`Length: ${trail.miles} miles roundtrip`}</h3> */}
                 <div className={classes["trail-stat"]}>
                   <img
                     className={classes["trail-stat-icon"]}
@@ -209,7 +209,7 @@ const TrailDetail = (props) => {
             </div>
             <p className={classes["description"]}>{trail.description}</p>
             <ImageSlider images={trail.images} />
-            <WeatherReport coords={coords} />
+            {/* <WeatherReport coords={coords} /> */}
             <div className={classes["map-container"]}>
               <h1>Map</h1>
               {trail.trailheadName && (
