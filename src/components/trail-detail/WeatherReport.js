@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import classes from "./WeatherReport.module.css";
 import WeatherDayForecast from "./WeatherDayForecast";
 import WeatherCurrent from "./WeatherCurrent";
 import hostURL from "../../hosturl";
 
 const WeatherReport = (props) => {
+    const didFetchWeatherData = useRef(false);
   // CURRENT WEATHER
   const [curTemp, setCurTemp] = useState("");
   const [curWeather, setCurWeather] = useState("");
@@ -23,7 +24,6 @@ const WeatherReport = (props) => {
 
   const getWeather = useCallback(
     async function () {
-      console.log('FETCHING WEATHER DATA')
       const latitude = props.coords[0];
       const longitude = props.coords[1];
       try {
@@ -71,7 +71,10 @@ const WeatherReport = (props) => {
   );
 
   useEffect(() => {
-    getWeather();
+      if (!didFetchWeatherData.current) {
+      getWeather();
+        didFetchWeatherData.current = true;
+      }
   }, []);
 
   return (
