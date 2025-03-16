@@ -18,14 +18,15 @@ import seasonIcon from "../assets/calender-icon.png";
 import { Link } from "react-router-dom";
 
 const TrailDetail = (props) => {
-  console.log('TRAIL DETAIL RENDER')
+  console.log("TRAIL DETAIL RENDER");
   let { trailId } = useParams();
   const dispatch = useDispatch();
   const userFavorites = useSelector((state) => state.auth.favorites);
-
+  const [season, setSeason] = useState("");
   const [trail, setTrail] = useState({});
   const [trailIsLoaded, setTrailIsLoaded] = useState(false);
   const [isFavorited, setIsFavorited] = useState(false);
+  // const [difficulty, setDifficulty] = useState('');
 
   // Parallax effect for Header
   const [offsetY, setOffsetY] = useState(0);
@@ -41,12 +42,15 @@ const TrailDetail = (props) => {
 
   /// FETCHES TRAIL DETAIL FROM BACKEND
   const fetchTrailHandler = useCallback(async () => {
+    console.log("FETCHING TRAIL DETAIL DATA");
     try {
       const response = await fetch(`${hostURL}/trails/trail-detail/${trailId}`);
       if (!response.ok) {
         throw new Error("Could not find trail!");
       }
       const resData = await response.json();
+      calcMonth(resData.trail.bestSeason);
+      // calcDifficulty(resData.trail.difficulty);
       setTrail(resData.trail);
       setTrailIsLoaded(true);
     } catch (err) {
@@ -56,14 +60,13 @@ const TrailDetail = (props) => {
 
   useEffect(() => {
     fetchTrailHandler();
-  }, [fetchTrailHandler]);
+  }, []);
 
-  const [season, setSeason] = useState("");
-  const coords = [trail.latitude, trail.longitude];
+  // const coords = [trail.latitude, trail.longitude];
   // M-  46.64463, -120.77671
 
-  // Gets MONTH NAME from props.trail
-  useEffect(() => {
+  const calcMonth = function (seasonArray) {
+    console.log("CALC MONTH");
     const monthArray = [
       [1, "January"],
       [2, "Febuary"],
@@ -78,27 +81,27 @@ const TrailDetail = (props) => {
       [11, "November"],
       [12, "December"],
     ];
-    if (trail.bestSeason === undefined) return;
-
     const [monthStart] = monthArray.filter(
-      (month) => month[0] === +trail.bestSeason[0]
+      (month) => month[0] === seasonArray[0]
     );
 
     const [monthEnd] = monthArray.filter(
-      (month) => month[0] === +trail.bestSeason[1]
+      (month) => month[0] === seasonArray[1]
     );
     setSeason(`${monthStart[1]} - ${monthEnd[1]}`);
-  }, [trail]);
-
-  let difficulty;
-  const calcDifficulty = function (diff) {
-    if (+diff <= 3) difficulty = "easy";
-    if (+diff > 3 && +diff < 7) difficulty = "moderate";
-    if (+diff >= 7 && +diff <= 8) difficulty = "hard";
-    if (+diff > 8) difficulty = "very-hard";
   };
 
-  calcDifficulty(trail.difficulty);
+  // let difficulty;
+  //       const calcDifficulty = function (diff) {
+  //         console.log("CALCULATE DIFFICULTY");
+  //         if (+diff <= 3) difficulty = "easy";
+  //         if (+diff > 3 && +diff < 7) difficulty = "moderate";
+  //         if (+diff >= 7 && +diff <= 8) difficulty = "hard";
+  //         if (+diff > 8) difficulty = "very-hard";
+  //       };
+  //  calcDifficulty(trail.difficulty);
+ 
+// console.log(difficulty)
 
   // TOGGLES FAVORITE STATUS OF TRAIL
   const isFavoritedHandler = function () {
@@ -175,7 +178,8 @@ const TrailDetail = (props) => {
                   />
                   <h3>{`Difficulty:`}</h3>
                   <h3
-                    className={classes[difficulty]}
+                    // className={classes[difficulty]}
+                    className={classes['easy']}
                   >{`${trail.difficulty}/10`}</h3>
                 </div>
                 <div className={classes["trail-stat"]}>
@@ -209,7 +213,7 @@ const TrailDetail = (props) => {
             </div>
             <p className={classes["description"]}>{trail.description}</p>
             <ImageSlider images={trail.images} />
-            {/* <WeatherReport coords={coords} /> */}
+            {/* <WeatherReport coords={[trail.latitude, trail.longitude]} /> */}
             <div className={classes["map-container"]}>
               <h1>Map</h1>
               {trail.trailheadName && (
@@ -224,22 +228,27 @@ const TrailDetail = (props) => {
                 </h3>
               )}
               <div className={classes["map-text-container"]}>
-                <p>{`Trailhead coordinates: ${coords[0]}, ${coords[1]}`}</p>
+                <p>{`Trailhead coordinates: ${trail.latitude}, ${trail.longitude}`}</p>
                 <a
                   className={classes["google-earth-link"]}
-                  href={`https://earth.google.com/web/search/${coords[0]},${coords[1]}/`}
+                  href={`https://earth.google.com/web/search/${trail.latitude},${trail.longitude}/`}
                   target="_blank"
                   rel="noreferrer"
                 >
                   View with Google Earth
                 </a>
               </div>
-              <TrailMap trails={props.trails} coords={coords} />
+              <TrailMap
+                trails={props.trails}
+                coords={[trail.latitude, trail.longitude]}
+              />
               <p
                 className={classes["submitted-by"]}
               >{`Submitted by ${trail.author}`}</p>
             </div>
-            <Link className="link-btn" to="/trails">FIND MORE TRAILS</Link>
+            <Link className="link-btn" to="/trails">
+              FIND MORE TRAILS
+            </Link>
           </div>
         )}
         {!trailIsLoaded && (
