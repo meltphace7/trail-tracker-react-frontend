@@ -110,6 +110,7 @@ const Login = (props) => {
 
   const setAutoLogout = (milliseconds) => {
     console.log("AUTO LOG TIMER STARTED");
+     console.log(email, password);
     setTimeout(() => {
       logoutHandler();
       console.log("AUTO LOG OUT");
