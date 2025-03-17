@@ -105,6 +105,7 @@
     rgba(19, 56, 1, 1) 100%
   );
   border-radius: 10px;
+  text-align: center;
 }
 
 .trail-wilderness {

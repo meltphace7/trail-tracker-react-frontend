@@ -3,20 +3,23 @@ import classes from "./Account.module.css";
 import { useSelector } from "react-redux";
 import UserTrail from "../components/account/UserTrail";
 import hostURL from "../hosturl";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
 
 const Account = (props) => {
   const [usersTrails, setUsersTrails] = useState([]);
 
   //Pagination
-  const resultsPerPage = 6;
+  const resultsPerPage = 12;
   const [page, setPage] = useState(1);
   const [results, setResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   ///
 
   const userName = useSelector((state) => state.auth.userName);
   const token = localStorage.getItem("token");
   // Fetches User's Submitted trails from database
   const fetchUserTrails = useCallback(async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(`${hostURL}/auth/fetch-user-trails`, {
         method: "POST",
@@ -28,6 +31,7 @@ const Account = (props) => {
         throw new Error("Could not find users trails!");
       }
       const responseData = await response.json();
+      setIsLoading(false);
       const alphaSortedTrails = responseData.submittedTrails.sort((a, b) =>
         a.trailName.localeCompare(b.trailName)
       );
@@ -72,6 +76,8 @@ const Account = (props) => {
     setPage((prevState) => prevState + 1);
     window.scrollTo(0, 0);
   };
+
+
   /////////////
   return (
     <div className={classes.account}>
@@ -99,8 +105,16 @@ const Account = (props) => {
             />
           );
         })}
-        {usersTrails.length === 0 && (
+        {isLoading && (
+          <div>
+            <p>Loading Trails...</p>
+            <LoadingSpinner />
+          </div>
+        )}
+        {(usersTrails.length === 0) & !isLoading ? (
           <h3>YOU HAVE NOT SUBMITTED ANY TRAILS YET</h3>
+        ) : (
+          ""
         )}
       </ul>
       {usersTrails.length !== 0 && (

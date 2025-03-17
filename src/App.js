@@ -24,9 +24,9 @@ import { useRef } from "react";
 import { useMemo } from "react";
 
 let isInitial = true;
+let render = 1;
 
 function App() {
- console.log('APP RENDER')
   const didFetchTrails = useRef(false);
   const dispatch = useDispatch();
 
@@ -40,21 +40,25 @@ function App() {
 
   //FETCH AUTH DATA IF CURRENT USER IS AUTHENTICATED
   useEffect(() => {
-    dispatch(fetchAuthData());
     if (isInitial) {
+      isInitial = false;
+      render++;
       return;
     }
+   
+    dispatch(fetchAuthData());
   }, [dispatch]);
 
   useEffect(() => {
     // PREVENTS AUTH UPDATE ON FIRST RENDER
 
-    if (isInitial) {
+    if (isInitial || render === 1) {
       isInitial = false;
       return;
     }
 
     // IF USER AUTHENTICATED, UPDATE FAVORITES ON FAVORITES CHANGE
+  
     dispatch(sendAuthData(userFavorites));
   }, [userFavorites, dispatch]);
 

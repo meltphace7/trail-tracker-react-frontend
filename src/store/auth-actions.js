@@ -6,7 +6,8 @@ export const fetchAuthData = () => {
   return async (dispatch) => {
     try {
       const token = localStorage.getItem("token");
-      if (token === null) {
+      const userId = localStorage.getItem("userId");
+      if (token === 'null '|| userId === 'null') {
         return;
       }
       const response = await fetch(`${hostURL}/auth/fetch-auth`, {
@@ -40,7 +41,7 @@ export const fetchAuthData = () => {
 export const sendAuthData = (favorites) => {
   return async (dispatch) => {
     const token = localStorage.getItem("token");
-    if (token === null) {
+    if (token === 'null') {
       return;
     }
 

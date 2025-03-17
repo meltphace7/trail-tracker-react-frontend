@@ -109,11 +109,8 @@ const Login = (props) => {
   };
 
   const setAutoLogout = (milliseconds) => {
-    // console.log("AUTO LOG TIMER STARTED");
-     console.log(email, password);
     setTimeout(() => {
       logoutHandler();
-      // console.log("AUTO LOG OUT");
     }, milliseconds);
   };
 // Input styles change depending on error state from validation hook
@@ -143,6 +140,7 @@ const Login = (props) => {
           onBlur={emailBlurHandler}
           value={email}
           required
+          autoComplete="email"
         />
         {passwordHasError && <p>Please enter a valid password!</p>}
         <input
@@ -153,6 +151,7 @@ const Login = (props) => {
           onChange={passwordChangeHandler}
           onBlur={passwordBlurHandler}
           value={password}
+          autoComplete="password"
           required
         />
 
