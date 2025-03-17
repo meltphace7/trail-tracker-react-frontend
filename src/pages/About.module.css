@@ -194,7 +194,7 @@
   }
 
   .overlay-split {
-     padding: 5rem 1rem;
+    padding: 5rem 1rem;
     flex-direction: column-reverse;
   }
 
@@ -211,6 +211,10 @@
 
   .sign-up-overlay {
     width: 98%;
+  }
+
+  .sign-up-overlay__text {
+    width: 80%;
   }
 
   .find-trail-img {

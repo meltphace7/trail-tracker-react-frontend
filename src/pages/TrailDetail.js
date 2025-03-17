@@ -99,11 +99,19 @@ const TrailDetail = (props) => {
       fetchTrailHandler();
       didFetchTrailData.current = true;
     }
+  
   }, []);
+
+  useEffect(() => {
+    if (trail._id === undefined) return;
+    if (!trailIsLoaded) return;
+    if (trail._id !== trailId) {
+      fetchTrailHandler();
+    }
+  }, [trailId, trailIsLoaded, fetchTrailHandler, trail._id]);
 
   // TOGGLES FAVORITE STATUS OF TRAIL
   const isFavoritedHandler = function () {
-    console.log("trail to favorite", trail);
     dispatch(authActions.toggleFavorites(trail));
     setIsFavorited((prevstate) => !prevstate);
   };
