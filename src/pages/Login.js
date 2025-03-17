@@ -61,7 +61,7 @@ const Login = (props) => {
       email,
       password,
     };
-    console.log(userLoginInput)
+    // console.log(userLoginInput)
 
     try {
       const response = await fetch(`${hostURL}/auth/login`, {
@@ -109,11 +109,11 @@ const Login = (props) => {
   };
 
   const setAutoLogout = (milliseconds) => {
-    console.log("AUTO LOG TIMER STARTED");
+    // console.log("AUTO LOG TIMER STARTED");
      console.log(email, password);
     setTimeout(() => {
       logoutHandler();
-      console.log("AUTO LOG OUT");
+      // console.log("AUTO LOG OUT");
     }, milliseconds);
   };
 // Input styles change depending on error state from validation hook
