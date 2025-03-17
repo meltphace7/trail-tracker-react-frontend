@@ -84,7 +84,7 @@
 
 @media (max-width: 29em) {
   .day-container {
-    height: 13rem;
+    min-height: 15rem;
   }
   .weather-description {
     font-size: 0.8rem;

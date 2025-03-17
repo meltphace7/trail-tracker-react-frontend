@@ -61,6 +61,7 @@ const Login = (props) => {
       email,
       password,
     };
+    console.log(userLoginInput)
 
     try {
       const response = await fetch(`${hostURL}/auth/login`, {
