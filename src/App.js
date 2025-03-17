@@ -26,6 +26,7 @@ import { useMemo } from "react";
 let isInitial = true;
 
 function App() {
+ console.log('APP RENDER')
   const didFetchTrails = useRef(false);
   const dispatch = useDispatch();
 
