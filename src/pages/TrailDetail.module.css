@@ -9,9 +9,8 @@
 .trail-detail {
   width: 90%;
   padding-bottom: 4rem;
-  background-color: var(--color-main-mid);
   background-color: var(--color-main-dark);
-  color: white;
+  color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,7 +31,7 @@
   position: relative;
   top: 2rem;
   border: none;
-  color: #adff2f;
+  color: var(--color-green-highlight);
   background-color: unset;
   cursor: pointer;
 }
@@ -97,8 +96,7 @@
 .trail-name {
   padding: 1.6rem;
   margin: 0.8rem;
-  background-color: var(--color-main-green);
-  background: rgb(62, 176, 12);
+  background: #3eb00c;
   background: linear-gradient(
     0deg,
     rgba(62, 176, 12, 1) 0%,
@@ -174,12 +172,11 @@
 }
 
 .description {
-   white-space: pre-line;
+  white-space: pre-line;
   width: 70%;
   min-height: 16rem;
   line-height: 2rem;
   padding: 2rem 5rem;
-
 }
 
 .map-container {
@@ -221,12 +218,14 @@
 
 .submitted-by {
   margin: 3rem;
-
 }
 
 @media (max-width: 53em) {
   .trail-detail {
     width: 100%;
+    -webkit-box-shadow: unset;
+    -moz-box-shadow: unset;
+    box-shadow: unset;
   }
 
   .info-header h1 {

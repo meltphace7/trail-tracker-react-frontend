@@ -7,7 +7,7 @@
 }
 
 .add-trail-section h1 {
-  color: white;
+  color: #ffffff;
   margin: 1.6rem;
 }
 
@@ -15,7 +15,7 @@
   border: 2px solid var(--color-main-light);
   margin-bottom: 5rem;
   width: 64rem;
-  color: white;
+  color: #ffffff;
   background-color: var(--color-main-dark);
   border-radius: 15px;
   padding: 4.8rem;
@@ -73,7 +73,7 @@
   width: 90%;
   padding: 2.4rem;
   text-align: center;
-  color: white;
+  color: #ffffff;
   border: none;
   background-color: var(--color-main-light);
   border-radius: 20rem;
@@ -83,7 +83,7 @@
 }
 
 .trail-form button:hover {
-  background-color: black;
+  background-color: #000000;
   border: 1px solid var(--color-main-light);
   
 }

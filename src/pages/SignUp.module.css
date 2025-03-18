@@ -40,7 +40,7 @@
   margin-bottom: 2rem;
   border: none;
   border-radius: 40px;
-  color: white;
+  color: #fff;
   background-color: var(--color-main-light);
   height: 6rem;
   width: 32rem;
@@ -52,7 +52,7 @@
 }
 
 .login {
-  color: green;
+  color: #008000;
 }
 
 .loading {

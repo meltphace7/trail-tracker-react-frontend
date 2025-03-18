@@ -3,7 +3,7 @@
     min-height: 62rem;
     background-image: url('/public/imgs/thousand-island-lake-loop-1.jpg');
     background-size: cover;
-    color: white;
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,7 +19,7 @@
 .home-search-container h1 {
   font-weight: bold;
   font-size: 5rem;
-  text-shadow: 4px 4px 2px rgba(0,0,0,0.38);
+  text-shadow: 4px 4px 2px #00000061;
   line-height: 4rem;
 }
 
@@ -32,7 +32,7 @@
     flex-direction: column;
     align-items: center;
     background-color: var(--color-main-dark);
-    color: white;
+    color: #ffffff;
 }
 
 .map-section h2 {
@@ -68,8 +68,8 @@
   height: 30px;
   margin: 8px;
   border-radius: 50%;
-  border: 3px solid white;
-  border-color: lime transparent lime  transparent;
+  border: 3px solid #ffffff;
+  border-color: #00ff00 transparent #00ff00  transparent;
   animation: spinner 1.2s linear infinite;
 }
 
@@ -82,19 +82,6 @@
     align-items: center;
 }
 
-/* .featured-hikes-section h1 {
-  color: var(--color-main-dark);
-} */
-
-
-/* .featured-hikes-container {
-    height: 25rem;
-    width: 100%;
-    background-color: #dad9d9;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-} */
 @keyframes spinner {
   0% {
     transform: rotate(0deg);

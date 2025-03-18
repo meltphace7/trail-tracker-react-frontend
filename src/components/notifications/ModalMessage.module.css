@@ -7,14 +7,14 @@
 .ok-btn {
     border-radius: 20rem;
     background-color: var(--color-main-light);
-    color: white;
+    color: #ffffff;
     margin-top: 4rem;
      height: 5rem;
     width: 15rem;
 }
 
 .ok-btn:hover {
-    background-color: white;
+    background-color: #ffffff;
     color: var(--color-main-light);
 }
 

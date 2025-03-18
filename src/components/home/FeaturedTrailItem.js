@@ -15,9 +15,10 @@ const FeaturedTrailItem = (props) => {
             <p>{props.wildernessArea}</p>
             <p>{props.state}</p>
             <div className={classes["trail-stats"]}>
-            <p>{props.difficulty}</p>
-            <p>{props.miles} mi.</p>
-          </div>
+              <p>{props.difficulty}</p>
+              <p>&#x2022;</p>
+              <p>{props.miles} mi.</p>
+            </div>
           </div>
         </Link>
       </div>
