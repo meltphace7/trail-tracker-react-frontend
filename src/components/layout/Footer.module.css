@@ -27,11 +27,6 @@
   font-size: 1.6rem;
 }
 
-.footer h2 {
-  margin-left: 3.2rem;
-  font-size: 1.92rem;
-}
-
 @media (max-width: 44em) {
     .logo {
   margin-left: 2rem;
@@ -42,6 +37,7 @@
     color: #ffffff;
     border-top: unset;
     flex-direction: column;
+    padding: 3rem 1rem;
   }
 }
 
