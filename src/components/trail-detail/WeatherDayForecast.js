@@ -1,8 +1,6 @@
-
 import classes from "./WeatherDayForecast.module.css";
 
 const WeatherDayForecast = (props) => {
-
   return (
     <div className={classes["day-container"]}>
       <h3 className={classes["day"]}>{props.date}</h3>
@@ -13,8 +11,10 @@ const WeatherDayForecast = (props) => {
           src={`/imgs/icons/weather-icons/${props.icon}.png`}
           alt="weather icon"
         />
-        <p className={classes["weather-temp"]}>{`High: ${props.highTemp}° F`}</p>
-        <p className={classes["weather-temp"]}>{`Low: ${props.lowTemp}° F`}</p>
+        <p className={classes["weather-temp"]}>
+          {`${props.highTemp}°/`}
+          <span>{`${props.lowTemp}°`}</span>
+        </p>
       </div>
     </div>
   );

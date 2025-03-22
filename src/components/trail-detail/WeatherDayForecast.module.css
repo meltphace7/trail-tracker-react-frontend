@@ -1,8 +1,7 @@
 .day-container {
-  margin: 0.5rem;
-  min-height: 23rem;
+  min-height: 20rem;
   padding: 1rem;
-  width: 19%;
+  width: 15%;
   background-color: var(--color-main-dark-2);
   border-radius: 10px;
   border: 1px solid #7a7a7a;
@@ -26,6 +25,10 @@
 .weather-icon {
   height: 8rem;
 }
+
+  .weather-temp span {
+    color: #b9b9b9;
+  }
 
 @media (max-width: 60em) {
   .weather-description {
@@ -80,6 +83,7 @@
   .weather-temp {
     font-size: 1rem;
   }
+
 }
 
 @media (max-width: 29em) {

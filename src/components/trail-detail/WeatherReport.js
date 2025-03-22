@@ -19,7 +19,7 @@ const WeatherReport = (props) => {
   function getDayName(timestamp) {
     const date = new Date(timestamp * 1000);
     const options = { weekday: "long" };
-    return new Intl.DateTimeFormat("en-US", options).format(date);
+    return new Intl.DateTimeFormat("en-US", options).format(date).slice(0, 3);
   }
 
   const getWeather = useCallback(
